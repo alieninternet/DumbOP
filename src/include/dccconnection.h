@@ -8,7 +8,7 @@
 #include "bot.h"
 
 class DCCPerson;
-class UserCommands;
+class Commands;
 
 class DCCConnection : public Connection {
   Bot *bot;
@@ -27,7 +27,7 @@ public:
   friend class Bot;
   friend class DCCPerson;
   friend class DCCParser;
-  friend class UserCommands;
+  friend class Commands;
 };
 
 #endif

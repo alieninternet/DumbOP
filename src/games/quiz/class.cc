@@ -164,6 +164,15 @@ bool GameQuiz::load(void)
 	    // Check what type of line we are at
 	    switch (line[0]) {
 	     case '#': // Comment. Ignore
+	     case '!': // Reserved chars for future use are ignored
+	     case '`':
+	     case '%':
+	     case '^':
+	     case '&':
+	     case '*':
+	     case '/':
+	     case '|':
+	     case '\\':
 	       continue;
 	       break; // this needed? not really..
 	     case ':': // Question
@@ -202,6 +211,7 @@ bool GameQuiz::load(void)
 	       break;
 	     case '@': // Source
 	       readQuestion->source = line.subString(1);
+	       break;
 	     default: // Must be a possible answer
 	       if (justStartedQuestion) { // make sure Q&A pair are ok
 		  // This question must be ok.

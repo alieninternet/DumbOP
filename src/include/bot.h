@@ -30,7 +30,6 @@ class Parser;
 class DCCParser;
 class ServerConnection;
 class Commands;
-class UserCommands;
 class Utils;
 class Telnet;
 
@@ -125,7 +124,6 @@ class Bot {
    friend class Channel;
    friend class Utils;
    friend class ServerConnection;
-   friend class UserCommands;
    friend class Commands;
    friend class Telnet;
    

@@ -70,11 +70,174 @@ All are Fractions
 Fractions 
 
 
+#??Category: Mathematics
+# Question 822
+:A U.S. dime is worth ... cents.
+ten
+#??Regexp: (ten|10)
+
+#??Category: Mathematics
+# Question 823
+:A line drawn from an angle of a triangle to the mid-point of the opposite side is a(n) ........
+median
+
+#??Category: Mathematics
+# Question 824
+:A triangle with three equal sides is called ........
+equilateral
+
+#??Category: Mathematics
+# Question 825
+:A triangle with two equal sides is called ...........
+isosceles
+
+#??Category: Mathematics
+# Question 826
+:An angle greater than 180 degrees and less than 360 degrees is a(n) ........ angle.
+reflex
+
+#??Category: Mathematics
+# Question 827
+:An angle greater than 90 degrees and less than 180 degrees is said to be ..........
+obtuse
+
+#??Category: Mathematics
+# Question 828
+:An integer that is greater than 1 and is divisible only by itself and 1 is known as a(n) ........
+prime
+
+#??Category: Mathematics
+# Question 829
+:Approximately how many inches are there in one meter?
+thirty nine
+#??Regexp: (thirty[- ]nine|39)
+
+#??Category: Mathematics
+# Question 830
+:Arc, radius, and sector are parts of a(n) ..........
+circle
+
+#??Category: Mathematics
+# Question 831
+:He is known as "The Father of Geometry".
+Euclid
+
+#??Category: Mathematics
+# Question 832
+:How many corners are there in a cube?
+eight
+#??Regexp: (eight|8)
+
+#??Category: Mathematics
+# Question 833
+:How many nickles are there in $2.25?
+forty five
+#??Regexp: (forty[- ]five|45)
+
+#??Category: Mathematics
+# Question 834
+:If you cut through a solid sphere what shape will the flat area be?
+circle
+
+#??Category: Mathematics
+# Question 835
+:Name the number system which uses only the symbols 1 and 0.
+The #binary# system
+
+#??Category: Mathematics
+# Question 836
+:The angles inside a square total ....... degrees.
+three hundred and sixty
+#??Regexp: (three hundred (and |& )?sixty|360)
+
+#??Category: Mathematics
+# Question 837
+:The mathematical study of properties of lines, angels, etc., is .........
+geometry
+
+#??Category: Mathematics
+# Question 838
+:The space occupied by a body is called its .......
+volume
+
+#??Category: Mathematics
+# Question 839
+:The square root of 1 is?
+1
+
+#??Category: Mathematics
+# Question 840
+:Two angles that total 180 degrees are called ........
+supplementary
+
+#??Category: Mathematics
+# Question 841
+:What geometric shape has 4 equal sides?
+square
 
 
+#??Category: Mathematics
+# Question 1001
+:How many different letters are used in the roman numeral system?
+seven
+#??Regexp: (seven|7)
 
+#??Category: Mathematics
+# Question 1002
+:What is 65% of 60?
+39
+#??Regexp: (Thirty[- ]nine|39)
 
+#??Category: Mathematics
+# Question 1003
+:What is the maximum number of integer degrees in a reflex angle?
+three hundred and fifty nine
+#??Regexp: (three hundred (and |& )?fifty[- ]nine|359)
 
+#??Category: Mathematics
+# Question 1004
+:What is the maximum number of integer degrees in an acute angle?
+eighty nine
+#??Regexp: (eighty[- ]nine|89)
 
+#??Category: Mathematics
+# Question 1005
+:What is the maximum number of integer degrees in an obtuse angle?
+one hundred and seventy nine
+#??Regexp: (One hundred (and |& )?seventy[- ]nine|179)
 
+#??Category: Mathematics
+# Question 1006
+:What is the minimum number of integer degrees in a reflex angle?
+one hundred and eighty one
+#??Regexp: (One hundred (and |& )?eighty[- ]one|181)
+
+#??Category: Mathematics
+# Question 1007
+:What is the minimum number of integer degrees in an acute angle?
+one 
+#??Regexp: (one|1)
+
+#??Category: Mathematics
+# Question 1008
+:What is the minimum number of integer degrees in an obtuse angle?
+ninety one
+#??Regexp: (ninety[- ]one|91)
+
+#??Category: Mathematics
+# Question 1009
+:What is the only digit that has the same number of letters as its value?
+four
+#??Regexp: (four|4)
+
+#??Category: Mathematics
+# Question 1010
+:What is the square root of one quarter?
+one half
+#??Regexp: ((One |A |1 )?half|1/2)
+
+#??Category: Measurement
+# Question 1011
+:What instrument measures walking distance?
+pedometer
 

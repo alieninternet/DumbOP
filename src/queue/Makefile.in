@@ -27,29 +27,35 @@ LIBS=
 
 TARGET=queue.o
 
-SOURCES=class.cc item.cc joinitem.cc kickitem.cc modeitem.cc noticeitem.cc \
-	otheritem.cc send.cc serverqueue.cc whoitem.cc
+SOURCES=class.cc item.cc send.cc serverqueue.cc
+
+SUB_DIRS=items
 
 INCLUDES=
 
 # fix this too.. :(
-OBJECTS=$(SOURCES:.cc=.@OBJEXT@)
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@) items/items.o
 
 ########################################################################
 
-.PHONY: all clean dclean
+.PHONY: all subdirs clean dclean
 
-all: $(TARGET)
+all: subdirs $(TARGET)
 
 $(TARGET): $(OBJECTS)
 	$(LD) $(LDFLAGS) -o $@ $(OBJECTS) $(LIBS)
+
+subdirs:
+	for d in $(SUB_DIRS); do $(MAKE) -C $$d; done
 
 %.@OBJEXT@: %.cc
 	$(CXX) $(CXXFLAGS) $(DEFS) $(INCDIRS) -c $<
 	
 clean:
+	for d in $(SUB_DIRS); do $(MAKE) -C $$d clean; done
 	$(RM) *~ *.@OBJEXT@ $(TARGET)
 
 dclean:
+	for d in $(SUB_DIRS); do $(MAKE) -C $$d dclean; done
 	$(RM) *~ *.@OBJEXT@ $(TARGET) Makefile
 

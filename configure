@@ -1397,7 +1397,7 @@ fi
 
 fi
 
-for ac_hdr in fcntl.h sys/time.h unistd.h memory.h math.h
+for ac_hdr in fcntl.h limits.h sys/time.h unistd.h
 do
 ac_safe=`echo "$ac_hdr" | sed 'y%./+-%__p_%'`
 echo $ac_n "checking for $ac_hdr""... $ac_c" 1>&6
@@ -2125,7 +2125,7 @@ cat >> confdefs.h <<EOF
 EOF
 
 
-for ac_func in select socket memcpy
+for ac_func in ftime select socket
 do
 echo $ac_n "checking for $ac_func""... $ac_c" 1>&6
 echo "configure:2132: checking for $ac_func" >&5
@@ -2540,6 +2540,7 @@ src/games/quiz/Makefile \
 src/notes/Makefile \
 src/parser/Makefile \
 src/queue/Makefile \
+src/queue/items/Makefile \
 src/strings/Makefile \
 src/system/Makefile \
 src/telnet/Makefile \
@@ -2636,6 +2637,7 @@ src/games/quiz/Makefile \
 src/notes/Makefile \
 src/parser/Makefile \
 src/queue/Makefile \
+src/queue/items/Makefile \
 src/strings/Makefile \
 src/system/Makefile \
 src/telnet/Makefile \

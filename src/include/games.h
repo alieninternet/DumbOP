@@ -33,7 +33,7 @@ class Games {
    friend class GameQuiz;
    friend class gameQuizChannel;
    
-   friend class UserCommands;
+   friend class Commands;
    friend class Channel;
 };
 

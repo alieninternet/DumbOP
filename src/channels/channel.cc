@@ -62,12 +62,12 @@ Channel::~Channel()
 
    /* If this was a quiz channel, we need to kill off the quiz details,
     * unfortunately :( */
-//   if ((cnx->bot->wantedChannels[channelName]->flags & CHANFLAG_ALLOW_GAMES) &&
-//       (cnx->bot->wantedChannels[channelName]->gameflags & GAMEFLAG_QUIZ)) {
-//      gameQuizChannel *gqc = cnx->bot->games->quiz->channels[channelName];
-//      cnx->bot->games->quiz->channels.erase(channelName);
-//      delete gqc;
-//   }
+   if ((cnx->bot->wantedChannels[channelName]->flags & CHANFLAG_ALLOW_GAMES) &&
+       (cnx->bot->wantedChannels[channelName]->gameflags & GAMEFLAG_QUIZ)) {
+      gameQuizChannel *gqc = cnx->bot->games->quiz->channels[channelName];
+      cnx->bot->games->quiz->channels.erase(channelName);
+      delete gqc;
+   }
 }
 
 void Channel::addNick(String n, String uh, int mode, UserList *ul,
@@ -142,12 +142,27 @@ void Channel::delNick(String n)
    delete u;  
 }
 
-void Channel::changeNick(String on, String nn)
+void Channel::changeNick(String oldNick, String newNick)
 {
-   on = on.toLower();
-   User *u = getUser(on);
-   channelMemory.erase(on);
-   channelMemory[nn.toLower()] = u;
+   // Lowercase the old nickname to find it.
+   oldNick = oldNick.toLower();
+   
+   // Grab the user reference for this nickname.
+   User *u = getUser(oldNick);
+   
+   // Double check. Spoofs may break us here.
+   if (!u) {
+     return;
+   }
+   
+   // Kill old nickname
+   channelMemory.erase(oldNick);
+   
+   // Add the nickname again with the 'newNick' reference.
+   channelMemory[newNick.toLower()] = u;
+   
+   // Change the nickname as the User class sees it..
+   u->nick = newNick;
 }
 
 bool Channel::hasNick(String n)

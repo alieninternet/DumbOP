@@ -12,7 +12,7 @@ class ChannelList;
 #include "bot.h"
 
 class Utils;
-class UserCommands;
+class Commands;
 
 class ChannelList {
    String listFilename;
@@ -39,7 +39,7 @@ public:
     { return list.end(); }
 
   friend class Utils;
-  friend class UserCommands;
+  friend class Commands;
 };
 
 #endif

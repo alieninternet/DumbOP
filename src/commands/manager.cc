@@ -1,84 +1,13 @@
 
 #include "commands.h"
-#include "usercommands.h"
 #include "flags.h"
-
-/* AddUser
- * Original 18/12/00, Pickle <pickle@alien.net.au>
- */
-void
-UserCommands::AddUser(ServerConnection *cnx, Person *from,
-                      String channel, String rest)
-{
-  StringTokens st(rest);
-  String mask, who, maskChannel, level, prot,
-    nick, flags, passwd;
-
-  mask = who = st.nextToken();
-  maskChannel = st.nextToken();
-  level = st.nextToken();
-  prot = st.nextToken();
-  nick = st.nextToken();
-  flags = st.nextToken();
-  passwd = st.nextToken();
-
-  if (mask == "" || maskChannel == "" || level == "" ||
-      prot == "" || nick == "") {
-    from->sendNotice("\002Invalid syntax for this command.\002");
-    return;
-  }
-
-  if (!Utils::isWildcard(mask)) {
-    mask = cnx->bot->getUserhost(channel, who);
-    if (mask == "") {
-      from->sendNotice(String("\002I can not find\002 ") + who);
-      return;
-    }
-    mask = Utils::makeWildcard(mask);
-  }
-
-  if (cnx->bot->userList->isInUserList(mask, maskChannel)) {
-    from->sendNotice(who + " \002is already in userlist on channel(s)\002 " +
-                     maskChannel);
-    return;
-  }
-
-  int l, p;
-  long f;
-
-  l = atoi((const char *)level);
-  if (l < 0 || l > User::MANAGER)
-    return;
-  if (l > Utils::getLevel(cnx->bot, from->getAddress())) {
-    from->sendNotice("\002You can not give a level greater than yours.\002");
-    return;
-  }
-  p = atoi((const char *)prot);
-  if (p < 0 || p > User::NO_DEOP)
-    return;
-
-//  f = Utils::strToFlags(flags);
-//
-//  if (!f)
-    f = 0;
-
-  cnx->bot->userList->addUser(mask, maskChannel, l, p, nick, f, -1, passwd);
-
-  from->sendNotice(String("\002Added\002 ") + mask +
-                   " \002on channels\002 " + maskChannel);
-  from->sendNotice(String("\002Level:\002 ") +
-                   Utils::levelToStr(l) +
-                   "  \002Protection:\002 " +
-                   Utils::protToStr(p));
-
-  cnx->bot->rehash();
-}
+#include "utils.h"
 
 /* Alias
  * Original 18/12/00, Pickle <pickle@alien.net.au>
  */
 void
-UserCommands::Alias(ServerConnection *cnx, Person *from,
+Commands::Alias(ServerConnection *cnx, Person *from,
                     String channel, String rest)
 {
   StringTokens st(rest);
@@ -126,49 +55,11 @@ UserCommands::Alias(ServerConnection *cnx, Person *from,
   from->sendNotice("\002Alias added.\002");
 }
 
-/* DelUser
- * Original 18/12/00, Pickle <pickle@alien.net.au>
- */
-void
-UserCommands::DelUser(ServerConnection *cnx, Person *from,
-                      String channel, String rest)
-{
-  StringTokens st(rest);
-
-  String who;
-  String mask = who = st.nextToken();
-  String maskChannel = st.nextToken();
-
-  if (mask == "" || maskChannel == "") {
-    from->sendNotice("\002Invalid syntax for this command.\002");
-    return;
-  }
-
-  if (!Utils::isWildcard(mask)) {
-    mask = cnx->bot->getUserhost(channel, who);
-    if (mask == "") {
-      from->sendNotice(String("\002I can not find\002 ") + who);
-      return;
-    }
-    mask = Utils::makeWildcard(mask);
-  }
-  
-  if (!cnx->bot->userList->isInUserList(mask, maskChannel)) {
-    from->sendNotice(mask + " \002is not in userlist on channel(s)\002 " +
-                     maskChannel);
-    return;
-  }
-
-  cnx->bot->userList->removeUser(mask, maskChannel);
-  from->sendNotice(who + " \002has been removed from the userlist.\002");
-  cnx->bot->rehash();
-}
-
 /* Names - List names on a channel, or channels
  * Original 23/12/00, Pickle <pickle@alien.net.au>
  * Needs: Channel authorisation checking
  */
-void UserCommands::Names(ServerConnection *cnx, Person *from,
+void Commands::Names(ServerConnection *cnx, Person *from,
 			 String channel, String rest)
   {
      String nick = from->getNick();
@@ -246,7 +137,7 @@ void UserCommands::Names(ServerConnection *cnx, Person *from,
 /* Save - Force a database save
  * Original 15/12/00, Pickle <pickle@alien.net.au>
  */
-void UserCommands::Save(ServerConnection *cnx, Person *from,
+void Commands::Save(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
    cnx->bot->userList->save();
@@ -258,7 +149,7 @@ void UserCommands::Save(ServerConnection *cnx, Person *from,
  * Original 14/12/00, Pickle <pickle@alien.net.au>
  * 22/12/00 Pickle - Reformatted
  */
-void UserCommands::UserList(ServerConnection *cnx, Person *from,
+void Commands::UserList(ServerConnection *cnx, Person *from,
 			    String channel, String rest)
   {
      int num = 0;
@@ -294,7 +185,7 @@ void UserCommands::UserList(ServerConnection *cnx, Person *from,
 
 /* MOVE COMMENTED CODE TO SETUSER */
 // void
-// UserCommands::ChangeLevel(ServerConnection *cnx, Person *from,
+// Commands::ChangeLevel(ServerConnection *cnx, Person *from,
 //                           String channel, String rest)
 // {
 //   StringTokens st(rest);

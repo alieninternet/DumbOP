@@ -1,0 +1,214 @@
+
+#??Category: Religion
+# Question 303
+:Who is the Norse Watchman of the Gods ?
+Heimdall
+
+#??Category: Religion
+# Question 304
+:Who is the Norse god of justice ?
+Forseti
+
+#??Category: Religion
+# Question 305
+:Who is the Norse god of poetry ?
+Bragi
+
+#??Category: Religion
+# Question 306
+:Who is the Norse god of poetry ?
+Bragi
+
+#??Category: Religion
+# Question 307
+:Who is the Norse god of the sky and thunder ?
+Thor
+
+#??Category: Religion
+# Question 308
+:Who is the Norse god of the sky and thunder ?
+Thor
+
+#??Category: Religion
+# Question 309
+:Who is the greek equivalent of the roman god Cupid ?
+Eros
+
+#??Category: Religion
+# Question 310
+:Who is the greek equivalent of the roman god Diana ?
+Artemis
+
+#??Category: Religion
+# Question 311
+:Who is the greek equivalent of the roman god Discordia ?
+Eris
+
+#??Category: Religion
+# Question 312
+:Who is the greek equivalent of the roman god Juno ?
+Hera
+
+#??Category: Religion
+# Question 313
+:Who is the greek equivalent of the roman god Jupiter ?
+Zeus
+
+#??Category: Religion
+# Question 314
+:Who is the greek equivalent of the roman god Mars ?
+Ares
+
+#??Category: Religion
+# Question 315
+:Who is the greek equivalent of the roman god Mercury ?
+Hermes
+
+#??Category: Religion
+# Question 316
+:Who is the greek equivalent of the roman god Minerva ?
+Athena
+
+#??Category: Religion
+# Question 317
+:Who is the greek equivalent of the roman god Neptune ?
+Poseidon
+
+#??Category: Religion
+# Question 318
+:Who is the greek equivalent of the roman god Pluto ?
+Hades
+
+#??Category: Religion
+# Question 319
+:Who is the greek equivalent of the roman god Venus ?
+Aphrodite
+
+#??Category: Religion
+# Question 320
+:Who is the greek equivalent of the roman god Vesta ?
+Hestia
+
+#??Category: Religion
+# Question 321
+:Who is the greek equivalent of the roman god Vulcan ?
+Hephaistos
+
+
+#??Category: Religion
+# Question 1189
+:Followers of the Unification Church are called .........
+Moonies
+
+#??Category: Religion
+# Question 1190
+:He led the Israelites out of Egypt.
+Moses
+
+#??Category: Religion
+# Question 1191
+:He was the first King of the Hebrews.
+Saul
+
+#??Category: Religion
+# Question 1192
+:He was the second King of Israel.
+David
+
+#??Category: Religion
+# Question 1193
+:In what month is Christmas observed?
+December
+
+#??Category: Religion
+# Question 1194
+:Name the holiest day in the Jewish calendar.
+Yom Kippur
+
+#??Category: Religion
+# Question 1195
+:On which mountain did Moses receive the Ten Commandments?
+Sinai
+
+#??Category: Religion
+# Question 1196
+:Which city is sacred to Jews, Christians, and Muslims?
+Jerusalem
+
+#??Category: Religion
+# Question 1197
+:Who founded Mormonism?
+Joseph #Smith#
+
+#??Category: Religion
+# Question 1198
+:Who founded the People's Temple Commune?
+Jim Jones
+
+
+#??Category: Christianity
+# Question 237
+:How long did it take God to create the Universe?
+seven days
+#??Regexp: (seven|7) days
+
+#??Category: Christianity
+# Question 238
+:How many children did Noah have?
+three
+#??Regexp: (three|3)
+
+#??Category: Christianity
+# Question 239
+:How many sayings did Jesus say from the cross?
+seven
+#??Regexp: (seven|7)
+
+#??Category: Christianity
+# Question 240
+:How many times did Peter deny Jesus?
+three
+#??Regexp: (three|3)
+
+#??Category: Christianity
+# Question 241
+:How old was Sarah when she had a child?
+ninety
+#??Regexp: (ninety|90)
+
+#??Category: Christianity
+# Question 242
+:On which day was the resurrection of Christ?
+Easter Sunday
+
+#??Category: Christianity
+# Question 243
+:What are the first three words of The Bible?
+In the beginning
+
+#??Category: Christianity
+# Question 244
+:What two biblical cities did God destroy with fire and brimstone?
+Sodom and Gomorrah
+#??Regexp: Sodom (&|and) G[eoa]mm?orr?ah
+
+#??Category: Christianity
+# Question 245
+:Which two books in the Old Testament list the ten commandments? (in order of appearance)
+Exodus and Deuteronomy
+#??Regexp: Exodus (and |& )?Deuteronomy
+
+#??Category: Christianity
+# Question 246
+:Who killed Goliath?
+David
+
+#??Category: Christianity
+# Question 247
+:Who replaced Moses as the prophet of the Israelites?
+Joshua
+
+#??Category: Christianity
+# Question 248
+:Whose name did God change to Israel?
+Jacob

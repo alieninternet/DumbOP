@@ -24,6 +24,15 @@
 /* Define if you want to compile an on-line debug ready version */
 # define DEBUG
 
+/* [GAMES] Define if you want a more free answering system */
+/* # undef NO_ANSWER_NAZI */
+
+/* [CNX] Define if you are connecting servers with no multi-WHO suppport */
+/* # undef ANAL_WHO_COMMAND */
+
+/* [CNX] Define if you REALLY do not like channel CTCP broadcast replies */
+/* # undef NOT_VERY_HAPPY_ABOUT_CHANNEL_CTCP_BROADCASTS_WORKING_NO_SIREE_BOB */
+
 /******************************************************************************
 **                                                                           **
 **                  WARNING!   WARNING!   WARNING!   WARNING!                **
@@ -104,8 +113,8 @@
 /* Define if the signal SIGCHLD is broken */
 /* #undef SIGCHLD_BRAIN_DAMAGE */
 
-/* Define if you have the memcpy function.  */
-#define HAVE_MEMCPY 1
+/* Define if you have the ftime function.  */
+#define HAVE_FTIME 1
 
 /* Define if you have the select function.  */
 #define HAVE_SELECT 1
@@ -119,11 +128,8 @@
 /* Define if you have the <fcntl.h> header file.  */
 #define HAVE_FCNTL_H 1
 
-/* Define if you have the <math.h> header file.  */
-#define HAVE_MATH_H 1
-
-/* Define if you have the <memory.h> header file.  */
-#define HAVE_MEMORY_H 1
+/* Define if you have the <limits.h> header file.  */
+#define HAVE_LIMITS_H 1
 
 /* Define if you have the <ndir.h> header file.  */
 /* #undef HAVE_NDIR_H */

@@ -19,14 +19,13 @@
 #include <time.h>
 
 #include "commands.h"
-#include "usercommands.h"
 #include "flags.h"
 #include "utils.h"
 
 /* Access
  * Original 20/12/00, Pickle <pickle@alien.net.au>
  */
-void UserCommands::Access(ServerConnection *cnx, Person *from,
+void Commands::Access(ServerConnection *cnx, Person *from,
 			  String channel, String rest)
 {
    String nick = from->getNick();
@@ -131,7 +130,7 @@ void UserCommands::Access(ServerConnection *cnx, Person *from,
 /* Ident
  * Original 16/12/00, Pickle <pickle@alien.net.au>
  */
-void UserCommands::Identify(ServerConnection *cnx, Person *from,
+void Commands::Identify(ServerConnection *cnx, Person *from,
 			 String channel, String rest)
 {
    // Is this secure enough to continue?
@@ -169,7 +168,7 @@ void UserCommands::Identify(ServerConnection *cnx, Person *from,
  * Needs: Reverse lookup capabilities and to be ported in having nslookups
  *        via a forked slave portion of the code like TG did
  */
-void UserCommands::NsLookup(ServerConnection *cnx, Person *from,
+void Commands::NsLookup(ServerConnection *cnx, Person *from,
 			    String channel, String rest)
 {
    String target;
@@ -224,7 +223,7 @@ void UserCommands::NsLookup(ServerConnection *cnx, Person *from,
  * Original 16/12/00, Pickle <pickle@alien.net.au>
  * Needs: Fixing.
  */
-void UserCommands::Password(ServerConnection *cnx, Person *from,
+void Commands::Password(ServerConnection *cnx, Person *from,
 			    String channel, String rest)
 {
    // Is this secure enough to continue?
@@ -275,7 +274,7 @@ void UserCommands::Password(ServerConnection *cnx, Person *from,
 /* Register - Add a user, or channel, at somebody's request
  * Original 19/07/01, Simon Butcher <simonb@alien.net.au>
  */
-void UserCommands::Register(ServerConnection *cnx, Person *from,
+void Commands::Register(ServerConnection *cnx, Person *from,
 			    String channel, String rest)
 {
    // Is this secure enough to continue?

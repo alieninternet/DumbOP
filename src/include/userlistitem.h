@@ -9,7 +9,6 @@ class User;
 class Utils;
 class UserList;
 class Commands;
-class UserCommands;
 
 class UserListItem {
    // Mask on the user
@@ -52,7 +51,6 @@ class UserListItem {
    friend class Channel;
    friend class UserList;
    friend class Commands;
-   friend class UserCommands;
 };
 
 #endif

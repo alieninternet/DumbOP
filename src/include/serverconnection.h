@@ -13,7 +13,6 @@ class Bot;
 class Parser;
 class Channel;
 class Commands;
-class UserCommands;
 
 class ServerQueue;
 
@@ -42,7 +41,6 @@ public:
    friend class Parser;
    friend class Channel;
    friend class Commands;
-   friend class UserCommands;
    friend class CTCP;
    friend class Version;
    friend class ServerQueue;

@@ -6,7 +6,7 @@
 
 #include "server.h"
 
-class UserCommands;
+class Commands;
 
 class ServerList {
   vector<Server *> v;
@@ -32,7 +32,7 @@ public:
   Server * get(int n) const { return v[n]; }
   int size() { return v.size(); }
 
-  friend class UserCommands;
+  friend class Commands;
 };
 
 #endif

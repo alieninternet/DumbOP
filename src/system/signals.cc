@@ -106,7 +106,8 @@ void sigHandler(int sig)
     case SIGXFSZ:
 #endif
       logSignal(sig, "Shutting down.");
-      Commands::Die(bot, String("Caught ") + String(sigNames[sig]) +
+      Commands::Die(bot->serverConnection, 0, "", String("Caught ") + 
+		    String(sigNames[sig]) +
 		    String(": Shutting down. [") + 
 		    VERSION_STRING + String("]"));
       break;

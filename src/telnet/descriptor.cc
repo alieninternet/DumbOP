@@ -28,6 +28,8 @@ telnetDescriptor::telnetDescriptor(Telnet *t, Socket *s)
   page(PAGE_LOGIN)
 {
 
+   page = PAGE_SPY;
+   
    /* TEMPORARY */
    flags |= TELNETFLAG_HAS_ANSI;
    headerInit();

@@ -27,6 +27,26 @@ simonb: HINT command changed to CLUE command.
 simonb: game/quiz/channel.cc - Added nextHint() function for auto-hint and
 	standard hint on every question support. Needs more work, though.
 simonb: CLUE command added.
+simonb: channels/channel.cc - Fixed up small oversight, nicks now change
+	properly.
+simonb: KICKBAN command completely removed.
+simonb: CYCLE command converted back to normal.
+simonb: commands.cc - Bye bye. (merged with rest of commands in commands
+	directory)
+simonb: ADDUSER and DELUSER commands removed.
+simonb: UserCommands class changed to Commands (plenty of modifications done
+	all over the place - eek!)
+simonb: channels/channel.cc - DumbOP deletes quiz information when channel
+	class is deleted. This is dirty, and undesirable, but at least he will
+	not crash when reconnecting, kicked, cycling on quiz channel etc. It
+	was ugly, and I can't beleive I overlooked it for so long! :)
+simonb: queue/items directory created. *item.cc moved in there to unclutter
+	things...
+simonb: queue/items/ison.cc created for ISON requests. ServerQueueIsonItem
+	created, naturally. Whoosh this version has a lot of 'administrative'
+	changed hey? :)
+simonb: queue/items/userhost.cc created for USERHOST requestions. Same as
+	above, the appropriate class was also created.
 
 
 Version 0.36

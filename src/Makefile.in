@@ -32,9 +32,8 @@ LIBS=
 
 TARGET=dumbop
 
-SOURCES=banentry.cc bot.cc commands.cc config.cc connection.cc ctcp.cc \
-	flags.cc log.cc main.cc mask.cc server.cc \
-	serverconnection.cc serverlist.cc todolist.cc
+SOURCES=banentry.cc bot.cc config.cc connection.cc ctcp.cc flags.cc log.cc \
+	main.cc mask.cc server.cc serverconnection.cc serverlist.cc todolist.cc
 
 SUB_DIRS=channels commands dcc games notes parser queue strings system telnet \
 	users utils

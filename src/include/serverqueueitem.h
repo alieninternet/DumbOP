@@ -17,12 +17,13 @@ class ServerQueueItem {
    
    enum {
       CHANNELMODE, 
-      USERMODE, 
-      INVITE, 
+      INVITE,
+      ISON,
       JOIN, 
       KICK,
       NICK, 
       NOTICE, 
+      OTHER,
       PART, 
       PASS, 
       PING, 
@@ -32,9 +33,9 @@ class ServerQueueItem {
       TOPIC, 
       USER, 
       USERHOST, 
+      USERMODE, 
       WHO, 
-      WHOIS, 
-      OTHER
+      WHOIS 
    };
    
    ServerQueueItem(int, int, int);
@@ -47,14 +48,6 @@ class ServerQueueItem {
 };
 
 
-class ServerQueueOtherItem : public ServerQueueItem {
- public:
-   String line;
-   
-   ServerQueueOtherItem(String, int, int, int);
-   String getLine();
-};
-
 class ServerQueueChannelModeItem : public ServerQueueItem {
  public:
    String channel;
@@ -63,6 +56,25 @@ class ServerQueueChannelModeItem : public ServerQueueItem {
    int paramcount;
    
    ServerQueueChannelModeItem(String, String, String);
+   bool merge(ServerQueueItem *);
+   String getLine();
+};
+
+class ServerQueueIsonItem : public ServerQueueItem {
+ public:
+   String nick;
+
+   ServerQueueIsonItem(String);
+   bool merge(ServerQueueItem *);
+   String getLine();
+};
+
+class ServerQueueJoinItem : public ServerQueueItem {
+ public:
+   String param; // includes channel, may also include ' '+key.
+   int count;
+   
+   ServerQueueJoinItem(String);
    bool merge(ServerQueueItem *);
    String getLine();
 };
@@ -90,13 +102,11 @@ class ServerQueueNoticeItem : public ServerQueueItem {
    String getLine();
 };
 
-class ServerQueueJoinItem : public ServerQueueItem {
+class ServerQueueOtherItem : public ServerQueueItem {
  public:
-   String param; // includes channel, may also include ' '+key.
-   int count;
+   String line;
    
-   ServerQueueJoinItem(String);
-   bool merge(ServerQueueItem *);
+   ServerQueueOtherItem(String, int, int, int);
    String getLine();
 };
 
@@ -106,6 +116,16 @@ class ServerQueueWhoItem : public ServerQueueItem {
    int count;
    
    ServerQueueWhoItem(String);
+   bool merge(ServerQueueItem *);
+   String getLine();
+};
+
+class ServerQueueUserhostItem : public ServerQueueItem {
+ public:
+   String nick;
+   int count;
+   
+   ServerQueueUserhostItem(String);
    bool merge(ServerQueueItem *);
    String getLine();
 };

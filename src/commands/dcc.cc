@@ -1,6 +1,5 @@
 
 #include "commands.h"
-#include "usercommands.h"
 #include "dccconnection.h"
 
 
@@ -8,7 +7,7 @@
  * Original 19/12/00, Pickle <pickle@alien.net.au>
  */
 void
-UserCommands::DCCList(ServerConnection *cnx, Person *from,
+Commands::DCCList(ServerConnection *cnx, Person *from,
                       String channel, String rest)
 {
   from->sendNotice("\002DCClist:\002");

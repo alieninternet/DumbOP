@@ -39,8 +39,8 @@ class Games;
 // Auto-Hint controls
 #define DEFAULT_QUIZ_HINT_SPECIAL_CHAR		'\001'	// Internal mask char
 #define DEFAULT_QUIZ_HINT_SPECIAL_CHAR_OUTPUT	'-'	// As seen by user
-#define DEFAULT_QUIZ_HINT_MIN_LENGTH		8	// Length to auto-hint
-#define DEFAULT_QUIZ_HINT_BLOCK_PERCENTAGE	30	// % hints before block
+#define DEFAULT_QUIZ_HINT_MIN_LENGTH		10	// Length to auto-hint
+#define DEFAULT_QUIZ_HINT_BLOCK_PERCENTAGE	40	// % hints before block
 
 // Class for quiz questions
 class gameQuizQuestion {
@@ -136,7 +136,7 @@ class GameQuiz {
    friend class gameQuizChannel;
 
    friend class Games;
-   friend class UserCommands;
+   friend class Commands;
    friend class Channel;
 };
 

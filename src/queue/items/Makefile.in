@@ -1,8 +1,7 @@
-# Generated automatically from Makefile.in by configure.
 #
 #
-# ./src/games/Makefile
-# Make for user note handling stuff
+# ./src/queue/Makefile
+# Make for queue item handling routines
 # Author: Simon Butcher
 # Copyright (c) 2001 Alien Internet Services
 
@@ -10,44 +9,43 @@
 ##                                                                    ##
 ########################################################################
 
-CXX=c++
-LD=ld
-RM=rm -vf
+CXX=@CXX@
+LD=@LD@
+RM=@RM@
 
-CXXFLAGS=-g -DDEBUG -Wall
+CXXFLAGS=@CXXFLAGS@ -Wall
 LDFLAGS=-r
 
-srcdir=.
-prefix=/usr/local
-libdir=${exec_prefix}/lib
+srcdir=@srcdir@
+VPATH=@srcdir@
+prefix=@prefix@
+libdir=@libdir@
 
-INCDIRS=-I$(srcdir) -I$(srcdir)/../include
-DEFS=-DHAVE_CONFIG_H
+INCDIRS=-I$(srcdir) -I$(srcdir)/../../include
+DEFS=@DEFS@
 LIBS=
 
-TARGET=notes.o
+TARGET=items.o
 
-SOURCES=list.cc note.cc
+SOURCES=ison.cc join.cc kick.cc mode.cc notice.cc other.cc who.cc userhost.cc
 
 INCLUDES=
 
-OBJECTS=$(SOURCES:.cc=.o)
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@)
 
 ########################################################################
-
-.PHONY: all clean dclean
 
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
 	$(LD) $(LDFLAGS) -o $@ $(OBJECTS) $(LIBS)
 
-%.o: %.cc
+%.@OBJEXT@: %.cc
 	$(CXX) $(CXXFLAGS) $(DEFS) $(INCDIRS) -c $<
 	
 clean:
-	$(RM) *~ *.o $(TARGET)
+	$(RM) *~ *.@OBJEXT@ $(TARGET)
 
 dclean:
-	$(RM) *~ *.o $(TARGET) Makefile
+	$(RM) *~ *.@OBJEXT@ $(TARGET) Makefile
 

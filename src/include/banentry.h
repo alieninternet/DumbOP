@@ -5,7 +5,6 @@
 # include "mask.h"
 
 class Commands;
-class UserCommands;
 
 class BanEntry {
    Mask banMask;
@@ -21,7 +20,6 @@ class BanEntry {
    String getMask();
    
    friend class Commands;
-   friend class UserCommands;
 };
 
 #endif

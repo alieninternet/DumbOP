@@ -14,7 +14,6 @@
 class Bot;
 class Parser;
 class Commands;
-class UserCommands;
 
 #define DEFAULT_KEEPMODES "iklmnpst"
 
@@ -94,7 +93,6 @@ public:
    friend class Bot;
    friend class Parser;
    friend class Commands;
-   friend class UserCommands;
    friend class Games;
    friend class GameQuiz;
 };

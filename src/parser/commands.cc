@@ -139,16 +139,14 @@ void Parser::parseMode(ServerConnection *cnx, Person *from, String rest)
 
 void Parser::parseNick(ServerConnection *cnx, Person *from, String rest)
 {
-   String on_orig = from->getNick();
-   String on = on_orig.toLower();
-   String nn = rest.subString(1);
-   String nn_lower = nn.toLower();
+   String oldNick = from->getNick();
+   String newNick = rest.subString(1);
    
    for (map<String, Channel *, less<String> >::iterator it = 
 	cnx->bot->channelList->begin(); 
 	it != cnx->bot->channelList->end(); ++it) {
-      if ((*it).second->hasNick(on)) {
-	 (*it).second->changeNick(on, nn_lower);
+      if ((*it).second->hasNick(oldNick)) {
+	 (*it).second->changeNick(oldNick, newNick);
       }
    }
 }

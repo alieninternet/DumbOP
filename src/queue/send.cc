@@ -32,6 +32,13 @@ void ServerQueue::sendInvite(String channel, String nick)
 	   INVITE_PRIORITY, INVITE_PENALTY, ServerQueueItem::INVITE);
 }
 
+void ServerQueue::sendIson(String nick)
+{
+   ServerQueueIsonItem *sqii =
+     new ServerQueueIsonItem(nick);
+   addItem(sqii);
+}
+
 void ServerQueue::sendJoin(String channel, String key)
 {
    ServerQueueJoinItem *sqji =
@@ -128,15 +135,13 @@ void ServerQueue::sendUserMode(String nick, String mode)
 
 void ServerQueue::sendUserhost(String nick)
 {
-   addLine(String("USERHOST ") + nick,
-	   USERHOST_PRIORITY, USERHOST_PENALTY, ServerQueueItem::USERHOST);
+   ServerQueueUserhostItem *squi =
+     new ServerQueueUserhostItem(nick);
+   addItem(squi);
 }
 
 void ServerQueue::sendWho(String who)
 {
-//   addLine(String("WHO ") + who,
-//	   WHO_PRIORITY, WHO_PENALTY, ServerQueueItem::WHO);
-   
    ServerQueueWhoItem *sqwi =
      new ServerQueueWhoItem(who);
    addItem(sqwi);

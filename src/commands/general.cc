@@ -1,7 +1,6 @@
 
 
 #include "commands.h"
-#include "usercommands.h"
 #include "flags.h"
 
 #include "utils.h"
@@ -10,7 +9,7 @@
  * Original 15/12/00, Pickle <pickle@alien.net.au>
  * 26/12/00 Pickle - Changed header output depending on command or topic
  */
-void UserCommands::Help(ServerConnection *cnx, Person *from,
+void Commands::Help(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
    if (rest.length() == 0) {
@@ -85,7 +84,7 @@ void UserCommands::Help(ServerConnection *cnx, Person *from,
 /* LastSeen - Find out when a user was seen last
  * Original 15/12/00, Pickle <pickle@alien.net.au>
  */
-void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
+void Commands::LastSeen(ServerConnection *cnx, Person *from,
 			    String channel, String rest)
 {
    String nick = from->getNick();
@@ -137,7 +136,7 @@ void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
 
 /* Note - Wrapper into the note interface
  */
-void UserCommands::Note(ServerConnection *cnx, Person *from,
+void Commands::Note(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
    from->sendNotice("The note interface is not operational.");
@@ -148,7 +147,7 @@ void UserCommands::Note(ServerConnection *cnx, Person *from,
  * Note: This only sends out the ping! The rest of the code is with the PING
  *       reply parser.
  */
-void UserCommands::Ping(ServerConnection *cnx, Person *from,
+void Commands::Ping(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
    from->sendCTCP("PING",String(cnx->bot->currentTime.time) + 
@@ -158,7 +157,7 @@ void UserCommands::Ping(ServerConnection *cnx, Person *from,
 /* Test - Test command to try out funky new stuff
  * Do not allow public access!! :)
  */
-void UserCommands::Test(ServerConnection *cnx, Person *from,
+void Commands::Test(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
 //   from->sendNotice("\002Begin test dump.\002");
@@ -177,7 +176,7 @@ void UserCommands::Test(ServerConnection *cnx, Person *from,
 /* Time - Tell someone the time (duh)
  * Original 6/7/01, Simon Butcher <simonb@alien.net.au>
  */
-void UserCommands::Time(ServerConnection *cnx, Person *from,
+void Commands::Time(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
    struct tm *timeNow = localtime(&cnx->bot->currentTime.time);
@@ -197,7 +196,7 @@ void UserCommands::Time(ServerConnection *cnx, Person *from,
 /* Stats - Show a list of statistical mumbo jumbo to impress stupid people
  * Original 19/12/00, Pickle <pickle@alien.net.au>
  */
-void UserCommands::Stats(ServerConnection *cnx, Person *from,
+void Commands::Stats(ServerConnection *cnx, Person *from,
 			 String channel, String rest)
 {
    Version::sendInformation(cnx, from);

@@ -168,7 +168,7 @@ String gameQuizChannel::nextHint(char chr = '\0') {
    }
 
    // Some handy dandy variables..
-   String primaryAnswer = (*question->answers.begin()).toUpper();
+   String primaryAnswer = *question->answers.begin();
    String output = "";
    String newHint = "";
    
@@ -228,7 +228,8 @@ String gameQuizChannel::nextHint(char chr = '\0') {
 	       normCharCount++;
 	       
 	       // Check how exactly we are bumping a char tho..
-	       if ((!charFound) && (primaryAnswer[i] == toupper(chr))) {
+	       if ((!charFound) && 
+		   (toupper(primaryAnswer[i]) == toupper(chr))) {
 		  // If we are looking for a specific char, this is it!
 		  output = output + String("\002") + String(primaryAnswer[i]) +
 		    String("\002");

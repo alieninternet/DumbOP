@@ -8,7 +8,6 @@
 # include "userlistitem.h"
 
 class Commands;
-class UserCommands;
 
 class UserList {
    String listFilename;
@@ -39,7 +38,6 @@ class UserList {
    bool identify(String, String);
 
    friend class Commands;
-   friend class UserCommands;
 };
 
 #endif

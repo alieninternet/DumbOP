@@ -10,7 +10,6 @@ class Utils;
 class Parser;
 class Channel;
 class Commands;
-class UserCommands;
 
 class User {
    
@@ -56,7 +55,6 @@ class User {
    friend class Parser;
    friend class Channel;
    friend class Commands;
-   friend class UserCommands;
 };
 
 #endif

@@ -1,5 +1,5 @@
 
-#include "usercommands.h"
+#include "commands.h"
 #include "games.h"
 #include "gamequiz.h"
 #include "channellist.h"
@@ -9,7 +9,7 @@
 /* Category - List or change quiz channel category setting for next round
  * Original 9/7/01, Simon Butcher <simonb@alien.net.au>
  */
-void UserCommands::Category(ServerConnection *cnx, Person *from,
+void Commands::Category(ServerConnection *cnx, Person *from,
 			    String channel, String rest)
 {
    // Grab the channel info
@@ -156,7 +156,7 @@ void UserCommands::Category(ServerConnection *cnx, Person *from,
 /* Clue - Send out the clue for the quiz, if one exists
  * Original 11/7/01, Simon Butcher <simonb@alien.net.au>
  */
-void UserCommands::Clue(ServerConnection *cnx, Person *from,
+void Commands::Clue(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
    // Grab the channel info
@@ -200,7 +200,7 @@ void UserCommands::Clue(ServerConnection *cnx, Person *from,
 /* Repeat - Repeat the last quiz question
  * Original 11/7/01, Simon Butcher <simonb@alien.net.au>
  */
-void UserCommands::Repeat(ServerConnection *cnx, Person *from,
+void Commands::Repeat(ServerConnection *cnx, Person *from,
 			  String channel, String rest)
 {
    // Grab the channel info
@@ -239,7 +239,7 @@ void UserCommands::Repeat(ServerConnection *cnx, Person *from,
 /* Hint - Send out a hint for the quiz
  * Original 24/7/01, Simon Butcher <simonb@alien.net.au>
  */
-void UserCommands::Hint(ServerConnection *cnx, Person *from,
+void Commands::Hint(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
    // Grab the channel info
