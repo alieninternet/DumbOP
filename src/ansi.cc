@@ -66,8 +66,8 @@ String ANSI::telnetHeaderInit()
 {
    return (String(ANSI_CUR_HOME) + String(ANSI_FINVERSE) + String(ANSI_BOLD) +
 	   String(ANSI_CLR_LINE) + String(" ") + String(VERSION_STRING) +
-	   scrollRegion(2, 25) + String(ANSI_NORMAL) + gotoXY(1, 25) + 
-	   telnetHeaderUpdate());
+	   String(" - Management Console") + scrollRegion(2, 25) + 
+	   String(ANSI_NORMAL) + gotoXY(1, 25) + telnetHeaderUpdate());
 }
 
 /* telnetHeaderUpdate - Update header for telnet sessions
@@ -79,7 +79,7 @@ String ANSI::telnetHeaderUpdate()
    struct tm *timeNow = localtime(&currentTime);
    
    return (String(ANSI_CUR_SAVE) + String(ANSI_FINVERSE) + String(ANSI_BOLD) +
-	   ANSI::gotoXY(20, 1) + String(ANSI_CLR_EOL) + ANSI::gotoXY(54, 1) + 
+	   ANSI::gotoXY(40, 1) + String(ANSI_CLR_EOL) + ANSI::gotoXY(54, 1) + 
 	   (Utils::intToMonth(timeNow->tm_mon) + String(" ") +
 	    String(timeNow->tm_mday) + String(" ") +
 	    String(timeNow->tm_year + 1900) + String(", ") +

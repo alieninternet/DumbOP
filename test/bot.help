@@ -17,10 +17,8 @@ Ban someone from a channel.
 List banned users for a channel.
 
 :CATEGORY (<channel>) ['-' | <category>]
-List or change the current quiz category. With no category specified, this command will return the current category, and the cost of changing the category for the next round. 
-When a dash ('-') is specified, available categories will be listed, as well as the number of questions in each category. When listing the category information, bold highlighted names will show which categories are available for selection.
-Finally, with a category specified, it will change to that category within the next round.
-This command is only available within a quiz channel.
+List or change the current quiz category. With no category specified, this command will return the current category, and the cost of changing the category for the next round. When a dash ('-') is specified, available categories will be listed, as well as the number of questions in each category. When listing the category information, bold highlighted names will show which categories are available for selection.
+Finally, with a category specified, it will change to that category within the next round. This command is only available within a quiz channel.
 
 :CYCLE (<channel>)
 Part and re-join the channel.
@@ -50,8 +48,7 @@ Make me do an action in a channel.
 Get help on something. The help file at the moment is very minimal, and quite possibly highly imcomplete in many areas. Don't trust it with your life :)
 
 :HINT
-Receive a hint. This command will cost you points, but at this stage the writer of this help file would not have a clue exactly how many it will cost until this command physically does something :) Oops :)
-This command is only available within a quiz channel.
+Receive a hint. This command will cost you points, but at this stage the writer of this help file would not have a clue exactly how many it will cost until this command physically does something :) Oops :) This command is only available within a quiz channel.
 
 :IDENT [<nick name>] <password>
 Identify yourself to give you access to functions you are privellaged to

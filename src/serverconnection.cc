@@ -24,9 +24,6 @@ ServerConnection::ServerConnection(Bot *b, Server *s, String localIP)
 #endif
   serverLastSpoken(time(NULL))
 {
-   // We want a lag check ping to run first time around
-   pingTime.time = 0;
-   
    // We are not connected.
    b->connected = false;
 }

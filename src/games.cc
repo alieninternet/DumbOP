@@ -27,4 +27,9 @@ Games::~Games()
  */
 void Games::attend(void)
 {
+   // If we are able to run a quiz, do so
+   if (quiz) {
+      quiz->attend();
+   }
 }
+

@@ -21,7 +21,7 @@ class UserListItem {
    // Protection (from 0 to 2)
    int prot;
    // Nickname List
-   String nicks;
+   String nick;
    // 32-bits of flags (flags.h)
    long flags;
    // Date last seen
@@ -36,7 +36,7 @@ class UserListItem {
  public:
    UserListItem(String m, String mc, int l, int p, String n = "",
 		long f = 0, time_t ls = -1, String pass = "", bool ae = false)
-     : mask(m), channelMask(mc), level(l), prot(p), nicks(n),
+     : mask(m), channelMask(mc), level(l), prot(p), nick(n),
    flags(f), lastseen(ls), passwd(pass), identified(0), autoEntry(ae) { }
    
    // Returns true if it matches <m> on channel(s) <mc>

@@ -3,6 +3,9 @@
 #include "utils.h"
 #include "channel.h"
 #include "stringtokenizer.h"
+#include "flags.h"
+#include "games.h"
+#include "gamequiz.h"
 
 Channel::Channel(ServerConnection *c,
                  String name, String wanted = "")
@@ -12,16 +15,26 @@ Channel::Channel(ServerConnection *c,
     count(0), countOp(0), countVoice(0), count_peak(0), countOp_peak(0),
     countVoice_peak(0), joined(false), doMode(true), gotWho(false), cnx(c)
 {
-  channelMemory.clear();
-  channelBanlist.clear();
-
-  if (c->bot->wantedChannels[channelName]) {
-    if (c->bot->wantedChannels[channelName]->keep != "")
-      keepModes = c->bot->wantedChannels[channelName]->keep;
-
-    if (c->bot->wantedChannels[channelName]->mode != "")
-      wantedModes = c->bot->wantedChannels[channelName]->mode;
-  }
+   channelMemory.clear();
+   channelBanlist.clear();
+   
+   if (c->bot->wantedChannels[channelName]) {
+      if (c->bot->wantedChannels[channelName]->keep != "")
+	keepModes = c->bot->wantedChannels[channelName]->keep;
+      
+      if (c->bot->wantedChannels[channelName]->mode != "")
+	wantedModes = c->bot->wantedChannels[channelName]->mode;
+   }
+   
+   /* If this is a quiz channel, we will want to add it to the quiz channel
+    * descriptor list
+    */
+   if ((c->bot->wantedChannels[channelName]->flags & CHANFLAG_ALLOW_GAMES) &&
+       (c->bot->wantedChannels[channelName]->gameflags & GAMEFLAG_QUIZ) &&
+       !(c->bot->games->quiz->channels[channelName])) {
+      c->bot->games->quiz->channels[channelName] = 
+	new gameQuizChannel(this, c->bot->games->quiz);
+   }
 }
 
 Channel::~Channel()
@@ -331,3 +344,12 @@ void Channel::parseMode(Person *from, String mode)
 	break;
      }
 }
+
+/* sendNotice - Quick way of sending notices to a channel
+ * Original 13/07/00, Pickle <pickle@alien.net.au>
+ */
+void Channel::sendNotice(String message)
+{
+   cnx->queue->sendNotice(channelName, message);
+}
+

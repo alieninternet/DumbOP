@@ -42,6 +42,9 @@ class Utils {
 
    static String intToDayOfWeek(int);
    static String intToMonth(int);
+   
+   static unsigned long random(unsigned long max);
+   
 };
 
 #endif

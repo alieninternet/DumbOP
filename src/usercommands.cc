@@ -94,7 +94,7 @@ void UserCommands::Access(ServerConnection *cnx, Person *from,
 				  String("\002*\002") :
 				  String("\002+\002")) : 
 				 String(" ")) +
-				Utils::getFirstNick((*it)->nicks).prepad(15) + " " +
+				Utils::getFirstNick((*it)->nick).prepad(15) + " " +
 				Utils::levelToStr((*it)->level).pad(12) + " " +
 				Utils::boolToStr((*it)->flags & USERFLAG_JOIN_AOP).pad(3) + " " +
 				Utils::boolToStr((*it)->flags & USERFLAG_JOIN_AOV).pad(3) + " " +
@@ -156,18 +156,18 @@ UserCommands::AddUser(ServerConnection *cnx, Person *from,
 {
   StringTokenizer st(rest);
   String mask, who, maskChannel, level, prot,
-    nicks, flags, passwd;
+    nick, flags, passwd;
 
   mask = who = st.nextToken();
   maskChannel = st.nextToken();
   level = st.nextToken();
   prot = st.nextToken();
-  nicks = st.nextToken();
+  nick = st.nextToken();
   flags = st.nextToken();
   passwd = st.nextToken();
 
   if (mask == "" || maskChannel == "" || level == "" ||
-      prot == "" || nicks == "") {
+      prot == "" || nick == "") {
     from->sendNotice("\002Invalid syntax for this command.\002");
     return;
   }
@@ -206,7 +206,7 @@ UserCommands::AddUser(ServerConnection *cnx, Person *from,
 //  if (!f)
     f = 0;
 
-  cnx->bot->userList->addUser(mask, maskChannel, l, p, nicks, f, -1, passwd);
+  cnx->bot->userList->addUser(mask, maskChannel, l, p, nick, f, -1, passwd);
 
   from->sendNotice(String("\002Added\002 ") + mask +
                    " \002on channels\002 " + maskChannel);
@@ -835,130 +835,53 @@ UserCommands::KickBan(ServerConnection *cnx, Person *from,
  */
 void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
 			    String channel, String rest)
-  {
-     String nick = from->getNick();
-     
-     if (!rest.length()) {
-	from->sendNotice("I'm not a mind reader, who are you asking about?");
-	return;
-     }
-
-     StringTokenizer st(rest);
-     String otherNick = st.nextToken();
-     
-     if (nick.toLower() == otherNick.toLower()) {
-	from->sendNotice("If you want to look at yourself, buy a mirror");
-	return;
-     }
-     
-     if (!(otherNick == "-") || 
-	 !(Utils::isWildcard(otherNick))) {
-	User * u = cnx->bot->channelList->getChannel(channel)->getUser(otherNick);
-	UserListItem * uli;
-	
-	if (u)
-	  uli = u->userListItem;
-	else 
-	  uli = cnx->bot->userList->getUserListItem(otherNick + "!" +
-						    cnx->bot->getUserhost(channel,
-									  otherNick),
-						    channel);
-	
-	if (!uli) // No user info yet? Maybe they typed the mask?
-	  uli = cnx->bot->userList->getUserListItem(otherNick, channel);
-	
-	if (uli) {
-	   if (uli->lastseen > 0) {
-	      from->sendNotice(String("\002") + otherNick +
-			       String("\002 on \002") + 
-			       uli->channelMask.getMask() +
-			       String("\002 was last seen \002") +
-			       Utils::timelenToStr(cnx->bot->currentTime.time -
-						   uli->lastseen) +
-			       String("\002 ago."));
-	   } else if (uli->lastseen == 0)
-		from->sendNotice(String("\002") + otherNick +
-				 String("\002 is online now! :)"));
-	} else {
-	   bool found = false;
-	   
-	   for (list<UserListItem *>::iterator it = cnx->bot->userList->l.begin();
-		it != cnx->bot->userList->l.end();
-		it++) 
-	     if (((*it)->channelMask.getMask().toLower() == channel.toLower()) &&
-		 ((*it)->nicks.toLower() == otherNick.toLower())) {
-		from->sendNotice(String("\002") + 
-				 Utils::getFirstNick((*it)->nicks) +
-				 String("\002 ") +
-				 ((Utils::getFirstNick((*it)->nicks).toLower() ==
-				   otherNick.toLower()) ?
-				  String("") :
-				  (String("\"") + otherNick +
-				   String("\") "))) +
-				 String("on \002") + 
-				 (*it)->channelMask.getMask() +
-				 String("\002 was last seen \002") +
-				 Utils::timelenToStr(cnx->bot->currentTime.time -
-						     (*it)->lastseen) +
-				 String("\002 ago."));
-		
-		found = true;
-		break;
-	     }
-	   
-	   
-	   if (!found)
-	     from->sendNotice(String("Sorry, I don't know when \002") + 
-			      otherNick + String("\002 was on \002") +
-			      channel + String("\002 last."));
-	}
-     } else { // Run a database search this time...
-	int num = 0;
-	
-	from->sendNotice(String("Last seen userlist search for mask \002") +
-			 ((otherNick == "-") ?
-			  String("ALL USERS") :
-			  otherNick) + 
-			 String("\002 on \002") +
-			 channel + String("\002:"));
-	from->sendNotice("\026 \037Nickname       \037 \037Last seen information                               \037 \026");
-	
-	for (list<UserListItem *>::iterator it = cnx->bot->userList->l.begin();
-	     it != cnx->bot->userList->l.end();
-	     it++) {
-	   if (((*it)->channelMask.getMask().toLower() == channel.toLower()) &&
-	       ((rest == "-") ||
-		(rest.toLower() == (*it)->nicks.toLower()))) {
-	      num++;
-	      from->sendNotice((((*it)->lastseen == 0) ?
-				(((*it)->flags & PERSONFLAG_IDENTIFIED) ?
-				 String("\002*\002") :
-				 String("\002+\002")) : 
-				String(" ")) +
-			       Utils::getFirstNick((*it)->nicks).prepad(15) +
-			       (((*it)->lastseen > 0) ?
-				(String(" Seen ") +
-				 Utils::timelenToStr(cnx->bot->currentTime.time -
-						     (*it)->lastseen) +
-				 String(" ago.") + 
-				 (((*it)->flags & USERFLAG_LASTSEEN_AUTH) ?
-				  String("") : String(" (Unconfirmed)"))) :
-				(((*it)->lastseen == 0) ?
-				 (String(" Currently online.") +
-				  (((*it)->flags & PERSONFLAG_IDENTIFIED) ?
-				   String(" (Confirmed)") : String(""))) :
-				 String(" No information available."))));
-	   }
-	   
-	}
-	
-	if (num == 0) 
-	  from->sendNotice("\002End of last seen\002 (No matches)");
-	else
-	  from->sendNotice(String("\002End of last seen\002 (") +
-			   String((int)num) + String(" entries)"));
-     }
-  }
+{
+   String nick = from->getNick();
+   
+   // Make sure they are asking about someone
+   if (!rest.length()) {
+      from->sendNotice("I'm not a mind reader, who are you asking about?");
+      return;
+   }
+   
+   // Grab their nick
+   StringTokenizer st(rest);
+   String otherNick = st.nextToken();
+   
+   // Are they checking up on themselves?
+   if (nick.toLower() == otherNick.toLower()) {
+      from->sendNotice("If you want to look at yourself, buy a mirror");
+      return;
+   }
+   
+   // Are they looking at us?
+   if (nick.toLower() == cnx->bot->nickName.toLower()) {
+      from->sendNotice("But I'm right here, aren't I?");
+      return;
+   }
+   
+   // run through the userlist and find this guy
+   for (list<UserListItem *>::iterator it = cnx->bot->userList->l.begin();
+	it != cnx->bot->userList->l.end();
+	it++) {
+      if ((*it)->nick.toLower() == otherNick.toLower()) {
+	 from->sendNotice(String("\002") + (*it)->nick + String("\002 ") +
+			  (((*it)->lastseen <= 0) ? 
+			   (((*it)->lastseen == 0) ?
+			    String("is online now!") :
+			    String("has no last seen information, sorry.")) :
+			   (String("was last seen \002") +
+			    Utils::timelenToStr(cnx->bot->currentTime.time -
+						(*it)->lastseen) +
+			    String("\002 ago."))));
+	 
+	 return;
+      }
+   }
+   
+   from->sendNotice(String("Sorry, I don't know when \002") + 
+		    otherNick + String("\002 was on last."));
+}
 
 /* Mode - Change a channel mode
  * Original 16/12/00, Pickle <pickle@alien.net.au>
@@ -1560,24 +1483,30 @@ void UserCommands::Test(ServerConnection *cnx, Person *from,
 		      String("\002#\002"));
 
      for (map<String, gameQuizCategory *, less<String> >::iterator it =
-	  cnx->bot->games->quiz->gameQuizCategories.begin();
-	  it != cnx->bot->games->quiz->gameQuizCategories.end(); ++it) {
-	from->sendNotice(String("Quiz dump of \002") +
-			 (*it).first + String("\002 (\002") +
-			 String(((*it).second)->numQuestions) +
-			 String("\002 questions)"));
-	for (list<gameQuizQuestion *>::iterator it2 = 
-	     ((*it).second)->questions.begin();
-	     it2 != ((*it).second)->questions.end(); ++it2) {
-	   from->sendNotice(String("Q: ") + (*it2)->question);
-	   
-	   if ((*it2)->hint.length() > 0) {
-	      from->sendNotice(String("H: ") + (*it2)->hint);
-	   }
-	   
-	   for (list<String>::iterator it3 = (*it2)->answers.begin();
-		it3 != (*it2)->answers.end(); ++it3) {
-	      from->sendNotice(String("A: ") + (*it3));
+	  cnx->bot->games->quiz->categories.begin();
+	  it != cnx->bot->games->quiz->categories.end(); ++it) {
+	if ((*it).second) {
+	   from->sendNotice(String("Quiz dump of \002") +
+			    (*it).first + String("\002 (\002") +
+			    String(((*it).second)->numQuestions) +
+			    String("\002 questions)"));
+	   for (vector<gameQuizQuestion *>::iterator it2 = 
+		((*it).second)->questions.begin();
+		it2 != ((*it).second)->questions.end(); ++it2) {
+	      if (*it2) {
+		 from->sendNotice(String("Q: ") + (*it2)->question);
+		 
+		 if ((*it2)->hint.length() > 0) {
+		    from->sendNotice(String("H: ") + (*it2)->hint);
+		 }
+		 
+		 for (list<String>::iterator it3 = (*it2)->answers.begin();
+		      it3 != (*it2)->answers.end(); ++it3) {
+		    if (*it3) {
+		       from->sendNotice(String("A: ") + (*it3));
+		    }
+		 }
+	      }
 	   }
 	}
      }
@@ -1651,7 +1580,7 @@ void UserCommands::UserList(ServerConnection *cnx, Person *from,
 			   String("\002*\002") :
 			   String("\002+\002")) : 
 			  String(" ")) +
-			 Utils::getFirstNick((*it)->nicks).prepad(15) + " " +
+			 Utils::getFirstNick((*it)->nick).prepad(15) + " " +
 			 String("\002[\002") +
 			 (*it)->mask.getMask().pad(14) + String("\002]\002 ") +
 			 (*it)->channelMask.getMask().pad(10) + " " +

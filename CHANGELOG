@@ -1,3 +1,16 @@
+Version 0.35
+------------
+Pickle: usercommands.cc - LASTSEEN command simplified, hopefully now works in
+	most (if not all) situations now. This is also in preparation for the
+	newer userlist model.
+Pickle: gamecommands.cc - Added pointer checking while running through the
+	category map. If there is any faulty code, this should be able to
+	catch it. Have not added debugging information (there should be some
+	output while compiled as DEBUG, right?)
+Pickle: gamequiz.cc - Timing routines under attend() written, seem pretty
+	solid and configurable.
+
+
 Version 0.34
 ------------
 Pickle: ctcp.cc - Fixed bug that was causing IRC servers to get cranky with

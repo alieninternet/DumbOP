@@ -411,3 +411,12 @@ String Utils::intToMonth(int month)
    
    return "?";
 }
+
+
+/* random - Return a random integer between 0 and the number given
+ * Original 16/7/01, Simon Butcher <simonb@alien.net.au>
+ */
+unsigned long Utils::random(unsigned long max)
+{
+   return (int)(((max + 1.0) * rand()) / (RAND_MAX + 1.0));
+}

@@ -796,7 +796,7 @@ struct CTCPFunctionsStruct CTCPFunctionsInit[] =
 	"" },
      { "PING",		CTCP::Ping,		false,	false,
 	"<time_t time>" },
-     { "SEX",		CTCP::Sex,		false,	false,
+     { "SEX",		CTCP::Sex,		false,	true,
 	"" },
      { "SOURCE",	CTCP::Source,		false,	false,
 	"" },
@@ -866,7 +866,7 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	User::MASTER,        	true 
      },
      { "CATEGORY",	UserCommands::Category,
-	User::MANAGER,		true
+	User::USER,		true
      },
      //     { "CHANGELEVEL", UserCommands::ChangeLevel, User::MASTER,       false, false },
      { "CYCLE",       	UserCommands::Cycle,       
@@ -895,25 +895,25 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	User::NONE,         	false 
      },
      { "HINT",        	UserCommands::Hint,        
-	User::MANAGER,         	false 
+	User::USER,         	false 
      },
    //     { "IDENT",       	UserCommands::Ident,       User::NONE,         true, false  },
      { "INVITE",      	UserCommands::Invite,      
-	User::TRUSTED_USER, 	true  
+	User::MANAGER, 		true // was trusted user
      },
      { "JOIN",        	UserCommands::Join,        
 	User::MASTER,       	false 
      },
    //     { "KEEP",        	UserCommands::Keep,        User::MANAGER,       true, false  },
      { "KICK",        	UserCommands::Kick,        
-	User::TRUSTED_USER, 	true  
+	User::MANAGER, 		true // was trusted user
      },
    //     { "KICKBAN",     	UserCommands::KickBan,     User::TRUSTED_USER, true, false  },
      { "LASTSEEN",	UserCommands::LastSeen,	   
-	User::USER,	       	true  
+	User::USER,	       	false  
      },
      { "MODE",        	UserCommands::Mode,        
-	User::TRUSTED_USER, 	true  
+	User::MANAGER, 		true // was trusted user
      },
      { "NAMES",       	UserCommands::Names,       
 	User::MASTER,        	true
@@ -942,7 +942,7 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	User::MASTER,       	false 
      },
      { "RECONNECT",   	UserCommands::Reconnect,   
-	User::MANAGER,       	false 
+	User::MASTER,       	false // master guy
      },
      { "REPEAT",   	UserCommands::Repeat,
 	User::MANAGER,       	false
@@ -960,7 +960,7 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	User::MANAGER,       	false 
      },
      { "STATS",		UserCommands::Stats,	   
-	User::MASTER,	       	false 
+	User::MANAGER,	       	false 
      },
      { "TEST",		UserCommands::Test,	   
 	User::MASTER,       	true  
@@ -975,7 +975,7 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	User::MANAGER,       	false 
      },
      { "VOICE",		UserCommands::Voice,
-	User::MASTER,  	false 
+	User::MASTER,  		false // buggy
      },
      { "",	0,	0,	false }
 };

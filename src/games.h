@@ -29,8 +29,10 @@ class Games {
    void attend(void);			// Main game loop called from main loop
    
    friend class GameQuiz;
+   friend class gameQuizChannel;
    
    friend class UserCommands;
+   friend class Channel;
 };
 
 #endif

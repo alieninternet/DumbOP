@@ -50,7 +50,7 @@ Commands::Action(Bot *bot, String channel, String message)
 
 Message
 Commands::AddUser(Bot *bot, String who, String maskChannel, int level, 
-		  int prot, String nicks, long flags, String password)
+		  int prot, String nick, long flags, String password)
 {
   if (who.length() == 0 ||
       maskChannel.length() == 0 ||
@@ -72,7 +72,7 @@ Commands::AddUser(Bot *bot, String who, String maskChannel, int level,
   if (bot->userList->isInUserList(mask, maskChannel))
     return AlreadyInUserlist(mask, maskChannel);
 
-  bot->userList->addUser(mask, maskChannel, level, prot, nicks, flags, -1, password);
+  bot->userList->addUser(mask, maskChannel, level, prot, nick, flags, -1, password);
   bot->rehash();
 
   return Ok;

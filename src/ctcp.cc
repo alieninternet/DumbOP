@@ -51,7 +51,7 @@ void CTCP::ClientInfo(ServerConnection *cnx, Person *from, String rest)
       from->sendCTCPReply("ERRMSG", String(rest) + String(" :") +
 			  String("No information on unsupported CTCP command queried"));
    } else {
-      String result = ":";
+      String result = "";
       
       for (list<CTCPFunction *>::iterator it = cnx->bot->CTCPFunctions.begin();
 	   it != cnx->bot->CTCPFunctions.end(); it++)

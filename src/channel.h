@@ -85,6 +85,8 @@ public:
   void parseMode(Person *, String);
   void resynchModes();
 
+  void sendNotice(String);
+   
   friend class Bot;
   friend class Parser;
   friend class Commands;

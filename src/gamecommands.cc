@@ -22,7 +22,7 @@ void UserCommands::Category(ServerConnection *cnx, Person *from,
    }
 
    // Try to get the quiz channel information
-   gameQuizChannel *gqc = cnx->bot->games->quiz->gameQuizChannels[c->channelName];
+   gameQuizChannel *gqc = cnx->bot->games->quiz->channels[c->channelName];
    
    // Check if the quiz is running in this channel or not
    if (!gqc) {
@@ -34,56 +34,54 @@ void UserCommands::Category(ServerConnection *cnx, Person *from,
    // If we get HERE, we know the category was not specified or was invalid.
    from->sendNotice(String("Current Quiz Category in \002") +
 		    c->channelName + String("\002 is \002") +
-		    String("?") +
-		    String("\002. ") +
-		    ((false) ?
+		    gqc->category + String("\002. ") +
+		    ((gqc->nextCategory.length() > 0) ?
 		     (String("Next category selected is \002") +
-		      String("?") +
-		      String("\002. ")) : String("")) +
+		      gqc->nextCategory + String("\002. ")) : String("")) +
 		    String("Changing the category for the next round will cost \002") +
-		    String("?") +
-		    String("\002 points."));
+		    String(gqc->nextCategoryCost) + String("\002 points."));
    
    // Have we been requested to list the categories too?
    if ((rest[0] == '-') || (rest[0] == '*')) {
       String result = "\002Available Quiz Categories:\002";
       unsigned long totalQuestions = 0;
-      int numCategories = 0;
       
       for (map<String, gameQuizCategory *, less<String> >::iterator it =
-	   cnx->bot->games->quiz->gameQuizCategories.begin();
-	   it != cnx->bot->games->quiz->gameQuizCategories.end(); ++it) {
-	 // Add to our tallies
-	 totalQuestions += ((*it).second)->numQuestions;
-	 numCategories++;
-	 
-	 // Start the category string with a space
-	 result = result + String(" ");
-	 
-	 // Check the age of this category
-	 if ((cnx->bot->currentTime.time - ((*it).second)->lastPlayed) <
-	     DEFAULT_QUIZ_CATEGORY_LOCKOUT) {
-	    // Too old to select
-	    result = result + (*it).first;
-	 } else {
-	    // OK to select
-	    result = result + String("\037") + (*it).first + String("\037");
+	   cnx->bot->games->quiz->categories.begin();
+	   it != cnx->bot->games->quiz->categories.end(); ++it) {
+	 // Double check the pointer is valid
+	 if ((*it).second) {
+	    // Add to our tallies
+	    totalQuestions += (*it).second->numQuestions;
+	    
+	    // Start the category string with a space
+	    result = result + String(" ");
+	    
+	    // Check the age of this category
+	    if ((cnx->bot->currentTime.time - (*it).second->lastPlayed) <
+		DEFAULT_QUIZ_CATEGORY_LOCKOUT_TIME) {
+	       // Too old to select
+	       result = result + (*it).first;
+	    } else {
+	       // OK to select
+	       result = result + String("\037") + (*it).first + String("\037");
+	    }
+	    
+	    /* End the category name including the number of questions.
+	     * Notice how we do not put a space here, this is to avoid any
+	     * line wrappers splitting apart small category names and the
+	     * number of questions and making it harder to read.
+	     */
+	    result = result + String("(") + 
+	      String((*it).second->numQuestions) + String("),");
+	    
+	    // Check if the category list is too long yet
+	    if (result.length() >= 350) {
+	       // Notice how we chop the last char (a comma) off
+	       from->sendNotice(result.subString(0,(result.length() - 2)));
+	       result = "";
+	    }   
 	 }
-	 
-	 /* End the category name including the number of questions.
-	  * Notice how we do not put a space here, this is to avoid any
-	  * line wrappers splitting apart small category names and the
-	  * number of questions and making it harder to read.
-	  */
-	 result = result + String("(") + 
-	   String(((*it).second)->numQuestions) + String("),");
-	 
-	 // Check if the category list is too long yet
-	 if (result.length() >= 350) {
-	    // Notice how we chop the last char (a comma) off
-	    from->sendNotice(result.subString(0,(result.length() - 2)));
-	    result = "";
-	 }   
       }
       
       // Check if we have a line left to send
@@ -92,9 +90,9 @@ void UserCommands::Category(ServerConnection *cnx, Person *from,
       }
       
       from->sendNotice(String("\002End of Quiz Category listing\002 (") +
-		       String(totalQuestions) + 
-		       String(" questions from ") +
-		       String(numCategories) + String(" categories)"));
+		       String(totalQuestions) + String(" questions from ") +
+		       String(cnx->bot->games->quiz->numCategories) +
+		       String(" categories)"));
    }
 }
 
@@ -115,7 +113,7 @@ void UserCommands::Repeat(ServerConnection *cnx, Person *from,
    }
    
    // Try to get the quiz channel information
-   gameQuizChannel *gqc = cnx->bot->games->quiz->gameQuizChannels[c->channelName];
+   gameQuizChannel *gqc = cnx->bot->games->quiz->channels[c->channelName];
    
    // Check if the quiz is running in this channel or not
    if (!gqc) {
@@ -123,8 +121,19 @@ void UserCommands::Repeat(ServerConnection *cnx, Person *from,
 		       String("\002 has not started yet, sorry."));
       return;
    }
+
+   // Do we actually HAVE a question to repeat?
+   if ((!gqc->questionStr.length()) &&
+       (!gqc->answered)) {
+      from->sendNotice(String("There is no question to repeat in \002") +
+		       c->channelName + String("\002."));
+      return;
+   }
    
-   from->sendNotice("The repeat command does not currently do anything.");
+   // Tell them the question
+   from->sendNotice(String("The question from \002") + gqc->category +
+		    String("\002 is: \002") + gqc->questionStr +
+		    String("\002"));
 }
 
 
@@ -145,7 +154,7 @@ void UserCommands::Hint(ServerConnection *cnx, Person *from,
    }
    
    // Try to get the quiz channel information
-   gameQuizChannel *gqc = cnx->bot->games->quiz->gameQuizChannels[c->channelName];
+   gameQuizChannel *gqc = cnx->bot->games->quiz->channels[c->channelName];
    
    // Check if the quiz is running in this channel or not
    if (!gqc) {
@@ -153,6 +162,6 @@ void UserCommands::Hint(ServerConnection *cnx, Person *from,
 		       String("\002 has not started yet, sorry."));
       return;
    }
-   
-   from->sendNotice("The hint command does not do anything.. yet..");
+  
+   c->sendNotice("The hint command does not do anything.. yet..");
 }

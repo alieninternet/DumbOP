@@ -39,14 +39,14 @@ void UserList::read()
       String maskChannel = st.nextToken(':');
       String level = st.nextToken(':');
       String prot = st.nextToken(':');
-      String nicks = st.nextToken(':');
+      String nick = st.nextToken(':');
       String flags = st.nextToken(':');
       String lastseen = st.nextToken(':');
       String password = st.rest().trim();
       if (password == "*NONE*")
 	password = "";
       l.push_back(new UserListItem(mask, maskChannel, atoi(level),
-				   atoi(prot), nicks,
+				   atoi(prot), nick,
 				   atol(flags),
 				   ((atol(lastseen) == 0) ? 
 				    -1 : atol(lastseen)),
@@ -70,7 +70,7 @@ void UserList::save()
 	<< (*it)->channelMask.getMask().toLower() << ":"
 	<< (*it)->level << ":"
 	<< (*it)->prot << ":"
-	<< (*it)->nicks << ":"
+	<< (*it)->nick << ":"
 	<< (*it)->flags << ":"
 	<< (*it)->lastseen << ":";
       if ((*it)->passwd == "")

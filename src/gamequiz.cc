@@ -13,6 +13,7 @@
 
 #define QUIZ_FILE_SUFFIX ".quiz"
 
+
 /* gameQuizQuestion - Initialise the question class
  * Original 4/6/01, Simon Butcher <simonb@alien.net.au>
  */
@@ -30,11 +31,15 @@ gameQuizQuestion::gameQuizQuestion(String q, String h,
    answers.clear();
    
    // Copy the answer pointers across
+   //
+   // THIS SHOULD BE STL LIST COPY()???
+   //
    for (list<String>::iterator it = a.begin();
 	it != a.end(); ++it) {
       answers.push_back(*it);
    }
 }
+
 
 /* ~gameQuizQuestion - Wipe out the question class
  * Original 4/6/01, Simon Butcher <simonb@alien.net.au>
@@ -44,13 +49,16 @@ gameQuizQuestion::~gameQuizQuestion(void)
    answers.clear();
 }
 
+
 /* gameQuizCategory - Initialise the category class
  * Original 4/6/01, Simon Butcher <simonb@alien.net.au>
  */
 gameQuizCategory::gameQuizCategory(void)
 : lastPlayed(0)
 {
+   questions.clear();
 }
+
 
 /* ~gameQuizCategory - Kill the category class :)
  * Original 4/6/01, Simon Butcher <simonb@alien.net.au>
@@ -66,7 +74,143 @@ gameQuizCategory::~gameQuizCategory(void)
       delete q;
    }
 }
- 
+
+
+/* gameQuizChannel - Initialise the quiz game run-time class
+ * Original 12/7/01, SImon Butcher <simonb@alien.net.au>
+ */
+gameQuizChannel::gameQuizChannel(Channel *c, GameQuiz *gq)
+: channel(c),
+  gameQuiz(gq),
+  category(""),
+  nextCategory(""),
+  nextCategoryCost(0),
+  question(0),
+  questionStr(""),
+  hintLevel(-1),
+  questionNum(0)
+{
+   // Fire up a category
+   bumpCategory();
+}
+
+
+/* bumpCategory - Fire up the next category
+ * Original 13/7/01, Simon Butcher <simonb@alien.net.au>
+ */
+void gameQuizChannel::bumpCategory(void) {
+   // Have we been requested to change to a specific category?
+   if (nextCategory.length()) {
+      /* Copy the next category across. The category command checks this
+       * so that we don't have to. Phew!
+       */
+      category = nextCategory;
+   } else { // Otherwise we run through the list and find the next
+      String potentialCategory = "";
+      unsigned char randomAttempts = 0;
+      
+      while ((!gameQuiz->categories[potentialCategory]) ||
+	     ((gameQuiz->games->bot->currentTime.time -
+	       gameQuiz->categories[potentialCategory]->lastPlayed) <
+	      DEFAULT_QUIZ_CATEGORY_LOCKOUT_TIME)) {
+	 // Are we forcing a run-through to find the oldest category?
+	 if (randomAttempts < DEFAULT_QUIZ_CATEGORY_RANDOM_ATTEMPTS) {
+	    // Randomly select a category
+	    
+	    // This was a random attempt, increase the attempt counter
+	    randomAttempts++;
+	 } else {
+	    /* No more random, to save time we will just run through the
+	     * damned categories and pick whatever we find that has not been
+	     * used in a long time.
+	     */
+	    for (map<String, gameQuizCategory *, less<String> >::iterator it =
+		 gameQuiz->categories.begin();
+		 it != gameQuiz->categories.end(); ++it) {
+	       // Is this older than the one we already have marked down?
+	       if ((!potentialCategory.length()) ||
+		   ((*it).second->lastPlayed <
+		    gameQuiz->categories[potentialCategory]->lastPlayed)) {
+		  potentialCategory = (*it).first;
+	       }
+	    }
+	    
+	    /* End the while, just in case this category has not expired.
+	     * For the quiz to keep going, we MUST break even if we might
+	     * be breaking the expiration rules.
+	     */
+	    break;
+	 }
+      }
+      
+      category = potentialCategory;
+   }
+   
+   // Reset the next category selection
+   nextCategory = "";
+
+   // Fix the last played variable for this category
+   gameQuiz->categories[category]->lastPlayed = 
+     gameQuiz->games->bot->currentTime.time;
+   
+   // Reset the cost for the next category
+   nextCategoryCost = DEFAULT_QUIZ_CATEGORY_BASE_CHANGE_COST;
+   
+   // Reset the question number counter too
+   questionNum = 0;
+}
+
+
+/* bumpQuestion - Fire up the next question
+ * Original 14/7/01, Simon Butcher <simonb@alien.net.au>
+ * Note: Should the 'find the oldest' method be replaced with a 'find the
+ *       first' style loop?
+ */
+void gameQuizChannel::bumpQuestion(void) {
+   gameQuizQuestion *potentialQuestion = 0;
+   unsigned char randomAttempts = 0;
+   
+   while ((!potentialQuestion) ||
+	  ((gameQuiz->games->bot->currentTime.time - 
+	    potentialQuestion->lastPlayed) < 
+	   DEFAULT_QUIZ_QUESTION_LOCKOUT_TIME)) {
+      if (randomAttempts < DEFAULT_QUIZ_QUESTION_RANDOM_ATTEMPTS) {
+	 // Randomly select a question
+	 potentialQuestion = 
+	   gameQuiz->categories[category]->questions[Utils::random(gameQuiz->categories[category]->numQuestions - 1)];
+	 
+	 // This was a random attempt, increase the attempt counter
+	 randomAttempts++;
+      } else {
+	 /* No more random attempts, we gotta stop mucking around and just
+	  * grab the first acceptable one we can find
+	  */
+	 for (vector<gameQuizQuestion *>::iterator it = 
+	      gameQuiz->categories[category]->questions.begin();
+	      it != gameQuiz->categories[category]->questions.end(); ++it) {
+	    // Check if this is older than the one we have marked down
+	    if ((!potentialQuestion) ||
+		((*it)->lastPlayed < potentialQuestion->lastPlayed)) {
+	       potentialQuestion = (*it);
+	    }
+	 }
+	 
+	 // Break the while loop to avoid any failure to comply to rules issues
+	 break;
+      }
+   }
+   
+   // Copy the question pointer across.
+   question = potentialQuestion;
+   
+   // Fix the last played variable for this category
+   question->lastPlayed = gameQuiz->games->bot->currentTime.time;
+   
+   // Increase the question number counter
+   questionNum++;
+}
+
+
 /* GameQuiz - Initialise the quiz game
  * Original 3/6/01, Simon Butcher <simonb@alien.net.au>
  */
@@ -74,8 +218,12 @@ GameQuiz::GameQuiz(Games *parent)
 : games(parent),
   available(false)
 {
+   categories.clear();
+   channels.clear();
+   
    load();
 }
+
 
 /* ~GameQuiz - Shutdown the quiz game
  * Original 3/6/01, Simon Butcher <simonb@alien.net.au>
@@ -86,24 +234,35 @@ GameQuiz::~GameQuiz()
    clear();
 }
 
+
 /* clear - Totally wipe out the quiz data in memory
  * Original 3/6/01, Simon Butcher <simonb@alien.net.au>
  */
 void GameQuiz::clear(void)
 {
-   map<String, gameQuizCategory *, less<String> > gameQuizCategories;
+   map<String, gameQuizCategory *, less<String> > categories;
 
-   gameQuizCategory *c;
-   map<String, gameQuizCategory *, less<String> >::iterator it;
+   gameQuizCategory *cat;
+   gameQuizChannel *chan;
+   map<String, gameQuizCategory *, less<String> >::iterator itCat;
+   map<String, gameQuizChannel *, less<String> >::iterator itChan;
    
    // Run through the categories in memory and wipe them out
-   while (gameQuizCategories.size() != 0) {
-      it = gameQuizCategories.begin();
-      c = (*it).second;
-      gameQuizCategories.erase(it);
-      delete c;
+   while (categories.size() != 0) {
+      itCat = categories.begin();
+      cat = (*itCat).second;
+      categories.erase(itCat);
+      delete cat;
+   }
+   
+   while (channels.size() != 0) {
+      itChan = channels.begin();
+      chan = (*itChan).second;
+      channels.erase(itChan);
+      delete chan;
    }
 }
+
 
 /* load - Seek and load the quiz question files
  * Original 3/6/01, Simon Butcher <simonb@alien.net.au>
@@ -112,8 +271,8 @@ bool GameQuiz::load(void)
 {
    struct dirent *dirEntry;
    DIR *directory = opendir(games->bot->quizDirectory);
-   bool happy = false; // Did we work happily? eg. At least 1 question
    gameQuizQuestion *readQuestion = new gameQuizQuestion;
+   unsigned int numCats = 0;
    
    // Clear a blank slate
    clear();
@@ -183,6 +342,7 @@ bool GameQuiz::load(void)
 	 unsigned long numQuestions = 0, numLines = 0;
 	 bool justStartedQuestion = false;
 	 gameQuizCategory *readCategory = new gameQuizCategory;
+	 readQuestion->question = "";
 	 
 	 // Run through the file
 	 while (!file.eof()) {
@@ -227,7 +387,6 @@ bool GameQuiz::load(void)
 	       
 	       // Make sure length was OK
 	       if (readQuestion->question.length() < 1) {
-		  happy = false;
 		  continue;
 	       }
 	       break;
@@ -243,13 +402,8 @@ bool GameQuiz::load(void)
 		  // Copy this question into the list
 		  readQuestion->answers.push_back(line);
 	       }
-	       happy = true; // We are happy, we have at least 1 Q&A
 	       break;
 	    }
-	    
-	    
-	    // uhh.. dirty.
-	    happy = true;
 	 }
 	 
 	 // Make sure we got at least 1 question there..
@@ -267,7 +421,8 @@ bool GameQuiz::load(void)
 	    readCategory->numQuestions = numQuestions;
 	    
 	    // Copy this category into the main map
-	    gameQuizCategories[category] = readCategory;
+	    categories[category] = readCategory;
+	    numCats++;
 	    
 	    // Tell the world what we did
 	    games->bot->logLine(String("Loaded QUIZ category '") +
@@ -292,13 +447,97 @@ bool GameQuiz::load(void)
    // Close the directory file
    closedir(directory);
 
+   // Copy the number of categories we loaded over
+   numCategories = numCats;
+   
    // Bitch and moan if we are not happy
-   if (!happy) {
+   if (numCats < 1) {
       games->bot->logLine(String("Could not load any QUIZ files from directory ") +
 			  games->bot->quizDirectory);
    }
    
    // The end.
    delete readQuestion;
-   return happy;
+   return (numCats < 1);
+}
+
+/* attend - Run the quiz channel, or channels
+ * Original 13/7/01, Simon Butcher <simonb@alien.net.au>
+ */
+void GameQuiz::attend(void)
+{
+   for (map<String, gameQuizChannel *, less<String> >::iterator it =
+	channels.begin(); it != channels.end(); ++it) {
+      // Make sure it is not a broken pointer..
+      if ((*it).second) {
+	 time_t period = games->bot->currentTime.time - (*it).second->timeAsked;
+	 
+	 // Has the question expired without someone answering it?
+	 if (((*it).second->questionStr.length()) &&
+	     (period >= DEFAULT_QUIZ_QUESTION_ASK_TIME) &&
+	     (!(*it).second->answered)) {
+	    // Reset the question
+	    (*it).second->questionStr = "";
+	    
+	    // Tell them nobody answered the question
+	    (*it).second->channel->sendNotice("Nobody got that question.");
+	 }
+	 
+	 // Are we in a question, and it is time for another hint?
+	 if (((*it).second->questionStr.length()) &&
+	     ((period % DEFAULT_QUIZ_QUESTION_NEXTHINT_DELAY) == 0) &&
+	     ((*it).second->hintLevel > 0)) {
+	    // Send another hint
+	    (*it).second->channel->sendNotice("This is a hint placeholder.");
+	 }
+	 
+	 // Have we finished with a question?
+	 if (!(*it).second->questionStr.length()) {
+	    // Next question time? or next category time?
+	    if ((period >= (DEFAULT_QUIZ_QUESTION_ASK_TIME +
+			    DEFAULT_QUIZ_QUESTION_BETWEEN_DELAY)) &&
+		((*it).second->questionNum < DEFAULT_QUIZ_ROUND_QUESTIONS)) {
+	       // Bump in the next question
+	       (*it).second->bumpQuestion();
+	       
+	       // Normal question?
+	       if (true) {
+		  // Copy the question string across normally
+		  (*it).second->questionStr = (*it).second->question->question;
+		  
+		  // Set the points correctly
+	       } else {
+		  // Bonus question.
+		  
+		  // Set the points correctly
+		  
+	       }
+	       
+	       // Send the question to the channel
+	       (*it).second->channel->sendNotice(String("Question ") +
+						 String((*it).second->questionNum) +
+						 String("/") +
+						 String(DEFAULT_QUIZ_ROUND_QUESTIONS) +
+						 String(": ") +
+						 (*it).second->questionStr);
+	       
+	       // Reset the time we asked the question variable
+	       (*it).second->timeAsked = games->bot->currentTime.time;
+	    } else if ((period >= (DEFAULT_QUIZ_QUESTION_ASK_TIME +
+				   DEFAULT_QUIZ_CATEGORY_BETWEEN_DELAY)) &&
+		       ((*it).second->questionNum >=
+			DEFAULT_QUIZ_ROUND_QUESTIONS)) {
+	       // Bump in the next category
+	       (*it).second->bumpCategory();
+	       
+	       // Send the next category to the channel
+	       (*it).second->channel->sendNotice(String("Category is now \002") +
+						 (*it).second->category +
+						 String("\002"));
+	    }
+	    
+	    
+	 }
+      }
+   }
 }

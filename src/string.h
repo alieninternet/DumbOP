@@ -20,6 +20,7 @@ public:
   String(const char *);
   String(const String &);
    String(int);
+   String(unsigned int);
    String(long);
    String(unsigned long);
   String(char);
