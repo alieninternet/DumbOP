@@ -2,7 +2,6 @@
 #include <time.h>
 
 #include "socket.h"
-#include "dccparser.h"
 #include "dccconnection.h"
 
 DCCConnection::DCCConnection(Bot *b, String n, unsigned long address, int port)
@@ -31,8 +30,6 @@ DCCConnection::handleInput()
 
   if (bot->debug)
     cout << "DCC: <" << line << ">" << endl;
-
-  DCCParser::parseLine(this, line);
 
   return false;
 }

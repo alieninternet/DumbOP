@@ -6,9 +6,6 @@
 
 #include "server.h"
 
-#ifdef USESCRIPTS
-class ScriptCommands;
-#endif
 class UserCommands;
 
 class ServerList {
@@ -35,9 +32,6 @@ public:
   Server * get(int n) const { return v[n]; }
   int size() { return v.size(); }
 
-#ifdef USESCRIPTS
-  friend class ScriptCommands;
-#endif
   friend class UserCommands;
 };
 

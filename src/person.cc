@@ -35,8 +35,18 @@ Person::operator=(const String & a)
   return *this;
 }
 
-void
-Person::sendNotice(String message)
+/* sendNotice (virtual) - Quick way of sending notices
+ * Original 13/12/00, Pickle <pickle@alien.net.au>
+ */
+void Person::sendNotice(String message)
 {
-  bot->serverConnection->queue->sendNotice(getNick(), message);
+   bot->serverConnection->queue->sendNotice(getNick(), message);
+}
+
+/* sendCTCPReply (virtual) - Quick way of sending CTCP replies
+ * Original 30/12/00, Pickle <pickle@alien.net.au>
+ */
+void Person::sendCTCPReply(String command, String query)
+{
+   bot->serverConnection->queue->sendCTCPReply(getNick(), command, query);
 }

@@ -1,6 +1,35 @@
+Version 0.31
+------------
+Pickle: bot.h - Changed server lag counter PING length from 90 secs to 5 mins
+Pickle: flags.c created! An enormously ugly flag lookup table has been made
+Pickle: ctcp.c and ctcp.h created - CTCP commands have been moved here and
+	are executed similar to usercommands.c. The CTCP responce code was
+	starting to get a little over the top.
+	!!! DUMBOP IS READY TO BE THE MOST CTCP COMPLIANT CLIENT AVAILABLE !!!
+	(Better than that bloody eggdrop pile of crap.. Heh heh heh! AND
+	 even better than mIRC and ircII. I'm personally impressed! :)
+Pickle: dccparser.c & dccparser.h have both been deleted due to the new CTCP
+	layout.
+Pickle: note.c and note.h created - NOTE command has been added, linking into
+	note.c, codebase creation has begin, although cannot really be
+	implemented until the database code is finalised and in place.
+Pickle: ansi.c, ansi.h, telnet.c, telnet.h, telnetspy.c, telnetspy.h added -
+	Ready for the ability to telnet to DumbOP for off-relay maintenance 
+	stuff.
+Pickle: games.c and games.h created - Implementation of gaming code can begin.
+	Game flags from flags.c/flags.h have been moved into their new home.
+Pickle: DumbOP now has a bit of the TG smell to it :)
+Pickle: version.h and version.c created, version information scattered across
+	the files has been moved here now, including the INFO command from 
+	usercommands.c
+Pickle: parser.c - NULL pointers that might have been followed accidentally
+	in loops have been removed.
+Pickle: bot.c - Added some debugging output to the init/deinit functions
+
 
 Version 0.30
 ------------
+Pickle: CHANGELOG created.. DumbOP is now quite the real UNIX production :)
 Pickle: Started to add comments in front of commands in usercommands.c.
 	Format should probably start to become a standard, as follows in
        	semi-BNF:

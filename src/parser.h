@@ -5,6 +5,29 @@
 # include "person.h"
 # include "serverconnection.h"
 
+struct CTCPFunctionsStruct {
+   const char * name;
+   void (*function)(ServerConnection *, Person *, String);
+   bool needsIdent;
+   bool hidden;
+   const char * usage;
+};
+
+class CTCPFunction {
+ public:
+   String name;
+   void (*function)(ServerConnection *, Person *, String);
+   bool needsIdent;
+   bool hidden;
+   String usage;
+   
+   CTCPFunction(String na, void (*f)(ServerConnection *, Person *, String),
+		bool i, bool h, String u)
+     : name(na), function(f), needsIdent(i), hidden(h), usage(u)
+       {
+       }
+};
+
 struct userFunctionsStruct {
    const char * name;
    void (*function)(ServerConnection *, Person *, String, String);
@@ -19,11 +42,9 @@ class userFunction {
    int minLevel;
    bool needsChannelName;
    
-   userFunction(String na,
-		void (*f)(ServerConnection *, Person *,
-			  String, String),
-		int m, bool n
-		)
+   userFunction(String na, void (*f)(ServerConnection *, Person *,
+				     String, String),
+		int m, bool n)
      : name(na), function(f), minLevel(m), needsChannelName(n)
      {
      }

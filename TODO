@@ -1,31 +1,67 @@
-PASSWORD CODE YOU DICKHEAD! Change password needs fixing, crypt fucked?
-Ban lists
-Command Counter
-ChanOP resync
-Add !ping
-Finish !lastseen (mask searching, channel mask searching)
-Finish !access (mask searching, channel mask searching)
-Tban+Tkban+ban+kick merge
-Combine !server and !serverlist, !nextserver and !reconnect
-Add command to force nickop/other bot identification
-Move channel list to a file (Add save/load channel list commands, peak saving)
-Finish !beep
-Finish !names (- returns all; should only return channels user has access to)
-Finish parse command (shouldn't require ! on direct privmsgs)
-Convert old flag code to use the new flags (FINALLY)
-Add channel flag (long int) to channel entries
-Add channel protection shit (see flags.h)
-Add channel logging [24hr e-mail log to channel owner(s)]??
-Remove the "add dumbop to userlist" bugfix in parser.c
-Add flag table, flag command, flag, flag chr, flags name (one table for chan, one for users)
-Fix utils::flagToStr for the new flag table (above)
-Add setuser and setchan flag manipulation commands
-Fix formatting in old ripped commands to suit new format
-Use "ISON" irc command (rfc 1459) to check for bot-users online
-Add bot-authentication strings to userlist file (replace old prot variable spot)
-Move hard-coded nickop authentication to userlist file (above)
-Add cnx->bot->sendLen += to output, where appropriate (most likely in serverqueue.c)
-Add signal checking code (maybe rip the old code from the gathering project) to minimise crashes, allow -HUP reloads etc
+Change over to GDBM Databases. Channel Masks should be removed and replaced
+with references to channel database entries as to make it act more like
+ChanOP, and to remove multiple user entries.
 
-.. and I'm sure plenty more bugs and unfinished bits I've missed out on:
-Good luck Scott.
+Users should be able to add themselves to DumbOP.
+
+PASSWORD CODE! Change password needs fixing, crypt fucked?
+
+Ban lists
+
+Command Counter
+
+ChanOP resync
+
+Add !ping
+
+Finish !lastseen (mask searching, channel mask searching)
+
+Finish !access (mask searching, channel mask searching)
+
+Tban+Tkban+ban+kick merge
+
+Combine !server and !serverlist, !nextserver and !reconnect
+
+Add command to force nickop/other bot identification
+
+Move channel list to a file (Add save/load channel list commands, peak saving)
+
+Finish !beep
+
+Finish !names (- returns all; should only return channels user has access to)
+
+Finish parse command (shouldn't require ! on direct privmsgs)
+
+Convert old flag code to use the new flags (FINALLY)
+
+Add channel flag (long int) to channel entries
+
+Add channel protection shit (see flags.h)
+
+Add channel logging [24hr e-mail log to channel owner(s)]??
+
+Remove the "add dumbop to userlist" bugfix in parser.c
+
+Add flag table, flag command, flag, flag chr, flags name (one table for chan, one for users)
+
+Fix utils::flagToStr for the new flag table (above)
+
+Add setuser and setchan flag manipulation commands
+
+Fix formatting in old ripped commands to suit new format
+
+Use "ISON" irc command (rfc 1459) to check for bot-users online
+
+Add bot-authentication strings to userlist file (replace old prot variable spot)
+
+Move hard-coded nickop authentication to userlist file (above)
+
+Add cnx->bot->sendLen += to output, where appropriate (most likely in serverqueue.c)
+
+Add signal checking code (maybe rip the old code from the gathering project) 
+to minimise hard crashes and panic race modes
+
+Game code bed should be completed
+
+Much better logging code needs to be implemented with levels, zones etc.
+This will require a log.c and log.h file

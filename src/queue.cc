@@ -14,6 +14,6 @@ bool
 Queue::sendLine(String s)
 {
   if (debug)
-    cout << "=> " << s << endl;
+    cout << "<=" << s << endl;
   return sock->write(s);
 }

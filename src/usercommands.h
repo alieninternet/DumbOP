@@ -37,6 +37,7 @@ class UserCommands {
    static void Names(ServerConnection *, Person *, String, String);
    static void NextServer(ServerConnection *, Person *, String, String);
    static void Nick(ServerConnection *, Person *, String, String);
+   static void Note(ServerConnection *, Person *, String, String);
    static void NsLookup(ServerConnection *, Person *, String, String);
    static void Op(ServerConnection *, Person *, String, String);
    static void Part(ServerConnection *, Person *, String, String);

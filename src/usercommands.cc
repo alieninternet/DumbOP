@@ -31,6 +31,7 @@
 #include "server.h"
 #include "bot.h"
 #include "flags.h"
+#include "version.h"
 
 #ifdef NOCRYPT
 char * crypt(const char *p, const char *s) { return p; }
@@ -87,7 +88,7 @@ void UserCommands::Access(ServerConnection *cnx, Person *from,
 	    if (((*it)->channelMask.getMask().toLower() == channel.toLower()) &&
 		!((*it)->flags & USERFLAG_SUSPENDED)) {
 	       from->sendNotice((((*it)->lastseen == 0) ?
-				 (((*it)->flags & USERFLAG_IDENTIFIED) ?
+				 (((*it)->flags & PERSONFLAG_IDENTIFIED) ?
 				  String("\002*\002") :
 				  String("\002+\002")) : 
 				 String(" ")) +
@@ -95,11 +96,11 @@ void UserCommands::Access(ServerConnection *cnx, Person *from,
 				Utils::levelToStr((*it)->level).pad(12) + " " +
 				Utils::boolToStr((*it)->flags & USERFLAG_JOIN_AOP).pad(3) + " " +
 				Utils::boolToStr((*it)->flags & USERFLAG_JOIN_AOV).pad(3) + " " +
-				(((*it)->flags & USERFLAG_IS_BOT) ?
+				(((*it)->flags & PERSONFLAG_IS_BOT) ?
 				 String("Bot") :
 				 (((*it)->flags & USERFLAG_IS_CHAN_OWNER) ?
 				  String("Admin") : String("Norm."))).pad(5) + " " +
-				Utils::boolToStr((*it)->flags & USERFLAG_IDENTIFIED).pad(5) + " " +
+				Utils::boolToStr((*it)->flags & PERSONFLAG_IDENTIFIED).pad(5) + " " +
 				Utils::flagsToStr((*it)->flags).pad(10));
 	       num++;
 	       if ((*it)->lastseen == 0)
@@ -542,7 +543,7 @@ void UserCommands::Deop(ServerConnection *cnx, Person *from,
 
 /* Die - Make the bot quit
  * Original 13/12/00, Pickle <pickle@alien.net.au>
- * 28/12/00, Pickle - Changed default quit message to VERSION_STRING
+ * 28/12/00 Pickle - Changed default quit message to VERSION_STRING
  */
 void UserCommands::Die(ServerConnection *cnx, Person *from,
 		       String channel, String rest)
@@ -550,7 +551,7 @@ void UserCommands::Die(ServerConnection *cnx, Person *from,
    String reason;
    
    if (rest.length() == 0)
-     reason = VERSION_STRING;
+     reason = String("Leaving [") + VERSION_STRING + String("]");
    else
      reason = rest;
    
@@ -579,7 +580,7 @@ void UserCommands::Do(ServerConnection *cnx, Person *from,
 
 /* Help - Display help
  * Original 15/12/00, Pickle <pickle@alien.net.au>
- * 26/12/00, Pickle - Changed header output depending on command or topic
+ * 26/12/00 Pickle - Changed header output depending on command or topic
  */
 void UserCommands::Help(ServerConnection *cnx, Person *from,
 			String channel, String rest)
@@ -703,21 +704,12 @@ UserCommands::Ident(ServerConnection *cnx, Person *from,
 
 /* Info - General information on the bot
  * Original 22/12/00, Pickle <pickle@alien.net.au>
- * 28/12/00, Pickle - Added trigger to the start of hint commands
+ * 28/12/00 Pickle - Added trigger to the start of hint commands
  */
 void UserCommands::Info(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
-   from->sendNotice(String("\026") + VERSION_STRING + String("\026"));
-   from->sendNotice(String("\002") + COPYRIGHT_STRING + String("\002"));
-   from->sendNotice("DumbOP was originally created as a tiny replacement for ChanOP on");
-   from->sendNotice("AustNet whenever it went down. DumbOP simply the peace for a while,");
-   from->sendNotice("but is now gradually growing into something a little more useful.");
-   from->sendNotice("Many thanks to o0 and ONION.");
-   from->sendNotice(String("Type \002") + String(cnx->bot->commandChar) +
-		    "HELP\002 for more information, or \002" +
-		    String(cnx->bot->commandChar) +
-		    "STATS\002 for statistical junk.");
+   Version::sendInformation(cnx, from);
 }
 
 /* Invite
@@ -968,7 +960,7 @@ void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
 	      time_t diff = time(NULL) - (*it)->lastseen;
 	      
 	      from->sendNotice((((*it)->lastseen == 0) ?
-				(((*it)->flags & USERFLAG_IDENTIFIED) ?
+				(((*it)->flags & PERSONFLAG_IDENTIFIED) ?
 				 String("\002*\002") :
 				 String("\002+\002")) : 
 				String(" ")) +
@@ -981,7 +973,7 @@ void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
 				  String("") : String(" (Unconfirmed)"))) :
 				(((*it)->lastseen == 0) ?
 				 (String(" Currently online.") +
-				  (((*it)->flags & USERFLAG_IDENTIFIED) ?
+				  (((*it)->flags & PERSONFLAG_IDENTIFIED) ?
 				   String(" (Confirmed)") : String(""))) :
 				 String(" No information available."))));
 	   }
@@ -1162,9 +1154,18 @@ UserCommands::Nick(ServerConnection *cnx, Person *from,
   cnx->queue->sendNick(nick);
 }
 
+/* Note - Wrapper into the note interface
+ */
+void UserCommands::Note(ServerConnection *cnx, Person *from,
+			String channel, String rest)
+{
+   from->sendNotice("The note interface is not operational.");
+}
+
 /* NsLookup - Do a name server lookup
  * Original 15/12/00, Pickle <pickle@alien.net.au>
- * Needs: Reverse lookup capabilities
+ * Needs: Reverse lookup capabilities and to be ported in having nslookups
+ *        via a forked slave portion of the code like TG did
  */
 void
 UserCommands::NsLookup(ServerConnection *cnx, Person *from,
@@ -1433,13 +1434,13 @@ void UserCommands::Stats(ServerConnection *cnx, Person *from,
 	   it != cnx->bot->userList->l.end();
 	   it++) {
 	 num_users++;
-	 if ((*it)->flags & USERFLAG_IS_BOT)
+	 if ((*it)->flags & PERSONFLAG_IS_BOT)
 	   num_bots++;
 	 if ((*it)->flags & USERFLAG_IS_CHAN_OWNER)
 	   num_chanowns++;
 	 if ((*it)->flags & USERFLAG_SUSPENDED)
 	   num_suspend++;
-	 if ((*it)->flags & USERFLAG_IDENTIFIED)
+	 if ((*it)->flags & PERSONFLAG_IDENTIFIED)
 	   num_ident++;
 	 if ((*it)->lastseen == 0)
 	   num_online++;
@@ -1702,7 +1703,7 @@ UserCommands::Topic(ServerConnection *cnx, Person *from,
 
 /* UserList - Display a list of users
  * Original 14/12/00, Pickle <pickle@alien.net.au>
- * 22/12/00, Pickle - Reformatted
+ * 22/12/00 Pickle - Reformatted
  */
 void UserCommands::UserList(ServerConnection *cnx, Person *from,
 			    String channel, String rest)
@@ -1716,7 +1717,7 @@ void UserCommands::UserList(ServerConnection *cnx, Person *from,
 	  it != cnx->bot->userList->l.end();
 	  it++) {
 	from->sendNotice((((*it)->lastseen == 0) ?
-			  (((*it)->flags & USERFLAG_IDENTIFIED) ?
+			  (((*it)->flags & PERSONFLAG_IDENTIFIED) ?
 			   String("\002*\002") :
 			   String("\002+\002")) : 
 			  String(" ")) +

@@ -13,9 +13,6 @@
 #include "todolist.h"
 #include "parser.h"
 
-#define VERSION_STRING   "DumbOP version 0.30"
-#define COPYRIGHT_STRING "Copyright (c) 2000 Alien Internet Services <dumbop@alien.net.au>"
-
 /* THIS SHOULD BE TEMPORARY
  * And shut up scott, I know I always make tiny patches - now you might
  * understand why!! :)
@@ -61,7 +58,9 @@ public:
   UserList * userList;
   ServerList * serverList;
   TodoList * todoList;
-  list<class userFunction *> userFunctions;
+
+   list<class userFunction *> userFunctions;
+   list<class CTCPFunction *> CTCPFunctions;
 
   map<String, wantedChannel *, less<String> > wantedChannels;
 
@@ -81,7 +80,7 @@ public:
   static const time_t CHANNEL_JOIN = 600; // 10 mins
   static const time_t IGNORE_DELAY = 180; // 3 mins
   static const time_t DCC_DELAY = 300; // 5 mins
-  static const time_t PING_TIME = 90; // 1 min 30 secs
+  static const time_t PING_TIME = 300; // 5 mins
   static const time_t TIMEOUT = 120; // 2 mins
 
 public:
@@ -106,7 +105,7 @@ public:
   friend class ServerConnection;
   friend class UserCommands;
   friend class Commands;
-  
+   
 private:
   bool canChangeServer();
   void nextServer();

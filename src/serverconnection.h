@@ -36,6 +36,8 @@ public:
   friend class Channel;
   friend class Commands;
   friend class UserCommands;
+  friend class CTCP;
+  friend class Version;
 };
 
 #endif

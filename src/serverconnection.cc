@@ -40,20 +40,22 @@ ServerConnection::connect()
   return true;
 }
 
-bool
-ServerConnection::handleInput()
+/* handleInput - Grab a line, quick check it, then send it off for parsing
+ * Original 11/12/00, Pickle <pickle@alien.net.au>
+ */
+bool ServerConnection::handleInput()
 {
-  String line = socket.readLine();
-
-  if (line.length() == 0)
-    return true;
-  
-  if (bot->debug)
-    cout << line << "\n";
-  
-  serverLastSpoken = time(0);
-  
-  Parser::parseLine(this, line);
-  
-  return false;
+   String line = socket.readLine();
+   
+   if (line.length() == 0)
+     return true;
+   
+   if (bot->debug)
+     cout << line << "\n";
+   
+   serverLastSpoken = time(NULL);
+   
+   Parser::parseLine(this, line);
+   
+   return false;
 }

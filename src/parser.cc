@@ -6,9 +6,11 @@
 #include "stringtokenizer.h"
 #include "parser.h"
 #include "usercommands.h"
+#include "ctcp.h"
 #include "macros.h"
 #include "utils.h"
 #include "bot.h"
+#include "telnetspy.h"
 
 struct {
    char *name;
@@ -49,31 +51,34 @@ struct {
      { 0,         0                    }
 };
 
-
-void
-Parser::parseLine(ServerConnection * cnx, String line)
+/* parseLine - Parse a line from the server then act upon it
+ * Original 12/12/00, Pickle <pickle@alien.net.au>
+ */
+void Parser::parseLine(ServerConnection * cnx, String line)
 {
-  StringTokenizer st(line);
-  Person * from = 0;
-
-  cnx->bot->receivedLen += line.length();
+   StringTokenizer st(line);
+   Person * from = 0;
    
-  if (line[0] == ':') {
-    String fromMask = st.nextToken().subString(1);
-    if (fromMask.find('!') != -1)
-      from = new Person(cnx->bot, fromMask);
-  }
+   cnx->bot->receivedLen += line.length();
+   
+   if (line[0] == ':') {
+      String fromMask = st.nextToken().subString(1);
+      if (fromMask.find('!') != -1)
+	from = new Person(cnx->bot, fromMask);
+   }
+   
+   String command = st.nextToken();
+   String rest = st.rest();
+   
+   for (int i = 0; functions[i].name != 0; i++)
+     if (command == functions[i].name) {
+	functions[i].function(cnx, from, rest);
+	break;
+     }
 
-  String command = st.nextToken();
-  String rest = st.rest();
-
-  for (int i = 0; functions[i].name != 0; i++)
-    if (command == functions[i].name) {
-      functions[i].function(cnx, from, rest);
-      break;
-    }
-
-  delete from;
+   TelnetSpy::spyLine(line);
+   
+   delete from;
 }
 
 void
@@ -609,104 +614,196 @@ Parser::parseTopic(ServerConnection *cnx,
   c->channelTopic = newTopic;
 }
 
-void
-Parser::parseCTCP(ServerConnection *cnx,
-                  Person *from, String to,
-                  String parameters)
+// CTCPFunctionList - Table of CTCP commands
+struct CTCPFunctionsStruct CTCPFunctionsInit[] =
 {
-  StringTokenizer st(parameters);
-  String command = st.nextToken().toUpper();
-  String nick = from->getNick();
-  String rest;
+     { "ACTION",	CTCP::Action,		false,	true,
+	  "" },
+     { "CLIENTINFO",	CTCP::ClientInfo,	false,	false,
+	  "[<string query>]" },
+     { "DCC",		CTCP::DCC,		false,	false,
+	  "<string type> [<string argument>] [<int address>] [<int port>] [<int size>]" },
+     { "ERRMSG",	CTCP::ErrMsg,		false,	false,
+	  "[<string query>]" },
+     { "FINGER",	CTCP::Finger,		false,	false,
+	  "" },
+     { "LAG",		CTCP::Lag,		false,	false,
+	  "" },
+     { "PING",		CTCP::Ping,		false,	false,
+	  "<time_t time>" },
+     { "SEX",		CTCP::Sex,		false,	false,
+	  "" },
+     { "TIME",		CTCP::Time,		false,	false,
+	  "" },
+     { "UPTIME",	CTCP::Uptime,		false,	false,
+	  "" },
+     { "USERINFO",	CTCP::UserInfo,		false,	false,
+	  "" },
+     { "VERSION",	CTCP::Version,		false,	false,
+	  "" },
+     { "",		0,			false,	false,	"" }
+   
+};
 
-  if (st.hasMoreTokens())
-    rest = st.rest();
-  else
-    rest = "";
-
-
-   if (command == "PING")
-     cnx->queue->sendCTCPReply(nick, "PING", rest);
-   else if (command == "VERSION") 
-     cnx->queue->sendCTCPReply(nick, "VERSION", VERSION_STRING);
-   else if (command == "UPTIME") {
-      time_t diff = time(NULL) - cnx->bot->startTime;
-      cnx->queue->sendCTCPReply(nick, "UPTIME", Utils::timelenToStr(diff));
-   } else if (command == "TIME")
-	/*    cnx->queue->sendCTCPReply(nick, "TIME",
-					String(ctime((time_t *)time(NULL)))); */
-	cnx->queue->sendCTCPReply(nick, "TIME", "Tell you later.");
-   else if (command == "LAG")
-     cnx->queue->sendCTCPReply(nick, "LAG", Utils::timelenToStr(cnx->lag));
-   else if (command == "SEX")
-     cnx->queue->sendCTCPReply(nick, "SEX", "Possibly Male");
-   else if (command == "DCC") {
-      StringTokenizer st2(rest);
-      command = st2.nextToken().toUpper();
-      if (command == "CHAT") {
-// FIXME: Re-activate and debug DCC
-//       st2.nextToken();
-//       unsigned long address =
-//         htonl(strtoul((const char *)st2.nextToken(), 0, 0));
-//       int port = atoi((const char *)st2.rest());
-//       if (port >= 1024 && Utils::getLevel(cnx->bot, from->getAddress()))
-//         cnx->bot->addDCC(from, address, port);
-      }
-   } else
-     if (command != "ACTION")
-       cnx->bot->logLine(from->getAddress() + " CTCP " + parameters);
+/* parseCTCP - Parse a CTCP request
+ * Original 16/12/00, Pickle <pickle@alien.net.au>
+ * 30/12/00 Pickle - Changed over to open function list instead of IF-swamps
+ * Needs: Identification code added (non-critical)
+ */
+void Parser::parseCTCP(ServerConnection *cnx,
+		       Person *from, String to,
+		       String parameters)
+{
+   bool found;
+   StringTokenizer st(parameters);
+   String command = st.nextToken().toUpper();
+   String rest = "";
+   
+   if (st.hasMoreTokens())
+     rest = st.rest();
+   
+   for (list<CTCPFunction *>::iterator it = cnx->bot->CTCPFunctions.begin();
+	it != cnx->bot->CTCPFunctions.end(); it++)
+     if (command == (*it)->name) {
+	found = true;
+	if (!((*it)->needsIdent) ||
+	    (((*it)->needsIdent) && 
+	     true)) { // Should check if identified if required
+	   (*it)->function(cnx, from, rest);
+	} else
+	  from->sendCTCPReply("ERRMSG",
+			      "You are required to be identified to for this query");
+	break;
+     }
+   
+   if (!found)
+     from->sendCTCPReply("ERRMSG", "Unsupported CTCP query");
 }
 
-struct userFunctionsStruct userFunctionsInit[] =
-
-{
-     { "ACCESS",	UserCommands::Access,      User::USER,	       true  },
-     { "ADDUSER",     	UserCommands::AddUser,     User::MASTER,       false },
-     { "ADDSERVER",   	UserCommands::AddServer,   User::FRIEND,       false },
-     { "ALIAS",      	UserCommands::Alias,       User::MASTER,       false },
+// userFunctionsInit - Table of user functions
+struct userFunctionsStruct userFunctionsInit[] = {
+     { "ACCESS",	UserCommands::Access,      
+	  User::USER,		true 
+     },
+     { "ADDUSER",     	UserCommands::AddUser,     
+	  User::MASTER,		false 
+     },
+     { "ADDSERVER",   	UserCommands::AddServer,   
+	  User::FRIEND,      	false 
+     },
+     { "ALIAS",      	UserCommands::Alias,       
+	  User::MASTER,       	false 
+     },
 //     { "BAN",         	UserCommands::Ban,         User::TRUSTED_USER, true, false  },
-     { "BANLIST",     	UserCommands::BanList,     User::USER,         true  },
-     { "BEEP",		UserCommands::Beep,	   User::TRUSTED_USER, false },
+     { "BANLIST",     	UserCommands::BanList,     
+	  User::USER,        	true 
+     },
+     { "BEEP",		UserCommands::Beep,	   
+	  User::TRUSTED_USER, 	false 
+     },
 //     { "CHANGELEVEL", UserCommands::ChangeLevel, User::MASTER,       false, false },
-     { "CYCLE",       	UserCommands::Cycle,       User::FRIEND,       true  },
-     { "DCCLIST",     	UserCommands::DCCList,     User::MASTER,       false },
+     { "CYCLE",       	UserCommands::Cycle,       
+	  User::FRIEND,       	true 
+     },
+     { "DCCLIST",     	UserCommands::DCCList,     
+	  User::MASTER,       	false 
+     },
 //     { "DEBAN",       	UserCommands::Deban,       User::TRUSTED_USER, true, false  },
-     { "DELSERVER",   	UserCommands::DelServer,   User::FRIEND,       false },
-     { "DELUSER",     	UserCommands::DelUser,     User::MASTER,       false },
-     { "DEOP",        	UserCommands::Deop,        User::TRUSTED_USER, true  },
-     { "DIE",         	UserCommands::Die,         User::MASTER,       false },
-     { "DO",		UserCommands::Do,	   User::USER,	       true  },
-     { "HELP",        	UserCommands::Help,        User::NONE,         false },
+     { "DELSERVER",   	UserCommands::DelServer,   
+	  User::FRIEND,       	false 
+     },
+     { "DELUSER",     	UserCommands::DelUser,     
+	  User::MASTER,       	false 
+     },
+     { "DEOP",        	UserCommands::Deop,        
+	  User::TRUSTED_USER, 	true 
+     },
+     { "DIE",         	UserCommands::Die,         
+	  User::MASTER,       	false 
+     },
+     { "DO",		UserCommands::Do,	   
+	  User::USER,	       	true  
+     },
+     { "HELP",        	UserCommands::Help,        
+	  User::NONE,         	false 
+     },
 //     { "IDENT",       	UserCommands::Ident,       User::NONE,         true, false  },
-     { "INFO",		UserCommands::Info,	   User::USER,	       false },
-     { "INVITE",      	UserCommands::Invite,      User::TRUSTED_USER, true  },
-     { "JOIN",        	UserCommands::Join,        User::MASTER,       false },
+     { "INFO",		UserCommands::Info,	   
+	  User::USER,	       	false 
+     },
+     { "INVITE",      	UserCommands::Invite,      
+	  User::TRUSTED_USER, 	true  
+     },
+     { "JOIN",        	UserCommands::Join,        
+	  User::MASTER,       	false 
+     },
 //     { "KEEP",        	UserCommands::Keep,        User::FRIEND,       true, false  },
-     { "KICK",        	UserCommands::Kick,        User::TRUSTED_USER, true  },
+     { "KICK",        	UserCommands::Kick,        
+	  User::TRUSTED_USER, 	true  
+     },
 //     { "KICKBAN",     	UserCommands::KickBan,     User::TRUSTED_USER, true, false  },
-     { "LASTSEEN",	UserCommands::LastSeen,	   User::USER,	       true  },
-     { "MODE",        	UserCommands::Mode,        User::TRUSTED_USER, true  },
-     { "MSG",         	UserCommands::Msg,         User::MASTER,       false },
-     { "NAMES",       	UserCommands::Names,       User::USER,         true },
-     { "NEXTSERVER",  	UserCommands::NextServer,  User::FRIEND,       false },
+     { "LASTSEEN",	UserCommands::LastSeen,	   
+	  User::USER,	       	true  
+     },
+     { "MODE",        	UserCommands::Mode,        
+	  User::TRUSTED_USER, 	true  
+     },
+     { "MSG",         	UserCommands::Msg,         
+	  User::MASTER,       	false 
+     },
+     { "NAMES",       	UserCommands::Names,       
+	  User::USER,         	true
+     },
+     { "NEXTSERVER",  	UserCommands::NextServer,  
+	  User::FRIEND,       	false 
+     },
 //     { "NICK",        	UserCommands::Nick,        User::FRIEND,       false, false },
-     { "NSLOOKUP",    	UserCommands::NsLookup,    User::USER,         false },
-     { "OP",          	UserCommands::Op,          User::TRUSTED_USER, true  },
-     { "PART",        	UserCommands::Part,        User::MASTER,       true  },
+     { "NOTE",		UserCommands::Note,	   
+	  User::USER,		false
+     },
+     { "NSLOOKUP",    	UserCommands::NsLookup,    
+	  User::USER,         	false 
+     },
+     { "OP",          	UserCommands::Op,          
+	  User::TRUSTED_USER, 	true  
+     },
+     { "PART",        	UserCommands::Part,        
+	  User::MASTER,       	true  
+     },
 //     { "PASSWORD",    	UserCommands::Password,    User::USER,         true, false  },
-     { "RAW",		UserCommands::Raw,	   User::MASTER,       false },
-     { "RECONNECT",   	UserCommands::Reconnect,   User::MASTER,       false },
-     { "SAVE",        	UserCommands::Save,        User::MASTER,       false },
-     { "SAY",         	UserCommands::Say,         User::USER,         true   },
-     { "SERVER",      	UserCommands::Server,      User::FRIEND,       false },
-     { "SERVERLIST",  	UserCommands::ServerList,  User::FRIEND,       false },
-     { "STATS",		UserCommands::Stats,	   User::USER,	       false },
+     { "RAW",		UserCommands::Raw,	   
+	  User::MASTER,       	false 
+     },
+     { "RECONNECT",   	UserCommands::Reconnect,   
+	  User::MASTER,       	false 
+     },
+     { "SAVE",        	UserCommands::Save,        
+	  User::MASTER,       	false 
+     },
+     { "SAY",         	UserCommands::Say,         
+	  User::USER,         	true 
+     },
+     { "SERVER",      	UserCommands::Server,      
+	  User::FRIEND,       	false 
+     },
+     { "SERVERLIST",  	UserCommands::ServerList,  
+	  User::FRIEND,       	false 
+     },
+     { "STATS",		UserCommands::Stats,	   
+	  User::USER,	       	false 
+     },
 //     { "TBAN",        	UserCommands::TBan,        User::TRUSTED_USER, true, false  },
 //     { "TKBAN",       	UserCommands::TKBan,       User::USER,         true, false  },
-     { "TEST",		UserCommands::Test,	   User::MASTER,       true  },
-     { "TOPIC",       	UserCommands::Topic,       User::TRUSTED_USER, true  },
-     { "USERLIST",	UserCommands::UserList,	   User::FRIEND,       false },
-     { "",            	0,                         0,                  false }
+     { "TEST",		UserCommands::Test,	   
+	  User::MASTER,       	true  
+     },
+     { "TOPIC",       	UserCommands::Topic,       
+	  User::TRUSTED_USER, 	true 
+     },
+     { "USERLIST",	UserCommands::UserList,	   
+	  User::FRIEND,       	false 
+     },
+     { "",	0,	0,	false }
 };
 
 void Parser::parseMessage(ServerConnection *cnx, Person *from, String to,
@@ -722,8 +819,7 @@ void Parser::parseMessage(ServerConnection *cnx, Person *from, String to,
    int level;
    bool identified = false;
    
-   list<userFunction *>::iterator it;
-   for (it = cnx->bot->userFunctions.begin();
+   for (list<userFunction *>::iterator it = cnx->bot->userFunctions.begin();
 	it != cnx->bot->userFunctions.end();
 	++it)
      if (command == (*it)->name) {
