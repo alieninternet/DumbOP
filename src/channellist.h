@@ -1,0 +1,36 @@
+#ifndef __CHANNELLIST_H_
+#define __CHANNELLIST_H_
+
+#include <map.h>
+
+#include "string.h"
+#include "serverconnection.h"
+#include "channel.h"
+
+class Utils;
+class UserCommands;
+
+class ChannelList {
+  map<String, Channel *, less<String> > list;
+  
+public:
+  ChannelList();
+  ~ChannelList();
+
+  void addChannel(ServerConnection *, String, String = "");
+  void delChannel(String);
+  
+  Channel * getChannel(String);
+
+  void clear();
+
+  map<String, Channel *, less<String> >::iterator begin()
+    { return list.begin(); }
+  map<String, Channel *, less<String> >::iterator end()
+    { return list.end(); }
+
+  friend class Utils;
+  friend class UserCommands;
+};
+
+#endif

@@ -1,0 +1,1642 @@
+
+#include <fstream.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <ctype.h>
+#ifndef _X_OPEN_SOURCE
+#define _X_OPEN_SOURCE
+#endif
+#ifndef _X_OPEN_SOURCE_EXTENDED
+#define _X_OPEN_SOURCE_EXTENDED 1
+#endif
+#ifndef __USE_XOPEN
+#define __USE_XOPEN
+#endif
+#include <unistd.h>
+#include <time.h>
+
+#include "commands.h"
+#include "usercommands.h"
+#include "dccconnection.h"
+#include "parser.h"
+#include "macros.h"
+#include "stringtokenizer.h"
+#include "string.h"
+#include "utils.h"
+#include "channellist.h"
+#include "serverlist.h"
+#include "server.h"
+#include "bot.h"
+#include "flags.h"
+
+#ifdef NOCRYPT
+char * crypt(const char *p, const char *s) { return p; }
+#endif
+
+void UserCommands::Access(ServerConnection *cnx, Person *from,
+			  String channel, String rest)
+{
+   String nick = from->getNick();
+   
+   if (!rest.length()) {
+      User * u = cnx->bot->channelList->getChannel(channel)->getUser(nick);
+      UserListItem * uli;
+      
+      if (u)
+	uli = u->userListItem;
+      else
+	uli = cnx->bot->userList->getUserListItem(from->getAddress(),
+						  channel);
+      
+      if (uli) {
+	 from->sendNotice(String("You are \002") +
+			  uli->mask.getMask() + "\002 on \002" +
+			  uli->channelMask.getMask() + "\002");
+	 from->sendNotice(String("Lvl: ") +
+			  Utils::levelToStr(uli->level) +
+			  " Prot: " +
+			  Utils::protToStr(uli->prot) +
+			  " Ident: " +
+			  (uli && !uli->identified ? "\026" : "") +
+			  Utils::boolToStr(uli && uli->identified) +
+			  (uli && !uli->identified ? "\026" : ""));
+      } else
+	from->sendNotice(String("You are not in the userlist for \002") +
+			 channel + "\002");
+   } else {
+      StringTokenizer st(rest);
+      String otherNick = st.nextToken();
+      
+      if (otherNick == "-") {
+	 int num = 0, num_on = 0;
+	 
+	 from->sendNotice(String("Access list search for mask \002") +
+			  otherNick + String("\002 on \002") +
+			  channel + String("\002:"));
+	 from->sendNotice("\026 \037Nickname       \037 \037Level       \037 \037A+o\037 \037A+v\037 \037Right\037 \037Ident\037 \037Flags     \037 \026");
+	 
+	 for (list<UserListItem *>::iterator it = cnx->bot->userList->l.begin();
+	      it != cnx->bot->userList->l.end();
+	      it++) {
+	    if (((*it)->channelMask.getMask().toLower() == channel.toLower()) &&
+		!((*it)->flags & USERFLAG_SUSPENDED)) {
+	       from->sendNotice((((*it)->lastseen == 0) ?
+				 (((*it)->flags & USERFLAG_IDENTIFIED) ?
+				  String("\002*\002") :
+				  String("\002+\002")) : 
+				 String(" ")) +
+				Utils::getFirstNick((*it)->nicks).prepad(15) + " " +
+				Utils::levelToStr((*it)->level).pad(12) + " " +
+				Utils::boolToStr((*it)->flags & USERFLAG_JOIN_AOP).pad(3) + " " +
+				Utils::boolToStr((*it)->flags & USERFLAG_JOIN_AOV).pad(3) + " " +
+				(((*it)->flags & USERFLAG_IS_BOT) ?
+				 String("Bot") :
+				 (((*it)->flags & USERFLAG_IS_CHAN_OWNER) ?
+				  String("Admin") : String("Norm."))).pad(5) + " " +
+				Utils::boolToStr((*it)->flags & USERFLAG_IDENTIFIED).pad(5) + " " +
+				Utils::flagsToStr((*it)->flags).pad(10));
+	       num++;
+	       if ((*it)->lastseen == 0)
+		 num_on++;
+	    }
+	 }
+	 
+	 if (num == 0) 
+	   from ->sendNotice("\002End of access list\002 (No matches)");
+	 else 
+	   from->sendNotice(String("\002End of access list\002 (") +
+			    String((int)num) + " entries, " + 
+			    String((int)num_on) + " online)");
+      } else {
+	 User * u = cnx->bot->channelList->getChannel(channel)->getUser(otherNick);
+	 UserListItem * uli;
+	 
+	 if (u)
+	   uli = u->userListItem;
+	 else
+	   uli = cnx->bot->userList->getUserListItem(otherNick + "!" +
+						     cnx->bot->getUserhost(channel,
+									   otherNick),
+						     channel);
+	 
+	 if (uli) {
+	    from->sendNotice(String("\002") + otherNick +
+			     String("\002 is \002") + uli->mask.getMask() +
+			     String("\002 on \002") + uli->channelMask.getMask() + 
+			     String("\002"));
+	    from->sendNotice(String("Lvl: ") +
+			     Utils::levelToStr(uli->level) +
+			     " Prot: " +
+			     Utils::protToStr(uli->prot) +
+			     " Ident: " +
+			     Utils::boolToStr(uli && uli->identified));
+	 } else
+	   from->sendNotice(String("\002") + otherNick +
+			    String("\002 is not in the userlist for \002") +
+			    channel + String("\002"));
+      }
+   }
+}
+
+// FIXME: Convert
+void
+UserCommands::AddUser(ServerConnection *cnx, Person *from,
+                      String channel, String rest)
+{
+  StringTokenizer st(rest);
+  String mask, who, maskChannel, level, prot,
+    nicks, flags, passwd;
+
+  mask = who = st.nextToken();
+  maskChannel = st.nextToken();
+  level = st.nextToken();
+  prot = st.nextToken();
+  nicks = st.nextToken();
+  flags = st.nextToken();
+  passwd = st.nextToken();
+
+  if (mask == "" || maskChannel == "" || level == "" ||
+      prot == "" || nicks == "") {
+    from->sendNotice("\002Invalid syntax for this command.\002");
+    return;
+  }
+
+  if (!Utils::isWildcard(mask)) {
+    mask = cnx->bot->getUserhost(channel, who);
+    if (mask == "") {
+      from->sendNotice(String("\002I can not find\002 ") + who);
+      return;
+    }
+    mask = Utils::makeWildcard(mask);
+  }
+
+  if (cnx->bot->userList->isInUserList(mask, maskChannel)) {
+    from->sendNotice(who + " \002is already in userlist on channel(s)\002 " +
+                     maskChannel);
+    return;
+  }
+
+  int l, p;
+  long f;
+
+  l = atoi((const char *)level);
+  if (l < 0 || l > User::FRIEND)
+    return;
+  if (l > Utils::getLevel(cnx->bot, from->getAddress())) {
+    from->sendNotice("\002You can not give a level greater than yours.\002");
+    return;
+  }
+  p = atoi((const char *)prot);
+  if (p < 0 || p > User::NO_DEOP)
+    return;
+
+//  f = Utils::strToFlags(flags);
+//
+//  if (!f)
+    f = 0;
+
+  cnx->bot->userList->addUser(mask, maskChannel, l, p, nicks, f, -1, passwd);
+
+  from->sendNotice(String("\002Added\002 ") + mask +
+                   " \002on channels\002 " + maskChannel);
+  from->sendNotice(String("\002Level:\002 ") +
+                   Utils::levelToStr(l) +
+                   "  \002Protection:\002 " +
+                   Utils::protToStr(p));
+
+  cnx->bot->rehash();
+}
+
+// FIXME: Convert
+void
+UserCommands::AddServer(ServerConnection *cnx, Person *from,
+                        String channel, String rest)
+{
+  if (rest.length() == 0) {
+    from->sendNotice("\002You must supply a server name.\002");
+    return;
+  }
+
+  StringTokenizer st(rest);
+  String serverName = st.nextToken();
+  int port = 6667;
+
+  if (st.hasMoreTokens()) {
+    String temp = st.nextToken();
+    port = atoi((const char *)temp);
+  }
+
+  Message m = Commands::AddServer(cnx->bot, serverName, port);
+  if (m.getCode() != 0)
+    from->sendNotice(m.getMessage());
+  else
+    from->sendNotice(String("\002Server\002 ") +
+                     serverName + " \002on port\002 " +
+                     String((long)port) + " \002has been added "
+                     "to the server list.\002");
+}
+
+// FIXME: Convert (and change ?)
+void
+UserCommands::Alias(ServerConnection *cnx, Person *from,
+                    String channel, String rest)
+{
+  StringTokenizer st(rest);
+  String newF = st.nextToken().toUpper();
+  String oldF = st.nextToken().toUpper();
+  list<userFunction *>::iterator it;
+
+  if (newF == "" || oldF == "") {
+    from->sendNotice("\002Invalid syntax for this command.\002");
+    return;
+  }
+
+  // First, we check that the "new" function does not exist
+  for (it = cnx->bot->userFunctions.begin(); it !=
+         cnx->bot->userFunctions.end(); ++it)
+    if (newF == (*it)->name) {
+      from->sendNotice(newF + " \002is already an alias.\002");
+      return;
+    }
+
+  // Next, we check that the "old" function exist
+  bool found = false;
+  userFunction *u;
+  for (it = cnx->bot->userFunctions.begin(); it !=
+         cnx->bot->userFunctions.end(); ++it)
+    if (oldF == (*it)->name) {
+      found = true;
+      u = *it;
+      break;
+    }
+  if (!found) {
+    from->sendNotice(String("\002I don't know the\002 ") + oldF +
+                     " \002command.");
+    return;
+  }
+
+  // Fine, we do the binding
+  cnx->bot->userFunctions.push_back(new
+                               userFunction((char *)(const char 
+                                                            *)newF,
+                                                   u->function,
+                                                   u->minLevel,
+                                                   u->needsChannelName));
+
+  from->sendNotice("\002Alias added.\002");
+}
+
+void
+UserCommands::Ban(ServerConnection *cnx, Person *from,
+                  String channel, String rest)
+{
+  if (rest.length() == 0) {
+    if (from)
+      from->sendNotice("\002No nick/mask specified.\002");
+    return;
+  }
+
+  Message m = Commands::Ban(cnx->bot, channel, rest);
+  if (m.getCode() != 0 && from)
+    from->sendNotice(m.getMessage());
+}
+
+void
+UserCommands::BanList(ServerConnection *cnx, Person *from,
+                      String channel, String rest)
+{
+  time_t current = time(0);
+  Channel *c = cnx->bot->channelList->getChannel(channel);
+  from->sendNotice(String("\002Banlist for channel\002 ") +
+                   channel + "\002:\002");
+  from->sendNotice("\002Mask                           Expires (seconds)\002");
+  for (vector<BanEntry *>::iterator it = c->channelBanlist.begin();
+       it != c->channelBanlist.end(); ++it)
+    if ((*it)->getExpirationDate() == -1)
+      from->sendNotice((*it)->getMask().pad(30) + " -1");
+    else
+      from->sendNotice((*it)->getMask().pad(30) + " " + 
+                       String((long)((*it)->getExpirationDate()-current)));
+  from->sendNotice("\002End of banlist.\002");
+}
+
+void UserCommands::Beep(ServerConnection *cnx, Person *from,
+			String channel, String rest)
+{
+   from->sendNotice("Since this command doesn't work yet.. \007*BEEP*!");
+}
+
+// void
+// UserCommands::ChangeLevel(ServerConnection *cnx, Person *from,
+//                           String channel, String rest)
+// {
+//   StringTokenizer st(rest);
+  
+//   String who;
+//   String mask = who = st.nextToken();
+//   String maskChannel = st.nextToken();
+//   String level = st.nextToken();
+  
+//   if (mask == "" || maskChannel == "" || level == "") {
+//     from->sendNotice("\002Invalid syntax for this command.\002");
+//     return;
+//   }
+  
+//   if (!Utils::isWildcard(mask)) {
+//     mask = cnx->bot->getUserhost(channel, who);
+//     if (mask == "") {
+//       from->sendNotice(String("\002I can not find\002 ") + who);
+//       return;
+//     }
+//     mask = from->getNick() + "!" + mask;
+//   }
+  
+//   UserListItem *uli = cnx->bot->userList->getUserListItem(mask, maskChannel);
+  
+//   if (!uli) {
+//     from->sendNotice(String("\002I can not find\002 ") + who +
+//                      " \002on channel(s)\002 " + maskChannel +
+//                      " \002in my userlist.\002");
+//     return;
+//   }
+  
+//   int l = atoi((const char *)level);
+  
+//   if (l < User::NONE || l > User::MASTER) {
+//     from->sendNotice("\002This is not a valid level.\002");
+//     return;
+//   }
+  
+//   if (l > Utils::getLevel(cnx->bot, from->getAddress())) {
+//     from->sendNotice("\002You can not give a level greater than yours.\002");
+//     return;
+//   }
+  
+//   if (Utils::getLevel(cnx->bot, from->getAddress()) < uli->level) {
+//     from->sendNotice("\002You can not change the level for a person "
+//                      "whose level is greater than yours.\002");
+//     return;
+//   }
+  
+//   uli->level = l;
+//   from->sendNotice("\002Level changed.\002");
+//   cnx->bot->rehash();
+// }
+
+void UserCommands::Cycle(ServerConnection *cnx, Person *from,
+			 String channel, String rest)
+{
+   Message m = Commands::Cycle(cnx->bot, channel, rest);
+   if (m.getCode() != 0)
+     from->sendNotice(m.getMessage());
+   else
+     from->sendNotice(String("Cycled on channel \002") + channel + 
+		      String("\002"));
+}
+
+void
+UserCommands::DCCList(ServerConnection *cnx, Person *from,
+                      String channel, String rest)
+{
+  time_t current_time = time(NULL);
+
+  from->sendNotice("\002DCClist:\002");
+  from->sendNotice("\002Hostname                         Last used\002");
+
+  for (list<DCCConnection *>::iterator it =
+         cnx->bot->dccConnections.begin();
+       it != cnx->bot->dccConnections.end();
+       ++it) {
+    from->sendNotice((*it)->nuh.pad(32) + " " +
+                     String((long)(current_time -
+                                   (*it)->lastSpoken)));
+  }
+
+  from->sendNotice("\002End of dcclist.\002");
+}
+
+void
+UserCommands::Deban(ServerConnection *cnx, Person *from,
+                    String channel, String rest)
+{
+  if (rest.length() == 0) {
+    from->sendNotice("\002No nick/mask specified.\002");
+    return;
+  }
+
+  Message m = Commands::Deban(cnx->bot, channel, rest);
+  if (m.getCode() != 0)
+    from->sendNotice(m.getMessage());
+}
+
+// FIXME: Convert
+void
+UserCommands::DelServer(ServerConnection *cnx, Person *from,
+                        String channel, String rest)
+{
+  if (rest.length() == 0) {
+    from->sendNotice("\002You need to supply a server number"
+                     " for this command.\002");
+    return;
+  }
+
+  int serverNumber = atoi(rest);
+
+  Message m = Commands::DelServer(cnx->bot, serverNumber);
+  if (m.getCode() != 0)
+    from->sendNotice(m.getMessage());
+  else
+    from->sendNotice(String("Deleted server ") +
+                     cnx->bot->serverList->get(serverNumber)->getHostName() +
+                     " (" + String((long)cnx->bot->serverList->get(serverNumber)->getPort()) +
+                     ").");
+}
+
+// FIXME: Convert
+void
+UserCommands::DelUser(ServerConnection *cnx, Person *from,
+                      String channel, String rest)
+{
+  StringTokenizer st(rest);
+
+  String who;
+  String mask = who = st.nextToken();
+  String maskChannel = st.nextToken();
+
+  if (mask == "" || maskChannel == "") {
+    from->sendNotice("\002Invalid syntax for this command.\002");
+    return;
+  }
+
+  if (!Utils::isWildcard(mask)) {
+    mask = cnx->bot->getUserhost(channel, who);
+    if (mask == "") {
+      from->sendNotice(String("\002I can not find\002 ") + who);
+      return;
+    }
+    mask = Utils::makeWildcard(mask);
+  }
+  
+  if (!cnx->bot->userList->isInUserList(mask, maskChannel)) {
+    from->sendNotice(mask + " \002is not in userlist on channel(s)\002 " +
+                     maskChannel);
+    return;
+  }
+
+  cnx->bot->userList->removeUser(mask, maskChannel);
+  from->sendNotice(who + " \002has been removed from the userlist.\002");
+  cnx->bot->rehash();
+}
+
+// UNCONVERT!! :)
+void UserCommands::Deop(ServerConnection *cnx, Person *from,
+			String channel, String rest)
+{
+   String target = rest;
+   
+   if (target.length() == 0)
+     target = from->getNick();
+   
+   Message m = Commands::Deop(cnx->bot, channel, target);
+   if (m.getCode() != 0)
+     from->sendNotice(m.getMessage());
+}
+
+void UserCommands::Die(ServerConnection *cnx, Person *from,
+		       String channel, String rest)
+{
+   String reason;
+   
+   if (rest.length() == 0)
+     reason = "Duh...";
+   else
+     reason = rest;
+   
+   Commands::Die(cnx->bot, reason);
+}
+
+void UserCommands::Do(ServerConnection *cnx, Person *from,
+		      String channel, String rest)
+{
+   if (!rest.length())
+     from->sendNotice("And do what?");
+   else {
+      
+      Message m = Commands::Action(cnx->bot, channel, 
+				   String("\002\037%%\037\002") +
+				   rest + String(" \00300<=- ") +
+				   from->getNick());
+      if (m.getCode() != 0)
+	from->sendNotice(m.getMessage());
+   }
+}
+
+void UserCommands::Help(ServerConnection *cnx, Person *from,
+			String channel, String rest)
+{
+   if (rest.length() == 0) {
+      from->sendNotice("\002Commands available to you are:\002");
+      int level = Utils::getLevel(cnx->bot, from->getAddress());
+      String result = "";
+      int length = 0;
+      for (list<userFunction *>::iterator it = cnx->bot->userFunctions.begin(); 
+	   it != cnx->bot->userFunctions.end(); ++it)
+	if ((*it)->minLevel <= level) {
+	   result = result + (*it)->name + " ";
+	   length += strlen((*it)->name) + 1;
+	   if (length >= 256) {
+	      from->sendNotice(result);
+	      result = ""; length = 0;
+	   }
+	}
+      if (result != "")
+	from->sendNotice(result);
+      from->sendNotice(String("Use \002") + String(cnx->bot->commandChar) +
+		       "HELP <command>\002 for more information.");
+      return;
+   }
+   
+   StringTokenizer st(rest);
+   String command = st.nextToken().toUpper();
+   ifstream helpFile(cnx->bot->helpFileName);
+   
+   if (!helpFile) {
+      from->sendNotice("I can't find the help file :(");
+      return;
+   }
+   
+   String buf;
+   while (!helpFile.eof()) {
+      helpFile >> buf;
+      if (buf.subString(0, command.length()) == String(":") + command) {
+	 buf = buf.subString(1);
+	 int level = -1;
+	 
+	 for (list<userFunction *>::iterator it = 
+	      cnx->bot->userFunctions.begin(); 
+	      it != cnx->bot->userFunctions.end(); ++it)
+	   if ((*it)->name == command) {
+	      level = (*it)->minLevel;
+	      break;
+	   }
+	 
+	 if (level > -1)
+	   from->sendNotice(String(String("Help for command \002") +
+				   String(cnx->bot->commandChar) +
+				   command + String("\002:")).pad(40) + 
+			    String("Access Required: \002") +
+			    Utils::levelToStr(level) +
+			    String("\002"));
+	 else
+	   from->sendNotice(String(String("Help on topic \002\"") + command +
+				   String("\002\":")));
+	 
+	 while (buf != "") {
+	    from->sendNotice(buf);
+	    helpFile >> buf;
+	 }
+	 from->sendNotice("\002End of help.\002");
+	 return;
+      }
+   }
+
+   from->sendNotice(String("Couldn't find \002") +
+		    command + "\002 in the helpfile.");
+}
+
+void
+UserCommands::Ident(ServerConnection *cnx, Person *from,
+                    String channel, String rest)
+{
+  Channel *c = cnx->bot->channelList->getChannel(channel);
+
+  if (rest.length() <= 2) {
+    from->sendNotice("\002No password specified or password "
+                     "too short.\002");
+    return;
+  }
+
+  User * u = c->getUser(from->getNick());
+  if (!u) {
+    from->sendNotice(String("\002You can identify yourself on"
+                     " channel\002 ") + channel +
+                     " \002only if you are on the channel.\002");
+    return;
+  }
+
+  if (u->userListItem && u->userListItem->identified) {
+    from->sendNotice(String("\002You are already identified on"
+                     " channel\002 ") + channel);
+    return;
+  }
+
+  if (!u->userListItem) {
+    from->sendNotice("\002You are not in my userlist.\002");
+    return;
+  }
+
+  if (u->userListItem->passwd ==
+      crypt((const char *)rest, (const char *)u->userListItem->passwd)) {
+    // For each channel, we increment identification counter
+    for (map<String, Channel *, less<String> >::iterator it =
+           cnx->bot->channelList->begin();
+         it != cnx->bot->channelList->end(); ++it)
+      u->userListItem->identified++;
+
+    from->sendNotice("\002You are now identified.\002");
+  } else
+    from->sendNotice("\002This is a wrong password.\002");
+}
+
+void UserCommands::Info(ServerConnection *cnx, Person *from,
+			String channel, String rest)
+{
+   from->sendNotice(String("\026") + VERSION_STRING + String("\026"));
+   from->sendNotice(String("\002") + COPYRIGHT_STRING + String("\002"));
+   from->sendNotice("DumbOP was originally created as a tiny replacement for ChanOP on");
+   from->sendNotice("AustNet whenever it went down. DumbOP simply the peace for a while,");
+   from->sendNotice("but is now gradually growing into something a little more useful.");
+   from->sendNotice("Many thanks to o0 and ONION.");
+   from->sendNotice("Use \002!HELP\002 for more information, or \002!STATS\002 for statistical nonsense.");
+}
+
+void
+UserCommands::Invite(ServerConnection *cnx, Person *from,
+                     String channel, String rest)
+{
+  Message m = Commands::Invite(cnx->bot, channel, rest);
+  if (m.getCode() < 0)
+    from->sendNotice(m.getMessage());
+  from->sendNotice(String("\002Inviting\002 ") + rest + " \002on channel\002 " + channel);
+}
+
+/* FIXME: Convert */
+void
+UserCommands::Join(ServerConnection *cnx, Person *from,
+                   String channel, String rest)
+{
+  StringTokenizer st(rest);
+  channel = st.nextToken();
+
+  if (!Utils::isValidChannelName(channel)) {
+    from->sendNotice(String("\002") + channel +
+                     " is not a valid channel name\002");
+    return;
+  }
+
+  // We change the key only if we are not on the channel. We don't trust
+  // the user...
+  if (!cnx->bot->channelList->getChannel(channel)) {
+    if (cnx->bot->wantedChannels[channel])
+      cnx->bot->wantedChannels[channel]->key = st.rest();
+    else {
+      cnx->bot->wantedChannels[channel] = new wantedChannel("", "", st.rest());
+    }
+  }
+  cnx->queue->sendJoin(channel, cnx->bot->wantedChannels[channel]->key);
+}
+
+/* FIXME: Convert */
+void
+UserCommands::Keep(ServerConnection *cnx, Person *from,
+                   String channel, String rest)
+{
+  String nick = from->getNick();
+
+  if (rest.length() == 0) {
+    from->sendNotice("\002No channel modes specified.\002");
+    return;
+  }
+
+  cnx->bot->channelList->getChannel(channel)->keepModes = rest;
+  from->sendNotice(String("\002Keeping modes\002 ") +
+                    rest + " \002on channel\002 " +
+                    channel);
+}
+
+void UserCommands::Kick(ServerConnection *cnx, Person *from,
+			String channel, String rest)
+{
+   String nick = from->getNick();
+   
+   Channel * c = cnx->bot->channelList->getChannel(channel);
+   
+   if (rest.length() == 0) {
+      from->sendNotice("Whom dost thou kicketh?");
+      return;
+   }
+   
+   StringTokenizer st(rest);
+   String who = st.nextToken();
+   
+   if (who.toLower() == from->getNick().toLower()) {
+      from->sendNotice("You might sprain something if you kick yourself.");
+      return;
+   }
+   
+   if (Utils::isWildcard(who)) {
+      User * u = c->getUser(nick);
+      if (!u)
+	return;
+      if (u->getLevel() < User::TRUSTED_USER) {
+	 from->sendNotice("You need an higher level to use wildcards.");
+	 return;
+      }
+   }
+   
+   if (!cnx->bot->iAmOp(channel)) {
+      from->sendNotice(String("I am not a channel op on \002") +
+		       channel + String("\002 :("));
+      return;
+   }
+   
+   if (Utils::isWildcard(who)) {
+      Mask m(who);
+      for (map<String, User *, less<String> >::iterator it =
+           c->channelMemory.begin();
+	   it != c->channelMemory.end();
+	   ++it)
+	if (m.matches((*it).second->nick + "!" +
+		      (*it).second->userhost) &&
+	    (*it).second->getProt() < User::NO_KICK)
+	  cnx->queue->sendKick(channel, (*it).second->nick, st.rest());
+   } else {
+      User * u = c->getUser(who);
+      if (!u) {
+	 from->sendNotice(String("Where is \002") +
+			  who + "\002 on \002" + channel + "?\002");
+	 return;
+      }
+      if (u->userListItem->flags & USERFLAG_PROTECT_NOKICK)
+	from->sendNotice(String("I don't want to kick \002") +
+			 who + "\002 on \002" + channel +
+			 "\002 (Protected)");
+      else {
+	 if (st.rest())
+	   cnx->queue->sendKick(channel, who, String("[") + from->getNick() +
+				String("] ") + st.rest());
+      }
+      
+   }
+}
+
+// FIXME: Convert
+void
+UserCommands::KickBan(ServerConnection *cnx, Person *from,
+                      String channel, String rest)
+{
+  StringTokenizer st(rest);
+
+  Ban(cnx, 0, channel, st.nextToken());
+  Kick(cnx, from, channel, rest);
+}
+
+void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
+			    String channel, String rest)
+  {
+     String nick = from->getNick();
+     
+     if (!rest.length()) {
+	from->sendNotice("I'm not a mind reader, who are you asking about?");
+	return;
+     }
+
+     StringTokenizer st(rest);
+     String otherNick = st.nextToken();
+     
+     if (nick.toLower() == otherNick.toLower()) {
+	from->sendNotice("If you want to look at yourself, buy a mirror");
+	return;
+     }
+     
+     if (!(otherNick == "-") || 
+	 !(Utils::isWildcard(otherNick))) {
+	User * u = cnx->bot->channelList->getChannel(channel)->getUser(otherNick);
+	UserListItem * uli;
+	
+	if (u)
+	  uli = u->userListItem;
+	else 
+	  uli = cnx->bot->userList->getUserListItem(otherNick + "!" +
+						    cnx->bot->getUserhost(channel,
+									  otherNick),
+						    channel);
+	
+	if (!uli) // No user info yet? Maybe they typed the mask?
+	  uli = cnx->bot->userList->getUserListItem(otherNick, channel);
+	
+	if (uli) {
+	   if (uli->lastseen > 0) {
+	      time_t diff = time(NULL) - uli->lastseen;
+	      
+	      from->sendNotice(String("\002") + otherNick +
+			       String("\002 on \002") + 
+			       uli->channelMask.getMask() +
+			       String("\002 was last seen \002") +
+			       Utils::timelenToStr(diff) +
+			       String("\002 ago."));
+	   } else if (uli->lastseen == 0)
+		from->sendNotice(String("\002") + otherNick +
+				 String("\002 is online now! :)"));
+	} else {
+	   bool found = false;
+	   
+	   for (list<UserListItem *>::iterator it = cnx->bot->userList->l.begin();
+		it != cnx->bot->userList->l.end();
+		it++) 
+	     if (((*it)->channelMask.getMask().toLower() == channel.toLower()) &&
+		 ((*it)->nicks.toLower() == otherNick.toLower())) {
+		time_t diff = time(NULL) - (*it)->lastseen;
+		
+		from->sendNotice(String("\002") + 
+				 Utils::getFirstNick((*it)->nicks) +
+				 String("\002 ") +
+				 ((Utils::getFirstNick((*it)->nicks).toLower() ==
+				   otherNick.toLower()) ?
+				  String("") :
+				  (String("\"") + otherNick +
+				   String("\") "))) +
+				 String("on \002") + 
+				 (*it)->channelMask.getMask() +
+				 String("\002 was last seen \002") +
+				 Utils::timelenToStr(diff) +
+				 String("\002 ago."));
+		
+		found = true;
+		break;
+	     }
+	   
+	   
+	   if (!found)
+	     from->sendNotice(String("Sorry, I don't know when \002") + 
+			      otherNick + String("\002 was on \002") +
+			      channel + String("\002 last."));
+	}
+     } else { // Run a database search this time...
+	int num = 0;
+	
+	from->sendNotice(String("Last seen userlist search for mask \002") +
+			 ((otherNick == "-") ?
+			  String("ALL USERS") :
+			  otherNick) + 
+			 String("\002 on \002") +
+			 channel + String("\002:"));
+	from->sendNotice("\026 \037Nickname       \037 \037Last seen information                               \037 \026");
+	
+	for (list<UserListItem *>::iterator it = cnx->bot->userList->l.begin();
+	     it != cnx->bot->userList->l.end();
+	     it++) {
+	   if (((*it)->channelMask.getMask().toLower() == channel.toLower()) &&
+	       ((rest == "-") ||
+		(rest.toLower() == (*it)->nicks.toLower()))) {
+	      num++;
+	      time_t diff = time(NULL) - (*it)->lastseen;
+	      
+	      from->sendNotice((((*it)->lastseen == 0) ?
+				(((*it)->flags & USERFLAG_IDENTIFIED) ?
+				 String("\002*\002") :
+				 String("\002+\002")) : 
+				String(" ")) +
+			       Utils::getFirstNick((*it)->nicks).prepad(15) +
+			       (((*it)->lastseen > 0) ?
+				(String(" Seen ") +
+				 Utils::timelenToStr(diff) +
+				 String(" ago.") + 
+				 (((*it)->flags & USERFLAG_LASTSEEN_AUTH) ?
+				  String(" (Confirmed)") : String(""))) :
+				(((*it)->lastseen == 0) ?
+				 (String(" Currently online.") +
+				  (((*it)->flags & USERFLAG_IDENTIFIED) ?
+				   String(" (Confirmed)") : String(""))) :
+				 String(" No information available."))));
+	   }
+	   
+	}
+	
+	if (num == 0) 
+	  from->sendNotice("\002End of last seen\002 (No matches)");
+	else
+	  from->sendNotice(String("\002End of last seen\002 (") +
+			   String((int)num) + String(" entries)"));
+     }
+  }
+
+// FIXME: Convert
+void
+  UserCommands::Mode(ServerConnection *cnx, Person *from,
+		     String channel, String rest)
+{
+  String nick = from->getNick();
+
+  if (rest.length() == 0) {
+    from->sendNotice("\002I need a parameter for this command.\002");
+    return;
+  }
+
+  if (!cnx->bot->iAmOp(channel)) {
+    from->sendNotice(String("\002I am not channel op on\002 ") +
+                     channel);
+    return;
+  }
+                      
+  cnx->queue->sendChannelMode(String("MODE ") + channel + " " + rest);
+}
+
+// FIXME: Convert
+void
+UserCommands::Msg(ServerConnection *cnx, Person *from,
+                   String channel, String rest)
+{
+  StringTokenizer st(rest);
+  String who = st.nextToken();
+  String message = st.rest();
+
+  Message m = Commands::Msg(cnx->bot, who, message);
+  if (m.getCode() != 0)
+    from->sendNotice(m.getMessage());
+}
+
+void UserCommands::Names(ServerConnection *cnx, Person *from,
+			 String channel, String rest)
+  {
+     String nick = from->getNick();
+     String result = "";
+     int length = 0;
+     
+     if (rest == "-") {
+	from->sendNotice("Warning, this command is incomplete.");
+	
+	for (map<String, Channel *, less<String> >::iterator it = cnx->bot->channelList->begin(); 
+	     it != cnx->bot->channelList->end(); ++it) {
+	   Channel *c = cnx->bot->channelList->getChannel((*it).first);
+
+	   if (true) {
+	      result = "";
+	      length = 0;
+	      
+	      from->sendNotice(String("Names on \002") + c->channelName + 
+			       "\002:");
+	      
+	      for (map<String, User *, less<String> >::iterator itB = 
+		   c->channelMemory.begin();
+		   itB != c->channelMemory.end(); ++itB) {
+		 result = result +
+		   ((((*itB).second->mode & User::OP_MODE) ?
+		     "@" :
+		     (((*itB).second->mode & User::VOICE_MODE) ? 
+		      "+" : ""))) +
+		   (((*itB).second->userListItem) ?
+		    "\037" : "" ) +
+		   (*itB).second->nick +
+		   (((*itB).second->userListItem) ?
+		    "\037" : "") + " ";
+		 length += (*it).first.length() + 1;
+		 if (length >= 256) {
+		    from->sendNotice(result);
+		    result = ""; length = 0;
+		 }
+	      }
+	      
+	      if (result != "")
+		from->sendNotice(result);
+	   }
+	}
+     } else {
+	Channel *c = cnx->bot->channelList->getChannel(channel);
+
+	from->sendNotice(String("Names on \002") + channel + "\002:");
+	
+	for (map<String, User *, less<String> >::iterator it = 
+	     c->channelMemory.begin();
+	     it != c->channelMemory.end(); ++it) {
+	   result = result +
+	     ((((*it).second->mode & User::OP_MODE) ?
+	       "@" :
+	       (((*it).second->mode & User::VOICE_MODE) ? 
+		"+" : ""))) +
+	     (((*it).second->userListItem) ?
+	      "\037" : "" ) +
+	     (*it).second->nick +
+	     (((*it).second->userListItem) ?
+	      "\037" : "") + " ";
+	   length += (*it).first.length() + 1;
+	   if (length >= 256) {
+	      from->sendNotice(result);
+	      result = ""; length = 0;
+	   }
+	}
+	
+	if (result != "")
+	  from->sendNotice(result);
+     }
+     
+     from->sendNotice("\002End of names.\002");
+  }
+
+// FIXME: Convert
+void
+UserCommands::NextServer(ServerConnection *cnx, Person *from,
+                         String channel, String rest)
+{
+  if (cnx->bot->serverList->size() == 0) {
+    from->sendNotice("\002Server list is empty !\002");
+    return;
+  }
+
+  if (cnx->bot->serverList->size() == 1) {
+    from->sendNotice("\002Server list has only one item. Use"
+                     " \"reconnect\" to force reconnection.\002");
+    return;
+  }
+
+  if (cnx->bot->canChangeServer()) {
+    cnx->queue->sendQuit("Changing server");
+    cnx->bot->nextServer();
+  }
+  else
+    from->sendNotice("\002I can not change server without"
+                     " losing op on a channel I am on.\002");
+}
+
+// FIXME: Convert
+void
+UserCommands::Nick(ServerConnection *cnx, Person *from,
+                   String channel, String rest)
+{
+  // We parse the parameters
+  StringTokenizer st(rest);
+  String nick = st.nextToken();
+
+  if (rest == "") {
+    from->sendNotice(String("\002No nickname given.\002"));
+    return;
+  }
+
+  if (!Utils::isValidNickName(nick)) {
+    from->sendNotice(String("\002") + nick +
+                     " is not a valid nickname\002");
+    return;
+  }
+
+  cnx->bot->wantedNickName = nick;
+  cnx->queue->sendNick(nick);
+}
+
+void
+UserCommands::NsLookup(ServerConnection *cnx, Person *from,
+                       String channel, String rest)
+{
+  String target;
+
+  if (rest.length() == 0) {
+    from->sendNotice("\002You need to supply a nick or an "
+                     "host for this command.\002");
+    return;
+  }
+
+  if (rest.find('.') == -1) {
+    StringTokenizer st(cnx->bot->getUserhost("", rest));
+    st.nextToken('@');
+    target = st.rest();
+    if (target.length() == 0) {
+      from->sendNotice(String("\002I could not find\002 ") +
+                        target);
+      return;
+    }
+  } else
+    target = rest;
+
+  struct hostent * host;
+  struct in_addr iaddr;
+
+  if (isdigit(target[0])) { // An IP ?
+    iaddr.s_addr = inet_addr((const char *)target);
+    host = gethostbyaddr((char *)(&iaddr),
+                         sizeof(struct in_addr),
+                         AF_INET);
+    if (host) {
+      from->sendNotice(target +
+                        " \002is the IP address of\002 " +
+                        host->h_name);
+      return;
+    }
+  } else {
+    host = gethostbyname((const char *)target);
+    if (host) {
+      memcpy((char *)&iaddr, (char *)host->h_addr,
+            host->h_length);
+      from->sendNotice(target + " \002has\002 " +
+                        inet_ntoa(iaddr) + " \002for IP address.\002");
+      return;
+    }
+  }
+
+  from->sendNotice(String("\002I could not find host\002 ") +
+                    target);
+}
+
+void UserCommands::Op(ServerConnection *cnx, Person *from,
+		      String channel, String rest)
+{
+   String nick = from->getNick();
+   
+   if (!cnx->bot->iAmOp(channel)) {
+      from->sendNotice(String("I'm not a channel op on \002") +
+		       channel + String("\002 :("));
+      return;
+   }
+   
+   if (Utils::isWildcard(rest)) {
+      from->sendNotice("Mass op is not allowed. Sorry :(");
+      return;
+   }
+   
+   String target;
+   
+   if (rest.length() == 0)
+     target = nick;
+   else
+     target = rest;
+   
+   User *u = cnx->bot->channelList->getChannel(channel)->getUser(target);
+   if (!u) {
+      from->sendNotice(String("I couldn't find \002") + target + 
+		       "\002 on \002" + channel + "\002");
+      return;
+   }
+   
+   if (!(u->mode & User::OP_MODE))
+     cnx->queue->sendChannelMode(channel, "+o", target);
+   else {
+      if (target == nick)
+	from->sendNotice(String("But aren't you already a channel op on \002") 
+			 + channel + "\002??!!");
+      else
+	from->sendNotice(String("But \002") + target + 
+			 "\002 is already a channel op on\002 " + channel +
+			 "\002!");
+   }
+}
+
+void UserCommands::Part(ServerConnection *cnx, Person *from,
+			String channel, String rest)
+{
+   wantedChannel *w = cnx->bot->wantedChannels[channel];
+   cnx->bot->wantedChannels.erase(channel);
+   delete w;
+   
+   cnx->queue->sendPart(channel, rest);
+}
+
+void
+UserCommands::Password(ServerConnection *cnx, Person *from,
+                       String channel, String rest)
+{
+  Channel *c = cnx->bot->channelList->getChannel(channel);
+
+  if (rest.length() == 0) {
+    from->sendNotice("\002No password.\002");
+    return;
+  }
+
+  User * u = c->getUser(from->getNick());
+  if (!u) {
+    from->sendNotice(String("\002To change your password for\002") +
+                     channel + "\002, you need to be on the "
+                     "channel.\002");
+    return;
+  }
+
+  if (!u->userListItem) {
+    from->sendNotice("\002You are not in my userlist.\002");
+    return;
+  }
+
+  if (rest.toLower() == "none") {
+    u->userListItem->passwd = "";
+    from->sendNotice("\002Password cleared.\002");
+    return;
+  }
+  
+  static char saltChars[] = "abcdefghijklmnopqrstuvwxyz"
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./";
+  char salt[3];
+  srand(time(0));
+  salt[0] = saltChars[rand() % 64];
+  salt[1] = saltChars[rand() % 64];
+  salt[2] = '\0';
+
+  u->userListItem->passwd = crypt((const char *)rest, salt);
+  from->sendNotice("\002Password changed.\002");
+}
+
+ void UserCommands::Save(ServerConnection *cnx, Person *from,
+			 String channel, String rest)
+ {
+    cnx->bot->userList->save();
+    from->sendNotice("Userlist saved.");
+ }
+
+void UserCommands::Say(ServerConnection *cnx, Person *from,
+		       String channel, String rest)
+  {
+     if (!rest.length())
+       from->sendNotice("And say what?");
+     else
+       cnx->queue->sendPrivmsg(channel,
+			       String("\002\037%%\037\002") + rest +
+			       String(" \00300<=- ") +
+			       from->getNick());
+  }
+
+// FIXME: Convert
+void
+UserCommands::Server(ServerConnection *cnx, Person *from,
+                     String channel, String rest)
+{
+  int serverNumber;
+  String nick = from->getNick();
+
+  if (rest.length() == 0) {
+    from->sendNotice("\002You need to supply a server number for this command.\002");
+    return;
+  }
+
+  serverNumber = atoi(rest);
+
+  if (serverNumber < 0 || serverNumber >= cnx->bot->serverList->size()) {
+    from->sendNotice(String((long)serverNumber) +
+                      " \002is an invalid server number (see the serverlist).\002");
+    return;
+  }
+
+  if (cnx->bot->canChangeServer()) {
+    cnx->queue->sendQuit("Changing server");
+    cnx->queue->flush();
+    cnx->bot->connect(serverNumber);
+  }
+  else
+    from->sendNotice("\002I can not change server without losing op on a channel I am on.\002");
+}
+
+void
+UserCommands::ServerList(ServerConnection *cnx, Person *from,
+                     String channel, String rest)
+{
+  String nick = from->getNick();
+  
+  from->sendNotice("\002Server list:\002");
+  long l = 0;
+  String s;
+  for (vector<class Server *>::iterator it =
+         cnx->bot->serverList->v.begin();
+       it != cnx->bot->serverList->v.end();
+       ++it) {
+    s = (*it) == cnx->server ? "\026" : "";
+    from->sendNotice(s + String(l++) + s + " " +
+                     (*it)->getHostName() +
+                     " (" + String((long)((*it)->getPort())) +
+                     ")");
+  }
+  from->sendNotice("\002End of server list.\002");
+}
+
+void UserCommands::Stats(ServerConnection *cnx, Person *from,
+			 String channel, String rest)
+{
+
+   if (rest.length() != 0) {
+      from->sendNotice(String("Statistics for \002") + rest +
+		       String("\002:"));
+      from->sendNotice("This command needs to be finished.");
+   } else {
+      int num_chans, num_users, num_bots, num_chanowns, num_suspend;
+      int num_ident, num_online, num_chanppl, num_chanops, num_chans_on;
+      int num_lvluser, num_lvltrusted, num_lvlfriend, num_lvlmaster;
+      int num_chanvoiced, num_nopass, peak_chanppl, peak_chanops;
+      int peak_chanvoiced, num_dcc_con, num_chanbans, peak_chanbans;
+      time_t uptime = time(NULL) - cnx->bot->startTime;
+      
+      num_chans = num_users = num_bots = num_chanowns = num_suspend = 
+	num_ident = num_online = num_chanppl, num_chanops = num_chans_on =
+	num_lvluser = num_lvltrusted = num_lvlfriend = num_lvlmaster = 
+	num_chanvoiced = num_nopass = peak_chanppl = peak_chanops =
+	peak_chanvoiced = num_dcc_con = num_chanbans = peak_chanbans = 0;
+      
+      for (list<UserListItem *>::iterator it = cnx->bot->userList->l.begin();
+	   it != cnx->bot->userList->l.end();
+	   it++) {
+	 num_users++;
+	 if ((*it)->flags & USERFLAG_IS_BOT)
+	   num_bots++;
+	 if ((*it)->flags & USERFLAG_IS_CHAN_OWNER)
+	   num_chanowns++;
+	 if ((*it)->flags & USERFLAG_SUSPENDED)
+	   num_suspend++;
+	 if ((*it)->flags & USERFLAG_IDENTIFIED)
+	   num_ident++;
+	 if ((*it)->lastseen == 0)
+	   num_online++;
+	 switch ((*it)->level) {
+	  case 1: num_lvluser++;
+	    break;
+	  case 2: num_lvltrusted++;
+	    break;
+	  case 3: num_lvlfriend++;
+	    break;
+	  case 4: num_lvlmaster++;
+	    break;
+	 }
+	 if ((*it)->passwd == "")
+	   num_nopass++;
+      }
+      
+      for (map<String, Channel *, less<String> >::iterator it = cnx->bot->channelList->begin(); 
+	   it != cnx->bot->channelList->end(); ++it) {
+	 Channel *chan = cnx->bot->channelList->getChannel((*it).first);
+	 
+	 num_chans++;
+	 num_chanppl += chan->count;
+	 num_chanops += chan->countOp;
+	 num_chanvoiced += chan->countVoice;
+	 peak_chanppl += chan->count_peak;
+	 peak_chanops += chan->countOp_peak;
+	 peak_chanvoiced += chan->countVoice_peak;
+	 if (cnx->bot->channelList->getChannel((*it).first)->joined)
+	   num_chans_on++;
+	 for (vector<BanEntry *>::iterator itB = chan->channelBanlist.begin();
+	      itB != chan->channelBanlist.end(); ++itB)
+	   num_chanbans++;
+//	 peak_chanbans += chan->countBans_peak;
+      }
+      
+      for (list<DCCConnection *>::iterator it = cnx->bot->dccConnections.begin();
+	   it != cnx->bot->dccConnections.end(); ++it) {
+	 num_dcc_con++;
+      }
+      
+      from->sendNotice(String("\002\037General Statistics:\037\002"));
+      from->sendNotice(String("Name: ").prepad(10) +
+		       String(cnx->bot->nickName + " (" +
+			      cnx->bot->wantedNickName + ")").pad(32) +
+		       String("  Lag Count: ") +
+		       Utils::timelenToStr(cnx->lag));
+      from->sendNotice(String("Up time: ").prepad(10) +
+		       (!(cnx->bot->debug) ?
+			Utils::timelenToStr(uptime) :
+			(Utils::timelenToStr(uptime).pad(45) +
+			 String("\026 DEBUG MODE \026"))));
+      from->sendNotice(String("IRC data received: ").prepad(20) +
+		       (String((long)(cnx->bot->receivedLen / 1024)) +
+			String("k")).pad(15) +
+		       String("IRC data sent: ").prepad(20) +
+		       (String((long)(cnx->bot->sentLen / 1024)) +
+			String("k")));
+
+      from->sendNotice(String("\002\037Number of users:\037 ") + 
+		       String(num_users) + String(" (") + 
+		       String(num_online) + String(" currently online)\002"));
+      from->sendNotice(String("Number of Bots: ").prepad(18) +
+		       String(num_bots).pad(6) +
+		       String("Channel Admins: ").prepad(18) +
+		       String(num_chanowns).pad(6) +
+		       String("Suspended Users: ").prepad(18) +
+		       String(num_suspend));
+      from->sendNotice(String("Normal Users: ").prepad(18) +
+		       String(num_lvluser).pad(6) +
+		       String("Trusted Users: ").prepad(18) +
+		       String(num_lvltrusted).pad(6) +
+		       String("Bot Friends: ").prepad(18) +
+		       String(num_lvlfriend));
+      from->sendNotice(String("Bot Masters: ").prepad(18) +
+		       String(num_lvlmaster).pad(6) +
+		       String("Identified Users: ").prepad(18) +
+		       String(num_ident).pad(6) +
+		       String("Users w/o passwd: ").prepad(18) +
+		       String(num_nopass));
+
+      from->sendNotice(String("\002\037Number of channels:\037 ") + 
+		       String(num_chans) + String(" (") +
+		       String(num_chans_on) + 
+		       String(" currently active)\002"));
+      from->sendNotice(String("Total People: ").prepad(16) +
+		       (String(num_chanppl) + String(" (Peak: ") +
+			String(peak_chanppl) + String(")")).pad(19) +
+		       String("Total Banned: ").prepad(16) +
+		       (String(num_chanbans) + String(" (Peak: ") +
+			String(peak_chanbans) + String(")")));
+      from->sendNotice(String("Total Opped: ").prepad(16) +
+		       (String(num_chanops) + String(" (Peak: ") +
+			String(peak_chanops) + String(")")).pad(19) +
+		       String("Total Voiced: ").prepad(16) +
+		       (String(num_chanvoiced) + String(" (Peak: ") +
+			String(peak_chanvoiced) + String(")")));
+
+      from->sendNotice(String("\002\037Number of DCC Fileserver Connections:\037 ") +
+		       String(num_dcc_con) + String("\002"));
+   }
+   from->sendNotice(String("\002End of statistics.\002"));
+}
+
+void UserCommands::Raw(ServerConnection *cnx, Person *from,
+		       String channel, String rest)
+  {
+     if (rest.length() != 0)
+       Commands::Do(cnx->bot, rest);
+  }
+
+// FIXME: Convert
+void
+UserCommands::Reconnect(ServerConnection *cnx, Person *from,
+                        String channel, String rest)
+{
+  String nick = from->getNick();
+
+  if (cnx->bot->canChangeServer()) {
+    cnx->queue->sendQuit("Reconnecting");
+    cnx->bot->reconnect();
+  }
+  else
+    from->sendNotice("\002I can not change server without losing op on a channel I am on.\002");
+}
+
+void
+UserCommands::RSpyMessage(ServerConnection *cnx, Person *from,
+                        String channel, String rest)
+{
+  String nick = from->getNick().toLower();
+
+  if (cnx->bot->spyList.find(nick) == cnx->bot->spyList.end()) {
+    from->sendNotice("\002You are not in the spy list.\002");
+    return;
+  }
+
+  delete cnx->bot->spyList[nick];
+  cnx->bot->spyList.erase(nick);
+  from->sendNotice("\002You have been removed from the "
+                   "spy list.\002");
+}
+
+void UserCommands::Test(ServerConnection *cnx, Person *from,
+			String channel, String rest)
+  {
+     from->sendNotice("\002Begin test dump.\002");
+     from->sendNotice(String("channel = ") + String(channel));
+     from->sendNotice(String("rest = ") + String(rest));
+     from->sendNotice("\002End of test dump.\002");
+  }
+
+// FIXME: Convert
+void
+UserCommands::TBan(ServerConnection *cnx, Person *from,
+                   String channel, String rest)
+{
+  Channel * c = cnx->bot->channelList->getChannel(channel);
+
+  StringTokenizer st(rest);
+  String who = st.nextToken();
+  String t = st.nextToken();
+  String dest;
+
+  if (who == "" || t == "") {
+    if (from)
+      from->sendNotice("\002Invalid syntax for this command.\002");
+    return;
+  }
+
+  if (Utils::isWildcard(who) && from) {
+    User * u = c->getUser(from->getNick());
+    if (u && u->getLevel() < User::TRUSTED_USER) {
+      if (from)
+        from->sendNotice("\002You need an higher level to use"
+                         " wildcards.\002");
+      return;
+    }
+  }
+
+  if (!cnx->bot->iAmOp(channel)) {
+    if (from)
+    from->sendNotice(String("\002I am not channel op on\002 ") +
+                     channel);
+    return;
+  }
+
+  if (!Utils::isWildcard(who))
+    dest = cnx->bot->getUserhost(channel, who);
+  else
+    dest = who;
+
+  if (dest == "") {
+    if (from)
+      from->sendNotice(String("\002I can not find\002 ") + who);
+    return;
+  }
+
+  time_t w;
+
+  if ((w = Utils::strToTime(t)) == 0) {
+    if (from)
+      from->sendNotice(t + " \002is an invalid time.\002");
+    return;
+  }
+
+  dest = Utils::makeWildcard(dest);
+  Mask m(dest);
+
+  for (list<UserListItem *>::iterator it = cnx->bot->userList->l.begin();
+       it != cnx->bot->userList->l.end();
+       it++)
+    if (m.matches((*it)->mask) &&
+        (*it)->channelMask.matches(channel) &&
+        (*it)->prot >= User::NO_BAN) {
+      if (from)
+        from->sendNotice(String("\002I can not ban\002 ") +
+                         who + " \002on channel\002 " +
+                         channel + " \002(protection).\002");
+      return;
+    }
+
+  for (vector<BanEntry *>::iterator it = c->channelBanlist.begin();
+       it != c->channelBanlist.end(); ++it)
+    if (m.matches((*it)->banMask))
+      cnx->queue->sendChannelMode(channel, "-b", (*it)->banMask.getMask());
+
+  cnx->bot->channelList->getChannel(channel)->addBan(dest, w);
+  cnx->queue->sendChannelMode(channel, "+b", dest);
+  cnx->bot->todoList->addDeban(channel, dest, (time_t)w);
+}
+
+// FIXME: Convert
+void
+UserCommands::TKBan(ServerConnection *cnx, Person *from,
+                   String channel, String rest)
+{
+  StringTokenizer st(rest);
+  String who = st.nextToken();
+  String t = st.nextToken();
+
+  TBan(cnx, 0, channel, who + " " + t);
+  Kick(cnx, from, channel, who + " " + st.rest());
+}
+
+// FIXME: Convert
+void
+UserCommands::Topic(ServerConnection *cnx, Person *from,
+                    String channel, String rest)
+{
+  String nick = from->getNick();
+
+  if (rest.length() == 0) {
+    if (cnx->bot->channelList->getChannel(channel)->channelTopic == "")
+      from->sendNotice(String("\002No topic is set for channel\002 ") +
+                        channel + "\002.\002");
+    else
+      from->sendNotice(String("\002Topic for\002 ") +
+                        channel + " \002is:\002 " +
+                        cnx->bot->channelList->getChannel(channel)->channelTopic);
+  } else {
+    if (cnx->bot->channelList->getChannel(channel)->lockedTopic)
+      from->sendNotice(String("Topic is locked on channel ") +
+                       channel);
+    else
+      cnx->queue->sendTopic(channel, rest);
+  }
+}
+
+
+void UserCommands::UserList(ServerConnection *cnx, Person *from,
+			    String channel, String rest)
+  {
+     int num = 0;
+     
+     from->sendNotice("\002Userlist:\002");
+     from->sendNotice("\026 \037Nickname       \037 \037Mask            \037 \037Channel   \037 \037Level       \037 \037Flags     \037 \026");
+     
+     for (list<UserListItem *>::iterator it = cnx->bot->userList->l.begin();
+	  it != cnx->bot->userList->l.end();
+	  it++) {
+	from->sendNotice((((*it)->lastseen == 0) ?
+			  (((*it)->flags & USERFLAG_IDENTIFIED) ?
+			   String("\002*\002") :
+			   String("\002+\002")) : 
+			  String(" ")) +
+			 Utils::getFirstNick((*it)->nicks).prepad(15) + " " +
+			 String("\002[\002") +
+			 (*it)->mask.getMask().pad(14) + String("\002]\002 ") +
+			 (*it)->channelMask.getMask().pad(10) + " " +
+			 Utils::levelToStr((*it)->level).pad(12) + " " +
+			 Utils::flagsToStr((*it)->flags).pad(10) + " " +
+			 String((*it)->flags));
+	num++;
+     }
+     
+     if (num == 0) 
+       from ->sendNotice("\002End of userlist\002 (No matches)");
+     else 
+       from->sendNotice(String("\002End of userlist\002 (") +
+			String((int)num) + " entries)");
+  }
+
