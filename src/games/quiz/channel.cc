@@ -18,11 +18,12 @@ gameQuizChannel::gameQuizChannel(Channel *c, GameQuiz *gq)
   nextCategory(""),
   question(0),
   questionStr(""),
-  timeAsked(gameQuiz->games->bot->currentTime.time),
-  hintLevel(-1),
-  hint(""),
   questionNum(0),
-  answered(false)
+  questionLevel(GameQuiz::Q_NORMAL),
+  timeAsked(gameQuiz->games->bot->currentTime),
+  answered(false),
+  hintLevel(-1),
+  hint("")
 {
    // Fire up a category
    bumpCategory();

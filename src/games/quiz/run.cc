@@ -4,6 +4,7 @@
 
 #include "gamequiz.h"
 
+
 /* attend - Run the quiz channel, or channels
  * Original 13/7/01, Simon Butcher <simonb@alien.net.au>
  */
@@ -13,7 +14,8 @@ void GameQuiz::attend(void)
 	channels.begin(); it != channels.end(); ++it) {
       // Make sure it is not a broken pointer..
       if ((*it).second) {
-	 time_t period = games->bot->currentTime.time - (*it).second->timeAsked;
+	 time_t period = (games->bot->currentTime.time - 
+			  (*it).second->timeAsked.time);
 	 
 	 // Check if we are running a question or not...
 	 if ((*it).second->questionStr.length()) {
@@ -94,7 +96,7 @@ void GameQuiz::attend(void)
 						    String(" \003"));
 		  
 		  // Reset the time we asked the question variable
-		  (*it).second->timeAsked = games->bot->currentTime.time;
+		  (*it).second->timeAsked = games->bot->currentTime;
 	       } else if ((*it).second->questionNum == DEFAULT_QUIZ_ROUND_QUESTIONS) {
 		  // We are telling the players the round is over..
 		  (*it).second->channel->sendNotice(String("That's the end of that round... \003"));
@@ -119,79 +121,6 @@ void GameQuiz::attend(void)
 	    
 	    
 	 }
-      }
-   }
-}
-
-
-/* parseLine - Parse a potential correct answer to a question
- * Original 16/7/01, Simon Butcher <simonb@alien.net.au>
- */
-void GameQuiz::parseLine(Channel *channel, Person *from, String line)
-{
-   // Create a few fresh variables to save time..
-   String potentialAnswer = line.toLower();
-   gameQuizChannel *gqc = channels[channel->channelName];
-   
-   // If this channel does not exist, we will have problems. Bail out now
-   if (!gqc) {
-      return;
-   }
-   
-   /* First, make sure the channel does exist, and the pointer is OK, and
-    * make sure a question has been asked. We need to make sure both the
-    * pointer and the question string are available. Also, if the question
-    * has already been answered, there's not much point looking up the answer
-    * really...
-    */
-   if ((!gqc) || (!gqc->questionStr.length()) || (gqc->answered)) {
-      return;
-   }
-
-   // Well we got this far, run through the answer list and look for a match
-   for (list<String>::iterator it = gqc->question->answers.begin();
-	it != gqc->question->answers.end(); it++) {
-      String anAnswer = (*it).toLower();
-      
-      // Does it match outright? Otherwise we check it another way...
-      if (potentialAnswer == anAnswer) {
-	 // Mark this question as answered
-	 gqc->answered = true;
-      }
-#ifdef NO_ANSWER_NAZI // Eg, you have more freedom with your answers      
-      else if ((potentialAnswer.length() > anAnswer.length()) &&
-		 (!isalnum(potentialAnswer[anAnswer.length()])) &&
-		 (potentialAnswer.subString(0, anAnswer.length() - 1) == 
-		  anAnswer)) {
-	 /* This string IS longer than the answer, and the char after the
-	  * answer in the potentialAnswer string is not a number or a digit,
-	  * therefore we can consider this to be *safe* (eg. a question mark)
-	  * and not someone just throwing garble at the parser. We're smarter
-	  * than that :)
-	  */
-	 gqc->answered = true;
-      } 
-#endif
-
-      // If we are in bonus mode, there are a few more things to check for..
-      if (gqc->questionLevel >= 0) {
-	 // Except I am too lazy to program them just yet..
-      }
-      
-      // Was it answered in this run?
-      if (gqc->answered) {
-	 // Tell the channel this user was correct!
-	 channel->sendNotice(String("\002") + from->getNick() + 
-			     String("\002 is correct! The answer was \"\002") +
-			     *gqc->question->answers.begin() +
-			     String("\002\". \003"));
-	 
-	 // Reset the question string and the timeer
-	 gqc->questionStr = "";
-	 gqc->timeAsked = games->bot->currentTime.time;
-
-	 // Bail out, no more checks needed
-	 break;
       }
    }
 }

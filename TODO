@@ -1,8 +1,7 @@
 High Priority
 -------------
-Users should be able to add themselves to DumbOP.
-
-PASSWORD CODE! Change password needs fixing, crypt fucked?
+Don't forget about Games::parseLeave() for QUIT and KICK messages you lazy
+prick!
 
 Convert old flag code to use the new flags (FINALLY)
 Add channel flag (long int) to channel entries
@@ -10,10 +9,11 @@ Add channel protection shit (see flags.h)
 Add flag table, flag command, flag, flag chr, flags name (one table for chan, one for users)
 Fix utils::flagToStr for the new flag table (above)
 
-DO NOT RANDOMISE QUESTION SEEKS IF ONLY 1 QUESTION IN A CATEGORY!!
 
 Medium Priority
 ---------------
+DO NOT RANDOMISE QUESTION SEEKS IF ONLY 1 QUESTION IN A CATEGORY!!
+
 Import connection/string/tokenizer code from evolution (eg. the latest
 versions). Probably best to do this while reorganising the directories.
 
@@ -25,19 +25,12 @@ and removed as appropriate to increase efficiency.
 
 Finish parse command (shouldn't require ! on direct privmsgs)
 
-Kill off commands.cc - it sucks. Probably a good idea IF we were adding
-script services but we're not. So it can die.
-
 Use "ISON" irc command (rfc 1459) to check for bot-users online (this should
 also add support for ChanOP resyncronisation on AustNet, plus authentication
 with other BOTs)
 
 Add bot-authentication strings to userlist file (replace old prot variable
 spot) -- also add a command to force nickop/other bot identification.
-
-Add JOINs on THE SAME LINE! JOIN chan[ key],chan[ key],chan[ key] etc. 
-RFC2812 says we can fill a whole 510 byte line, but most servers only let
-us join around 13 channels anyway :(
 
 Add 'REHASH' command
 
@@ -48,6 +41,7 @@ Add setuser and setchan flag manipulation commands
 Merge wanted channels and channels structures together and add a boolean
 "joined" variable. This would be easier to work with considering the flags
 etc.
+
 
 Low Priority
 ------------
@@ -70,8 +64,6 @@ Ban lists - Should be better than ChanOP - check every nick change and join
 against banlist masks, so that DumbOP can properly ban name!*@* like ChanOP
 is incapable of.. (Cheeky`louise!*@* would be handy in #melbrave :)
 
-Tban+Tkban+ban+kick merge
-
 Change over to GDBM Databases. Channel Masks should be removed and replaced
 with references to channel database entries as to make it act more like
 ChanOP, and to remove multiple user entries. Probably required prior to adding
@@ -82,6 +74,10 @@ Finish !names (- returns all; should only return channels user has access to)
 
 Make a types.h file and put the different types in there rather than repeat
 them over and over again throughout the source code (esp. the lists/maps etc)
+
+SNMP section for stats etc
+
+SMTP section for e-mail forwarding of 'notes', channel logging etc.
 
 
 Probably not needed :)

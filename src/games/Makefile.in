@@ -27,7 +27,7 @@ LIBS=
 
 TARGET=games.o
 
-SOURCES=class.cc
+SOURCES=class.cc parser.cc
 
 SUB_DIRS=quiz
 

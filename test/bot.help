@@ -103,8 +103,8 @@ USE WITH CAUTION!!! Send raw data to the IRC server.
 This causes me to disconnect and reconnect to my current server.
 
 :REGISTER <password>
-Register your nickname to be able to use the functions of the bot. If you do not specify a nickname (only a password), you will be registered under your current nickname. Your password is used to identify yourself with the bot at later times. If you do not use this for a long period of time, your access will be deleted. More information on the period of time is given upon registration.
-!! WARNING !!  This is _NOT_ a nickname registration service, it is only designed to allow you access to the functions provided by this software. Abuse of this software will most likely include being banned from participation. Channels can _NOT_ be registered.
+This command is used to register you for access to the functions provided by this bot. Before using this command, make sure you are using the nickname you usually use, and it is registered with your nickname registration (eg. NickOP). Specify a password that would not be easy to guess, as you are responsible for any actions done under your nickname with this bot. In future you will simply need to use the IDENTIFY command to identify yourself to the software.
+!! WARNING !!  This is NOT a nickname registration service, it is only designed to allow you access to the functions provided by this software. Abuse of this software will result in you being banned.
 See also: IDENTIFY
 
 :REPEAT

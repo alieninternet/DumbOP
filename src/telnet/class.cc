@@ -36,7 +36,7 @@ Telnet::~Telnet()
 #endif
    
    // Close down all active sockets
-   telnetDescriptor *d;
+   TelnetDescriptor *d;
    while (descList.size() != 0) {
       d = *descList.begin();
 
@@ -52,7 +52,7 @@ Telnet::~Telnet()
       delete d;
    }
    
-   for (list<telnetDescriptor *>::iterator it = descList.begin();
+   for (list<TelnetDescriptor *>::iterator it = descList.begin();
 	it != descList.end(); it++)
      if ((*it)->sock->isConnected()) {
 	//	if ((*it)->flags & TELNETFLAG_CONNECTED)
@@ -132,7 +132,7 @@ bool Telnet::newConnection()
      cout << "Acception telnet connection! Adding to descriptor list.." << endl;
 #endif
 
-   descList.push_back(new telnetDescriptor(this, newsock));
+   descList.push_back(new TelnetDescriptor(this, newsock));
 
    return true;
 }
@@ -142,7 +142,7 @@ bool Telnet::newConnection()
  */
 void Telnet::cleanDescs()
 {
-//   for (list<telnetDescriptor *>::iterator it = descList.begin();
+//   for (list<TelnetDescriptor *>::iterator it = descList.begin();
 //	it != descList.end(); it++)
 }
 
@@ -160,7 +160,7 @@ void Telnet::attend(void)
    }
    
    // Run through the descriptor list to see what needs doing
-   for (list<telnetDescriptor *>::iterator it = descList.begin();
+   for (list<TelnetDescriptor *>::iterator it = descList.begin();
 	it != descList.end(); it++) {
       // Is this descriptor connected?
       if ((*it)->flags & TELNETFLAG_CONNECTED) {

@@ -27,7 +27,7 @@ LIBS=
 
 TARGET=quiz.o
 
-SOURCES=category.cc channel.cc class.cc question.cc run.cc
+SOURCES=category.cc channel.cc class.cc parser.cc question.cc run.cc
 
 INCLUDES=
 

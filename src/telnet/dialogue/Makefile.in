@@ -1,0 +1,51 @@
+#
+#
+# ./src/telnet/dialogue/Makefile
+# Make for telnet management port dialogue 'windows' control routines
+# Author: Simon Butcher
+# Copyright (c) 2001 Alien Internet Services
+
+########################################################################
+##                                                                    ##
+########################################################################
+
+CXX=@CXX@
+LD=@LD@
+RM=@RM@
+
+CXXFLAGS=@CXXFLAGS@ -Wall
+LDFLAGS=-r
+
+srcdir=@srcdir@
+VPATH=@srcdir@
+prefix=@prefix@
+libdir=@libdir@
+
+INCDIRS=-I$(srcdir) -I$(srcdir)/../../include
+DEFS=@DEFS@
+LIBS=
+
+TARGET=dialogue.o
+
+SOURCES=class.cc login.cc
+
+INCLUDES=
+
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@)
+
+########################################################################
+
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(LD) $(LDFLAGS) -o $@ $(OBJECTS) $(LIBS)
+
+%.@OBJEXT@: %.cc
+	$(CXX) $(CXXFLAGS) $(DEFS) $(INCDIRS) -c $<
+	
+clean:
+	$(RM) *~ *.@OBJEXT@ $(TARGET)
+
+dclean:
+	$(RM) *~ *.@OBJEXT@ $(TARGET) Makefile
+

@@ -10,31 +10,30 @@
 
 # include "strings.h"
 # include "socket.h"
-# include "bot.h" 
+# include "bot.h"
+# include "telnetdialogue.h"
 # include "telnetspy.h"
 
 # define TELNETFLAG_CONNECTED		0x00000001 // Connected
 # define TELNETFLAG_HAS_ANSI		0x00000002 // Has ANSI capability?
-# define TELNETFLAG_TELETYPE		0x00000004 // Echoing printable chars?
-# define TELNETFLAG_TELETYPE_MASK	0x00000008 // Masking inputted chars?
-# define TELNETFLAG_IN_TELNET_CODE	0x00000010 // Reading a telnet code?
-# define TELNETFLAG_IN_ANSI_CODE	0x00000020 // Reading an ANSI code?
+# define TELNETFLAG_IN_TELNET_CODE	0x00000004 // Reading a telnet code?
+# define TELNETFLAG_IN_ANSI_CODE	0x00000008 // Reading an ANSI code?
+# define TELNETFLAG_TELETYPE		0x00000010 // Echoing printable chars?
+# define TELNETFLAG_TELETYPE_MASK	0x00000020 // Masking inputted chars?
+# define TELNETFLAG_TELETYPE_NO_BS	0x00000040 // Not allowing backspace?
+# define TELNETFLAG_TELETYPE_CONTROL	0x00000080 // Allow control chars?
 
 # define TELNET_TELETYPE_MASK_CHAR	'*'	// Char to mask input with
 # define TELNET_DEFAULT_BAR_MESSAGE	"Management Console" // Bar message
 # define TELNET_ASSUMED_TTY_ROWS	24
 # define TELNET_ASSUMED_TTY_COLUMNS	80
 
+# define TELNET_NEWLINE			"\r\n"	// Full CRLF for compatibility
+# define TELNET_BACKSPACE		"\b \b"	// Back, clear, back again.
 
 class Telnet;
 
-class telnetDescriptor {
-   enum {
-      PAGE_LOGIN = 0,				// Login window
-      PAGE_MAIN_MENU,				// Main menu
-      PAGE_SPY					// Monitoring
-   };
-   
+class TelnetDescriptor {
  public:
    Telnet *telnet;				// Recursive back
    Socket *sock;				// Socket they are connected to
@@ -46,9 +45,9 @@ class telnetDescriptor {
    unsigned short columns;			// Number of COLUMNS on tty
 
    String barMessage;				// Header bar message
-   unsigned char page;				// Current page
+   TelnetDialogue *dialogue;			// Current dialogue page
    
-   telnetDescriptor(Telnet *, Socket *);	// Constructor
+   TelnetDescriptor(Telnet *, Socket *);	// Constructor
 
    void handleInput();				// Deal with incoming char(s)
    void goodbyeSocket();			// Shutdown sockets
@@ -59,6 +58,7 @@ class telnetDescriptor {
    void headerMessage(String = "");		// Change the header message
 
    friend class TelnetSpy;
+   friend class TelnetDialogue;
 };
 
 class Socket;
@@ -70,7 +70,7 @@ class Telnet {
    Socket *sock;
    Bot *bot; // Recursive
    
-   list<class telnetDescriptor *> descList;
+   list<class TelnetDescriptor *> descList;
    
    bool makeSocket();
    bool newConnection();
@@ -87,7 +87,7 @@ class Telnet {
 
    void attend(void);			// Called by main loop
    
-   friend class telnetDescriptor;
+   friend class TelnetDescriptor;
    
    friend class Socket;
    friend class Bot;

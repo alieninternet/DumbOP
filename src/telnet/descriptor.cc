@@ -9,14 +9,15 @@
 #include <ctype.h>
 
 #include "telnet.h"
+#include "telnetdialogue.h"
 #include "socket.h"
 #include "ansi.h"
 
 
-/* telnetDescriptor - Descriptor constructor
- * Original 2/1/01, Pickle <pickle@alien.net.au>
+/* TelnetDescriptor - Descriptor constructor
+ * Original 02/01/01, Simon Butcher <simonb@alien.net.au>
  */
-telnetDescriptor::telnetDescriptor(Telnet *t, Socket *s)
+TelnetDescriptor::TelnetDescriptor(Telnet *t, Socket *s)
 : telnet(t), 
   sock(s),
   connectedTime(telnet->bot->currentTime.time),
@@ -25,32 +26,22 @@ telnetDescriptor::telnetDescriptor(Telnet *t, Socket *s)
   rows(TELNET_ASSUMED_TTY_ROWS),
   columns(TELNET_ASSUMED_TTY_COLUMNS), 
   barMessage(TELNET_DEFAULT_BAR_MESSAGE),
-  page(PAGE_LOGIN)
+  dialogue(new TelnetDialogueLogin(this))
 {
-
-   page = PAGE_SPY;
-   
    /* TEMPORARY */
    flags |= TELNETFLAG_HAS_ANSI;
    headerInit();
    /* TEMPORARY */
-   flags |= TELNETFLAG_TELETYPE | TELNETFLAG_IN_ANSI_CODE;
-   write(TelnetSpy::spyHeaderInit());
-   /* TEMPORARY */
+   
+   dialogue->drawPage();
 }
 
 
 /* handleInput - Handle telnet server input
- * Original 2/1/01, Pickle <pickle@alien.net.au>
+ * Original 02/01/01, Simon Butcher <simonb@alien.net.au>
  */
-void telnetDescriptor::handleInput()
+void TelnetDescriptor::handleInput()
 {
-//   String line = sock->readLine();
-//   
-//   if (line.length()) {
-//      telnet->bot->logLine(String("telnet input: %") + line + String("%"));
-//   }
-
    // Glue the 'last spoke' to the time now
    lastActed = telnet->bot->currentTime.time;
    
@@ -59,7 +50,6 @@ void telnetDescriptor::handleInput()
    
    // Are we reading a telnet-protocol code, ANSI code, or running normally?
    if (flags & TELNETFLAG_IN_TELNET_CODE) { // NOTE: telnet comes first...
-      
       // Turn off the telnet code flag thing.
       flags &= ~TELNETFLAG_IN_TELNET_CODE;
    } else if (flags & TELNETFLAG_IN_ANSI_CODE) { // NOTE: ANSI comes second...
@@ -69,11 +59,12 @@ void telnetDescriptor::handleInput()
       }
       
       // Stuff should go here.
-      
    } else {
       // Check if the char is printable
       if ((chr > 31) && (chr != 127)) {
-	 // Check if we have this socket in teletype mode
+	 /* Check if we have this socket in teletype mode and it is not a
+	  * newline char
+	  */
 	 if (flags & TELNETFLAG_TELETYPE) {
 	    // Are we going to mask this output or not?
 	    if (flags & TELNETFLAG_TELETYPE_MASK) {
@@ -84,18 +75,41 @@ void telnetDescriptor::handleInput()
 	       sock->write(String(chr));
 	    }
 	 }
+	 
+	 // The dialogue routines may need this char too
+	 dialogue->parseInput(chr);
       } else { // A special char perhaps?
 	 switch (chr) {
-	  case '\b': // A backspace.
-	    if (flags & TELNETFLAG_TELETYPE) {
-	       /* Send a backspace to move back, a space to clear whatever char
-		* we are clearing, and another backspace to jump back again.
-		* We do this so verbosely because backspace is only to move
-		* back one space, it doesn't normally include clearing the 
-		* char -- that's our job as the terminal controller.
-		*/
-	       sock->write(String("\b \b"));
+	  case '\b':	// BS - Backspace
+	  case '\177':	// DEL - Delete (we treat it the same)
+	    // Check if we are allowed to 'do' a backspace
+	    if ((flags & TELNETFLAG_TELETYPE) && 
+		!(flags & TELNETFLAG_TELETYPE_NO_BS)) {
+	       sock->write(String(TELNET_BACKSPACE));
 	    }
+	    
+	    // The dialogue routines may need this char too
+	    dialogue->parseInput(chr);
+	    break;
+	  case '\f':	// FF - Form Feed (or Page Eject/Redraw Screen)
+	    /* Reinitialise the header. This will also clear the screen, 
+	     * draw the current header bar message, and also write the time
+	     */
+	    headerInit();
+	    
+	    // Draw the page
+	    dialogue->drawPage();
+	    break;
+	  case '\n':	// CR - Carrage return
+	  case '\025':	// NAK - Negative Acknowledge (Modern use: clear line)
+	    // The dialogue routines may need this char
+	    dialogue->parseInput(chr);
+	    break;
+	  case '\021':	// DC1 - Device Control 1 (was XON, paper reader on)
+	    // start output.
+	    break;
+	  case '\022':	// DC3 - Device Control 3 (was XOFF, paper reader off
+	    // stop output.
 	    break;
 	 }
       }
@@ -104,9 +118,9 @@ void telnetDescriptor::handleInput()
 
 
 /* goodbyeSocket - Say goodbye and close the socket down
- * Original 2/1/01, Pickle <pickle@alien.net.au>
+ * Original 02/01/01, Simon Butcher <simonb@alien.net.au>
  */
-void telnetDescriptor::goodbyeSocket()
+void TelnetDescriptor::goodbyeSocket()
 {
    flags |= ~TELNETFLAG_CONNECTED;
    sock->close();
@@ -114,9 +128,9 @@ void telnetDescriptor::goodbyeSocket()
 
 
 /* write
- * Original 2/1/01, Pickle <pickle@alien.net.au>
+ * Original 02/01/01, Simon Butcher <simonb@alien.net.au>
  */
-void telnetDescriptor::write(String s)
+void TelnetDescriptor::write(String s)
 {
    if ((flags & TELNETFLAG_CONNECTED) && 
        (sock->isConnected()))
@@ -128,14 +142,15 @@ void telnetDescriptor::write(String s)
 
 
 /* headerInit - Initialise header for telnet sessions
- * Original 30/12/00, Pickle <pickle@alien.net.au>
+ * Original 30/12/00, Simon Butcher <simonb@alien.net.au>
+ * Note: Clears the screen, draws the basic header, and flows through to
+ *       further header routines to draw the message and time.
  */
-void telnetDescriptor::headerInit()
+void TelnetDescriptor::headerInit()
 {
-   write(String(ANSI_CUR_HOME) + String(ANSI_FINVERSE) + 
-	 String(ANSI_CLR_LINE) + String(" ") + 
-	 String(VERSION_STRING).pad(columns - 1) + 
-	 ANSI::scrollRegion(2, rows));
+   write(String(ANSI_CLR_SCREEN) + String(ANSI_CUR_HOME) + 
+	 String(ANSI_FINVERSE) + String(ANSI_CLR_LINE) + String(" ") + 
+	 Version::getVersion().pad(columns - 1) + ANSI::scrollRegion(2, rows));
    
    /* Fire up the status bar with a new message. This will also call the
     * first header bar update to occur (eg. put the time etc on there)
@@ -145,12 +160,12 @@ void telnetDescriptor::headerInit()
 
 
 /* headerUpdate - Update header for telnet sessions
- * Original 30/12/00, Pickle <pickle@alien.net.au>
+ * Original 30/12/00, Simon Butcher <simonb@alien.net.au>
  * Note: We save the cursor location before updating the bar. If the client
  * 	 does not support this ANSI string, TO HELL WITH THEM! Pretty bad
  * 	 client if it doesn't even support THAT.
  */
-void telnetDescriptor::headerUpdate()
+void TelnetDescriptor::headerUpdate()
 {
    struct tm *timeNow = localtime(&telnet->bot->currentTime.time);
    String timeStr = (Utils::intToMonth(timeNow->tm_mon) + String(" ") +
@@ -167,10 +182,10 @@ void telnetDescriptor::headerUpdate()
 
 
 /* headerMessage - Update header message
- * Original 30/12/00, Pickle <pickle@alien.net.au>
+ * Original 30/12/00, Simon Butcher <simonb@alien.net.au>
  * Note: We also prevoke a header update, since we clear the line.
  */
-void telnetDescriptor::headerMessage(String message = "")
+void TelnetDescriptor::headerMessage(String message = "")
 {
    // Are we changing the message?
    if (message.length()) {
@@ -178,8 +193,8 @@ void telnetDescriptor::headerMessage(String message = "")
    }
 
    // Pump out the message.
-   write(String(ANSI_CUR_SAVE) + String(ANSI_FINVERSE) + String(ANSI_BOLD) +
-	 ANSI::gotoXY(15, 1) + String(ANSI_CLR_EOL) + 
+   write(String(ANSI_CUR_SAVE) + String(ANSI_FINVERSE) + 
+	 ANSI::gotoXY(15, 1) + String(ANSI_CLR_EOL) +
 	 ANSI::gotoXY((int)((columns / 2) - (barMessage.length() / 2)), 1) +
 	 barMessage + String(ANSI_CUR_RESTORE) + String(ANSI_NORMAL));
    

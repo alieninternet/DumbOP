@@ -1,0 +1,20 @@
+Hi.
+
+This version of DumbOP is *NOT* mature software!
+
+To compile, you will first need to run 'configure'.
+
+Before you do, you may be interested in these:
+
+Turn on internal and GDB debugging:
+> export CXXFLAGS="-g -DDEBUG"
+
+Optomise but leave internal debugging on:
+> export CXXFLAGS="-O2 -DDEBUG"
+
+Otherwise configure will default to just -O2, and you miss out on the
+luxury of being able to find a bug :) Without the DEBUG define you will not
+be able to use the -D command.
+
+Also, a little note to myself here, to find the biggest .cc file:
+> ls -l `find . -name \\*.cc` |sort |less

@@ -140,6 +140,13 @@ AC_OUTPUT(Makefile \
 src/Makefile \
 src/channels/Makefile \
 src/commands/Makefile \
+src/commands/channel/Makefile \
+src/commands/connection/Makefile \
+src/commands/dcc/Makefile \
+src/commands/game/Makefile \
+src/commands/general/Makefile \
+src/commands/manager/Makefile \
+src/commands/user/Makefile \
 src/dcc/Makefile \
 src/games/Makefile \
 src/games/quiz/Makefile \
@@ -147,9 +154,12 @@ src/notes/Makefile \
 src/parser/Makefile \
 src/queue/Makefile \
 src/queue/items/Makefile \
+src/smtp/Makefile \
+src/snmp/Makefile \
 src/strings/Makefile \
 src/system/Makefile \
 src/telnet/Makefile \
+src/telnet/dialogue/Makefile \
 src/users/Makefile \
 src/utils/Makefile)
 

@@ -128,7 +128,7 @@ void CTCP::ErrMsg(ServerConnection *cnx, Person *from, String rest)
  */
 void CTCP::Finger(ServerConnection *cnx, Person *from, String rest)
 {
-   from->sendCTCPReply("FINGER", VERSION_STRING);
+   from->sendCTCPReply("FINGER", Version::getVersion());
 }
 
 
@@ -213,12 +213,11 @@ void CTCP::UserInfo(ServerConnection *cnx, Person *from, String rest)
 
 /* Version - Show version information
  * Original 29/12/00, Pickle <pickle@alien.net.au>
- * Notes: Format - VERSION <string client_name>:<string version>:<string env>
+ * Notes: Format - VERSION <version information>
  */
 void CTCP::Version(ServerConnection *cnx, Person *from, String rest)
 {
-   from->sendCTCPReply("VERSION", String(PROGNAME_STRING) + String(":") + 
-		       String(VERNUM_STRING) + String(":") +
-		       String(COMPILE_STRING));
+   from->sendCTCPReply("VERSION", Version::getVersion() + String(" ") +
+		       Version::getCopyright());
 }
 

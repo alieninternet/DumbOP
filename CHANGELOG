@@ -1,3 +1,46 @@
+Version 0.38
+------------
+simonb: src/games/class.cc - Split into class.cc and parser.cc
+simonb: src/games/parser.cc - Added parseJoin and parseLeave functions
+simonb: src/games/quiz/run.cc - Split into run.cc and parser.cc
+simonb: src/games/quiz/parser.cc - Added parseJoin and parseLeave functions
+simonb: src/utils/ansi.cc - Line-wrapping functionality added to ANSI::toANSI()
+simonb: gameQuizChannel::timeAsked changed from time_t to struct timeb to
+	allow for millisecond timing
+simonb: src/users/list.cc - Channel field in userlist automatically is #*. This
+	field is now used for 'registration time'.
+simonb: src/commands/*.cc - Split so that each file is now a directory (such as
+	channel, connection, dcc, game, general, manager, and user) and
+	within each directory each command has its own file. This was done
+	due to the size of some of these commands become enormous (especially
+	commands which server several purposes such as the CATEGORY command
+	in the game directory).
+simonb: TelnetDialogue base class created for telnet management dialogue box
+	control routines.
+simonb: src/telnet/dialogue directory created for dialogue files.
+simonb: src/smtp directory created
+simonb: src/snmp directory created
+simonb: src/version.cc - Changed a few 'things'.. Strings are pulled through
+	functions rather than out of the code (this way they are always
+	up-to-date per compile)
+simonb: src/ctcp.cc - Changed VERSION ctcp responce to suit new version
+	'pulling' style :)
+simonb: All work and no play makes Simon a dull boy all work and no play makes
+	simon a dull boy all work and no play makes simon a dull boy all work
+	and no play makes simon a dull boy all work and no play makes simon a
+	dull boy all work and no play makes simon a dull boy all work and no
+	play makes simon a dull boy all work and no play makes simon... uhh..
+simonb: src/utils/ansi.cc - Ported in basic drawing functions from the now
+	very old AXS BBS menu/internet connection system (it was in pascal)
+simonb: src/telnet/login.cc - Stuff created for a login box to 'work'... 
+	sort of.
+simonb: src/telnet/descriptor.cc - Terminals make the background normal/bold
+	on the status bar (well, monochrome terminals at least) so the bar
+	thing is totally normal-reverse instead of having the message bold.
+	Did that make any sense?
+simonb: src/utils/class.cc - Added repeatChar() routine.
+
+
 Version 0.37
 ------------
 simonb: commands/user.cc - Finally wrote password changing code (gee I'm slow)

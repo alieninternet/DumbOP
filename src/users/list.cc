@@ -37,7 +37,7 @@ void UserList::read()
 	 return;
       }
       String mask = st.nextToken(':');
-      String maskChannel = st.nextToken(':');
+      String regTime = st.nextToken(':');
       String level = st.nextToken(':');
       String prot = st.nextToken(':');
       String nick = st.nextToken(':');
@@ -49,9 +49,8 @@ void UserList::read()
 	 password = "";
       }
       
-      l.push_back(new UserListItem(mask, maskChannel, atoi(level),
-				   atoi(prot), nick,
-				   atol(flags),
+      l.push_back(new UserListItem(mask, atol(regTime), atoi(level),
+				   atoi(prot), nick, atol(flags),
 				   ((atol(lastseen) == 0) ? 
 				    -1 : atol(lastseen)),
 				   password));
@@ -70,7 +69,7 @@ void UserList::save()
    
    for ( ; it != l.end(); ++it) {
       file << (*it)->mask.getMask().toLower() << ":"
-	<< (*it)->channelMask.getMask().toLower() << ":"
+	<< (*it)->registered << ":"
 	<< (*it)->level << ":"
 	<< (*it)->prot << ":"
 	<< (*it)->nick << ":"
@@ -95,11 +94,11 @@ void UserList::clear()
      }
   }
 
-void UserList::addUser(String m, String mc, int lev, int p, String n,
+void UserList::addUser(String m, time_t r, int lev, int p, String n,
 		       long f, time_t ls, String pa)
-  {
-     l.push_back(new UserListItem(m, mc, lev, p, n, f, ls, pa));
-  }
+{
+   l.push_back(new UserListItem(m, r, lev, p, n, f, ls, pa));
+}
 
 UserListItem *UserList::getUserListItem(String nuh, String channel = "#*")
   {

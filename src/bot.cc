@@ -117,7 +117,7 @@ Bot::Bot(String filename)
    
    logFile.open(logFileName, ios::out | ios::ate | ios::app);
    logLine("Starting log.");
-   logLine(VERSION_STRING);
+   logLine(Version::getVersion());
    
 #ifdef DEBUG
    if (debug)
@@ -416,7 +416,7 @@ void Bot::waitForInput()
      maxSocketNumber = telnetDaemon->sock->getFileDescriptor();
    
    // Add live telnet connections
-   for (list<telnetDescriptor *>::iterator it = telnetDaemon->descList.begin();
+   for (list<TelnetDescriptor *>::iterator it = telnetDaemon->descList.begin();
 	it != telnetDaemon->descList.end(); it++)
      if (((*it)->flags & TELNETFLAG_CONNECTED) &&
 	 ((*it)->sock->isConnected())) {
@@ -469,7 +469,7 @@ void Bot::waitForInput()
       }
       
       // Check for activity on live telnet sockets
-      for (list<telnetDescriptor *>::iterator it = telnetDaemon->descList.begin();
+      for (list<TelnetDescriptor *>::iterator it = telnetDaemon->descList.begin();
 	   it != telnetDaemon->descList.end(); it++) {
 	 if (((*it)->flags & TELNETFLAG_CONNECTED) &&
 	     ((*it)->sock->isConnected()) &&

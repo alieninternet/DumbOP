@@ -2,6 +2,7 @@
 #include "parser.h"
 #include "bot.h"
 #include "serverqueue.h"
+#include "flags.h"
 
 void Parser::parseError(ServerConnection *cnx, Person *from, String rest)
 {
@@ -12,6 +13,7 @@ void Parser::parseError(ServerConnection *cnx, Person *from, String rest)
 		     ").");
    cnx->bot->nextServer();
 }
+
 
 void Parser::parseInvite(ServerConnection *cnx, Person *from, String rest)
 {
@@ -25,6 +27,7 @@ void Parser::parseInvite(ServerConnection *cnx, Person *from, String rest)
       cnx->queue->sendJoin(channel, cnx->bot->wantedChannels[channel]->key);
    }
 }
+
 
 void Parser::parseJoin(ServerConnection *cnx, Person *from, String rest)
 {
@@ -74,12 +77,19 @@ void Parser::parseJoin(ServerConnection *cnx, Person *from, String rest)
       if (cnx->bot->wantedChannels[ch->channelName]->greeting.length()) {
 	 from->sendNotice(cnx->bot->wantedChannels[ch->channelName]->greeting);
       }
+      
+      // If it is a game channel, the game engine may need this data too.
+      if (cnx->bot->wantedChannels[ch->channelName]->flags & 
+	  CHANFLAG_ALLOW_GAMES) {
+	 cnx->bot->games->parseJoin(ch, from);
+      }
    }
    
    if (joinAndMode) {
       parseMode(cnx, 0, mode);
    }
 }
+
 
 void Parser::parseKick(ServerConnection *cnx, Person *from, String rest)
 {
@@ -111,10 +121,12 @@ void Parser::parseKick(ServerConnection *cnx, Person *from, String rest)
 				 target + " \002is protected !\002");
 	 }
       }
-      
+
+      // Delete the nickname from that channel
       cnx->bot->channelList->getChannel(channel)->delNick(target);
    }
 }
+
 
 void Parser::parseMode(ServerConnection *cnx, Person *from, String rest)
 {
@@ -137,6 +149,7 @@ void Parser::parseMode(ServerConnection *cnx, Person *from, String rest)
    }
 }
 
+
 void Parser::parseNick(ServerConnection *cnx, Person *from, String rest)
 {
    String oldNick = from->getNick();
@@ -150,6 +163,7 @@ void Parser::parseNick(ServerConnection *cnx, Person *from, String rest)
       }
    }
 }
+
 
 void Parser::parseNotice(ServerConnection *cnx, Person *from, String rest)
 {
@@ -193,6 +207,7 @@ void Parser::parseNotice(ServerConnection *cnx, Person *from, String rest)
    }
 }
 
+
 void Parser::parsePrivmsg(ServerConnection *cnx, Person *from, String rest)
 {
    String nick = from->getNick();
@@ -233,6 +248,7 @@ void Parser::parsePrivmsg(ServerConnection *cnx, Person *from, String rest)
    }
 }
 
+
 void Parser::parsePart(ServerConnection *cnx, Person *from, String rest)
 {
    String n = from->getNick();
@@ -255,13 +271,21 @@ void Parser::parsePart(ServerConnection *cnx, Person *from, String rest)
 	 cnx->queue->sendPart(channel, "");
 	 cnx->queue->sendJoin(channel, cnx->bot->wantedChannels[channel]->key);
       }
+
+      // If it is a game channel, the game engine may need this data too.
+      if (cnx->bot->wantedChannels[c->channelName]->flags & 
+	  CHANFLAG_ALLOW_GAMES) {
+	 cnx->bot->games->parseLeave(c, from);
+      }
    }
 }
+
 
 void Parser::parsePing(ServerConnection * cnx, Person *from, String rest)
 {
    cnx->queue->sendPong(rest);
 }
+
 
 void Parser::parsePong(ServerConnection *cnx, Person *from, String rest)
 {
@@ -271,6 +295,7 @@ void Parser::parsePong(ServerConnection *cnx, Person *from, String rest)
 		cnx->pingTime.millitm));
    cnx->bot->sentPing = false;
 }
+
 
 void Parser::parseQuit(ServerConnection *cnx, Person *from, String rest)
 {
@@ -287,6 +312,7 @@ void Parser::parseQuit(ServerConnection *cnx, Person *from, String rest)
       (*it).second->delNick(n);
    }
 }
+
 
 void Parser::parseTopic(ServerConnection *cnx, Person *from, String rest)
 {

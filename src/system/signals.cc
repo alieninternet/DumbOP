@@ -48,6 +48,7 @@ static const char *sigNames[] = {
    
 Bot *bot; // We need this so we can do stuff during a signal event
 
+
 /* logSignal - Log the catchment of a signal
  * Original 11/1/01, Simon Butcher <simonb@alien.net.au>
  */
@@ -107,9 +108,8 @@ void sigHandler(int sig)
 #endif
       logSignal(sig, "Shutting down.");
       Commands::Die(bot->serverConnection, 0, "", String("Caught ") + 
-		    String(sigNames[sig]) +
-		    String(": Shutting down. [") + 
-		    VERSION_STRING + String("]"));
+		    String(sigNames[sig]) + String(": Shutting down. [") + 
+		    Version::getVersion() + String("]"));
       break;
       
       // Everything else we ignore.

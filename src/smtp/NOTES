@@ -1,0 +1,126 @@
+
+< = send
+- = send (optional)
+> = receive
+
+All lines terminated with CRLF (\r\n)
+
+--------------------
+Commands of interest
+____________________
+HELO - Hello
+MAIL - Mail
+RCPT - Receipt
+DATA - Data follows (until . on lonely line)
+QUIT - Quit (close connection) 
+
+
+---------------
+Numeric replies
+_______________
+211 - System status or system help reply
+214 - Help message
+220 - <domain> service ready
+221 - <domain> service closing
+250 - Mail action OK
+251 - User not local, but mail action ok (forwarding)
+252 - Cannot VRFY user, but will accept delivery
+
+354 - Start mail input (after DATA, end with <crlf>.<crlf>)
+
+421 - <domain> service not available, closing
+450 - Mail action not taken (mailbox busy/unavailable)
+451 - Requested action aborted (error in processing)
+452 - Requested action aborted (out of disk space)
+
+500 - Syntax error (command unknown)
+501 - Syntax error (wrong parameters)
+502 - Command not implemented
+503 - Bad sequence of commands
+504 - Command parameter not implemented
+550 - Mail action not taken (mailbox non-existant/unavailable)
+551 - Mail action not taken (user not local, not forwarding)
+552 - Mail action not taken (exceeded disk quota)
+553 - Mail action not taken (mailbox name not allowed)
+554 - Transaction failed
+
+
+----------------
+Example dialogue
+________________
+
+< 220					[welcome]
+
+> HELO domain.name
+
+< MAIL FROM:<name@host.domain>
+
+> 250					[ok]
+
+< RCPT TO:<name@host.domain.name>	[can be repeated several times]
+
+> 250					[ok]
+> 251					[ok, but not normal]
+> 550					[fail]
+> 551					[fail, not normal]
+
+< DATA
+
+> 354					[intermediate reply]
+
+- Received: any information I feel like here, apparently :)
+(receive path string, for tracing)
+
+- Organization: whatever
+(should be configurable.. good idea..)
+
+- X-Mailer: version string
+(mailer type for tracing)
+
+- X-DumbOP-NickName: usernickname
+
+- X-DumbOP-UserHost: userhost
+
+- X-DumbOP-UserLevel: blah
+
+- Message-Id: <message.id@host.domain.name>
+(identification of the message for trace-ability)
+
+- 
+
+- Sender: "User Name" <user@host.domain.name>
+(used for transport error replies)
+
+- Reply-To: "User Name" <user@host.domain.name>
+(request for mail to be sent here rather than to 'from')
+
+< From: "User Name" <user@host.domain.name>
+
+< Subject: subject
+
+- Date: RFC822 date, ftp://ftp.isi.edu/in-notes/rfc822.txt
+(date message was constructed/sent)
+
+- Importance: Normal
+
+- Sensitivity: Private
+
+- Precedence: Bulk
+
+- MIME-Version: 1.0
+
+- Content-Type: text/plain; charset="us-ascii"
+
+<					(crlf)
+
+< any message data then goes here.
+
+<					(crlf)
+
+< .					[end of message]
+
+> 250					[ok]
+
+< QUIT
+
+> 221					[goodbye]

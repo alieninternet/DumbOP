@@ -83,10 +83,9 @@ struct {
 
 /* toANSI - Convert IRC formatting to ANSI
  * Original 29/06/01, Pickle <pickle@alien.net.au>
- * Note: This doesn't only convert IRC formatting to ANSI, it also strips any
- *       nasties that it might find, such as CTCP chars etc.
+ * Note: Also does line wrapping if columns variable is > 0.
  */
-String ANSI::toANSI(String line)
+String ANSI::toANSI(String line, int columns = 0)
 {
    if (line.length() < 1) {
       return line;
@@ -97,8 +96,13 @@ String ANSI::toANSI(String line)
    bool attr_change = false, fgColour_change = false, bgColour_change = false;
    bool coloured = false;
    char fgColour = 15, bgColour = 1;
+   unsigned short charCount = 0;
    
    for (int i = 0; i < line.length(); i++) {
+      // This counter is for the word wrapping thing.
+      charCount++;
+      
+      // See what we should do with this char
       switch (line[i]) {
        case '\002': /* bold (^B) - toggle the bold setting */
 	 bold_on = !bold_on;
@@ -159,14 +163,63 @@ String ANSI::toANSI(String line)
 	 inverse_on = !inverse_on;
 	 attr_change = true;
 	 break;
-       case '\037': /* underline - act the same as bold a la ircII */
+       case '\037': /* underline - we do real underline, not emulation */
 	 underline_on = !underline_on;
 	 attr_change = true;
 	 break;
-       default: /* Everything else falls through the trap */
+       case ESC_CHAR: /* ANSI Escape char? We wanna strip the ANSI code out */
+	 // Loop until we are past the ANSI code
+	 while ((!isalpha(line[i])) && (i < line.length())) {
+	    // Copy the char through
+	    temp = temp + String(line[i]);
+	    i++;
+	 }
+	 
+	 // Copy the last char through, naturally
+	 temp = temp + String(line[i]);
+	 
+	 // Hide the ANSI stuff from the wrap thingy
+	 charCount--; 
+	 
+	 // Just keep on going, no changes to be made.
+	 continue;
+       case ' ': // White space - This may be our chance to word wrap!
+       case '\t':
+	 // Check if we are right for word wrapping...
+	 if ((columns > 0) && ((columns - charCount) <= WORDWRAP_MIN_LEFT)) {
+	    /* Rip the string apart so we are only looking at whatever is
+	     * beyond this point. We also need to find where the next
+	     * occurances of a tab or a space are (if any).
+	     */
+	    String rip = line.subString(i + 1);
+	    long findSpace = rip.find(' ');
+	    long findTab = rip.find('\t');
+	    
+	    // Check if a word-wrap should be done later, not now
+	    if (((findSpace > columns) || (findTab > columns)/* ||
+		 ((findSpace < 0) && (findTab < 0))*/) &&
+		((rip.length() + charCount) > columns)) {
+	       // We are going to do it! Wrap that line here and now.
+	       temp = temp + String(TELNET_NEWLINE) + String("   ");
+	       
+	       // Reset the character counter
+	       charCount = 0;
+	       
+	       // Stop here, move on with our lives.
+	       continue;
+	    }
+	 } 
+	 
+	 /* Otherwise copy it through. Notice how tabs become spaces now
+	  * which conforms to how most IRC clients will read the line.
+	  */
+	 temp = temp + String(" ");
+	 
+	 break;
+       default: // Everything else falls through the trap
 	 temp = temp + String(line[i]);
       }
-      
+
       /* If we changed a basic attribute (bold, underline, inverse) then
        * we have to append the appropriate ANSI codes. To compensate for
        * our stupidity, we append a full ANSI attribute string.
@@ -229,3 +282,74 @@ String ANSI::toANSI(String line)
    
    return temp;
 }
+
+
+/* drawHLine - Draw a horizontal line at x,y for l
+ * Original 15/08/94, Simon Butcher <simonb@alien.net.au>
+ * 29/07/01 simonb - Ported from AXS BBS/internet connection menu (dos pascal)
+ * Note: The x,y default to -1 which means 'draw from here'.
+ */
+String ANSI::drawHLine(int l, int x = -1, int y = -1)
+{
+   String temp = "";
+
+   // Set our location if we need to.
+   if ((x >= 0) || (y >= 0)) {
+      temp = gotoXY(x, y);
+   }
+
+   // Add the chars
+   temp = temp + Utils::repeatChar(l, ANSI_DRAW_HORIZONTAL_LINE);
+   
+   return temp;
+}
+
+
+/* drawVLine - Draw a verticle line at x,y for l
+ * Original 15/08/94, Simon Butcher <simonb@alien.net.au>
+ * 29/07/01 simonb - Ported from AXS BBS/internet connection menu (dos pascal)
+ * Note: It is faster to do a cursor down, then a backspace, rather than
+ * 	 either a cursor down then left, or a gotoxy. NOTE, if we are told
+ * 	 not to move the char (with X,Y both being -1) then the char must be
+ *       originally offset by being one char to the right, one char above of
+ *       the actual point of drawing.
+ */
+String ANSI::drawVLine(int l, int x = -1, int y = -1)
+{
+   String temp = "";
+   
+   // Set our location if we need to.
+   if ((x >= 0) || (y >= 0)) {
+      temp = gotoXY((x + 1), (y - 1));
+   }
+   
+   // Run through the line chars
+   for (int i = 0; i < l; i++) {
+      temp = temp + String(ANSI_CUR_DOWN) + String("\b") + 
+	String(ANSI_DRAW_VERTICLE_LINE);
+   }
+   
+   return temp;
+}
+
+
+/* drawBox - Draw a box with the two line functions from xA,yA to xB,yB
+ * Original 15/08/94, Simon Butcher <simonb@alien.net.au>
+ * 29/07/01 simonb - Ported from AXS BBS/internet connection menu (dos pascal)
+ * Note: We save chars by starting from the beginning, doing the top line
+ * 	 and the right-hand line, then jumping back to the top corner again,
+ *       doing the left line, then the bottom line. Whew! Hopefully it wont
+ *       look that crap - admittantly it would look better to draw top to
+ *       bottom in one sweep, but this is technically 'faster'.. hrrm :-/
+ */
+String ANSI::drawBox(int xA, int yA, int xB, int yB)
+{
+   return (gotoXY(xA, yA) + String(ANSI_DRAW_TOP_LH_CORNER) + 
+	   drawHLine(xB - xA - 2) + String(ANSI_DRAW_TOP_RH_CORNER) +
+	   drawVLine(yB - yA - 2) + gotoXY(xA + 1, yA) + 
+	   drawVLine(yB - yA - 2) + String(ANSI_CUR_DOWN) + String("\b") +
+	   String(ANSI_DRAW_BOTTOM_LH_CORNER) + drawHLine(xB - xA - 2) +
+	   String(ANSI_DRAW_BOTTOM_RH_CORNER));
+}
+
+

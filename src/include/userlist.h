@@ -21,7 +21,7 @@ class UserList {
    void save();
    void clear();
    
-   void addUser(String, String, int, int, String,
+   void addUser(String, time_t, int, int, String,
 		long = 0, time_t = -1, String = "");
    void removeUser(String, String);
 

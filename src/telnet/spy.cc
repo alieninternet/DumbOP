@@ -12,6 +12,8 @@
 
 void TelnetSpy::spyLine(Bot *bot, String mask, String command, String rest)
 {
+   return; // skip this
+   
    StringTokens t(rest);
    String to = t.nextToken(' ');
    String line = t.rest();
@@ -19,12 +21,13 @@ void TelnetSpy::spyLine(Bot *bot, String mask, String command, String rest)
    if (line[0] == ':')
      line = line.subString(1);
    
-   for (list<telnetDescriptor *>::iterator it = bot->telnetDaemon->descList.begin();
+   for (list<TelnetDescriptor *>::iterator it = bot->telnetDaemon->descList.begin();
 	it != bot->telnetDaemon->descList.end(); it++)
      if (((*it)->flags & TELNETFLAG_CONNECTED) &&
-	 ((*it)->page == telnetDescriptor::PAGE_SPY)) {
-	// THIS SHOULD CHANGE! :)
-	(*it)->write(IRCtoANSI(mask, command, to, ANSI::toANSI(line)));
+	 (true)) {
+	// this really should change sometime......
+	(*it)->write(ANSI::toANSI(IRCtoANSI(mask, command, to, line),
+				  (*it)->columns));
      }
 
 }

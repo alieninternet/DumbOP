@@ -52,6 +52,8 @@ class Utils {
    static String dwindleSpaces(String);
 
    static String generateSHA1(String);
+   
+   static String repeatChar(int, char = ' ');
 };
 
 #endif

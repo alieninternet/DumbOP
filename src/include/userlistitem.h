@@ -14,7 +14,9 @@ class UserListItem {
    // Mask on the user
    Mask mask;
    // Mask on the channel
-   Mask channelMask;
+   Mask channelMask; // LEGACY
+   // Time the user was registered with the bot
+   time_t registered;
    // Level (from 0 to 4)
    int level;
    // Protection (from 0 to 2)
@@ -31,9 +33,9 @@ class UserListItem {
    bool identified;
    
  public:
-   UserListItem(String m, String mc, int l, int p, String n = "",
+   UserListItem(String m, time_t r, int l, int p, String n = "",
 		long f = 0, time_t ls = -1, String pass = "")
-     : mask(m), channelMask(mc), level(l), prot(p), nick(n),
+     : mask(m), channelMask("#*"), registered(r), level(l), prot(p), nick(n),
    flags(f), lastseen(ls), passwd(pass), identified(0) { }
    
    // Returns true if it matches <m> on channel(s) <mc>

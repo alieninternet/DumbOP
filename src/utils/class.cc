@@ -536,3 +536,18 @@ String Utils::generateSHA1(String line)
    
    return output;
 }
+
+
+/* repeatChar - Repeat a char... simple :)
+ * Original 29/07/01, Simon Butcher <simonb@alien.net.au>
+ */
+String Utils::repeatChar(int num, char chr = ' ')
+{
+   String temp = "";
+   
+   while ((temp.length() - 1) != num) {
+      temp = temp + String(chr);
+   }
+   
+   return temp;
+}

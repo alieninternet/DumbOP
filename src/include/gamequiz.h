@@ -42,6 +42,9 @@ class Games;
 #define DEFAULT_QUIZ_HINT_MIN_LENGTH		10	// Length to auto-hint
 #define DEFAULT_QUIZ_HINT_BLOCK_PERCENTAGE	40	// % hints before block
 
+// These thingies effect the answering mechanism
+#define DEFAULT_QUIZ_ANSWER_MAX_FAST_TIME	1500	// 1 sec 500 millisecs
+
 // Class for quiz questions
 class gameQuizQuestion {
  public:
@@ -78,20 +81,22 @@ class gameQuizChannel {
  public:
    Channel *channel;			// Recursive back to original channel
    GameQuiz *gameQuiz;			// Recursive back to quiz game class
-   
+
+   // Category variables
    String category;			// Current category
    String nextCategory;			// Next category
    
+   // Question variables
    gameQuizQuestion *question;		// Current question pointer
    String questionStr;			// Current question (may be warped)
-   time_t timeAsked;			// Time question was asked
+   unsigned short questionNum;		// Question number (this round)
+   char questionLevel;			// -1 = Normal, >= 0 are bonus-Q types
+   struct timeb timeAsked;		// Time question was asked
+   bool answered;			// Question is answered?
    
+   // Hint system variables
    short hintLevel;			// -1 = Make new hint, 0 = no hint...
    String hint;				// Current hint string
-   
-   unsigned short questionNum;		// Question number (this round)
-   bool answered;			// Question is answered?
-   char questionLevel;			// -1 = Normal, >= 0 are bonus-Q types
    
    gameQuizChannel(Channel *, 
 		   GameQuiz *);		// Class constructor
@@ -117,6 +122,8 @@ class GameQuiz {
    
    void parseLine(Channel *, Person *, 
 		  String);		// Parse a line of input
+   void parseJoin(Channel *, Person *);	// Parse a new quiz player joining
+   void parseLeave(Channel *, Person *);// Parse a quiz player leaving
    
  public:
    enum {				// Question types

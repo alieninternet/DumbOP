@@ -1,5 +1,6 @@
 /* ansi.h
  * Basic ANSI/VT-102 implementation for telnet sessions
+ * Note: Most of this is from software dating back to mid-to-late 1994.
  */
 
 #ifndef __ANSI_H_
@@ -114,7 +115,7 @@
 # define ANSI_PRINT_START_LOG	"\033[5i"	// Start logging to printer
 # define ANSI_PRINT_STOP_LOG	"\033[4i"	// Stop logging to printer
 
-// Line headers (for CLI mode)
+// Line headers (for CLI/Monitoring modes)
 # define ANSI_HEAD_GEN 	"\033[0;32m-\033[1m=\033[36m> \033[0m"    // White-Cyan
 # define ANSI_HEAD_WARN	"\033[1;30m-\033[0;31m=\033[1m> \033[0m"  // Red
 # define ANSI_HEAD_IRC	"\033[1;30m-\033[0;32m=\033[1m> \033[0m"  // Green
@@ -122,6 +123,25 @@
 # define ANSI_HEAD_NEWS	"\033[1;30m-\033[0;35m=\033[1m> \033[0m"  // Magenta
 # define ANSI_HEAD_BW  	"\033[1;30m-\033[0;37m=\033[1m> \033[0m"  // Bland B&W
 # define ANSI_HEAD_CLI	"\033[0;34m> \033[37m"	// Command line header
+
+// This is for word-wrap functionality
+# define WORDWRAP_MIN_LEFT	20		// 20 chars left on the line
+
+// Drawing chars
+# define ANSI_DRAW_TOP_LH_CORNER	'.'	// Top left-hand corner
+# define ANSI_DRAW_TOP_RH_CORNER	'.'	// Top right-hand corner
+# define ANSI_DRAW_BOTTOM_LH_CORNER	'`'	// Bottom left-hand corner
+# define ANSI_DRAW_BOTTOM_RH_CORNER	'\''	// Bottom right-hand corner
+# define ANSI_DRAW_HORIZONTAL_LINE	'-'	// Horizontal line
+# define ANSI_DRAW_VERTICLE_LINE	'|'	// Verticle line
+
+/*
+ *  .-------------------------------.
+ *  |                               |
+ *  |          Example box          |
+ *  |                               |
+ *  `-------------------------------'
+ */
 
 class ANSI {
  public:
@@ -133,7 +153,11 @@ class ANSI {
 
    static String scrollRegion(int, int);
    
-   static String ANSI::toANSI(String);
+   static String toANSI(String, int = 0);
+   
+   static String drawHLine(int, int = -1, int = -1);
+   static String drawVLine(int, int = -1, int = -1);
+   static String drawBox(int, int, int, int);
 };
 
 #endif

@@ -24,7 +24,7 @@ Log::Log(String filename)
       logFile = (int)&stderr;
    }
 
-   Log::logRawLine(String("Starting log file (v") + String(VERSION_STRING) + 
+   Log::logRawLine(String("Starting log file (v") + Version::getVersion() +
 		   String(")."));
 }
 
