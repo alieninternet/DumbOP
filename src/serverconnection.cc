@@ -30,7 +30,13 @@ ServerConnection::ServerConnection(Bot *b, Server *s, String localIP)
 
 ServerConnection::~ServerConnection()
 {
-  delete queue;
+   // Announce we are going bye bye
+//   bot->logLine(String("Closing connection to ") + server->hostName +
+//		String(":") + String(server->port) + 
+//		String(" (Rx: ") + String(receivedLen) +
+//		String(" Tx: ") + String(sentLen) + String(")"));
+   
+   delete queue;
 }
 
 bool

@@ -10,7 +10,6 @@
 
 #include "bot.h"
 #include "dccconnection.h"
-#include "stringtokenizer.h"
 #include "serverconnection.h"
 #include "utils.h"
 #include "telnet.h"
@@ -56,7 +55,7 @@ Bot::Bot(String filename)
 #endif
   stop(false), 
   sentPing(false),
-  sigs(new Signal(this)),
+  sigs(new Signals(this)),
   startTime(time(NULL)), 
   lastNickNameChange(startTime), 
   lastChannelJoin(startTime),
@@ -147,7 +146,7 @@ Bot::Bot(String filename)
       int line = 0;
       while (initFile >> temp, temp.length() != 0) {
 	 line++;
-	 StringTokenizer st(temp);
+	 StringTokens st(temp);
 	 temp = temp.trim();
 	 if (temp[0]=='#') continue;
 	 if (st.countTokens(' ') != 2) {
@@ -319,7 +318,7 @@ void Bot::readConfig()
 	 continue;
       }
       
-      StringTokenizer st(temp);
+      StringTokens st(temp);
       String command = st.nextToken('=').trim().toUpper();
       String parameters = st.nextToken('=').trim();
       
@@ -349,7 +348,7 @@ void Bot::readConfig()
 	 if (parameters.indexOf(' ') == -1)
 	   serverList->addServer(new Server(parameters));
 	 else {
-	    StringTokenizer st2(parameters);
+	    StringTokens st2(parameters);
 	    String name = st2.nextToken();
 	    int port = atoi(st2.nextToken());
 	    serverList->addServer(new Server(name,

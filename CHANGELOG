@@ -31,10 +31,31 @@ simonb: usercommands.cc - PASSWORD and IDENT commands obliterated.
 simonb: parser.cc & usercommands.cc - REGISTER command added.
 simonb: IDENT command changed to IDENTIFY command
 simonb: usercommands.cc - split into managercommands.cc, channelcommands.cc,
-	and usercommands.cc for my own sanity.
+	generalcommands.cc and usercommands.cc for my own sanity.
 simonb: *.h - fixed many files up in preparation for splitting the package
 	into logical sections (eg. subdirs and mid-way objects)
 simonb: Imported SHA1 routines from Evolution.
+simonb: userlist.cc - Added identify function to support password
+	identification via the SHA1 digest routines.
+simonb: My sanity wasn't dealing with the *commands.cc files well enough
+	still, so connectioncommands.cc was spawned from managercommands.cc 
+	and dcccommands.cc is ripped from generalcommands.cc
+simonb: Imported strings class from evolution (latest class version)
+simonb: Signal class and filename (signal.cc/signal.h) renamed to Signals
+	(signals.cc and signals.h naturally) to avoid breaking c++-lib .h's
+simonb: *commands.cc - Directory created (commands) in the source directory
+	for these files, appropriate Makefile has been make.
+simonb: games.cc and gamequiz.cc - Directory created (games), and you know
+	the rest..
+simonb: telnet*.cc, ansi.cc - Directory created (telnet) etc etc..
+simonb: parser.cc - Broken up and placed into parser directory. Now three
+	files: class.cc, numerics.cc, commands.cc, ctcp.cc, and message.cc
+simonb: dcc*.cc - Moved into dcc directory
+simonb: channel*.cc and person.cc - Moved into channels directory
+simonb: user*.cc - Moved into users directory
+simonb: socket.cc and signals.cc - Moved into system directory
+simonb: note*.cc - Moved into notes directory
+simonb: utils.cc & sha1.cc - Moved into utils directory
 
 
 Version 0.35

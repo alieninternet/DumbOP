@@ -1,0 +1,51 @@
+#
+#
+# ./src/users/Makefile
+# Make for user handling routines
+# Author: Simon Butcher
+# Copyright (c) 2001 Alien Internet Services
+
+########################################################################
+##                                                                    ##
+########################################################################
+
+CXX=@CXX@
+LD=@LD@
+RM=@RM@
+
+CXXFLAGS=@CXXFLAGS@ -Wall
+LDFLAGS=-r
+
+srcdir=@srcdir@
+VPATH=@srcdir@
+prefix=@prefix@
+libdir=@libdir@
+
+INCDIRS=-I$(srcdir) -I$(srcdir)/../include
+DEFS=@DEFS@
+LIBS=
+
+TARGET=users.o
+
+SOURCES=user.cc list.cc
+
+INCLUDES=
+
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@)
+
+########################################################################
+
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(LD) $(LDFLAGS) -o $@ $(OBJECTS) $(LIBS)
+
+%.@OBJEXT@: %.cc
+	$(CXX) $(CXXFLAGS) $(DEFS) $(INCDIRS) -c $<
+	
+clean:
+	$(RM) *~ *.@OBJEXT@ $(TARGET)
+
+dclean:
+	$(RM) *~ *.@OBJEXT@ $(TARGET) Makefile
+

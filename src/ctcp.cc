@@ -7,8 +7,6 @@
 #include "ctcp.h"
 #include "parser.h"
 #include "utils.h"
-#include "stringtokenizer.h"
-#include "str.h"
 #include "bot.h"
 #include "person.h"
 #include "version.h"
@@ -32,7 +30,7 @@ void CTCP::Action(ServerConnection *cnx, Person *from, String rest)
 void CTCP::ClientInfo(ServerConnection *cnx, Person *from, String rest)
 {
    if (rest.length() != 0) {
-      StringTokenizer st(rest);
+      StringTokens st(rest);
       String query = st.nextToken();
       
       for (list<CTCPFunction *>::iterator it = cnx->bot->CTCPFunctions.begin();
@@ -78,7 +76,7 @@ void CTCP::DCC(ServerConnection *cnx, Person *from, String rest)
       return;
    }
    
-   StringTokenizer st(rest);
+   StringTokens st(rest);
    String type, argument, address, port, size;
    
    type = st.nextToken().toUpper();

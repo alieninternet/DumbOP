@@ -1,0 +1,75 @@
+#
+#
+# ./src/Makefile
+# Main make-file for DumbOP sources
+# Author: Simon Butcher
+# Copyright (c) 2001 Alien Internet Services
+
+########################################################################
+##                                                                    ##
+##     TO REDUCE THE RISK OF ELECTRIC SHOCK, DO NOT REMOVE COVER.     ##
+##                NO USER - SERVICEABLE PARTS INSIDE.                 ##
+##           REFER SERVICING TO QUALIFIED SERVICE PERSONNEL.          ##
+##                                                                    ##
+##       WARNING: TO REDUCE THE RISK OF FIRE OR ELECTRIC SHOCK,       ##
+##          DO NOT EXPOSE THIS APPLIANCE TO RAIN OR MOISTURE          ##
+##                                                                    ##
+########################################################################
+
+CXX=@CXX@
+RM=@RM@
+
+CXXFLAGS=@CXXFLAGS@ -Wall
+
+srcdir=@srcdir@
+VPATH=@srcdir@
+prefix=@prefix@
+libdir=@libdir@
+
+INCDIRS=-I$(srcdir) -I$(srcdir)/include
+DEFS=@DEFS@
+LIBS=
+
+TARGET=dumbop
+
+SOURCES=banentry.cc bot.cc commands.cc config.cc connection.cc ctcp.cc \
+	flags.cc log.cc main.cc mask.cc queue.cc server.cc \
+	serverconnection.cc serverlist.cc serverqueue.cc serverqueueitem.cc \
+	todolist.cc
+
+SUB_DIRS=channels commands dcc games notes parser strings system telnet \
+	users utils
+
+VER_SRC=version.cc
+VER_OBJ=version.@OBJEXT@
+VER_FLG=-DCOMPILE_STRING="\"uname -n -m\"" -DBUILD_STRING="\"date\""
+
+# this needs to be fixed...
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@) \
+	channels/channels.o commands/commands.o dcc/dcc.o games/games.o \
+	parser/parser.o notes/notes.o strings/strings.o system/system.o \
+	telnet/telnet.o users/users.o utils/utils.o
+
+########################################################################
+
+all: $(TARGET)
+
+$(TARGET): subdirs $(OBJECTS) $(VER_OBJ)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $(OBJECTS) $(VER_OBJ) $(LIBS)
+
+subdirs:
+	for d in $(SUB_DIRS); do $(MAKE) -C $$d; done
+
+%.@OBJEXT@: %.cc
+	$(CXX) $(CXXFLAGS) $(DEFS) $(INCDIRS) -c $<
+	
+$(VER_OBJ): $(VER_SRC)
+	$(CXX) $(CXXFLAGS) $(VER_FLG) $(DEFS) $(INCDIRS) -c $(VER_SRC)
+
+clean:
+	for d in $(SUB_DIRS); do $(MAKE) -C $$d clean; done
+	$(RM) *~ *.@OBJEXT@ $(TARGET)
+
+dclean:
+	for d in $(SUB_DIRS); do $(MAKE) -C $$d dclean; done
+	$(RM) *~ *.@OBJEXT@ $(TARGET) Makefile

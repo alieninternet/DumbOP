@@ -142,7 +142,7 @@ Message Commands::Cycle(Bot *bot, String channel, String reason)
    if (!CHANNEL(channel))
      return NotOnChannel(channel);
    
-   if (reason = "")
+   if (reason == "")
      QUEUE->sendPart(channel, String("Cycle"));
    else
      QUEUE->sendPart(channel, String("[Cycle] ") + reason);

@@ -1,5 +1,4 @@
 
-#include "stringtokenizer.h"
 #include "serverqueue.h"
 #include "serverqueueitem.h"
 
@@ -28,7 +27,7 @@ ServerQueueChannelModeItem::ServerQueueChannelModeItem(String c, String m, Strin
                     CHANNELMODE),
     channel(c), mode(m), parameters(p)
 {
-  StringTokenizer st(p);
+  StringTokens st(p);
   paramcount = st.countTokens();
 }
 

@@ -34,6 +34,10 @@ with other BOTs)
 Add bot-authentication strings to userlist file (replace old prot variable
 spot) -- also add a command to force nickop/other bot identification.
 
+Add JOINs on THE SAME LINE! JOIN chan[ key],chan[ key],chan[ key] etc. 
+RFC2812 says we can fill a whole 510 byte line, but most servers only let
+us join around 13 channels anyway :(
+
 Add 'REHASH' command
 
 Add 'RESTART' command (actually quit/respawn process)
