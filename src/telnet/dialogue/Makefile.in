@@ -33,7 +33,8 @@ SUB_DIRS=login monitor
 
 INCLUDES=
 
-OBJECTS=$(SOURCES:.cc=.@OBJEXT@) login/login.o monitor/monitor.o
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@) \
+	$(foreach dir,$(SUB_DIRS),$(dir)/$(dir).@OBJEXT@)
 
 ########################################################################
 

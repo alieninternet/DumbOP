@@ -51,6 +51,21 @@
 # define ANSI_DRAW_VERTICLE_LINE	'|'	// Verticle line
 
 
+/* BOT                                                                       */
+#define DEFAULT_NICKNAME "DumbOP"
+#define DEFAULT_USERNAME "dumbop"
+#define DEFAULT_IRCNAME "DumbOP"
+#define DEFAULT_COMMANDCHAR '!'
+#define DEFAULT_USERLISTFILENAME "bot.users"
+#define DEFAULT_CHANNELLISTFILENAME "bot.channels"
+#define DEFAULT_NOTELISTFILENAME "bot.notes"
+#define DEFAULT_HELPFILENAME "bot.help"
+#define DEFAULT_SCRIPTLOGFILENAME "script.log"
+#define DEFAULT_LOGFILENAME "bot.log"
+#define DEFAULT_INITFILENAME "bot.init"
+#define DEFAULT_QUIZDIRECTORY "quiz"
+
+
 /* CHANNEL                                                                   */
 #define DEFAULT_KEEPMODES "iklmnpst"
 
@@ -59,7 +74,7 @@
 // Timing and sequencing values
 #define DEFAULT_QUIZ_QUESTION_LOCKOUT_TIME	7200	// 2 hours
 #define DEFAULT_QUIZ_CATEGORY_LOCKOUT_TIME	1800	// 30 mins
-#define DEFAULT_QUIZ_QUESTION_ASK_TIME		120	// 2 mins
+#define DEFAULT_QUIZ_QUESTION_ASK_TIME		80	// 1 min 20 secs
 #define DEFAULT_QUIZ_QUESTION_BETWEEN_DELAY	12	// 12 secs
 #define DEFAULT_QUIZ_CATEGORY_BETWEEN_DELAY	50	// 50 secs
 #define DEFAULT_QUIZ_QUESTION_NEXTHINT_DELAY	25	// 25 secs

@@ -1,5 +1,6 @@
 /* src/games/parser.c
  * Built in game channel data parsing routines
+ * Copyright (c) 2001 Alien Internet Services
  */
 
 #include "config.h"

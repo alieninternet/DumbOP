@@ -1,5 +1,6 @@
-/* main.c
- * The beginning, and the end, but not the middle
+/* src/main.c
+ * The beginning, and the end, but not quite the middle
+ * Copyright (c) 2000 Alien Internet Services
  */
 
 #include "config.h"
@@ -10,8 +11,12 @@
 
 #include "bot.h"
 
+// Link into the main class, and hense main loop
 Bot *b;
 
+/* printUsage - Print the usage of this damned horrible ugly mess.
+ * Original 08/11/00, Simon Butcher <simonb@alien.net.au>
+ */
 void printUsage(char *name)
 {
    cout << "Usage: " << name << " [-h] [-b] [-f file] [-d dir] [-D]\n"
@@ -22,8 +27,13 @@ void printUsage(char *name)
 #ifdef DEBUG
    cout << " -D        Debug mode (input/output printing and no background mode.\n";
 #endif
+   cout << endl;
 }
 
+
+/* main - And so forth beginneth thine great beast, steadfast but alas bashful
+ * Original 08/11/00, Simon Butcher <simonb@alien.net.au>
+ */
 int main(int argc, char **argv)
 {
    int opt;
@@ -62,24 +72,26 @@ int main(int argc, char **argv)
 	break;
      }
    
-   if ((directory != "") && (chdir((const char *)directory)<0))
-     perror("Warning: ");
+   if ((directory != "") && (chdir((const char *)directory)<0)) {
+      perror("Warning: ");
+   }
    
 #ifdef DEBUG
    if (!debug) {
 #endif
-      if (background)
-	switch (fork()) {
-	 case -1:
-	   cout << "Could not run in the background. Exiting...\n";
-	   perror("fork");
-	   exit(1);
-	 case 0:
-	   break;
-	 default:
-	   cout << "Running in the background...\n";
-	   exit(0);
-	}
+      if (background) {
+	 switch (fork()) {
+	  case -1:
+	    cout << "Could not run in the background. Exiting...\n";
+	    perror("fork");
+	    exit(1);
+	  case 0:
+	    break;
+	  default:
+	    cout << "Running in the background...\n";
+	    exit(0);
+	 }
+      }
 #ifdef DEBUG
    }
 #endif

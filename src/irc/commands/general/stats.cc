@@ -33,81 +33,47 @@ void Commands::Stats(Person *from, String channel, String rest)
 
    // We doing channel stats?
    if (Utils::isChannel(rest)) {
-      // FINISH THIS DAMMIT!!!
       from->sendLine("I don't have any channel stats yet, sorry.");
+      // FINISH THIS DAMMIT!!!
+      // FINISH THIS DAMMIT!!!
       return;
    } else if (destination.toLower() == from->cnx->bot->nickName.toLower()) { 
       // Consider this to be asking info about me
-      from->sendLine("I'm not that interesting, honestly.");
-   } else { // Blatantly consider this to be a nickname!
-      UserListItem *uli = 0;
+      time_t uptime = from->cnx->bot->currentTime.time - from->cnx->bot->startTime;
       
-      if (destination == from->getNick()) {
-	 uli = from->cnx->bot->userList->getUserListItem(from->getAddress());
-      } else {
-	 uli = from->cnx->bot->userList->getUserListItemNick(destination);
-      }
-      
-      // Make sure we got a user, or this will get ugly..
-      if (uli) {
-	 // Calculate some stats before we jump into the mess
-	 struct tm *regoTime = localtime(&uli->registered);
-	 
-	 // Send the header
-	 from->sendLine(String("\037") +
-			  ((destination == from->getNick()) ?
-			   String("Your statistics") : 
-			   (String("Statistics for \002") +
-			    uli->nick + String("\002"))) +
-			  String(":\037"));
-	 
-	 // The stats - 66 char limit per line.
-	 from->sendLine(String("Registered: ").prepad(12) + String("\002") +
-			  ((uli->registered <= 0) ?
-			   String("Unknown") :
-			   (String(regoTime->tm_mday).prepad(2, '0') + 
-			    String("/") +
-			    String(regoTime->tm_mon).prepad(2, '0') + 
-			    String("/") +
-			    String(regoTime->tm_year + 
-				   1900))).pad(10) + String("\002") +
-			  String("Credits: ").prepad(12) + String("\002") +
-			  (((uli->flags & USERFLAG_HAS_MONEY_TREE) ||
-			    (uli->level >= User::MANAGER)) ?
-			   String("Unlimited") :
-			   ((uli->credits == 0) ? 
-			    String("None") :
-			    String(uli->credits))).pad(10) + String("\002") /*+
-			  String("Uhh: ").prepad(12) +
-			  String("Nothing..").pad(10)*/);
-      } else {
-	 from->sendLine(String("I'm sorry, I don't know who ") +
-			  ((destination == from->getNick()) ?
-			   String("you are") : (destination + String(" is"))) +
-			  String("!"));
-	 return;
-      }
-   }
-   
-   
-   
-   
-   
-   
-   
-/*   Version::sendInformation(from->cnx, from);
-*
- *  if (rest.length() != 0) {
-  *    from->sendLine(String("Statistics for \002") + rest +
-*		       String("\002:"));
- *     from->sendLine("This command needs to be finished.");
-  * } else {
-   *   int num_chans, num_users, num_bots, num_suspend;
+      from->sendLine(String("\037General Statistics:\037"));
+      from->sendLine(String("Name: ").prepad(12) +
+		     from->cnx->bot->wantedNickName + String(" <") +
+		     from->cnx->bot->userName + 
+		     ((from->cnx->bot->userHost.length()) ?
+		      (String("@") + from->cnx->bot->userHost) :
+		      String("")) +
+		     String("> (") + Version::getVersion() +
+		     String(")"));
+#ifdef DEBUG
+      from->sendLine((String("Up time: ").prepad(12) +
+		      Utils::timelenToStr(uptime)).pad(56) +
+		     String("\026 DEBUG MODE \026"));
+#else
+      from->sendLine(String("Up time: ").prepad(12) +
+		     Utils::timelenToStr(uptime));
+#endif
+      from->sendLine((String("Received: ").prepad(12) +
+		      (String((long)(from->cnx->receivedLen / 1024)) +
+		       String("k")).pad(10)) +
+		     (String("Sent: ").prepad(12) +
+		      (String((long)(from->cnx->sentLen / 1024)) +
+		       String("k")).pad(10)) +
+		     (String("Lag Count: ").prepad(12) +
+		      ((from->cnx->lag > 0) ?
+		       Utils::timeBigToStr(from->cnx->lag) :
+		       String("None"))));
+		     
+      /*   int num_chans, num_users, num_bots, num_suspend;
     *  int num_online, num_chanppl, num_chanops, num_chans_on;
      * int num_lvluser, num_lvltrusted, num_lvlfriend, num_lvlmaster;
 *      int num_chanvoiced, num_nopass, peak_chanppl, peak_chanops;
  *     int peak_chanvoiced, num_dcc_con, num_chanbans, peak_chanbans;
-  *    time_t uptime = from->cnx->bot->currentTime.time - from->cnx->bot->startTime;
    *   
     *  // This is a scarey way of zeroing every variable!
      * num_chans = num_users = num_bots = num_suspend = 
@@ -164,29 +130,6 @@ void Commands::Stats(Person *from, String channel, String rest)
 *	 num_dcc_con++;
  *     }
   *    
-   *   from->sendLine(String("\002\037General Statistics:\037\002"));
-    *  from->sendLine(String("Name: ").prepad(10) +
-*		       String(from->cnx->bot->nickName + " (" +
-*			      from->cnx->bot->wantedNickName + ")").pad(23) +
-*		       String("  Lag Check: ") +
-*		       Utils::timeBigToStr(from->cnx->lag));
-* #ifdef DEBUG
-*      from->sendLine(String("Up time: ").prepad(10) +
-*		       (!(from->cnx->bot->debug) ?
-*			Utils::timelenToStr(uptime) :
-*			(Utils::timelenToStr(uptime).pad(45) +
-*			 String("\026 DEBUG MODE \026"))));
-* #else
-*      from->sendLine(String("Up time: ").prepad(10) +
-*		       Utils::timelenToStr(uptime));
-* #endif
-*      from->sendLine(String("IRC data received: ").prepad(20) +
-*		       (String((long)(from->cnx->receivedLen / 1024)) +
-*			String("k")).pad(15) +
-*		       String("IRC data sent: ").prepad(20) +
-*		       (String((long)(from->cnx->sentLen / 1024)) +
-*			String("k")));
-*
 *
  *      from->sendLine(String("\002\037Number of users:\037 ") + 
 *			String(num_users) + String(" (") + 
@@ -230,14 +173,59 @@ void Commands::Stats(Person *from, String channel, String rest)
  *      from->sendLine(String("\002\037Number of DCC Fileserver Connections:\037 ") +
 *			String(num_dcc_con) + String("\002"));
  *
- *
- *  }
- * 
-*/
+ */
    
-   
-   
-   
+   } else { // Blatantly consider this to be a nickname!
+      UserListItem *uli = 0;
+      
+      // Are we copying the ULI or searching the list?
+      if (destination == from->getNick()) {
+	 uli = from->uli;
+      } else {
+	 uli = from->cnx->bot->userList->getUserListItemNick(destination);
+      }
+      
+      // Make sure we got a user, or this will get ugly..
+      if (uli) {
+	 // Calculate some stats before we jump into the mess
+	 struct tm *regoTime = localtime(&uli->registered);
+	 
+	 // Send the header
+	 from->sendLine(String("\037") +
+			((destination == from->getNick()) ?
+			 String("Your statistics") : 
+			 (String("Statistics for \002") +
+			  uli->nick + String("\002"))) +
+			String(":\037"));
+	 
+	 // The stats - 66 char limit per line.
+	 from->sendLine((String("Registered: ").prepad(12) + 
+			 ((uli->registered <= 0) ?
+			  String("Unknown") :
+			  (String(regoTime->tm_mday).prepad(2, '0') + 
+			   String("/") +
+			   String(regoTime->tm_mon).prepad(2, '0') + 
+			   String("/") +
+			   String(regoTime->tm_year + 
+				  1900))).pad(10)) +
+			(String("Credits: ").prepad(12) +
+			 (((uli->flags & USERFLAG_HAS_MONEY_TREE) ||
+			   (uli->level >= User::MANAGER)) ?
+			  String("Unlimited") :
+			  ((uli->credits == 0) ? 
+			   String("None") :
+			   String(uli->credits))).pad(10))
+			/*+
+			 String("Uhh: ").prepad(12) +
+			 String("Nothing..").pad(10)*/);
+      } else {
+	 from->sendLine(String("I'm sorry, I don't know who ") +
+			((destination == from->getNick()) ?
+			 String("you are") : (destination + String(" is"))) +
+			String("!"));
+	 return;
+      }
+   }
    
    // Send the user the last line..
    from->sendLine(String("\002End of statistics.\002"));

@@ -1,5 +1,6 @@
 /* src/games/quiz/parser.cc
  * Quiz run-time parsing routines
+ * Copyright (c) 2001 Alien Internet Services
  */
 
 #include "config.h"
@@ -82,7 +83,10 @@ void GameQuiz::parseLine(Channel *channel, Person *from, String line)
 			     gqc->timeAsked.millitm));
 
 	 // Throw the nick on the string, first off.
-	 notice = notice + String("\002") + from->getNick() + String("\002");
+	 notice = notice + (gqc->confColourHilight +
+			    String(" ") + 
+			    from->getNick() + 
+			    gqc->confColourNormal);
 	 
 	 // A bonus answer to a bonus question?
 	 if (bonusAnswer) {
@@ -90,7 +94,7 @@ void GameQuiz::parseLine(Channel *channel, Person *from, String line)
 	 }
 	 
 	 // Check if this was a fast answer ppl should know about
-	 if (answerTime <= DEFAULT_QUIZ_ANSWER_MAX_FAST_TIME) {
+	 if (answerTime <= gqc->confAnswerMaxFastTime) {
 	    notice = notice + String(" answered in \002") +
 	      Utils::timeBigToStr(answerTime) + String("\002!");
 	 } else {
@@ -99,8 +103,12 @@ void GameQuiz::parseLine(Channel *channel, Person *from, String line)
 	 }
 	 
 	 // Append what the answer was..
-	 notice = notice + String(" The answer was \"\002") +
-	   *gqc->question->answers.begin() + String("\002\". \003");
+	 notice = notice + (String(" The answer was \"") +
+			    gqc->confColourHilight +
+			    String("\002\002") +
+			    *(gqc->question->answers.begin()) +
+			    gqc->confColourNormal +
+			    String("\" \003"));
 	 
 	 // Send the notice
 	 channel->sendNotice(notice);
@@ -116,10 +124,10 @@ void GameQuiz::parseLine(Channel *channel, Person *from, String line)
 	    // Grab the points they are entitled to
 	    if (gqc->questionLevel == gameQuizChannel::NORMAL) {
 	       // Normal points
-	       points = DEFAULT_QUIZ_QUESTION_NORMAL_POINTS;
+	       points = gqc->confQuestionNormalPoints;
 	    } else {
 	       // Bonus points
-	       points = DEFAULT_QUIZ_QUESTION_BONUS_POINTS;
+	       points = gqc->confQuestionBonusPoints;
 	       
 	       /* If this user answered specially, they get double the 
 		* bonus score
@@ -146,6 +154,11 @@ void GameQuiz::parseLine(Channel *channel, Person *from, String line)
 
 /* parseJoin - Parse a new player joining the quiz channel
  * Original 27/07/01, Simon Butcher <simonb@alien.net.au>
+ * Note: We do something tricky here. We store their info in a map
+ * 	 where the key is their identity (username@hostname) since during
+ * 	 their IRC connection that can never change, while their nickname
+ * 	 may change. This mechanism is only for statistics so it runs
+ * 	 separately to the main client connection map.
  */
 void GameQuiz::parseJoin(Channel *channel, Person *from)
 {
@@ -156,11 +169,15 @@ void GameQuiz::parseJoin(Channel *channel, Person *from)
    if (!gqc) {
       return;
    }
+   
+   // Add this person to the appropriate quiz channel
+   gqc->players[from->getIdent()] = new gameQuizPlayer();
 }
 
 
 /* parseLeave - Parse a quiz channel player leaving (eg. part or kick etc)
  * Original 27/07/01, Simon Butcher <simonb@alien.net.au>
+ * Note: See note on parseJoin..
  */
 void GameQuiz::parseLeave(Channel *channel, Person *from)
 {
@@ -171,4 +188,16 @@ void GameQuiz::parseLeave(Channel *channel, Person *from)
    if (!gqc) {
       return;
    }
+   
+   // Grab the player record from the players list in this channel...
+   gameQuizPlayer *gqp = gqc->players[from->getIdent()];
+   
+   // Make sure we got a record (sanity check)
+   if (!gqp) {
+      return;
+   }
+   
+   // Remove that record from the players list, and delete the player
+   gqc->players.erase(from->getIdent());
+   delete gqp;
 }

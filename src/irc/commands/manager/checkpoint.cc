@@ -17,12 +17,9 @@
  */
 void Commands::Checkpoint(Person *from, String channel, String rest)
 {
-   // Warn the user about potential delays
-   from->sendLine("Performing database checkpoint...");
-   
    // Do the checkpoint *gulp*
    from->cnx->bot->checkpoint();
    
    // Tell the user the pain is over!
-   from->sendNotice("Database checkpoint complete!");
+   from->sendNotice("Database checkpoint completed.");
 }

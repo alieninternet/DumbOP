@@ -51,18 +51,33 @@ void Commands::Clue(Person *from, String channel, String rest)
 	from->cnx->bot->userList->getUserListItem(from->getAddress());
       
       if ((!uli) || 
-	  !uli->canAfford(DEFAULT_QUIZ_QUESTION_CLUE_COST)) {
+	  !uli->canAfford(gqc->confQuestionClueCost)) {
 	 c->sendNotice(String("Sorry, you need at least ") +
-		       String(DEFAULT_QUIZ_QUESTION_HINT_COST) +
+		       String(gqc->confQuestionClueCost) +
 		       String(" credits to get this clue."));
 	 return;
       }
       
       // Charge them!
-      uli->charge(DEFAULT_QUIZ_QUESTION_CLUE_COST);
+      uli->charge(gqc->confQuestionClueCost);
    
-      c->sendNotice(String("Clue: ") +
-		    gqc->question->clue + String(" \003"));
+      // Send the clue to the channel
+      c->sendNotice(gqc->confColourNormal +
+		    String(" Question ") +
+		    gqc->confColourHilight +
+		    String("\002\002") +
+		    String(gqc->questionNum) +
+		    gqc->confColourNormal +
+		    String("/") +
+		    gqc->confColourHilight +
+		    String("\002\002") +
+		    String(gqc->confRoundQuestions) +
+		    gqc->confColourNormal +
+		    String(" Clue:") +
+		    gqc->confColourText +
+		    String(" ") +
+		    gqc->question->clue +
+		    String(" \003"));
    } else {
       from->sendLine(String("There is no clue for the current question in \002") +
 		       c->channelName + String("\002, sorry."));

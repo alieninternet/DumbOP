@@ -11,17 +11,16 @@
  */
 void Commands::Test(Person *from, String channel, String rest)
 {
-//   from->sendLine("\002Begin test dump.\002");
-//   from->sendLine(String("channel = ") + String(channel));
-//   from->sendLine(String("rest = \002#\002") + String(rest) +
-//		    String("\002#\002"));
+   from->sendLine(String("channel = ") + String(channel));
+   from->sendLine(String("rest = \002#\002") + String(rest) + 
+		  String("\002#\002"));
    
-   // Split out the first word
-   StringTokens st(rest);
-   String word = st.nextToken();
-   
-   from->sendLine(String("\002!\002") + word + String("\002!\002") +
-		  Utils::generateSHA1(word) + String("\002!\002"));
+   from->sendLine(String("I am \"") + from->cnx->bot->wantedNickName + 
+		  String("\" <") + from->cnx->bot->userName +
+		  String("@") + from->cnx->bot->userHost +
+		  String(">"));
+   from->sendLine(String("You are ") + from->getNick() + String(", ") +
+		  from->getIdent());
    
    // colour lister
    String out = "";

@@ -138,6 +138,7 @@ dnl Make the files we needed to edit
 dnl --------------------------------
 AC_OUTPUT(Makefile \
 src/Makefile \
+src/bot/Makefile \
 src/common/Makefile \
 src/common/strings/Makefile
 src/dcc/Makefile \
@@ -155,21 +156,24 @@ src/irc/commands/general/Makefile \
 src/irc/commands/manager/Makefile \
 src/irc/commands/user/Makefile \
 src/irc/parser/Makefile \
+src/irc/parser/user/Makefile \
 src/irc/queue/Makefile \
 src/irc/queue/items/Makefile \
+src/irc/server/Makefile \
 src/notes/Makefile \
 src/smtp/Makefile \
 src/snmp/Makefile \
 src/system/Makefile \
 src/telnet/Makefile \
 src/telnet/ansi/Makefile \
+src/telnet/descriptor/Makefile \
 src/telnet/dialogue/Makefile \
-src/telnet/dialogue/monitor/Makefile \
 src/telnet/dialogue/login/Makefile \
+src/telnet/dialogue/monitor/Makefile \
 src/users/Makefile)
 
 
 dnl ------------------------------------------
 dnl Print a pretty message for the nice people
 dnl ------------------------------------------
-echo "Done. Have a nice day."
+echo "Phew! Have a nice day! :)"

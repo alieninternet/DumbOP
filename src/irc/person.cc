@@ -41,6 +41,25 @@ String Person::getAddress() const
    return address;
 }
 
+
+/* getIdent - Return the ident of this person ('user@host')
+ * Original 05/08/01, Simon Butcher <simonb@alien.net.au>
+ */
+String Person::getIdent()
+{
+   // Find where the ident starts
+   int loc = address.find('!');
+   
+   // If we cannot find it, just return the address (prolly a service/server)
+   if (!loc) {
+      return address;
+   }
+   
+   // Else we return the identity
+   return address.subString(++loc);
+}
+
+
 Person &Person::operator=(const String & a)
 {
    address = a;

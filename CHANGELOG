@@ -49,6 +49,36 @@ simonb: src/utils directory renamed to src/common
 simonb: src/strings moved to src/common/strings
 simonb: src/ctcp.cc moved into src/irc directory
 simonb: src/common/ansi.cc broken up and placed into src/telnet/ansi directory
+simonb: src/todolist.cc moved into src/irc/queue directory
+simonb: src/banentry.cc moved into src/irc directory
+simonb: src/mask.cc moved into src/common directory
+simonb: src/log.cc moved into src/common directory
+simonb: src/bot.cc - Defines moved into src/include/acconfig.h (config.h)
+simonb: src/bot.cc split up and moved into src/bot directory
+simonb: src/config.cc - Removed.. It was a previous idea but config.h
+	overwrote whatever work I had started on it and.. well.. it was just
+	a waste of space in the end :(
+simonb: src/irc/parser/commands.cc and src/irc/parser/numerics.cc moved into
+	new directory src/irc/parser/user as a start to allow for user,
+	service or server type connections.
+simonb: ServerConnection class modified for future possibility of different
+	connection types
+simonb: src/irc/server*.cc moved into new directory src/irc/server
+simonb: Finally fixed Makefiles so that subdirectory substitutions work
+simonb: Fixed up 'STATS <bot nick>' command and restored most of the original
+	'statistical nerdiness' into STATS...
+simonb: src/games/quiz/*.cc broken down a little more; hints.cc, bump.cc and
+	files.cc created.
+simonb: src/games/quiz/*.cc colour support added
+simonb: src/games/quiz/*.cc configuration support added - default defines now
+	set up variables which allow for the possibility of either a
+	configuration file style modification or on-line real-time modification
+	which may also aid debugging.. Bit of a mass edit here :-/
+simonb: src/irc/parser/user/*.cc - Broken up similar to how on-line IRC
+	commands were. Each protocol command (commands/numerics) all have one
+	file per routine to keep compile times down and editing easier. This
+	will unfortunately have the effect of increasing the object file size,
+	again... *sigh* :(
 
 
 Version 0.38

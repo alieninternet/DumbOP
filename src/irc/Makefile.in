@@ -27,16 +27,14 @@ LIBS=
 
 TARGET=irc.o
 
-SOURCES=connection.cc ctcp.cc person.cc server.cc serverconnection.cc \
-	serverlist.cc
+SOURCES=banentry.cc connection.cc ctcp.cc person.cc 
 
-SUB_DIRS=channels commands parser queue
+SUB_DIRS=channels commands parser queue server
 
 INCLUDES=
 
-# fix this too.. :(
-OBJECTS=$(SOURCES:.cc=.@OBJEXT@) channels/channels.o commands/commands.o \
-	parser/parser.o queue/queue.o
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@) \
+	$(foreach dir,$(SUB_DIRS),$(dir)/$(dir).@OBJEXT@)
 
 ########################################################################
 

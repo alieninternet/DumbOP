@@ -33,9 +33,8 @@ SUB_DIRS=channel connection dcc game general manager user
 
 INCLUDES=
 
-# fix this too.. :(
-OBJECTS=$(SOURCES:.cc=.@OBJEXT@) channel/channel.o connection/connection.o \
-	dcc/dcc.o game/game.o general/general.o manager/manager.o user/user.o
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@) \
+	$(foreach dir,$(SUB_DIRS),$(dir)/$(dir).@OBJEXT@)
 
 ########################################################################
 

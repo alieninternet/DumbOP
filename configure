@@ -2532,6 +2532,7 @@ ac_given_srcdir=$srcdir
 
 trap 'rm -fr `echo "Makefile \
 src/Makefile \
+src/bot/Makefile \
 src/common/Makefile \
 src/common/strings/Makefile
 src/dcc/Makefile \
@@ -2549,17 +2550,20 @@ src/irc/commands/general/Makefile \
 src/irc/commands/manager/Makefile \
 src/irc/commands/user/Makefile \
 src/irc/parser/Makefile \
+src/irc/parser/user/Makefile \
 src/irc/queue/Makefile \
 src/irc/queue/items/Makefile \
+src/irc/server/Makefile \
 src/notes/Makefile \
 src/smtp/Makefile \
 src/snmp/Makefile \
 src/system/Makefile \
 src/telnet/Makefile \
 src/telnet/ansi/Makefile \
+src/telnet/descriptor/Makefile \
 src/telnet/dialogue/Makefile \
-src/telnet/dialogue/monitor/Makefile \
 src/telnet/dialogue/login/Makefile \
+src/telnet/dialogue/monitor/Makefile \
 src/users/Makefile src/include/config.h" | sed "s/:[^ ]*//g"` conftest*; exit 1' 1 2 15
 EOF
 cat >> $CONFIG_STATUS <<EOF
@@ -2644,6 +2648,7 @@ cat >> $CONFIG_STATUS <<EOF
 
 CONFIG_FILES=\${CONFIG_FILES-"Makefile \
 src/Makefile \
+src/bot/Makefile \
 src/common/Makefile \
 src/common/strings/Makefile
 src/dcc/Makefile \
@@ -2661,17 +2666,20 @@ src/irc/commands/general/Makefile \
 src/irc/commands/manager/Makefile \
 src/irc/commands/user/Makefile \
 src/irc/parser/Makefile \
+src/irc/parser/user/Makefile \
 src/irc/queue/Makefile \
 src/irc/queue/items/Makefile \
+src/irc/server/Makefile \
 src/notes/Makefile \
 src/smtp/Makefile \
 src/snmp/Makefile \
 src/system/Makefile \
 src/telnet/Makefile \
 src/telnet/ansi/Makefile \
+src/telnet/descriptor/Makefile \
 src/telnet/dialogue/Makefile \
-src/telnet/dialogue/monitor/Makefile \
 src/telnet/dialogue/login/Makefile \
+src/telnet/dialogue/monitor/Makefile \
 src/users/Makefile"}
 EOF
 cat >> $CONFIG_STATUS <<\EOF
@@ -2847,4 +2855,4 @@ test "$no_create" = yes || ${CONFIG_SHELL-/bin/sh} $CONFIG_STATUS || exit 1
 
 
 
-echo "Done. Have a nice day."
+echo "Phew! Have a nice day! :)"

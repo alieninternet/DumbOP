@@ -27,14 +27,14 @@ LIBS=
 
 TARGET=queue.o
 
-SOURCES=class.cc item.cc send.cc serverqueue.cc
+SOURCES=class.cc item.cc send.cc serverqueue.cc todolist.cc
 
 SUB_DIRS=items
 
 INCLUDES=
 
-# fix this too.. :(
-OBJECTS=$(SOURCES:.cc=.@OBJEXT@) items/items.o
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@) \
+	$(foreach dir,$(SUB_DIRS),$(dir)/$(dir).@OBJEXT@)
 
 ########################################################################
 

@@ -26,7 +26,7 @@ void Commands::Inventory(Person *from, String channel, String rest)
    from->sendLine(String("You have ") + 
 		  (((from->uli->flags & USERFLAG_HAS_MONEY_TREE) ||
 		    (from->uli->level >= User::MANAGER)) ?
-		   String("Unlimited") :
+		   String("unlimited") :
 		   ((from->uli->credits > 0) ?
 		    String(from->uli->credits) : String("no"))) +
 		  String(" credits."));

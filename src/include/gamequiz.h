@@ -52,6 +52,19 @@ class gameQuizCategory {
 };
 
 
+// Class for quiz channel member (player) statistics and.. stuff...
+class gameQuizPlayer {
+ public:
+   unsigned char questionsRight;	// Questions right this round
+   unsigned long totalQuestionsRight;	// Total questions right this session
+   
+   unsigned short creditsWon;		// Credits won this round
+   unsigned long totalCreditsWon;	// Total credits accumulated
+   
+   gameQuizPlayer(void);		// Class constructor
+};
+
+
 // Class for quiz channel in-game run-time information
 class gameQuizChannel {
  public:
@@ -81,13 +94,40 @@ class gameQuizChannel {
    String hint;				// Current hint string
    bool autoHint;			// Auto-hinting?
    
+   // Stats and stuff
+   map<String, gameQuizPlayer *, less<String> > players;
+
+   // Configuration variables
+   time_t confQuestionLockoutTime;
+   time_t confCategoryLockoutTime;
+   time_t confQuestionAskTime;
+   time_t confQuestionBetweenDelay;
+   time_t confCategoryBetweenDelay;
+   time_t confQuestionNexthintDelay;
+   unsigned char confRoundQuestions;
+   unsigned short confQuestionNormalPoints;
+   unsigned short confQuestionBonusPoints;
+   unsigned short confCategoryChangeCost;
+   unsigned short confQuestionHintCost;
+   unsigned short confQuestionClueCost;
+   unsigned char confBonusQuestionPercentile;
+   unsigned char confHintMinLength;
+   unsigned char confHintBlockPercentage;
+   time_t confAnswerMaxFastTime;
+   String confColourNormal;
+   String confColourHilight;
+   String confColourText;
+   
    gameQuizChannel(Channel *, 
 		   GameQuiz *);		// Class constructor
+   ~gameQuizChannel(void);		// Class destructor
    
    void bumpCategory(void);		// Fire up the next category
    void bumpQuestion(void);		// Fire up the next question
    
    String nextHint(char = '\0');	// Fire up the next hint
+   
+   void sendHint(void);			// Send the formatted nextHint()..
 };
 
 

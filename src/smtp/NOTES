@@ -51,7 +51,9 @@ ________________
 
 < 220					[welcome]
 
-> HELO domain.name
+< HELO domain.name
+
+> 250					[HELO accepted]
 
 < MAIL FROM:<name@host.domain>
 
@@ -60,16 +62,23 @@ ________________
 < RCPT TO:<name@host.domain.name>	[can be repeated several times]
 
 > 250					[ok]
-> 251					[ok, but not normal]
-> 550					[fail]
-> 551					[fail, not normal]
 
 < DATA
 
 > 354					[intermediate reply]
 
-- Received: any information I feel like here, apparently :)
-(receive path string, for tracing)
+< Received: FROM domain 
+< <tab> BY domain 
+- <tab> VIA link 
+- <tab> WITH protocol 
+- <tab> ID string
+- <tab> FOR path
+< ; RFC822 date
+
+recommended received line:
+< Received: FROM [irc server | Notethingy]
+< <tab> BY wantedNickName (version string)
+< <tab> FOR <recipient@address> ; RFC822 date here.
 
 - Organization: whatever
 (should be configurable.. good idea..)
@@ -85,8 +94,6 @@ ________________
 
 - Message-Id: <message.id@host.domain.name>
 (identification of the message for trace-ability)
-
-- 
 
 - Sender: "User Name" <user@host.domain.name>
 (used for transport error replies)

@@ -1,5 +1,6 @@
 /* src/games/quiz/category.cc
  * 'Quiz' game, modelled on numerous quizbots that have been around for ages
+ * Copyright (c) 2001 Alien Internet Services
  */
 
 #include "config.h"

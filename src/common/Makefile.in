@@ -27,14 +27,14 @@ LIBS=
 
 TARGET=common.o
 
-SOURCES=sha1.cc utils.cc
+SOURCES=log.cc mask.cc sha1.cc utils.cc
 
 SUB_DIRS=strings
 
 INCLUDES=
 
-# fix this too.. :(
-OBJECTS=$(SOURCES:.cc=.@OBJEXT@) strings/strings.o
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@) \
+	$(foreach dir,$(SUB_DIRS),$(dir)/$(dir).@OBJEXT@)
 
 ########################################################################
 

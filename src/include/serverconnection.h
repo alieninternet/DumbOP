@@ -1,13 +1,13 @@
 
 #ifndef __SERVERCONNECTION_H_
-#define __SERVERCONNECTION_H_
+# define __SERVERCONNECTION_H_
 
-#include <time.h>
-#include <sys/timeb.h>
+# include <time.h>
+# include <sys/timeb.h>
 
-#include "server.h"
-#include "serverqueue.h"
-#include "connection.h"
+# include "server.h"
+# include "serverqueue.h"
+# include "socket.h"
 
 class Bot;
 class Parser;
@@ -16,25 +16,40 @@ class Commands;
 
 class ServerQueue;
 
-class ServerConnection : public Connection {
-   Server * server;
-   Bot * bot; // Recursive
-
-   long receivedLen;
-   long sentLen;
+class ServerConnection {
+ protected:
+   Socket *socket;				// Data socket
    
-  ServerQueue *queue;
-  struct timeb pingTime;
-  long long lag;
+ private:
+   Bot *bot; 					// Recursive back
+   Server *server;				// Server details
 
-  time_t serverLastSpoken;
-  
-public:
-  ServerConnection(Bot *, Server *, String);
-  ~ServerConnection();
+   // Connection type
+   enum {
+      USER = 0,					// Normal user connection
+      SERVICE = 1,				// Service connection
+      SERVER_IRCD = 2,				// Vanilla IRCd server
+      SERVER_AUSTNET = 3,			// Austnet style server
+   } type;					
+   
+   unsigned long receivedLen;			// Bytes received
+   unsigned long sentLen;			// Bytes send
 
-  bool connect();
-  bool handleInput();
+   ServerQueue *queue;				// Data output queue
+   
+   struct timeb pingTime;			// Time at last ping
+   long long lag;				// Millisecs of calculated lag
+
+   time_t serverLastSpoken;			// Time the server last spoke
+   
+ public:
+   ServerConnection(Bot *, Server *, String);	// Class constructor
+   ~ServerConnection();				// Class destructor
+   
+   int getFileDescriptor() const;		// Get the socket descriptor
+
+   bool connect();				// Connect to the server
+   bool handleInput();				// Handle a line of input
    
    friend class Bot;
    friend class Person;

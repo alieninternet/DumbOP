@@ -12,6 +12,10 @@ Turn on internal and GDB debugging:
 Optomise but leave internal debugging on:
 > export CXXFLAGS="-O2 -DDEBUG"
 
+Warning!! Using the -g flag will cause dumbop's compile to be HUGE... At
+last count after a compilation it chewed up around 190 meg of space, producing
+a binary around 7 meg in size -- use this -g thing with caution :)
+
 Otherwise configure will default to just -O2, and you miss out on the
 luxury of being able to find a bug :) Without the DEBUG define you will not
 be able to use the -D command.

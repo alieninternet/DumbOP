@@ -33,7 +33,7 @@ void Commands::Category(Person *from, String channel, String rest)
    // Check if the quiz is running in this channel or not
    if (!gqc) {
       from->sendLine(String("The Quiz in \002") + c->channelName + 
-		       String("\002 has not started yet, sorry."));
+		     String("\002 has not started yet, sorry."));
       return;
    }
    
@@ -42,9 +42,9 @@ void Commands::Category(Person *from, String channel, String rest)
       // Check if the next category has been already set
       if (gqc->nextCategory.length()) {
 	 from->sendLine(String("The category for the next round in \002") +
-			  c->channelName +
-			  String("\002 has already been set to \002") +
-			  gqc->nextCategory + String("\002, sorry."));
+			c->channelName +
+			String("\002 has already been set to \002") +
+			gqc->nextCategory + String("\002, sorry."));
 	 return;
       }
       
@@ -61,30 +61,30 @@ void Commands::Category(Person *from, String channel, String rest)
 	 if (potentialCategory == gqc->category) {
 	    // Tell the user the category is being played NOW!!
 	    from->sendLine(String("But the current category is \002") +
-			     potentialCategory + String("\002!!"));
-	 } else if (playedTimeAgo < DEFAULT_QUIZ_CATEGORY_LOCKOUT_TIME) {
+			   potentialCategory + String("\002!!"));
+	 } else if (playedTimeAgo < gqc->confCategoryLockoutTime) {
 	    // Tell the user the category is too old, and when to try next.
 	    from->sendLine(String("The category \002") + potentialCategory +
-			     String("\002 was played too recently to select. Try again in \002") +
-			     Utils::timelenToStr(DEFAULT_QUIZ_CATEGORY_LOCKOUT_TIME -
-						 playedTimeAgo) +
-			     String("\002."));
+			   String("\002 was played too recently to select. Try again in \002") +
+			   Utils::timelenToStr(gqc->confCategoryLockoutTime -
+					       playedTimeAgo) +
+			   String("\002."));
 	 } else {
 	    // Make sure they can pay for this!
 	    UserListItem *uli = 
 	      from->cnx->bot->userList->getUserListItem(from->getAddress());
 
 	    if ((!uli) || 
-		!uli->canAfford(DEFAULT_QUIZ_CATEGORY_CHANGE_COST)) {
+		!uli->canAfford(gqc->confCategoryChangeCost)) {
 	       c->sendNotice(String("Sorry, you need at least ") +
-			     String(DEFAULT_QUIZ_CATEGORY_CHANGE_COST) +
+			     String(gqc->confCategoryChangeCost) +
 			     String(" credits to change the category."));
 	       return;
 	    }
 
 	    // We are OK! Set the next category, and take some credits away
 	    gqc->nextCategory = potentialCategory;
-	    uli->charge(DEFAULT_QUIZ_CATEGORY_CHANGE_COST);
+	    uli->charge(gqc->confCategoryChangeCost);
 
 	    // Tell them we are setting the category
 	    c->sendNotice(String("The category for the next round in \002") +
@@ -102,7 +102,7 @@ void Commands::Category(Person *from, String channel, String rest)
    }
    
    // If we get HERE, we know the category was not specified or was invalid.
-   from->sendLine(((gqc->questionNum <= DEFAULT_QUIZ_ROUND_QUESTIONS) ?
+   from->sendLine(((gqc->questionNum <= gqc->confRoundQuestions) ?
 		     (String("Current Quiz Category in \002") +
 		      c->channelName + String("\002 is \002") +
 		      gqc->category + String("\002. ")) : String("")) +
@@ -110,7 +110,7 @@ void Commands::Category(Person *from, String channel, String rest)
 		     (String("Next category selected is \002") +
 		      gqc->nextCategory + String("\002. ")) : 
 		     (String("Changing the category for the next round will cost \002") +
-		      String(DEFAULT_QUIZ_CATEGORY_CHANGE_COST) + 
+		      String(gqc->confCategoryChangeCost) + 
 		      String("\002 credits."))));
    
    // Have we been requested to list the categories too?
@@ -133,7 +133,7 @@ void Commands::Category(Person *from, String channel, String rest)
 	    
 	    // Check the age of this category
 	    if ((from->cnx->bot->currentTime.time - (*it).second->lastPlayed) <
-		DEFAULT_QUIZ_CATEGORY_LOCKOUT_TIME) {
+		gqc->confCategoryLockoutTime) {
 	       // Too old to select
 	       result = result + (*it).first;
 	    } else {

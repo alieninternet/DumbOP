@@ -12,18 +12,26 @@
 #include "bot.h"
 
 ServerConnection::ServerConnection(Bot *b, Server *s, String localIP)
-: Connection(s->getHostName(), s->getPort(), localIP),
-  server(s),
+: socket(new Socket()),
   bot(b),
+  server(s),
+  type(USER),
   receivedLen(0), 
   sentLen(0), 
-  queue(new ServerQueue(this, &socket)),
+  queue(new ServerQueue(this, socket)),
   pingTime(bot->currentTime),
   lag(0),
-  serverLastSpoken(time(NULL))
+  serverLastSpoken(bot->currentTime.time)
 {
    // We are not connected.
-   b->connected = false;
+   bot->connected = false;
+   
+   // Set up the socket nicely
+   socket->setRemoteHostname(s->getHostName());
+   socket->setRemotePort(s->getPort());
+   if (localIP.length()) {
+      socket->setLocalHostname(localIP);
+   }
 }
 
 ServerConnection::~ServerConnection()
@@ -34,16 +42,23 @@ ServerConnection::~ServerConnection()
 //		String(" (Rx: ") + String(receivedLen) +
 //		String(" Tx: ") + String(sentLen) + String(")"));
    
+   // Kill stuff off
+   delete socket;
    delete queue;
+}
+
+int ServerConnection::getFileDescriptor() const
+{
+   return socket->getFileDescriptor();
 }
 
 bool ServerConnection::connect()
 {
-   if (!socket.connect()) {
+   if (!socket->connect()) {
       return false;
    }
    
-   socket.setNonBlocking();
+   socket->setNonBlocking();
    
    if (server->getPassword().length() != 0) {
       queue->sendPass(server->getPassword());
@@ -63,7 +78,7 @@ bool ServerConnection::connect()
  */
 bool ServerConnection::handleInput()
 {
-   String line = socket.readLine();
+   String line = socket->readLine();
    
    if (line.length() == 0)
      return true;
@@ -73,7 +88,7 @@ bool ServerConnection::handleInput()
      cout << line << "\n";
 #endif
    
-   serverLastSpoken = time(NULL);
+   serverLastSpoken = bot->currentTime.time;
    
    Parser::parseLine(this, line);
    

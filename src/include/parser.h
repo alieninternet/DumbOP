@@ -53,38 +53,38 @@ class userFunction {
 class Parser {
  public:
    static void parseLine(ServerConnection *, String);
-   
-   static void parse001(Person *, String);
-   static void parse302(Person *, String);
-   static void parse303(Person *, String);
-   static void parse311(Person *, String);
-   static void parse315(Person *, String);
-   static void parse324(Person *, String);
-   static void parse332(Person *, String);
-   static void parse352(Person *, String);
-   static void parse353(Person *, String);
-   static void parse366(Person *, String);
-   static void parse367(Person *, String);
-   static void parse401(Person *, String);
-   static void parse433(Person *, String);
-   static void parse473(Person *, String);
-   static void parseError(Person *, String);
-   static void parseInvite(Person *, String);
-   static void parseJoin(Person *, String);
-   static void parseKick(Person *, String);
-   static void parseMode(Person *, String);
-   static void parseNick(Person *, String);
-   static void parseNotice(Person *, String); 
-   static void parsePart(Person *, String);
-   static void parsePing(Person *, String);
-   static void parsePong(Person *, String);
-   static void parsePrivmsg(Person *, String);
-   static void parseQuit(Person *, String);
-   static void parseTopic(Person *, String);
-   static void parseWallops(Person *, String);
-   
    static void parseCTCP(Person *, String, String);
    static void parseMessage(Person *, String, String);
+   
+   // User type connection
+   static void parseUser001(Person *, String);
+   static void parseUser302(Person *, String);
+   static void parseUser303(Person *, String);
+   static void parseUser311(Person *, String);
+   static void parseUser315(Person *, String);
+   static void parseUser324(Person *, String);
+   static void parseUser332(Person *, String);
+   static void parseUser352(Person *, String);
+   static void parseUser353(Person *, String);
+   static void parseUser366(Person *, String);
+   static void parseUser367(Person *, String);
+   static void parseUser401(Person *, String);
+   static void parseUser433(Person *, String);
+   static void parseUser473(Person *, String);
+   static void parseUserError(Person *, String);
+   static void parseUserInvite(Person *, String);
+   static void parseUserJoin(Person *, String);
+   static void parseUserKick(Person *, String);
+   static void parseUserMode(Person *, String);
+   static void parseUserNick(Person *, String);
+   static void parseUserNotice(Person *, String); 
+   static void parseUserPart(Person *, String);
+   static void parseUserPing(Person *, String);
+   static void parseUserPong(Person *, String);
+   static void parseUserPrivmsg(Person *, String);
+   static void parseUserQuit(Person *, String);
+   static void parseUserTopic(Person *, String);
+   static void parseUserWallops(Person *, String);
 };
 
 #endif

@@ -1,5 +1,6 @@
 /* src/games/interface.c
  * Built in games for the heck of it
+ * Copyright (c) 2001 Alien Internet Services
  */
 
 #include "config.h"

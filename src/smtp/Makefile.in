@@ -27,7 +27,7 @@ LIBS=
 
 TARGET=smtp.o
 
-SOURCES=class.cc
+SOURCES=address.cc class.cc message.cc parser.cc
 
 INCLUDES=
 

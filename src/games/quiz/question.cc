@@ -1,5 +1,6 @@
 /* src/games/quiz/class.cc
  * Quiz question class
+ * Copyright (c) 2001 Alien Internet Services
  */
 
 #include "config.h"

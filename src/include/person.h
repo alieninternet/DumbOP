@@ -23,6 +23,7 @@ class Person {
    
    String getNick() const;
    String getAddress() const;
+   String getIdent();
    
    virtual void keepAlive() { }
    

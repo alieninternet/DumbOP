@@ -1,0 +1,57 @@
+#
+#
+# ./src/irc/parser/user/Makefile
+# Make for IRC message parsing for user connections
+# Author: Simon Butcher
+# Copyright (c) 2001 Alien Internet Services
+
+########################################################################
+##                                                                    ##
+########################################################################
+
+CXX=@CXX@
+LD=@LD@
+RM=@RM@
+
+CXXFLAGS=@CXXFLAGS@ -Wall
+LDFLAGS=-r
+
+srcdir=@srcdir@
+VPATH=@srcdir@
+prefix=@prefix@
+libdir=@libdir@
+
+INCDIRS=-I$(srcdir) -I$(srcdir)/.. -I$(srcdir)/../../../include
+DEFS=@DEFS@
+LIBS=
+
+TARGET=user.o
+
+# table.cc is first because it is the table of functions
+SOURCES=table.cc 001.cc 302.cc 303.cc 311.cc 315.cc 324.cc 332.cc 352.cc \
+	353.cc 366.cc 367.cc 401.cc 433.cc 473.cc error.cc invite.cc join.cc \
+	kick.cc mode.cc nick.cc notice.cc part.cc ping.cc pong.cc privmsg.cc \
+	quit.cc topic.cc wallops.cc
+
+INCLUDES=
+
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@)
+
+########################################################################
+
+.PHONY: all clean dclean
+
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(LD) $(LDFLAGS) -o $@ $(OBJECTS) $(LIBS)
+
+%.@OBJEXT@: %.cc
+	$(CXX) $(CXXFLAGS) $(DEFS) $(INCDIRS) -c $<
+	
+clean:
+	$(RM) *~ *.@OBJEXT@ $(TARGET)
+
+dclean:
+	$(RM) *~ *.@OBJEXT@ $(TARGET) Makefile
+

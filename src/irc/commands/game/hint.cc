@@ -22,8 +22,10 @@ void Commands::Hint(Person *from, String channel, String rest)
    Channel *c = from->cnx->bot->channelList->getChannel(channel);
 
    // Check if this is a quiz channel
-   if (!((from->cnx->bot->wantedChannels[c->channelName]->flags & CHANFLAG_ALLOW_GAMES) &&
-	 (from->cnx->bot->wantedChannels[c->channelName]->gameflags & GAMEFLAG_QUIZ))) {
+   if (!((from->cnx->bot->wantedChannels[c->channelName]->flags & 
+	  CHANFLAG_ALLOW_GAMES) &&
+	 (from->cnx->bot->wantedChannels[c->channelName]->gameflags & 
+	  GAMEFLAG_QUIZ))) {
       // No comment!
       return;
    }
@@ -45,6 +47,13 @@ void Commands::Hint(Person *from, String channel, String rest)
       return;
    }
 
+   // Check if the auto-hint thing has been start
+   if (gqc->autoHint) {
+      from->sendLine(String("The hints in \002") + c->channelName +
+		     String("\002 will be displayed automatically."));
+      return;
+   }
+   
    // Do we have a hint?
    if (gqc->hintLevel <= 0) {
       from->sendLine(String("There are no hints available for the question in \002") +
@@ -60,21 +69,21 @@ void Commands::Hint(Person *from, String channel, String rest)
      from->cnx->bot->userList->getUserListItem(from->getAddress());
    
    if ((!uli) || 
-       !uli->canAfford(DEFAULT_QUIZ_QUESTION_HINT_COST)) {
-      c->sendNotice(String("Sorry, you need at least ") +
-		    String(DEFAULT_QUIZ_QUESTION_HINT_COST) +
-		    String(" credits to get a hint."));
+       !uli->canAfford(gqc->confQuestionHintCost)) {
+      from->sendLine(String("Sorry, you need at least ") +
+		     String(gqc->confQuestionHintCost) +
+		     String(" credits to get a hint."));
       return;
    }
    
    // Charge them!
-   uli->charge(DEFAULT_QUIZ_QUESTION_HINT_COST);
+   uli->charge(gqc->confQuestionHintCost);
    
    // We hinted, turn that autohint thing on now
    gqc->autoHint = true;
    
    // Ok well we must have a hint waiting for us if we got here...
-   c->sendNotice(String("Hint: ") + gqc->nextHint());
+   gqc->sendHint();
 }
 
 
