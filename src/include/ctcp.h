@@ -11,20 +11,20 @@
 
 class CTCP {
  public:
-   static void Action(ServerConnection *, Person *, String);
-   static void ClientInfo(ServerConnection *, Person *, String);
-   static void DCC(ServerConnection *, Person *, String);
-   static void Echo(ServerConnection *, Person *, String);
-   static void ErrMsg(ServerConnection *, Person *, String);
-   static void Finger(ServerConnection *, Person *, String);
-   static void Lag(ServerConnection *, Person *, String);
-   static void Ping(ServerConnection *, Person *, String);
-   static void Sex(ServerConnection *, Person *, String);
-   static void Source(ServerConnection *, Person *, String);
-   static void Time(ServerConnection *, Person *, String);
-   static void Uptime(ServerConnection *, Person *, String);
-   static void UserInfo(ServerConnection *, Person *, String);
-   static void Version(ServerConnection *, Person *, String);
+   static void Action(Person *, String);
+   static void ClientInfo(Person *, String);
+   static void DCC(Person *, String);
+   static void Echo(Person *, String);
+   static void ErrMsg(Person *, String);
+   static void Finger(Person *, String);
+   static void Lag(Person *, String);
+   static void Ping(Person *, String);
+   static void Sex(Person *, String);
+   static void Source(Person *, String);
+   static void Time(Person *, String);
+   static void Uptime(Person *, String);
+   static void UserInfo(Person *, String);
+   static void Version(Person *, String);
 };
 
 #endif

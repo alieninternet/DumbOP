@@ -27,13 +27,14 @@ LIBS=
 
 TARGET=telnet.o
 
-SOURCES=class.cc descriptor.cc monitor.cc
+SOURCES=class.cc monitor.cc
 
-SUB_DIRS=dialogue
+SUB_DIRS=ansi descriptor dialogue
 
 INCLUDES=
 
-OBJECTS=$(SOURCES:.cc=.@OBJEXT@) dialogue/dialogue.o
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@) ansi/ansi.o descriptor/descriptor.o \
+	dialogue/dialogue.o
 
 ########################################################################
 

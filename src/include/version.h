@@ -9,7 +9,7 @@
 # include "serverconnection.h"
 # include "strings.h"
 
-# define VERNUM_STRING		"0.38"
+# define VERNUM_STRING		"0.39"
 # define PROGNAME_STRING	"DumbOP"
 # define COPYRIGHT_STRING	"(c)1994-2001 alien internet services"
 

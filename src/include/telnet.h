@@ -28,6 +28,13 @@
 class Telnet;
 
 class TelnetDescriptor {
+ private:
+   void parseTelnet(String);			// Parse a telnet code
+   void telnetWill(char);			// Send a telnet WILL
+   void telnetWont(char);			// Send a telnet WONT
+   void telnetDo(char);				// Send a telnet DO
+   void telnetDont(char);			// Send a telnet DONT
+   
  public:
    Telnet *telnet;				// Recursive back
    Socket *sock;				// Socket they are connected to

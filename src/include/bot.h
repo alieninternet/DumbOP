@@ -1,6 +1,8 @@
 #ifndef __BOT_H_
 # define __BOT_H_
 
+/* WARNING! __ANY__ changed to this file will require a COMPLETE RECOMPILE */
+
 # include <time.h>
 # include <set.h>
 # include <fstream.h>
@@ -78,7 +80,11 @@ class Bot {
    
    map<String, unsigned int, less<String> > ignoredUserhosts;
    
-   time_t startTime, lastNickNameChange, lastChannelJoin;
+   time_t startTime;				// Time the bot was started
+   time_t lastNickNameChange;			// Last time of nick change
+   time_t lastChannelJoin;			// Last channel join time
+   time_t lastCheckpoint;			// Last database checkpoint
+ 
    
    ServerConnection *serverConnection;
    list<DCCConnection *> dccConnections;
@@ -103,6 +109,7 @@ class Bot {
    static const time_t DCC_DELAY = 300; // 5 mins
    static const time_t PING_TIME = 120; // 2 mins *MUST BE SHORTED THAN TIMEOUT*
    static const time_t TIMEOUT = 300; // 5 mins
+   static const time_t CHECKPOINT_TIME = 1800; // 30 mins
    
  public:
    
@@ -121,6 +128,8 @@ class Bot {
    
    void logLine(String);
    void readConfig();
+
+   void checkpoint(void);			// Checkpoint the databases
    
    void reconnect();
    

@@ -27,7 +27,7 @@ class UserListItem {
    time_t lastseen;
    // Password
    String passwd;
-   // How many channels are we identified on ?
+   // Is this user 'identified' online?
    bool identified;
    
  public:
@@ -41,6 +41,7 @@ class UserListItem {
    void pay(unsigned long);			// Pay user an amount
    
    friend class User;
+   friend class Person;
    friend class Utils;
    friend class Parser;
    friend class Channel;

@@ -1,5 +1,7 @@
 High Priority
 -------------
+src/parser/message.cc - it desparately needs to be redone..
+
 Don't forget about Games::parseLeave() for QUIT and KICK messages you lazy
 prick!
 
@@ -14,16 +16,11 @@ Medium Priority
 ---------------
 DO NOT RANDOMISE QUESTION SEEKS IF ONLY 1 QUESTION IN A CATEGORY!!
 
-Import connection/string/tokenizer code from evolution (eg. the latest
-versions). Probably best to do this while reorganising the directories.
-
 Redo select() process -- The BOT blindly outputs data without truely checking
 if the output path is open. This is OK under low-traffic conditions, but when
 things get intense it's a requirement! It should check before being able to
 sent. Sockets should not be recreated each loop either, they should be created
 and removed as appropriate to increase efficiency.
-
-Finish parse command (shouldn't require ! on direct privmsgs)
 
 Use "ISON" irc command (rfc 1459) to check for bot-users online (this should
 also add support for ChanOP resyncronisation on AustNet, plus authentication
@@ -36,7 +33,7 @@ Add 'REHASH' command
 
 Add 'RESTART' command (actually quit/respawn process)
 
-Add setuser and setchan flag manipulation commands
+Add setme, setuser and setchannel flag manipulation commands
 
 Merge wanted channels and channels structures together and add a boolean
 "joined" variable. This would be easier to work with considering the flags

@@ -9,6 +9,8 @@
 #include "signals.h"
 #include "commands.h"
 
+#include "person.h"
+
 static const char *sigNames[] = {
    "SIGZERO",   //  0 - Apparently never used
    "SIGHUP",    //  1 - Hang up detected on controlling terminal
@@ -109,9 +111,10 @@ void sigHandler(int sig)
     case SIGXFSZ:
 #endif
       logSignal(sig, "Shutting down.");
-      Commands::Die(bot->serverConnection, 0, "", String("Caught ") + 
-		    String(sigNames[sig]) + String(": Shutting down. [") + 
-		    Version::getVersion() + String("]"));
+      Commands::Die(new Person("", bot->serverConnection, 0),
+		    "", String("Caught ") + String(sigNames[sig]) + 
+		    String(": Shutting down. [") + Version::getVersion() + 
+		    String("]"));
       break;
       
       // Everything else we ignore.

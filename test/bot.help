@@ -23,6 +23,9 @@ List banned users for a channel.
 List or change the current quiz category. With no category specified, this command will return the current category, and the cost of changing the category for the next round. When a dash ('-') is specified, available categories will be listed, as well as the number of questions in each category. When listing the category information, bold highlighted names will show which categories are available for selection.
 Finally, with a category specified, it will change to that category within the next round. This command is only available within a quiz channel.
 
+:CHECKPOINT
+Force a database checkpoint over all saveable files.
+
 :CLUE (<channel>)
 Retreive a clue for the current question in a QUIZ channel, if one is available. This command is only valid in a QUIZ channel.
 
@@ -62,6 +65,9 @@ Retreive the next hint! This command is only valid in a QUIZ channel.
 
 :IDENTIFY <password>
 Identify yourself to give you access to functions you have access to. For security reasons, you should only use this command privately (eg. with /msg).
+
+:INVENTORY
+Show how many credits you have
 
 :INVITE (<channel>)
 Invite someone into the channel.
@@ -119,9 +125,6 @@ This command is only available within a quiz channel.
 
 :RULES (<channel>)
 Display the channel rules for your current channel, or the channel specified. If no channel rules have been set, no responce will be given.
-
-:SAVE
-Force a database checkpoint over all saveable files.
 
 :SAY (<channel>) <message>
 Make me say something.

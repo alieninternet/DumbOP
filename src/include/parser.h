@@ -7,7 +7,7 @@
 
 struct CTCPFunctionsStruct {
    const char * name;
-   void (*function)(ServerConnection *, Person *, String);
+   void (*function)(Person *, String);
    bool needsIdent;
    bool hidden;
    const char * usage;
@@ -16,12 +16,12 @@ struct CTCPFunctionsStruct {
 class CTCPFunction {
  public:
    String name;
-   void (*function)(ServerConnection *, Person *, String);
+   void (*function)(Person *, String);
    bool needsIdent;
    bool hidden;
    String usage;
    
-   CTCPFunction(String na, void (*f)(ServerConnection *, Person *, String),
+   CTCPFunction(String na, void (*f)(Person *, String),
 		bool i, bool h, String u)
      : name(na), function(f), needsIdent(i), hidden(h), usage(u)
        {
@@ -30,7 +30,7 @@ class CTCPFunction {
 
 struct userFunctionsStruct {
    const char * name;
-   void (*function)(ServerConnection *, Person *, String, String);
+   void (*function)(Person *, String, String);
    int minLevel;
    bool needsChannelName;
 };
@@ -38,14 +38,14 @@ struct userFunctionsStruct {
 class userFunction {
  public:
    String name;
-   void (*function)(ServerConnection *, Person *, String, String);
+   void (*function)(Person *, String, String);
    int minLevel;
    bool needsChannelName;
+   bool hidden;
    
-   userFunction(String na, void (*f)(ServerConnection *, Person *,
-				     String, String),
-		int m, bool n)
-     : name(na), function(f), minLevel(m), needsChannelName(n)
+   userFunction(String na, void (*f)(Person *, String, String),
+		int m, bool n, bool h)
+     : name(na), function(f), minLevel(m), needsChannelName(n), hidden(h)
      {
      }
 };
@@ -54,41 +54,37 @@ class Parser {
  public:
    static void parseLine(ServerConnection *, String);
    
-   static void parse001(ServerConnection *, Person *, String);
-   static void parse302(ServerConnection *, Person *, String);
-   static void parse303(ServerConnection *, Person *, String);
-   static void parse311(ServerConnection *, Person *, String);
-   static void parse315(ServerConnection *, Person *, String);
-   static void parse324(ServerConnection *, Person *, String);
-   static void parse332(ServerConnection *, Person *, String);
-   static void parse352(ServerConnection *, Person *, String);
-   static void parse353(ServerConnection *, Person *, String);
-   static void parse366(ServerConnection *, Person *, String);
-   static void parse367(ServerConnection *, Person *, String);
-   static void parse401(ServerConnection *, Person *, String);
-   static void parse433(ServerConnection *, Person *, String);
-   static void parse473(ServerConnection *, Person *, String);
-   static void parseError(ServerConnection *, Person *, String);
-   static void parseInvite(ServerConnection *, Person *, String);
-   static void parseJoin(ServerConnection *, Person *, String);
-   static void parseKick(ServerConnection *, Person *, String);
-   static void parseMode(ServerConnection *, Person *, String);
-   static void parseNick(ServerConnection *, Person *, String);
-   static void parseNotice(ServerConnection *, Person *, String); 
-   static void parsePart(ServerConnection *, Person *, String);
-   static void parsePing(ServerConnection *, Person *, String);
-   static void parsePong(ServerConnection *, Person *, String);
-   static void parsePrivmsg(ServerConnection *, Person *, String);
-   static void parseQuit(ServerConnection *, Person *, String);
-   static void parseTopic(ServerConnection *, Person *, String);
-   static void parseWallops(ServerConnection *, Person *, String);
+   static void parse001(Person *, String);
+   static void parse302(Person *, String);
+   static void parse303(Person *, String);
+   static void parse311(Person *, String);
+   static void parse315(Person *, String);
+   static void parse324(Person *, String);
+   static void parse332(Person *, String);
+   static void parse352(Person *, String);
+   static void parse353(Person *, String);
+   static void parse366(Person *, String);
+   static void parse367(Person *, String);
+   static void parse401(Person *, String);
+   static void parse433(Person *, String);
+   static void parse473(Person *, String);
+   static void parseError(Person *, String);
+   static void parseInvite(Person *, String);
+   static void parseJoin(Person *, String);
+   static void parseKick(Person *, String);
+   static void parseMode(Person *, String);
+   static void parseNick(Person *, String);
+   static void parseNotice(Person *, String); 
+   static void parsePart(Person *, String);
+   static void parsePing(Person *, String);
+   static void parsePong(Person *, String);
+   static void parsePrivmsg(Person *, String);
+   static void parseQuit(Person *, String);
+   static void parseTopic(Person *, String);
+   static void parseWallops(Person *, String);
    
-   static void parseCTCP(ServerConnection *, Person *, String,
-			 String);
-   static void parseMessage(ServerConnection *, Person *, String,
-			    String);
-
-   static void sendNotice(Person *, String);
+   static void parseCTCP(Person *, String, String);
+   static void parseMessage(Person *, String, String);
 };
 
 #endif

@@ -92,6 +92,11 @@
 # define TELNET_LOGIN_MAX_ATTEMPTS	3	// Three attempts allowed
 
 
+/* JOINING CHANNELS	                  	         	             */
+# define CHANNEL_JOIN_MAX_CREDIT_FIND	5	// Maximum 'found' credits
+# define CHANNEL_JOIN_FIND_PERCENTAGE	1	// 1 in 100 chance
+
+
 /******************************************************************************
 **                                                                           **
 **                  WARNING!   WARNING!   WARNING!   WARNING!                **

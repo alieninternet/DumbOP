@@ -1,0 +1,53 @@
+#
+#
+# ./src/telnet/ansi/Makefile
+# Make for ANSI screen routines
+# Author: Simon Butcher
+# Copyright (c) 2001 Alien Internet Services
+
+########################################################################
+##                                                                    ##
+########################################################################
+
+CXX=@CXX@
+LD=@LD@
+RM=@RM@
+
+CXXFLAGS=@CXXFLAGS@ -Wall
+LDFLAGS=-r
+
+srcdir=@srcdir@
+VPATH=@srcdir@
+prefix=@prefix@
+libdir=@libdir@
+
+INCDIRS=-I$(srcdir) -I$(srcdir)/../../include
+DEFS=@DEFS@
+LIBS=
+
+TARGET=ansi.o
+
+SOURCES=class.cc convert.cc cursor.cc drawing.cc
+
+INCLUDES=
+
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@)
+
+########################################################################
+
+.PHONY: all clean dclean
+
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(LD) $(LDFLAGS) -o $@ $(OBJECTS) $(LIBS)
+
+%.@OBJEXT@: %.cc
+	$(CXX) $(CXXFLAGS) $(DEFS) $(INCDIRS) -c $<
+	
+clean:
+	$(RM) *~ *.@OBJEXT@ $(TARGET)
+
+dclean:
+	$(RM) *~ *.@OBJEXT@ $(TARGET) Makefile
+

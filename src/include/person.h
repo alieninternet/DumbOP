@@ -1,24 +1,25 @@
 
 #ifndef __PERSON_H_
-#define __PERSON_H_
+# define __PERSON_H_
 
-#include "strings.h"
-
-class Bot;
+# include "strings.h"
+# include "userlistitem.h"
+# include "serverconnection.h"
 
 class Person {
-protected:
-  Bot *bot;
-  String address;
-public:
-   unsigned long flags;
+ protected:
+   String address;				// User mask (x!y@z)
    
-   Person(Bot *, String = "");
+ public:
+   ServerConnection *cnx;			// Recursive back
+   UserListItem *uli;				// Pointer to the user entry
+   
+   Person(String, ServerConnection *, UserListItem *);
    Person(Person &);
    
    virtual ~Person() { }
    
-   virtual Person * copy();
+   virtual Person *copy();
    
    String getNick() const;
    String getAddress() const;
@@ -26,8 +27,11 @@ public:
    virtual void keepAlive() { }
    
    virtual void sendNotice(String);
+   virtual void sendPrivmsg(String);
    virtual void sendCTCP(String, String);
    virtual void sendCTCPReply(String, String);
+   
+   void sendLine(String);			// Send user a line of text
    
    Person & operator=(const String &);
 };

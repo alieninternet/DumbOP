@@ -138,33 +138,35 @@ dnl Make the files we needed to edit
 dnl --------------------------------
 AC_OUTPUT(Makefile \
 src/Makefile \
-src/channels/Makefile \
-src/commands/Makefile \
-src/commands/channel/Makefile \
-src/commands/connection/Makefile \
-src/commands/dcc/Makefile \
-src/commands/game/Makefile \
-src/commands/general/Makefile \
-src/commands/manager/Makefile \
-src/commands/user/Makefile \
+src/common/Makefile \
+src/common/strings/Makefile
 src/dcc/Makefile \
 src/games/Makefile \
 src/games/quiz/Makefile \
 src/garbage/Makefile \
+src/irc/Makefile \
+src/irc/channels/Makefile \
+src/irc/commands/Makefile \
+src/irc/commands/channel/Makefile \
+src/irc/commands/connection/Makefile \
+src/irc/commands/dcc/Makefile \
+src/irc/commands/game/Makefile \
+src/irc/commands/general/Makefile \
+src/irc/commands/manager/Makefile \
+src/irc/commands/user/Makefile \
+src/irc/parser/Makefile \
+src/irc/queue/Makefile \
+src/irc/queue/items/Makefile \
 src/notes/Makefile \
-src/parser/Makefile \
-src/queue/Makefile \
-src/queue/items/Makefile \
 src/smtp/Makefile \
 src/snmp/Makefile \
-src/strings/Makefile \
 src/system/Makefile \
 src/telnet/Makefile \
+src/telnet/ansi/Makefile \
 src/telnet/dialogue/Makefile \
-src/telnet/dialogue/login/Makefile \
 src/telnet/dialogue/monitor/Makefile \
-src/users/Makefile \
-src/utils/Makefile)
+src/telnet/dialogue/login/Makefile \
+src/users/Makefile)
 
 
 dnl ------------------------------------------

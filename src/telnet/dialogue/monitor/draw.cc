@@ -21,7 +21,7 @@ void TelnetDialogueMonitor::drawPage(void)
    // Setup the 'bar' and lock the scroll region to the bottom line
    desc->write(ANSI::gotoXY(1, (desc->rows - 1)) + String(ANSI_FINVERSE) +
 	       String(ANSI_CLR_LINE) + // Stuff?
-	       String(ANSI_NORMAL) + ANSI::gotoXY(1, desc->rows) +
-	       ANSI::scrollRegion(desc->rows, desc->rows));
+	       String(ANSI_NORMAL) + ANSI::scrollRegion(2, (desc->rows - 2)) +
+	       ANSI::gotoXY(1, desc->rows));
 }
 

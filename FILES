@@ -1,0 +1,25 @@
+
+bot.users format (split, one var per line, colon at end marks delimeter)
+
+mask nick!name@host:
+time_t registration time:
+int level (0..3):
+unsigned long credits:
+string nickname:
+unsigned long flags:
+time_t last seen time:
+string password
+
+
+bot.channels format
+
+string name:
+string mode (- = none):
+string topic to keep (- = none):
+string key (- = none):
+unsigned long flags:
+unsigned long game flags:
+string join auto-greet message (- = none):
+string channel rules (- = none)
+
+

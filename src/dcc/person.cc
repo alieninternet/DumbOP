@@ -2,8 +2,11 @@
 #include "config.h"
 #include "dccperson.h"
 
+#include "serverconnection.h"
+#include "userlistitem.h"
+
 DCCPerson::DCCPerson(DCCConnection *cnx)
-  : Person(cnx->bot, cnx->nuh), dcc(cnx)
+  : Person(cnx->nuh, (ServerConnection *)0, (UserListItem *)0), dcc(cnx)
 { }
 
 DCCPerson::DCCPerson(DCCPerson &p)

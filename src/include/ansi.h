@@ -145,19 +145,19 @@
 
 class ANSI {
  public:
-   static String moveLeft(int);
-   static String moveRight(int);
-   static String moveUp(int);
-   static String moveDown(int);
-   static String gotoXY(int, int);
+   static String moveLeft(unsigned char = 1);
+   static String moveRight(unsigned char = 1);
+   static String moveUp(unsigned char = 1);
+   static String moveDown(unsigned char = 1);
+   static String gotoXY(unsigned char, unsigned char);
 
-   static String scrollRegion(int, int);
+   static String scrollRegion(unsigned char, unsigned char);
    
-   static String toANSI(String, int = 0);
+   static String IRCtoANSI(String, unsigned char = 0);
    
-   static String drawHLine(int, int = -1, int = -1);
-   static String drawVLine(int, int = -1, int = -1);
-   static String drawBox(int, int, int, int);
+   static String drawHLine(short, short = -1, short = -1);
+   static String drawVLine(short, short = -1, short = -1);
+   static String drawBox(short, short, short, short);
 };
 
 #endif

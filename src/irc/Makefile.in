@@ -1,0 +1,63 @@
+#
+#
+# ./src/irc/Makefile
+# Make for IRC client/service/server routines
+# Author: Simon Butcher
+# Copyright (c) 2001 Alien Internet Services
+
+########################################################################
+##                                                                    ##
+########################################################################
+
+CXX=@CXX@
+LD=@LD@
+RM=@RM@
+
+CXXFLAGS=@CXXFLAGS@ -Wall
+LDFLAGS=-r
+
+srcdir=@srcdir@
+VPATH=@srcdir@
+prefix=@prefix@
+libdir=@libdir@
+
+INCDIRS=-I$(srcdir) -I$(srcdir)/../include
+DEFS=@DEFS@
+LIBS=
+
+TARGET=irc.o
+
+SOURCES=connection.cc ctcp.cc person.cc server.cc serverconnection.cc \
+	serverlist.cc
+
+SUB_DIRS=channels commands parser queue
+
+INCLUDES=
+
+# fix this too.. :(
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@) channels/channels.o commands/commands.o \
+	parser/parser.o queue/queue.o
+
+########################################################################
+
+.PHONY: all subdirs clean dclean
+
+all: $(TARGET)
+
+$(TARGET): subdirs $(OBJECTS)
+	$(LD) $(LDFLAGS) -o $@ $(OBJECTS) $(LIBS)
+
+subdirs:
+	for d in $(SUB_DIRS); do $(MAKE) -C $$d; done
+
+%.@OBJEXT@: %.cc
+	$(CXX) $(CXXFLAGS) $(DEFS) $(INCDIRS) -c $<
+	
+clean:
+	for d in $(SUB_DIRS); do $(MAKE) -C $$d clean; done
+	$(RM) *~ *.@OBJEXT@ $(TARGET)
+
+dclean:
+	for d in $(SUB_DIRS); do $(MAKE) -C $$d dclean; done
+	$(RM) *~ *.@OBJEXT@ $(TARGET) Makefile
+

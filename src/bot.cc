@@ -61,6 +61,7 @@ Bot::Bot(String filename)
   startTime(time(NULL)), 
   lastNickNameChange(startTime), 
   lastChannelJoin(startTime),
+  lastCheckpoint(startTime),
   serverConnection(0), 
   telnetDaemon(0),
   SMTPagent(new SMTP(this)),
@@ -97,7 +98,8 @@ Bot::Bot(String filename)
 			      userFunction(String(userFunctionsInit[i].name),
 					   userFunctionsInit[i].function,
 					   userFunctionsInit[i].minLevel,
-					   userFunctionsInit[i].needsChannelName));
+					   userFunctionsInit[i].needsChannelName,
+					   false));
    }
 
 #ifdef DEBUG
@@ -183,7 +185,8 @@ Bot::Bot(String filename)
 	 userFunctions.push_back(new userFunction((char *)(const char *)alias,
 						  u->function,
 						  u->minLevel,
-						  u->needsChannelName));
+						  u->needsChannelName,
+						  true));
       }
    }
 
@@ -557,17 +560,17 @@ void Bot::waitForInput()
    }
    
    // Do our business with current DCC connections
-   list<DCCConnection *>::iterator it2;
-   for (list<DCCConnection *>::iterator it = dccConnections.begin();
-	it != dccConnections.end(); ) {
-      it2 = it;
-      ++it;
-      if ((*it2)->autoRemove && 
-	  currentTime.time >= (time_t)((*it2)->lastSpoken + Bot::DCC_DELAY)) {
-	 delete *it2;
-	 dccConnections.erase(it2);
-      }
-   }
+//   list<DCCConnection *>::iterator it2;
+//   for (list<DCCConnection *>::iterator it = dccConnections.begin();
+//	it != dccConnections.end(); ) {
+//      it2 = it;
+//      ++it;
+//      if ((*it2)->autoRemove && 
+//	  currentTime.time >= (time_t)((*it2)->lastSpoken + Bot::DCC_DELAY)) {
+//	 delete *it2;
+//	 dccConnections.erase(it2);
+//      }
+//   }
    
    // Ping the server and calculate our current client <-> server lag
    if (((currentTime.time >= (time_t)(serverConnection->pingTime.time + 
@@ -575,8 +578,6 @@ void Bot::waitForInput()
 	(currentTime.time >= (time_t)(serverConnection->serverLastSpoken + Bot::PING_TIME))) &&
        !sentPing) {
       serverConnection->queue->sendPing(nickName);
-//      serverConnection->pingTime.time = currentTime.time;
-//      serverConnection->pingTime.millitm = currentTime.millitm;
       serverConnection->pingTime = currentTime;
       sentPing = true;
    }
@@ -594,6 +595,11 @@ void Bot::waitForInput()
       
       sentPing = false;
       nextServer();
+   }
+
+   // Is it time for the almighty database checkpoint sequence to run?
+   if (currentTime.time >= (time_t)(lastCheckpoint + Bot::CHECKPOINT_TIME)) {
+      checkpoint();
    }
    
    // The telnet console may need our attention - give it a slice
@@ -649,6 +655,30 @@ void
       }
    } while (cont);
 }
+
+
+/* checkpoint - Database checkpoint (check/save) routine
+ * Original 03/08/01, Simon Butcher <simonb@alien.net.au>
+ */
+void Bot::checkpoint(void) {
+#ifdef DEBUG
+   if (debug)
+     cout << "********> Checkpoint." << endl;
+#endif
+
+   // Log what we are about to do
+   logLine("Checkpoint.");
+   
+   // Save the userlist
+   userList->save();
+   
+   // Save the notelist
+   noteList->save();
+   
+   // Mark down the new checkpoint time
+   lastCheckpoint = currentTime.time;
+}
+
 
 void
   Bot::reconnect()
