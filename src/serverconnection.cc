@@ -12,16 +12,9 @@ ServerConnection::ServerConnection(Bot *b, Server *s, String localIP)
   bot(b),
   receivedLen(0), 
   sentLen(0), 
-#ifdef DEBUG
-  queue(new ServerQueue(this, &socket, b->debug)),
-#else
   queue(new ServerQueue(this, &socket)),
-#endif
   pingTime(bot->currentTime),
   lag(0),
-#ifdef DEBUG
-  debug(b->debug),
-#endif
   serverLastSpoken(time(NULL))
 {
    // We are not connected.
@@ -39,22 +32,25 @@ ServerConnection::~ServerConnection()
    delete queue;
 }
 
-bool
-ServerConnection::connect()
+bool ServerConnection::connect()
 {
-  if (!socket.connect())
-    return false;
-
-  socket.setNonBlocking();
-
-  if (server->getPassword().length() != 0)
-    queue->sendPass(server->getPassword());
-  queue->sendNick(bot->wantedNickName);
-  queue->sendUser(bot->userName, bot->ircName);
-
-  queue->flush();
- 
-  return true;
+   if (!socket.connect()) {
+      return false;
+   }
+   
+   socket.setNonBlocking();
+   
+   if (server->getPassword().length() != 0) {
+      queue->sendPass(server->getPassword());
+   }
+   
+   queue->sendNick(bot->wantedNickName);
+   queue->sendUser(bot->userName, bot->ircName,
+		   IRC_MODE_WALLOPS | IRC_MODE_INVISIBLE);
+   
+   queue->flush();
+   
+   return true;
 }
 
 /* handleInput - Grab a line, quick check it, then send it off for parsing

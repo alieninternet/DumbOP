@@ -142,7 +142,7 @@ Bot::Bot(String filename)
       String temp, alias, command;
       list<userFunction *>::iterator it;
       bool found = false;
-      userFunction *u;
+      userFunction *u = 0;
       int line = 0;
       while (initFile >> temp, temp.length() != 0) {
 	 line++;
@@ -475,6 +475,7 @@ void Bot::waitForInput()
 	     ((*it)->sock->isConnected()) &&
 	     FD_ISSET((*it)->sock->getFileDescriptor(), &rd)) {
 	    // Stuff should really happen here.
+	    (*it)->handleInput();
 	 }
       }
       
@@ -678,12 +679,13 @@ void
    dccConnections.push_back(d);
 }
 
-void
-  Bot::rehash()
+void Bot::rehash()
 {
-   for (map<String, Channel *, less<String> >::iterator it = channelList->begin();
-	it != channelList->end(); ++it)
-     serverConnection->queue->sendWho((*it).first);
+   for (map<String, Channel *, less<String> >::iterator it = 
+	channelList->begin();
+	it != channelList->end(); ++it) {
+      serverConnection->queue->sendWho((*it).first);
+   }
 }
 
 String

@@ -136,7 +136,7 @@ void UserCommands::Identify(ServerConnection *cnx, Person *from,
 {
    // Is this secure enough to continue?
    if (Utils::isChannel(channel)) {
-      from->sendNotice("For security reasons you should not use that command on a channel.");
+      from->sendNotice("For security reasons you should not use the IDENTIFY command on a channel.");
       return;
    }
 
@@ -224,14 +224,51 @@ void UserCommands::NsLookup(ServerConnection *cnx, Person *from,
  * Original 16/12/00, Pickle <pickle@alien.net.au>
  * Needs: Fixing.
  */
-void
-UserCommands::Password(ServerConnection *cnx, Person *from,
-                       String channel, String rest)
+void UserCommands::Password(ServerConnection *cnx, Person *from,
+			    String channel, String rest)
 {
    // Is this secure enough to continue?
    if (Utils::isChannel(channel)) {
-      from->sendNotice("For security reasons you should not use that command on a channel.");
+      from->sendNotice("For security reasons you should not use the PASSWORD command on a channel.");
       return;
+   }
+
+   // Split out the first word
+   StringTokens st(rest);
+   String wordFrom = st.nextToken();
+   String wordTo = st.nextToken();
+   
+   // Make sure we got their original and new passwords
+   if (!wordFrom.length() || !wordTo.length()) {
+      from->sendNotice("You must supply your original password to change it!");
+      return;
+   }
+   
+   /* This is the same as identifying someone. Why? It's easier to use the
+    * same code, plus it has the benifit of unidentifying them if they are
+    * NOT the real person! Remember they have to be identified to use this
+    * command in the first place (eg. USER level access at least).
+    */
+   if (cnx->bot->userList->identify(from->getNick(), wordFrom)) {
+      // Find the user and change their password
+      UserListItem *uli = 
+	cnx->bot->userList->getUserListItem(from->getAddress());
+      
+      // Make sure we got the user details
+      if (uli) {
+	 uli->passwd = Utils::generateSHA1(wordTo.toLower());
+	 
+	 // Tell the user what we have done
+	 from->sendNotice("Password changed.");
+      } else {
+	 // Bitch and moan
+	 from->sendNotice("Could not change your password, sorry.");
+      }
+   } else {
+      /* Tell the user their password was incorrect and now they are no
+       * longer identified
+       */
+      from->sendNotice("Nickname/Password mismatch - You are now unidentified.");
    }
 }
 
@@ -243,7 +280,7 @@ void UserCommands::Register(ServerConnection *cnx, Person *from,
 {
    // Is this secure enough to continue?
    if (Utils::isChannel(channel)) {
-      from->sendNotice("For security reasons you should not use that command on a channel.");
+      from->sendNotice("For security reasons you should not use the REGISTER command on a channel.");
       return;
    }
    
@@ -274,10 +311,20 @@ void UserCommands::Register(ServerConnection *cnx, Person *from,
       from->sendNotice(String("Registering you as \002") + mask +
 		       String("\002 with the password specified."));
       cnx->bot->userList->addUser(mask, "#*", User::USER, 0, from->getNick(),
-				  0, 0, Utils::generateSHA1(word));
+				  0, 0, Utils::generateSHA1(word.toLower()));
       
       // They have registered, technically they have also identified too.
-      from->flags &= PERSONFLAG_IDENTIFIED;
+      from->flags |= PERSONFLAG_IDENTIFIED;
+      
+      
+      
+      //////////////////////////////// DIRTY HACK because flags are not 100%
+      UserListItem *uli = 
+	cnx->bot->userList->getUserListItem(from->getAddress());
+      if (uli) {
+	 uli->identified = true;
+      }
+      //////////////////////////////////////////////////////////////////////
    }
 }
 

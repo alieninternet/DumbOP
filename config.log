@@ -1,0 +1,61 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:533: checking for gcc
+configure:646: checking whether the C compiler (gcc  ) works
+configure:662: gcc -o conftest    conftest.c  1>&5
+configure:688: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:693: checking whether we are using GNU C
+configure:721: checking whether gcc accepts -g
+configure:757: checking for c++
+configure:789: checking whether the C++ compiler (c++ -g -DDEBUG ) works
+configure:805: c++ -o conftest -g -DDEBUG   conftest.C  1>&5
+configure:831: checking whether the C++ compiler (c++ -g -DDEBUG ) is a cross-compiler
+configure:836: checking whether we are using GNU C++
+configure:864: checking whether c++ accepts -g
+configure:896: checking whether make sets ${MAKE}
+configure:925: checking for strip
+configure:955: checking for rm
+configure:985: checking for ld
+configure:1016: checking how to run the C preprocessor
+configure:1096: checking for ANSI C header files
+configure:1200: checking whether time.h and sys/time.h may both be included
+configure:1235: checking for sys/wait.h that is POSIX.1 compatible
+configure:1281: checking for dirent.h that defines DIR
+configure:1319: checking for opendir in -ldir
+configure:1405: checking for fcntl.h
+configure:1405: checking for sys/time.h
+configure:1405: checking for unistd.h
+configure:1405: checking for memory.h
+configure:1405: checking for math.h
+configure:1444: checking whether byte ordering is bigendian
+configure:1534: checking for working const
+configure:1609: checking for inline
+configure:1649: checking whether char is unsigned
+configure:1712: checking for long double
+configure:1755: checking whether stat file-mode macros are broken
+configure:1811: checking whether time.h and sys/time.h may both be included
+configure:1846: checking whether struct tm is in sys/time.h or time.h
+configure:1880: checking for tm_zone in struct tm
+configure:1950: checking for sys_siglist declaration in signal.h or unistd.h
+configure:1988: checking for size_t
+configure:2021: checking for pid_t
+configure:2054: checking for mode_t
+configure:2089: checking return type of signal handlers
+configure:2132: checking for select
+configure:2132: checking for socket
+configure:2132: checking for memcpy
+configure:2187: checking for Cygwin environment
+configure:2220: checking for mingw32 environment
+configure:2251: checking for executable suffix
+configure:2282: checking for object suffix
+configure:2308: checking for struct sigcontext in signal handlers
+configure:2317: gcc -c -g -O2  conftest.c 1>&5
+configure:2331: checking whether signal SIGCHLD is brain-damaged
+configure:2372: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function `handler':
+configure:2354: warning: passing arg 2 of `signal' from incompatible pointer type
+configure: In function `main':
+configure:2360: warning: passing arg 2 of `signal' from incompatible pointer type
+configure:2397: checking for a compliant STL C++ class framework
+configure:2417: c++ -o conftest -g -DDEBUG   conftest.C  1>&5

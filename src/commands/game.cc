@@ -152,6 +152,51 @@ void UserCommands::Category(ServerConnection *cnx, Person *from,
    }
 }
 
+
+/* Clue - Send out the clue for the quiz, if one exists
+ * Original 11/7/01, Simon Butcher <simonb@alien.net.au>
+ */
+void UserCommands::Clue(ServerConnection *cnx, Person *from,
+			String channel, String rest)
+{
+   // Grab the channel info
+   Channel *c = cnx->bot->channelList->getChannel(channel);
+
+   // Check if this is a quiz channel
+   if (!((cnx->bot->wantedChannels[c->channelName]->flags & CHANFLAG_ALLOW_GAMES) &&
+	 (cnx->bot->wantedChannels[c->channelName]->gameflags & GAMEFLAG_QUIZ))) {
+      // No comment!
+      return;
+   }
+   
+   // Try to get the quiz channel information
+   gameQuizChannel *gqc = cnx->bot->games->quiz->channels[c->channelName];
+   
+   // Check if the quiz is running in this channel or not
+   if (!gqc) {
+      from->sendNotice(String("The Quiz in \002") + c->channelName + 
+		       String("\002 has not started yet, sorry."));
+      return;
+   }
+  
+   // Do we actually HAVE a question to clue for?
+   if ((!gqc->questionStr.length()) || (gqc->answered)) {
+      from->sendNotice(String("There is no question currently asked in \002") +
+		       c->channelName + String("\002."));
+      return;
+   }
+
+   // Make sure a clue is available for that question
+   if (gqc->question->clue.length()) {
+      c->sendNotice(String("Clue: ") +
+		    gqc->question->clue + String(" \003"));
+   } else {
+      from->sendNotice(String("There is no clue for the current question in \002") +
+		       c->channelName + String("\002, sorry."));
+   }
+}
+
+
 /* Repeat - Repeat the last quiz question
  * Original 11/7/01, Simon Butcher <simonb@alien.net.au>
  */
@@ -191,8 +236,8 @@ void UserCommands::Repeat(ServerConnection *cnx, Person *from,
 }
 
 
-/* Hint - Send out the next hint for the quiz
- * Original 11/7/01, Simon Butcher <simonb@alien.net.au>
+/* Hint - Send out a hint for the quiz
+ * Original 24/7/01, Simon Butcher <simonb@alien.net.au>
  */
 void UserCommands::Hint(ServerConnection *cnx, Person *from,
 			String channel, String rest)
@@ -219,20 +264,23 @@ void UserCommands::Hint(ServerConnection *cnx, Person *from,
   
    // Do we actually HAVE a question to hint for?
    if ((!gqc->questionStr.length()) || (gqc->answered)) {
-      from->sendNotice(String("There is no question to hint for in \002") +
+      from->sendNotice(String("There is no question currently asked in \002") +
 		       c->channelName + String("\002."));
       return;
    }
 
-   // Are we being asked to pull up the expensive hint thingy?
-   if (true) {
-      // Make sure a hint is available for that question
-      if (gqc->question->hint.length()) {
-	 c->sendNotice(String("Extra Hint: ") + 
-		       gqc->question->hint + String(" \003"));
-      } else {
-	 from->sendNotice(String("There is no extra hint for the current question in \002") +
-			  c->channelName + String("\002, sorry."));
-      }
+   // Do we have a hint?
+   if (gqc->hintLevel <= 0) {
+      from->sendNotice(String("There are no hints available for the question in \002") +
+		       c->channelName + String("\002") +
+		       ((gqc->question->clue.length()) ?
+			String(", but there is a clue!") :
+			String(".")));
+      return;
    }
+   
+   // Ok well we must have a hint waiting for us if we got here...
+   c->sendNotice(String("Hint: ") + gqc->nextHint());
 }
+
+

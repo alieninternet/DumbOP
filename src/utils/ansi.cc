@@ -1,4 +1,4 @@
-/* ansi.cc
+/* src/utils/ansi.cc
  * Basic ANSI/VT-102 implementation for telnet sessions
  */
 
@@ -56,35 +56,6 @@ String ANSI::scrollRegion(int top, int bottom)
 {
    return (String(ANSI_BEGIN) + String(top) + String(";") + String(bottom) +
 	   String("r"));
-}
-
-/* telnetHeaderInit - Initialise header for telnet sessions
- * Original 30/12/00, Pickle <pickle@alien.net.au>
- */
-String ANSI::telnetHeaderInit()
-{
-   return (String(ANSI_CUR_HOME) + String(ANSI_FINVERSE) + String(ANSI_BOLD) +
-	   String(ANSI_CLR_LINE) + String(" ") + String(VERSION_STRING) +
-	   String(" - Management Console") + scrollRegion(2, 25) + 
-	   String(ANSI_NORMAL) + gotoXY(1, 25) + telnetHeaderUpdate());
-}
-
-/* telnetHeaderUpdate - Update header for telnet sessions
- * Original 30/12/00, Pickle <pickle@alien.net.au>
- */
-String ANSI::telnetHeaderUpdate()
-{
-   time_t currentTime = time(NULL);
-   struct tm *timeNow = localtime(&currentTime);
-   
-   return (String(ANSI_CUR_SAVE) + String(ANSI_FINVERSE) + String(ANSI_BOLD) +
-	   ANSI::gotoXY(40, 1) + String(ANSI_CLR_EOL) + ANSI::gotoXY(54, 1) + 
-	   (Utils::intToMonth(timeNow->tm_mon) + String(" ") +
-	    String(timeNow->tm_mday) + String(" ") +
-	    String(timeNow->tm_year + 1900) + String(", ") +
-	    String(timeNow->tm_hour).prepad(2, '0') + String(":") +
-	    String(timeNow->tm_min).prepad(2, '0')).prepad(26) +
-	   String(ANSI_CUR_RESTORE) + String(ANSI_NORMAL));
 }
 
 // Table roughly converting "Khaled Colour" to base ANSI

@@ -1,8 +1,39 @@
+Version 0.37
+------------
+simonb: commands/user.cc - Finally wrote password changing code (gee I'm slow)
+simonb: games/quiz.cc - Broken up and placed into games/quiz directory
+simonb: serverqueue* - Broken up further and placed into queue directory
+simonb: Added specific JOIN and WHO sub-classes to the ServerQueueItem class
+simonb: telnet/ansi.cc moved to utils directory
+simonb: telnet/class.cc split into class.cc and descriptor.cc
+simonb: ANSI::telnetHeaderInit and ANSI::telnetHeaderUpdate moved to
+	telnetDescriptor::headerInit and telnetDescriptor::headerUpdate
+	respectively.
+simonb: parser/message.cc - 'did' logging reduced, only shows the command name
+	now. More secure (bloody password/register/identify commands!)
+simonb: telnet/* - Cleaned up stuff, added support ready for input/ANSI/TELNET
+	codes and sequences.
+simonb: telnet/descriptor.cc - Added support for different terminals and stuff
+simonb: telnet/descriptor.cc - Cleaned up header bar handing stuff, now there
+	is a variable message which can be placed in the center of the bar
+	between the version string and the time.
+simonb: telnet/descriptor.cc - Changed version string and time on header bar
+	to be 'normal' text mode, and the bar message to be 'bold'. Looks crap
+	on some telnet clients, but ok on dumb terminals (makes more sense to
+	me at least :).
+simonb: ctcp.cc - Fixed up CTCP responces. We are NOW (beleive me this time,
+	please) fully compliant :) Now leave me alone! :)
+simonb: HINT command changed to CLUE command.
+simonb: game/quiz/channel.cc - Added nextHint() function for auto-hint and
+	standard hint on every question support. Needs more work, though.
+simonb: CLUE command added.
+
+
 Version 0.36
 ------------
 simonb: utils.cc - Re-broke the random() function. Seems the broken version
 	actually works, hehehe :) Kluge? Well probably not, but it sorta seems
-	like it. Effected random() usage (esp. bumbQuestion in gamequiz.cc)
+	like it. Effected random() usage (esp. bumpQuestion in gamequiz.cc)
 	have been kluged (or kludged, depending on how 'modern' your hacking
 	is) to match the, uhh, strangeness :)
 simonb: Ok, ignore that last entry :) I've just had some strong coffee (been

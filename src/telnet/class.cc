@@ -1,4 +1,4 @@
-/* telnet.cc
+/* telnet/telnet.cc
  * Handle telnet connections
  */
 
@@ -69,35 +69,6 @@ Telnet::~Telnet()
    delete sock;
 }
 
-/* handleInput - Handle telnet server input
- * Original 2/1/01, Pickle <pickle@alien.net.au>
- */
-void telnetDescriptor::handleInput()
-{
-}
-  
-/* goodbyeSocket - Say goodbye and close the socket down
- * Original 2/1/01, Pickle <pickle@alien.net.au>
- */
-void telnetDescriptor::goodbyeSocket()
-{
-   flags = 0; // Should actually be not connected, leave other flags intact
-   sock->close();
-}
-
-/* write
- * Original 2/1/01, Pickle <pickle@alien.net.au>
- */
-void telnetDescriptor::write(String s)
-{
-   if ((flags & TELNETFLAG_CONNECTED) && 
-       (sock->isConnected()))
-     if (!sock->write(s)) {
-	sock->close();
-	flags = 0; // Should be plus ~TELNETFLAG_CONNECTED, leave rest
-     }
-}
-
 /* makeSocket - Create a socket for the telnet server
  * Original 2/1/01, Pickle <pickle@alien.net.au>
  */
@@ -142,7 +113,6 @@ bool Telnet::makeSocket()
 bool Telnet::newConnection()
 {
    Socket *newsock;
-   time_t currentTime = time(NULL);
    
 #ifdef DEBUG
    if (bot->debug)
@@ -162,16 +132,7 @@ bool Telnet::newConnection()
      cout << "Acception telnet connection! Adding to descriptor list.." << endl;
 #endif
 
-   /* TEMPORARY */   
-   newsock->write(ANSI::telnetHeaderInit());
-   newsock->write(TelnetSpy::spyHeaderInit());
-   /* TEMPORARY */
-   
-   descList.push_back(new telnetDescriptor(newsock,
-					   currentTime, currentTime,
-//					   TELNETFLAG_CONNECTED,
-					   0xFFFF, // TEMPORARY.. Honest! :)
-					   String("")));
+   descList.push_back(new telnetDescriptor(this, newsock));
 
    return true;
 }
@@ -205,7 +166,7 @@ void Telnet::attend(void)
       if ((*it)->flags & TELNETFLAG_CONNECTED) {
 	 // Are we set to update the bars this time around?
 	 if (updateBars) {
-	    (*it)->write(ANSI::telnetHeaderUpdate());
+	    (*it)->headerUpdate();
 	 }
       }
    }

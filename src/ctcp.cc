@@ -72,7 +72,7 @@ void CTCP::DCC(ServerConnection *cnx, Person *from, String rest)
 {
    if (rest.length() == 0) {
       from->sendCTCPReply("ERRMSG", String(rest) + String(" :") +
-			  String("This query requires more information"));
+			  String("Incomplete command."));
       return;
    }
    
@@ -85,18 +85,16 @@ void CTCP::DCC(ServerConnection *cnx, Person *from, String rest)
    port = st.nextToken();
    size = st.nextToken();
    
-   if (type == "CHAT") {
+/*   if (type == "CHAT") {
       from->sendCTCPReply("ERRMSG", String(rest) + String(" :") +
 			  String("Incomplete command."));
-   } else if (type == "TALK") {
-      from->sendCTCPReply("ERRMSG", String(rest) + String(" :") +
-			  String("Non-living client cannot accept TALK request"));
    } else if (type == "SEND") {
       from->sendCTCPReply("ERRMSG", String(rest) + String(" :") +
 			  String("Incomplete command."));
-   } else
-     from->sendCTCPReply("ERRMSG", String(rest) + String(" :") +
-			 String("Unsupported DCC type"));
+   } else*/ {
+      from->sendCTCPReply("ERRMSG", String(rest) + String(" :") +
+			  String("Unsupported DCC type"));
+   }
 }
 
 
@@ -117,7 +115,8 @@ void CTCP::Echo(ServerConnection *cnx, Person *from, String rest)
  */
 void CTCP::ErrMsg(ServerConnection *cnx, Person *from, String rest)
 {
-   from->sendCTCPReply("ERRMSG", String(rest) + String(" :") +
+   from->sendCTCPReply("ERRMSG", ((rest.length()) ? 
+				  (String(rest) + String(" :")) : String("")) +
 		       String("No error, test responce OK."));
 }
 
@@ -129,7 +128,7 @@ void CTCP::ErrMsg(ServerConnection *cnx, Person *from, String rest)
  */
 void CTCP::Finger(ServerConnection *cnx, Person *from, String rest)
 {
-   from->sendCTCPReply("FINGER", String(":") + VERSION_STRING);
+   from->sendCTCPReply("FINGER", VERSION_STRING);
 }
 
 
@@ -181,10 +180,9 @@ void CTCP::Source(ServerConnection *cnx, Person *from, String rest)
  */
 void CTCP::Time(ServerConnection *cnx, Person *from, String rest)
 {
-   String time = String(ctime(&cnx->bot->currentTime.time));
+   String timeStr = String(ctime(&cnx->bot->currentTime.time));
    
-   from->sendCTCPReply("TIME", 
-		       time.subString(0,time.length()-2));
+   from->sendCTCPReply("TIME", timeStr.subString(0,(timeStr.length() - 2)));
 }
 
 
@@ -209,8 +207,7 @@ void CTCP::UserInfo(ServerConnection *cnx, Person *from, String rest)
 {
    // Really should be a nicer string I think.. 
    // DumbOP is smarter than people give him credit for.
-   from->sendCTCPReply("USERINFO", 
-		       "DumbOP, the stupidest bot on IRC.");
+   from->sendCTCPReply("USERINFO", "DumbOP, the stupidest bot on IRC.");
 }
 
 

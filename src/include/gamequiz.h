@@ -36,20 +36,27 @@ class Games;
 #define DEFAULT_QUIZ_QUESTION_RANDOM_ATTEMPTS	5
 #define DEFAULT_QUIZ_BONUS_QUESTION_PERCENTILE	3 // 3%
 
+// Auto-Hint controls
+#define DEFAULT_QUIZ_HINT_SPECIAL_CHAR		'\001'	// Internal mask char
+#define DEFAULT_QUIZ_HINT_SPECIAL_CHAR_OUTPUT	'-'	// As seen by user
+#define DEFAULT_QUIZ_HINT_MIN_LENGTH		8	// Length to auto-hint
+#define DEFAULT_QUIZ_HINT_BLOCK_PERCENTAGE	30	// % hints before block
 
 // Class for quiz questions
 class gameQuizQuestion {
  public:
    String question;			// The question
-   String hint;				// A written hint
+   String clue;				// A written clue
 
+   String source;			// Where the question came from
+   
    list<String> answers;		// The answers
    
    time_t lastPlayed;			// Time question was last played
    
    gameQuizQuestion(void);		// Class constructors
 
-   gameQuizQuestion(String, String, list<String>);
+   gameQuizQuestion(String, String, String, list<String>);
    ~gameQuizQuestion(void);		// Class destructor
 };
 
@@ -80,6 +87,8 @@ class gameQuizChannel {
    time_t timeAsked;			// Time question was asked
    
    short hintLevel;			// -1 = Make new hint, 0 = no hint...
+   String hint;				// Current hint string
+   
    unsigned short questionNum;		// Question number (this round)
    bool answered;			// Question is answered?
    char questionLevel;			// -1 = Normal, >= 0 are bonus-Q types
@@ -90,6 +99,7 @@ class gameQuizChannel {
    void bumpCategory(void);		// Fire up the next category
    void bumpQuestion(void);		// Fire up the next question
    
+   String nextHint(char = '\0');	// Fire up the next hint
 };
 
 

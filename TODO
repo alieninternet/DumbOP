@@ -10,6 +10,7 @@ Add channel protection shit (see flags.h)
 Add flag table, flag command, flag, flag chr, flags name (one table for chan, one for users)
 Fix utils::flagToStr for the new flag table (above)
 
+DO NOT RANDOMISE QUESTION SEEKS IF ONLY 1 QUESTION IN A CATEGORY!!
 
 Medium Priority
 ---------------

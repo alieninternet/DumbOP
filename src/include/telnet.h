@@ -13,28 +13,52 @@
 # include "bot.h" 
 # include "telnetspy.h"
 
-# define TELNETFLAG_CONNECTED		0x0001	// Connected
-# define TELNETFLAG_AUTHENTICATED	0x0002	// Logged on
-# define TELNETFLAG_IN_MENU		0x0010	// Currently in a menu
-# define TELNETFLAG_SPYING		0x0020	// In ircII style 'spying' mode
+# define TELNETFLAG_CONNECTED		0x00000001 // Connected
+# define TELNETFLAG_HAS_ANSI		0x00000002 // Has ANSI capability?
+# define TELNETFLAG_TELETYPE		0x00000004 // Echoing printable chars?
+# define TELNETFLAG_TELETYPE_MASK	0x00000008 // Masking inputted chars?
+# define TELNETFLAG_IN_TELNET_CODE	0x00000010 // Reading a telnet code?
+# define TELNETFLAG_IN_ANSI_CODE	0x00000020 // Reading an ANSI code?
+
+# define TELNET_TELETYPE_MASK_CHAR	'*'	// Char to mask input with
+# define TELNET_DEFAULT_BAR_MESSAGE	"Management Console" // Bar message
+# define TELNET_ASSUMED_TTY_ROWS	24
+# define TELNET_ASSUMED_TTY_COLUMNS	80
+
+
+class Telnet;
 
 class telnetDescriptor {
- public:
-   Socket *sock;
-   time_t connectedTime;
-   time_t lastActed;
-   int flags;
-   String spyChannel;
+   enum {
+      PAGE_LOGIN = 0,				// Login window
+      PAGE_MAIN_MENU,				// Main menu
+      PAGE_SPY					// Monitoring
+   };
    
-   telnetDescriptor(Socket *s, time_t ct, time_t la, int f, String sc)
-     : sock(s), connectedTime(ct), lastActed(la), flags(f), 
-       spyChannel(sc)
-       {
-       }
+ public:
+   Telnet *telnet;				// Recursive back
+   Socket *sock;				// Socket they are connected to
+   time_t connectedTime;			// Time user logged on
+   time_t lastActed;				// Time user last 'spoke'
+   unsigned long flags;				// Connection flags
 
-   void handleInput();
-   void goodbyeSocket();
-   void write(String);
+   unsigned short rows;				// Number of ROWS on tty
+   unsigned short columns;			// Number of COLUMNS on tty
+
+   String barMessage;				// Header bar message
+   unsigned char page;				// Current page
+   
+   telnetDescriptor(Telnet *, Socket *);	// Constructor
+
+   void handleInput();				// Deal with incoming char(s)
+   void goodbyeSocket();			// Shutdown sockets
+   void write(String);				// Write a string
+
+   void headerInit();				// Initialise the header bar
+   void headerUpdate();				// Update the header bar
+   void headerMessage(String = "");		// Change the header message
+
+   friend class TelnetSpy;
 };
 
 class Socket;
@@ -62,6 +86,8 @@ class Telnet {
    ~Telnet();
 
    void attend(void);			// Called by main loop
+   
+   friend class telnetDescriptor;
    
    friend class Socket;
    friend class Bot;

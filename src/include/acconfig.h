@@ -22,6 +22,15 @@
 /* Define if you want to compile an on-line debug ready version */
 # define DEBUG
 
+/* [GAMES] Define if you want a more free answering system */
+# undef NO_ANSWER_NAZI
+
+/* [CNX] Define if you are connecting servers with no multi-WHO suppport */
+# undef ANAL_WHO_COMMAND
+
+/* [CNX] Define if you REALLY do not like channel CTCP broadcast replies */
+# undef NOT_VERY_HAPPY_ABOUT_CHANNEL_CTCP_BROADCASTS_WORKING_NO_SIREE_BOB
+
 /******************************************************************************
 **                                                                           **
 **                  WARNING!   WARNING!   WARNING!   WARNING!                **

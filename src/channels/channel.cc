@@ -59,6 +59,15 @@ Channel::~Channel()
     channelBanlist.erase(it2);
     delete b;
   }
+
+   /* If this was a quiz channel, we need to kill off the quiz details,
+    * unfortunately :( */
+//   if ((cnx->bot->wantedChannels[channelName]->flags & CHANFLAG_ALLOW_GAMES) &&
+//       (cnx->bot->wantedChannels[channelName]->gameflags & GAMEFLAG_QUIZ)) {
+//      gameQuizChannel *gqc = cnx->bot->games->quiz->channels[channelName];
+//      cnx->bot->games->quiz->channels.erase(channelName);
+//      delete gqc;
+//   }
 }
 
 void Channel::addNick(String n, String uh, int mode, UserList *ul,

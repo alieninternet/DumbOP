@@ -26,6 +26,9 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	User::USER,		true
      },
      //     { "CHANGELEVEL", UserCommands::ChangeLevel, User::MASTER,       false, false },
+     { "CLUE",		UserCommands::Clue,
+	User::USER,		true
+     },
      { "CYCLE",       	UserCommands::Cycle,       
 	User::MASTER,       	true
      },
@@ -93,7 +96,9 @@ struct userFunctionsStruct userFunctionsInit[] = {
      { "PART",        	UserCommands::Part,        
 	User::MASTER,       	true  
      },
-//     { "PASSWORD",    	UserCommands::Password,    User::USER,         true, false  },
+     { "PASSWORD",    	UserCommands::Password,
+	User::USER,		false
+     },
      { "PING",        	UserCommands::Ping,
 	User::USER,       	false
      },
@@ -229,8 +234,7 @@ void Parser::parseMessage(ServerConnection *cnx, Person *from, String to,
 	    identified = true;
 	 }
 	 if ((level >= (*it)->minLevel) || ((*it)->minLevel == User::NONE)) {
-	    cnx->bot->logLine(from->getAddress() + " did " + command +
-			      " " + rest);
+	    cnx->bot->logLine(from->getAddress() + " did " + command);
 	    (*it)->function(cnx, from, to, rest);
 	    break;
 	 } else {

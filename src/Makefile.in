@@ -33,24 +33,25 @@ LIBS=
 TARGET=dumbop
 
 SOURCES=banentry.cc bot.cc commands.cc config.cc connection.cc ctcp.cc \
-	flags.cc log.cc main.cc mask.cc queue.cc server.cc \
-	serverconnection.cc serverlist.cc serverqueue.cc serverqueueitem.cc \
-	todolist.cc
+	flags.cc log.cc main.cc mask.cc server.cc \
+	serverconnection.cc serverlist.cc todolist.cc
 
-SUB_DIRS=channels commands dcc games notes parser strings system telnet \
+SUB_DIRS=channels commands dcc games notes parser queue strings system telnet \
 	users utils
-
+	
 VER_SRC=version.cc
 VER_OBJ=version.@OBJEXT@
-VER_FLG=-DCOMPILE_STRING="\"uname -n -m\"" -DBUILD_STRING="\"date\""
+VER_FLG=-DCOMPILE_STRING="\"`uname -n -m`\"" -DBUILD_STRING="\"`date`\""
 
 # this needs to be fixed...
 OBJECTS=$(SOURCES:.cc=.@OBJEXT@) \
 	channels/channels.o commands/commands.o dcc/dcc.o games/games.o \
-	parser/parser.o notes/notes.o strings/strings.o system/system.o \
-	telnet/telnet.o users/users.o utils/utils.o
+	notes/notes.o parser/parser.o queue/queue.o strings/strings.o \
+	system/system.o telnet/telnet.o users/users.o utils/utils.o
 
 ########################################################################
+
+.PHONY: all subdirs clean dclean
 
 all: $(TARGET)
 

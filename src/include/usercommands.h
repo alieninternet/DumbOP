@@ -16,6 +16,7 @@ class UserCommands {
    static void Beep(ServerConnection *, Person *, String, String);
    static void Category(ServerConnection *, Person *, String, String);
    static void ChangeLevel(ServerConnection *, Person *, String, String);
+   static void Clue(ServerConnection *, Person *, String, String);
    static void Cycle(ServerConnection *, Person *, String, String);
    static void DCCList(ServerConnection *, Person *, String, String);
    static void Deban(ServerConnection *, Person *, String, String);

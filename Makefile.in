@@ -10,6 +10,8 @@ RM=@RM@
 
 SUB_DIRS=src
 
+.PHONY: all clean dclean autoconf dready dsums distro
+
 # Make the package
 all:
 	@echo "**********************************************************"

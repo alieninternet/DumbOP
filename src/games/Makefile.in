@@ -27,25 +27,35 @@ LIBS=
 
 TARGET=games.o
 
-SOURCES=class.cc quiz.cc
+SOURCES=class.cc
+
+SUB_DIRS=quiz
 
 INCLUDES=
 
-OBJECTS=$(SOURCES:.cc=.@OBJEXT@)
+# fix this too.. :(
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@) quiz/quiz.o
 
 ########################################################################
 
+.PHONY: all subdirs clean dclean
+
 all: $(TARGET)
 
-$(TARGET): $(OBJECTS)
+$(TARGET): subdirs $(OBJECTS)
 	$(LD) $(LDFLAGS) -o $@ $(OBJECTS) $(LIBS)
+
+subdirs:
+	for d in $(SUB_DIRS); do $(MAKE) -C $$d; done
 
 %.@OBJEXT@: %.cc
 	$(CXX) $(CXXFLAGS) $(DEFS) $(INCDIRS) -c $<
 	
 clean:
+	for d in $(SUB_DIRS); do $(MAKE) -C $$d clean; done
 	$(RM) *~ *.@OBJEXT@ $(TARGET)
 
 dclean:
+	for d in $(SUB_DIRS); do $(MAKE) -C $$d dclean; done
 	$(RM) *~ *.@OBJEXT@ $(TARGET) Makefile
 

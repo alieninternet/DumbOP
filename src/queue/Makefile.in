@@ -1,0 +1,55 @@
+#
+#
+# ./src/queue/Makefile
+# Make for IRC command queue routines
+# Author: Simon Butcher
+# Copyright (c) 2001 Alien Internet Services
+
+########################################################################
+##                                                                    ##
+########################################################################
+
+CXX=@CXX@
+LD=@LD@
+RM=@RM@
+
+CXXFLAGS=@CXXFLAGS@ -Wall
+LDFLAGS=-r
+
+srcdir=@srcdir@
+VPATH=@srcdir@
+prefix=@prefix@
+libdir=@libdir@
+
+INCDIRS=-I$(srcdir) -I$(srcdir)/../include
+DEFS=@DEFS@
+LIBS=
+
+TARGET=queue.o
+
+SOURCES=class.cc item.cc joinitem.cc kickitem.cc modeitem.cc noticeitem.cc \
+	otheritem.cc send.cc serverqueue.cc whoitem.cc
+
+INCLUDES=
+
+# fix this too.. :(
+OBJECTS=$(SOURCES:.cc=.@OBJEXT@)
+
+########################################################################
+
+.PHONY: all clean dclean
+
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(LD) $(LDFLAGS) -o $@ $(OBJECTS) $(LIBS)
+
+%.@OBJEXT@: %.cc
+	$(CXX) $(CXXFLAGS) $(DEFS) $(INCDIRS) -c $<
+	
+clean:
+	$(RM) *~ *.@OBJEXT@ $(TARGET)
+
+dclean:
+	$(RM) *~ *.@OBJEXT@ $(TARGET) Makefile
+

@@ -27,13 +27,15 @@ LIBS=
 
 TARGET=telnet.o
 
-SOURCES=ansi.cc class.cc spy.cc
+SOURCES=class.cc descriptor.cc spy.cc
 
 INCLUDES=
 
 OBJECTS=$(SOURCES:.cc=.@OBJEXT@)
 
 ########################################################################
+
+.PHONY: all clean dclean
 
 all: $(TARGET)
 

@@ -5,14 +5,9 @@
 #ifndef __FLAGS_H_
 # define __FLAGS_H_
 
-// Flag types
-# define TYPE_PERSON	0x00	// Flag is for a PERSON
-# define TYPE_USER	0x01	// Flag is for a CHANNEL USER
-# define TYPE_CHANNEL	0x02	// Flag is for a CHANNEL
-
-// General flag stuff
-# define FLAG_NONE			0x00000000 // Use flag =
-# define FLAG_CLEANUP			0xFF000000 // Use flag &=
+/* DO NOT CHANGE THESE FLAGS ONCE THEY ARE SET OR I WILL HAVE TO KILL YOU 
+ * or something.
+ */
 
 // Personal flags
 # define PERSONFLAG_IDENTIFIED		0x00000001 // Person is identified

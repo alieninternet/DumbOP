@@ -35,6 +35,8 @@ OBJECTS=$(SOURCES:.cc=.@OBJEXT@)
 
 ########################################################################
 
+.PHONY: all clean dclean
+
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)

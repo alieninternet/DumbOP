@@ -15,6 +15,8 @@ class Channel;
 class Commands;
 class UserCommands;
 
+class ServerQueue;
+
 class ServerConnection : public Connection {
    Server * server;
    Bot * bot; // Recursive
@@ -22,12 +24,10 @@ class ServerConnection : public Connection {
    long receivedLen;
    long sentLen;
    
-  ServerQueue * queue;
+  ServerQueue *queue;
   struct timeb pingTime;
   long long lag;
-#ifdef DEBUG
-   bool debug;
-#endif
+
   time_t serverLastSpoken;
   
 public:

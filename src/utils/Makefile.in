@@ -27,13 +27,15 @@ LIBS=
 
 TARGET=utils.o
 
-SOURCES=class.cc sha1.cc
+SOURCES=ansi.cc class.cc sha1.cc
 
 INCLUDES=
 
 OBJECTS=$(SOURCES:.cc=.@OBJEXT@)
 
 ########################################################################
+
+.PHONY: all clean dclean
 
 all: $(TARGET)
 

@@ -44,8 +44,11 @@ void UserList::read()
       String flags = st.nextToken(':');
       String lastseen = st.nextToken(':');
       String password = st.rest().trim();
-      if (password == "*NONE*")
-	password = "";
+
+      if (password == "*NONE*") {
+	 password = "";
+      }
+      
       l.push_back(new UserListItem(mask, maskChannel, atoi(level),
 				   atoi(prot), nick,
 				   atol(flags),
@@ -199,12 +202,18 @@ bool UserList::identify(String nick, String password)
    if (!uli) {
       return false;
    }
-   
-   // Check the password and see if they match
-   if (Utils::generateSHA1(password.toLower()) == uli->passwd) {
-      uli->identified = true;
+
+   // If the password is blank, they are automatically identified...
+   if (uli->passwd.length()) {
+      // Check the password and see if they match
+      if (Utils::generateSHA1(password.toLower()) == uli->passwd) {
+	 uli->identified = true;
+      } else {
+	 uli->identified = false;
+      }
    } else {
-      uli->identified = false;
+      // no password!
+      uli->identified = true;
    }
    
    // Return the identified status

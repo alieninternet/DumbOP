@@ -133,9 +133,6 @@ class ANSI {
 
    static String scrollRegion(int, int);
    
-   static String telnetHeaderInit();
-   static String telnetHeaderUpdate();
-
    static String ANSI::toANSI(String);
 };
 
