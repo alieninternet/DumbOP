@@ -20,7 +20,7 @@ class UserListItem {
    int level;
    // Protection (from 0 to 2)
    int prot;
-   // Nickname List
+   // Nickname
    String nick;
    // 32-bits of flags (flags.h)
    long flags;
@@ -29,15 +29,13 @@ class UserListItem {
    // Password
    String passwd;
    // How many channels are we identified on ?
-   int identified;
-   // Is this item automatically added ?
-   bool autoEntry;
+   bool identified;
    
  public:
    UserListItem(String m, String mc, int l, int p, String n = "",
-		long f = 0, time_t ls = -1, String pass = "", bool ae = false)
+		long f = 0, time_t ls = -1, String pass = "")
      : mask(m), channelMask(mc), level(l), prot(p), nick(n),
-   flags(f), lastseen(ls), passwd(pass), identified(0), autoEntry(ae) { }
+   flags(f), lastseen(ls), passwd(pass), identified(0) { }
    
    // Returns true if it matches <m> on channel(s) <mc>
    bool matches(String m, String mc)

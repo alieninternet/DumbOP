@@ -1,7 +1,7 @@
 #ifndef __PARSER_H_
 # define __PARSER_H_
 
-# include "string.h"
+# include "str.h"
 # include "person.h"
 # include "serverconnection.h"
 

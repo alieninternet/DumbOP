@@ -3,16 +3,17 @@
 
 #include "userlist.h"
 #include "stringtokenizer.h"
+#include "sha1.h"
 
 UserList::UserList(String filename)
-  : listFilename(filename)
+: listFilename(filename)
 {
-  read();
+   read();
 }
 
 UserList::~UserList()
 {
-  clear();
+   clear();
 }
 
 void UserList::read()
@@ -64,7 +65,6 @@ void UserList::save()
    if (!file)
      return;
    
-   ++it; // We skip the bot's entry
    for ( ; it != l.end(); ++it) {
       file << (*it)->mask.getMask().toLower() << ":"
 	<< (*it)->channelMask.getMask().toLower() << ":"
@@ -98,13 +98,7 @@ void UserList::addUser(String m, String mc, int lev, int p, String n,
      l.push_back(new UserListItem(m, mc, lev, p, n, f, ls, pa));
   }
 
-void UserList::addUserFirst(String m, String mc, int lev, int p,
-			    String n, long f, time_t ls, String pa)
-  {
-     l.push_front(new UserListItem(m, mc, lev, p, n, f, ls, pa, true));
-  }
-
-UserListItem *UserList::getUserListItem(String nuh, String channel)
+UserListItem *UserList::getUserListItem(String nuh, String channel = "#*")
   {
      for (list<UserListItem *>::iterator it = l.begin();
 	  it != l.end(); ++it)
@@ -122,7 +116,7 @@ int UserList::getMaxLevel(String nuh)
      for (list<UserListItem *>::iterator it = l.begin();
 	  it != l.end(); it++)
        if ((*it)->matches(nuh) && level < (*it)->level &&
-	   ((*it)->passwd == "" || (*it)->identified > 0))
+	   ((*it)->passwd == "" || (*it)->identified))
 	 level = (*it)->level;
      
      return level;
@@ -155,22 +149,62 @@ int UserList::getMaxProt(String nuh, String channel)
 bool UserList::isInUserList(String nuh, String maskChannel)
   {
      for (list<UserListItem *>::iterator it = l.begin();
-	  it != l.end();
-	  ++it)
-       if ((*it)->matches(nuh, maskChannel))
-	 return true;
+	  it != l.end(); ++it) {
+	if ((*it)->matches(nuh, maskChannel)) {
+	   return true;
+	}
+     }
      
      return false;
   }
 
-void UserList::removeFirst()
-  {
-     UserListItem * uli = *(l.begin());
-     if (uli->autoEntry) {
-	l.erase(l.begin());
-	delete uli;
-     };
-  }
+/* isNickInUserlist - Scan the userlist and check if a nickname in the list
+ * Original 19/7/01, Simon Butcher <simonb@alien.net.au>
+ */
+bool UserList::isNickInUserList(String nick)
+{
+   for (list<UserListItem *>::iterator it = l.begin();
+	it != l.end(); ++it) {
+      if ((*it)->nick.toLower() == nick.toLower()) {
+	 return true;
+      }
+   }
+   
+   return false;
+}
+
+
+/* identify - Identify a user via a given mask and password
+ * Original 19/7/01, Simon Butcher <simonb@alien.net.au>
+ */
+bool UserList::identify(String nick, String password, bool onIRC = true)
+{
+   UserListItem *uli = 0;
+
+   // Run through the userlist and find this nickname
+   for (list<UserListItem *>::iterator it = l.begin(); it != l.end(); ++it) {
+      if ((*it)->nick.toLower() == nick.toLower()) {
+	 uli = *it;
+      }
+   }
+   
+   // Make sure we got a record out of that
+   if (!uli) {
+      return false;
+   }
+   
+   // Check the password and see if they match
+   if (SHA1::generate(password.toLower()) == 
+       SHA1::generate(uli->passwd.toLower())) {
+      uli->identified = true;
+   } else {
+      uli->identified = false;
+   }
+   
+   // Return the identified status
+   return uli->identified;
+}
+
 
 void UserList::removeUser(String mask, String maskChannel)
   {

@@ -6,7 +6,7 @@
 # include <fstream.h>
 # include <sys/timeb.h>
 
-# include "string.h"
+# include "str.h"
 # include "person.h"
 # include "serverlist.h"
 # include "channellist.h"

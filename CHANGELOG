@@ -1,3 +1,42 @@
+Version 0.36
+------------
+simonb: utils.cc - Re-broke the random() function. Seems the broken version
+	actually works, hehehe :) Kluge? Well probably not, but it sorta seems
+	like it. Effected random() usage (esp. bumbQuestion in gamequiz.cc)
+	have been kluged (or kludged, depending on how 'modern' your hacking
+	is) to match the, uhh, strangeness :)
+simonb: Ok, ignore that last entry :) I've just had some strong coffee (been
+	awake for almost another 24 hours.. eep!) and have looked over that
+	whole randomness debarcle.. Uhh, it makes sense! I'm just a moron :(
+	On with more important things :)
+simonb: Added support for extraordinarily answered questions. Now, any
+	question can be answered by giving the answer (as usual) but the
+	answer can have appended to it a char (of non-alphanumeric origin)
+	and any other extraneous information. This means someone can ask
+	if the question is right (answer?) as in 'not sure' and get it right.
+simonb: gamecommands.cc - Added more next-category checking to the routines,
+	now the current category (equality) and age checking of the categories
+	are checked prior to accepting a category as being the next one to
+	play.
+simonb: gamecommands.cc - When changing the quiz category, the category 
+	change is announced to the channel now, rather than just the user 
+	who requested the change.
+simonb: channel*.cc - Added support for 'rules' and 'greeting' strings - one
+	liner messages that channel operators will be able to specify.
+simonb: usercommands.cc - Added RULES command. If rules exist, they can be
+	requested by the user.
+simonb: parser.cc - Added auto-greeting support which will send a notice to
+	a user immediately upon joining a channel that has a greeting set.
+simonb: usercommands.cc - PASSWORD and IDENT commands obliterated.
+simonb: parser.cc & usercommands.cc - REGISTER command added.
+simonb: IDENT command changed to IDENTIFY command
+simonb: usercommands.cc - split into managercommands.cc, channelcommands.cc,
+	and usercommands.cc for my own sanity.
+simonb: *.h - fixed many files up in preparation for splitting the package
+	into logical sections (eg. subdirs and mid-way objects)
+simonb: Imported SHA1 routines from Evolution.
+
+
 Version 0.35
 ------------
 Pickle: usercommands.cc - LASTSEEN command simplified, hopefully now works in

@@ -6,6 +6,7 @@
 # define __SIGNAL_H_
 
 class Signal;
+class Bot;
 
 # include "bot.h" 
 

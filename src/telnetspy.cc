@@ -6,7 +6,7 @@
 
 #include "telnetspy.h"
 #include "telnet.h"
-#include "string.h"
+#include "str.h"
 #include "stringtokenizer.h"
 #include "ansi.h"
 #include "utils.h"

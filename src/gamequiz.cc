@@ -7,6 +7,7 @@
 #include <fstream.h>
 #include <errno.h>
 #include <sys/types.h>
+#include <ctype.h>
 
 #include "gamequiz.h"
 #include "stringtokenizer.h"
@@ -175,13 +176,9 @@ void gameQuizChannel::bumpQuestion(void) {
       potentialQuestion = 0;
       
       if (randomAttempts < DEFAULT_QUIZ_QUESTION_RANDOM_ATTEMPTS) {
-	 // Randomly select a question
-	 unsigned long randomEntry = Utils::random(gameQuiz->categories[category]->questions.size() - 1) + 1;
-	 
-	 cout << "!!!!! bumpQuestion random " << randomEntry << endl;
-	 
+	 // Try and pull the question out of the vector sequence
 	 potentialQuestion =
-	   gameQuiz->categories[category]->questions[randomEntry];
+	   gameQuiz->categories[category]->questions[Utils::random(gameQuiz->categories[category]->questions.size() - 2) + 1];
 	 
 	 // This was a random attempt, increase the attempt counter
 	 randomAttempts++;
@@ -262,14 +259,14 @@ void GameQuiz::attend(void)
 	       (*it).second->questionStr = "";
 	       
 	       // Tell them nobody answered the question
-	       (*it).second->channel->sendNotice("Nobody got that question.");
+	       (*it).second->channel->sendNotice("Nobody got that question. \003");
 	    }
 	    
 	    // Are we in a question, and it is time for another hint?
 	    if (((period % DEFAULT_QUIZ_QUESTION_NEXTHINT_DELAY) == 0) &&
 		((*it).second->hintLevel > 0)) {
 	       // Send another hint
-	       (*it).second->channel->sendNotice("This is a hint placeholder.");
+	       (*it).second->channel->sendNotice("This is a hint placeholder. \003");
 	    }
 	 } else {
 	    // Next question time? or next category time?
@@ -288,28 +285,34 @@ void GameQuiz::attend(void)
 		     // Copy the question string across normally
 		     (*it).second->questionStr = (*it).second->question->question;
 		     
+		     // Tell the rest of the software this question is normal
+		     (*it).second->questionLevel = Q_NORMAL;
+		     
 		     // Set the points correctly
 		  } else {
 		     // Bonus question, grab the string for mangling
 		     String questionStr = (*it).second->question->question;
 		     
+		     // Pick the type of mangling we want...
+		     (*it).second->questionLevel = Utils::random(1);
+		     
 		     // Select the type of mangling we will do...
-		     switch (Utils::random(1)) {
+		     switch ((*it).second->questionLevel) {
 		      default:
-		      case 0: // Hide the vowels
-			(*it).second->questionStr = 
-			  Utils::replaceVowels(questionStr, '-');
-			break;
-		      case 1: // Reverse the string
+		      case Q_BONUS_REVERSE: // Reverse the string
 			(*it).second->questionStr =
 			  Utils::reverseStr(questionStr);
+			break;
+		      case Q_BONUS_NO_VOWELS: // Hide the vowels
+			(*it).second->questionStr = 
+			  Utils::replaceVowels(questionStr, '-');
 			break;
 		     }
 		     
 		     // Set the points correctly
 
 		     // Tell the channel it is a bonus question
-		     (*it).second->channel->sendNotice(String("Bonus points for getting this question!"));
+		     (*it).second->channel->sendNotice(String("Bonus points for getting this question! \003"));
 		  }
 
 		  // Send the question to the channel
@@ -318,13 +321,14 @@ void GameQuiz::attend(void)
 						    String("/") +
 						    String(DEFAULT_QUIZ_ROUND_QUESTIONS) +
 						    String(": ") +
-						    (*it).second->questionStr);
+						    (*it).second->questionStr +
+						    String(" \003"));
 		  
 		  // Reset the time we asked the question variable
 		  (*it).second->timeAsked = games->bot->currentTime.time;
 	       } else if ((*it).second->questionNum == DEFAULT_QUIZ_ROUND_QUESTIONS) {
 		  // We are telling the players the round is over..
-		  (*it).second->channel->sendNotice(String("That's the end of that round..."));
+		  (*it).second->channel->sendNotice(String("That's the end of that round... \003"));
 		  
 		  // Mark down that we have already ended the round
 		  (*it).second->questionNum++;
@@ -341,7 +345,7 @@ void GameQuiz::attend(void)
 	       // Send the next category to the channel
 	       (*it).second->channel->sendNotice(String("The category for this round will be \002") +
 						 (*it).second->category +
-						 String("\002 - Get ready!"));
+						 String("\002 - Get ready! \003"));
 	    }
 	    
 	    
@@ -357,7 +361,7 @@ void GameQuiz::attend(void)
 void GameQuiz::parseLine(Channel *channel, Person *from, String line)
 {
    // Create a few fresh variables to save time..
-   String potentialAnswer = Utils::dwindleSpaces(line.toLower());
+   String potentialAnswer = line.toLower();
    gameQuizChannel *gqc = channels[channel->channelName];
    
    // If this channel does not exist, we will have problems. Bail out now
@@ -378,16 +382,42 @@ void GameQuiz::parseLine(Channel *channel, Person *from, String line)
    // Well we got this far, run through the answer list and look for a match
    for (list<String>::iterator it = gqc->question->answers.begin();
 	it != gqc->question->answers.end(); it++) {
-      // Does it match outright?
-      if (potentialAnswer == (*it).toLower()) {
+      String anAnswer = (*it).toLower();
+      
+      // Does it match outright? Otherwise we check it another way...
+      if (potentialAnswer == anAnswer) {
+	 // Mark this question as answered
+	 gqc->answered = true;
+      }
+#ifdef NO_ANSWER_NAZI // Eg, you have more freedom with your answers      
+      else if ((potentialAnswer.length() > anAnswer.length()) &&
+		 (!isalnum(potentialAnswer[anAnswer.length()])) &&
+		 (potentialAnswer.subString(0, anAnswer.length() - 1) == 
+		  anAnswer)) {
+	 /* This string IS longer than the answer, and the char after the
+	  * answer in the potentialAnswer string is not a number or a digit,
+	  * therefore we can consider this to be *safe* (eg. a question mark)
+	  * and not someone just throwing garble at the parser. We're smarter
+	  * than that :)
+	  */
+	 gqc->answered = true;
+      } 
+#endif
+
+      // If we are in bonus mode, there are a few more things to check for..
+      if (gqc->questionLevel >= 0) {
+	 // Except I am too lazy to program them just yet..
+      }
+      
+      // Was it answered in this run?
+      if (gqc->answered) {
 	 // Tell the channel this user was correct!
 	 channel->sendNotice(String("\002") + from->getNick() + 
-			     String("\002 is correct! The answer was \002") +
+			     String("\002 is correct! The answer was \"\002") +
 			     *gqc->question->answers.begin() +
-			     String("\002."));
+			     String("\002\". \003"));
 	 
-	 // Mark this question as answered, reset the question and clock
-	 gqc->answered = true;
+	 // Reset the question string and the timeer
 	 gqc->questionStr = "";
 	 gqc->timeAsked = games->bot->currentTime.time;
 

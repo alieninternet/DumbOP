@@ -619,9 +619,6 @@ void
    if (channelList)
      channelList->clear();
    
-   if (serverConnection)
-     userList->removeFirst();
-   
    delete serverConnection;
    
    do {
@@ -648,8 +645,6 @@ void
    if (channelList)
      channelList->clear();
    
-   userList->removeFirst();
-   
    delete serverConnection;
    
    serverConnection =
@@ -663,8 +658,6 @@ void
 {
    if (channelList)
      channelList->clear();
-   
-   userList->removeFirst();
    
    delete serverConnection;
    

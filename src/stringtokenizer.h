@@ -2,7 +2,7 @@
 #ifndef __STRINGTOKENIZER_H_
 #define __STRINGTOKENIZER_H_
 
-#include "string.h"
+#include "str.h"
 
 class StringTokenizer {
   String st;

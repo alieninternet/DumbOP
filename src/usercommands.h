@@ -1,7 +1,7 @@
 #ifndef __USERCOMMANDS_H_
 # define __USERCOMMANDS_H_
 
-# include "string.h"
+# include "str.h"
 # include "person.h"
 # include "serverconnection.h"
 
@@ -26,7 +26,7 @@ class UserCommands {
    static void Do(ServerConnection *, Person *, String, String);
    static void Help(ServerConnection *, Person *, String, String);
    static void Hint(ServerConnection *, Person *, String, String);
-   static void Ident(ServerConnection *, Person *, String, String);
+   static void Identify(ServerConnection *, Person *, String, String);
    static void Invite(ServerConnection *, Person *, String, String);
    static void Join(ServerConnection *, Person *, String, String);
    static void Keep(ServerConnection *, Person *, String, String);
@@ -45,7 +45,9 @@ class UserCommands {
    static void Ping(ServerConnection *, Person *, String, String);
    static void Raw(ServerConnection *, Person *, String, String);
    static void Reconnect(ServerConnection *, Person *, String, String);
+   static void Register(ServerConnection *, Person *, String, String);
    static void Repeat(ServerConnection *, Person *, String, String);
+   static void Rules(ServerConnection *, Person *, String, String);
    static void Save(ServerConnection *, Person *, String, String);
    static void Say(ServerConnection *, Person *, String, String);
    static void Server(ServerConnection *, Person *, String, String);

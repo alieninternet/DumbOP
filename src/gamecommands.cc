@@ -4,6 +4,7 @@
 #include "gamequiz.h"
 #include "channellist.h"
 #include "flags.h"
+#include "utils.h"
 
 /* Category - List or change quiz channel category setting for next round
  * Original 9/7/01, Simon Butcher <simonb@alien.net.au>
@@ -42,15 +43,37 @@ void UserCommands::Category(ServerConnection *cnx, Person *from,
 	 return;
       }
       
+      // Fix the potential category to save time..
+      String potentialCategory = rest.toUpper();
+      
       // Otherwise, check that the category exists
-      if (cnx->bot->games->quiz->categories[rest.toUpper()]) {
-	 // Set the next category
-	 gqc->nextCategory = rest.toUpper();
+      if (cnx->bot->games->quiz->categories[potentialCategory]) {
+	 // Calculate how long ago this selected category was played...
+	 time_t playedTimeAgo = cnx->bot->currentTime.time -
+	   cnx->bot->games->quiz->categories[potentialCategory]->lastPlayed;
 	 
-	 // Tell them we are setting the category
-	 from->sendNotice(String("The category for the next round in \002") +
-			  c->channelName + String("\002 will be \002") +
+	 // Make sure the category is not the same, or too old...
+	 if (potentialCategory == gqc->category) {
+	    // Tell the user the category is being played NOW!! :)
+	    from->sendNotice(String("But the current category is \002") +
+			     potentialCategory + String("\002!!"));
+	 } else if (playedTimeAgo < DEFAULT_QUIZ_CATEGORY_LOCKOUT_TIME) {
+	    // Tell the user the category is too old, and when to try next.
+	    from->sendNotice(String("The category \002") + potentialCategory +
+			     String("\002 was played too recently to select. Try again in \002") +
+			     Utils::timelenToStr(DEFAULT_QUIZ_CATEGORY_LOCKOUT_TIME -
+						 playedTimeAgo) +
+			     String("\002."));
+	 } else {
+	    // We are OK! Set the next category..
+	    gqc->nextCategory = potentialCategory;
+	 
+	    // Tell them we are setting the category
+	    c->sendNotice(String("The category for the next round in \002") +
+			  c->channelName + String("\002 has been changed by \002") +
+			  from->getNick() + String("\002 to \002") +
 			  rest.toUpper() + String("\002"));
+	 }
 	 return;
       } else {
 	 // Could not find the category
@@ -204,8 +227,8 @@ void UserCommands::Hint(ServerConnection *cnx, Person *from,
    if (true) {
       // Make sure a hint is available for that question
       if (gqc->question->hint.length()) {
-	 c->sendNotice(String("Extra Hint: ") +
-		       gqc->question->hint);
+	 c->sendNotice(String("Extra Hint: ") + 
+		       gqc->question->hint + String(" \003"));
       } else {
 	 from->sendNotice(String("There is no extra hint for the current question in \002") +
 			  c->channelName + String("\002, sorry."));

@@ -418,9 +418,36 @@ String Utils::intToMonth(int month)
  */
 unsigned long Utils::random(unsigned long max)
 {
-   return (int)((max * rand()) / (RAND_MAX + 1.0));
+   return (unsigned long)(((max+1.0) * rand()) / RAND_MAX);
 }
 
+/* baseXStr - Convert a number to another base (output a string) up to base 84
+ * Original 17/1/01, Simon Butcher <simonb@alien.net.au>
+ * Notes: The charset is NOT mime/base64 compatible! Do not be fooled!! Rather,
+ *        it conforms to a scarey old USASI document in late 1968 which was
+ *        apparently based on a proposed 96-bit ascii table.. EEK!
+ */
+#define MAXBASE 84
+String Utils::baseXStr(unsigned long n, unsigned short base)
+{
+   const char baseChrs[MAXBASE + 1] =
+     "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?"
+     "$#%&*+/-=~[(<])>|';";
+   
+   long digit;
+   String tempStr = "";
+   
+   if ((base < 2) || (base > MAXBASE)) // Check if someone is stupid
+     return "";
+   
+   while (n > 0) {
+      digit = n % base;
+      n = (n - digit) / base;
+      tempStr = String(baseChrs[digit]) + tempStr;
+   }
+   
+   return tempStr;
+}
 
 /* stripCRLF - Remove any carrage returns or linefeeds from a string
  * Original 16/7/01, Simon Butcher <simonb@alien.net.au>
@@ -443,7 +470,7 @@ String Utils::stripCRLF(String line)
    return temp;
 }
 
-/* stripCRLF - Remove any carrage returns or linefeeds from a string
+/* dwindleSpaces - Dwindle the population of white space in a string :)
  * Original 16/7/01, Simon Butcher <simonb@alien.net.au>
  * Note: No I wasn't on drugs during the writing of these comments.
  */

@@ -45,12 +45,13 @@ Kill me :(
 Make me do an action in a channel.
 
 :HELP [<topic>]
-Get help on something. The help file at the moment is very minimal, and quite possibly highly imcomplete in many areas. Don't trust it with your life :)
+Get help on something, like you are right now! Options in brackets ('(',')') are only needed if being /msg'd to me. Options in square-brackets ('[',']') are optional. Names surrounded by right-angled-brackets ('<','>') are place-holders for your command data. For example, the usage for this topic ('HELP') contains an optional command parameter where you may enter a topic to display.
+The help system is currently quite small, and under-documentated in some areas. If you need more help, ask another user who has access to me.
 
 :HINT
 Receive a hint. This command will cost you points, but at this stage the writer of this help file would not have a clue exactly how many it will cost until this command physically does something :) Oops :) This command is only available within a quiz channel.
 
-:IDENT [<nick name>] <password>
+:IDENTIFY <password>
 Identify yourself to give you access to functions you are privellaged to
 
 :INVITE (<channel>)
@@ -90,7 +91,7 @@ Leave a channel, optionally giving a reason for leaving.
 Change your password. You must specify your old password, and you must already be identified and using your normal nick name before the password will be allowed to change for security reasons.
 
 :PING
-Ping yourself :) Not fully functional yet, sorry, but give it a shot anyway :)
+Pure and simple - Ping yourself :)
 
 :RAW <IRC data>
 USE WITH CAUTION!!! Send raw data to the IRC server.
@@ -98,9 +99,17 @@ USE WITH CAUTION!!! Send raw data to the IRC server.
 :RECONNECT
 This causes me to disconnect and reconnect to my current server.
 
+:REGISTER <password>
+Register your nickname to be able to use the functions of the bot. If you do not specify a nickname (only a password), you will be registered under your current nickname. Your password is used to identify yourself with the bot at later times. If you do not use this for a long period of time, your access will be deleted. More information on the period of time is given upon registration.
+!! WARNING !!  This is _NOT_ a nickname registration service, it is only designed to allow you access to the functions provided by this software. Abuse of this software will most likely include being banned from participation. Channels can _NOT_ be registered.
+See also: IDENTIFY
+
 :REPEAT
 Repeat the last quiz question asked.
 This command is only available within a quiz channel.
+
+:RULES (<channel>)
+Display the channel rules for your current channel, or the channel specified. If no channel rules have been set, no responce will be given.
 
 :SAVE
 Force a database checkpoint over all saveable files.
@@ -118,7 +127,7 @@ List the servers in my server list.
 Report some utterly useless and downright geeky statistics. Incomplete. :(
 
 :TIME
-Report the current time, local to where I am running. The machine that runs me is kept in regular synchronisation with reliable time observatories around the world. Having said that, however, you should be aware that the time may be slightly wrong due to lag between us, and you should consult the PING command shld you require strict accuracy! :)
+Report the current time, local to where I am running. The machine that runs me is kept in regular synchronisation with reliable time observatories around the world. Having said that, however, you should be aware that the time may be slightly wrong due to lag between us, and you should consult the PING command should you require strict accuracy! :)
 
 :TOPIC (<channel>) <topic>
 Change the topic of a channel.

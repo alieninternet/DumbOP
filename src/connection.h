@@ -2,7 +2,7 @@
 #ifndef __CONNECTION_H_
 #define __CONNECTION_H_
 
-#include "string.h"
+#include "str.h"
 #include "socket.h"
 
 class Connection {

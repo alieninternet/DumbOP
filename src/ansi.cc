@@ -5,7 +5,7 @@
 #include <ctype.h>
 
 #include "ansi.h"
-#include "string.h"
+#include "str.h"
 #include "utils.h"
 #include "version.h"
 

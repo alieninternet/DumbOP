@@ -5,22 +5,22 @@ RM=rm -fv
 CPP=c++
 CC=gcc
 STRIP=strip
-CFLAGS=$(DEFINES) -Wall -O2
+CFLAGS=$(DEFINES) -Wall #-O2
 LDFLAGS=-lnsl -lcrypt  
 INCDIRS=
 
 # This really should be fused with the make debug tag
-#DEBUG_FLAGS=-g -DDEBUG
-DEBUG_FLAGS=-DDEBUG
+DEBUG_FLAGS=-g -DDEBUG
+#DEBUG_FLAGS=-DDEBUG
 
-SOURCES=ansi.cc banentry.cc bot.cc channel.cc channellist.cc commands.cc \
-	config.cc connection.cc ctcp.cc dccconnection.cc dccperson.cc \
-	flags.cc gamecommands.cc gamequiz.cc games.cc \
-	log.cc main.cc mask.cc note.cc notelist.cc parser.cc person.cc \
-	queue.cc server.cc serverconnection.cc serverlist.cc serverqueue.cc \
-	serverqueueitem.cc signal.cc socket.cc string.cc stringtokenizer.cc \
-	telnet.cc telnetspy.cc todolist.cc user.cc usercommands.cc \
-	userlist.cc utils.cc
+SOURCES=ansi.cc banentry.cc bot.cc channel.cc channelcommands.cc \
+	channellist.cc commands.cc config.cc connection.cc ctcp.cc \
+	dccconnection.cc dccperson.cc flags.cc gamecommands.cc gamequiz.cc \
+	games.cc log.cc main.cc managercommands.cc mask.cc note.cc \
+	notelist.cc parser.cc person.cc queue.cc server.cc \
+	serverconnection.cc serverlist.cc serverqueue.cc serverqueueitem.cc \
+	sha1.cc signal.cc socket.cc string.cc stringtokenizer.cc telnet.cc \
+	telnetspy.cc todolist.cc user.cc usercommands.cc userlist.cc utils.cc
 
 VER_SRC=version.cc
 VER_OBJ=version.o
@@ -32,7 +32,7 @@ OBJECTS=$(SOURCES:.cc=.o)
 TARGET=dumbop
 
 all: $(TARGET)
-	$(STRIP) $(TARGET)
+#	$(STRIP) $(TARGET)
 
 debug: $(TARGET)
 

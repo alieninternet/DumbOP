@@ -4,7 +4,7 @@
 # include <time.h>
 # include <list.h>
 
-# include "string.h"
+# include "str.h"
 # include "userlistitem.h"
 
 class Commands;
@@ -24,12 +24,9 @@ class UserList {
    
    void addUser(String, String, int, int, String,
 		long = 0, time_t = -1, String = "");
-   void addUserFirst(String, String, int, int, String,
-		     long = 0, time_t = -1, String = "");
-   void removeFirst();
    void removeUser(String, String);
-   
-   UserListItem * getUserListItem(String, String);
+
+   UserListItem * getUserListItem(String, String = "#*");
    
    int getMaxLevel(String);
    int getLevel(String, String);
@@ -37,7 +34,10 @@ class UserList {
    int getMaxProt(String, String);
    
    bool isInUserList(String, String = "");
-   
+   bool isNickInUserList(String);
+
+   bool identify(String, String, bool = true);
+
    friend class Commands;
    friend class UserCommands;
 };

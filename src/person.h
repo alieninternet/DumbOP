@@ -2,7 +2,7 @@
 #ifndef __PERSON_H_
 #define __PERSON_H_
 
-#include "string.h"
+#include "str.h"
 
 class Bot;
 

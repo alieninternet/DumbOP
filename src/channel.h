@@ -28,10 +28,14 @@ struct wantedChannel {
    String key;
    unsigned long flags;
    unsigned long gameflags;
+
+   String greeting;			// Welcoming string
+   String rules;			// Rules line
    
-   wantedChannel(String m, String kp, String ky, 
-		 unsigned long f, unsigned long gf)
-     : mode(m), keep(kp), key(ky), flags(f), gameflags(gf) { }
+   wantedChannel(String m, String kp, String ky,
+		 unsigned long f, unsigned long gf, String g, String r)
+     : mode(m), keep(kp), key(ky), flags(f), gameflags(gf), 
+       greeting(g), rules(r) { }
 };
 
 class Channel {

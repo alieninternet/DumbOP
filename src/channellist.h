@@ -3,7 +3,7 @@
 
 #include <map.h>
 
-#include "string.h"
+#include "str.h"
 #include "serverconnection.h"
 #include "channel.h"
 

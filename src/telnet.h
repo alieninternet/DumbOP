@@ -8,7 +8,7 @@
 # include <time.h>
 # include <list.h>
 
-# include "string.h"
+# include "str.h"
 # include "socket.h"
 # include "bot.h" 
 # include "telnetspy.h"

@@ -1,7 +1,7 @@
 #ifndef __COMMANDS_H_
 #define __COMMANDS_H_
 
-#include "string.h"
+#include "str.h"
 #include "message.h"
 #include "bot.h"
 #include "serverconnection.h"

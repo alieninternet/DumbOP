@@ -5,7 +5,7 @@
 #ifndef __ANSI_H_
 # define __ANSI_H_
 
-# include "string.h"
+# include "str.h"
 
 // Basic stuff
 # define BEEP_CHAR     		'\007'		// Beep ^G

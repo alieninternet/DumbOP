@@ -5,7 +5,7 @@
 #ifndef __TELNETSPY_H_
 # define __TELNETSPY_H_
 
-# include "string.h"
+# include "str.h"
 # include "utils.h" 
 # include "bot.h"
 

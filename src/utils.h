@@ -2,7 +2,7 @@
 # define __UTILS_H_
 
 # include <time.h>
-# include "string.h"
+# include "str.h"
 # include "bot.h"
 
 # define CHR_BOLD	'\002'
@@ -45,6 +45,9 @@ class Utils {
    
    static unsigned long random(unsigned long);
 
+   static String baseXStr(unsigned long,
+			  unsigned short);	// Convert base 10 number to another base
+   
    static String stripCRLF(String);
    static String dwindleSpaces(String);
 };

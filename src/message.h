@@ -1,7 +1,7 @@
 #ifndef __MESSAGE_H_
 #define __MESSAGE_H_
 
-#include "string.h"
+#include "str.h"
 
 struct Message {
   int code;

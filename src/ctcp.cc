@@ -8,7 +8,7 @@
 #include "parser.h"
 #include "utils.h"
 #include "stringtokenizer.h"
-#include "string.h"
+#include "str.h"
 #include "bot.h"
 #include "person.h"
 #include "version.h"

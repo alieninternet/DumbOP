@@ -307,7 +307,8 @@ Commands::Join(Bot *bot, String channel, String key)
     if (bot->wantedChannels[channel])
       bot->wantedChannels[channel]->key = key;
     else {
-      bot->wantedChannels[channel] = new wantedChannel("", "", key, 0, 0);
+      bot->wantedChannels[channel] = new wantedChannel("", "", key, 0, 0, 
+						       "", "");
     }
   }
   QUEUE->sendJoin(channel, bot->wantedChannels[channel]->key);

@@ -10,7 +10,7 @@
 #include <vector.h>
 #include <list.h>
 
-#include "string.h"
+#include "str.h"
 #include "channel.h"
 
 class Games;
@@ -18,11 +18,11 @@ class Games;
 #include "games.h"
 
 // Timing and sequencing values
-#define DEFAULT_QUIZ_CATEGORY_LOCKOUT_TIME	3600	// 1 hour
 #define DEFAULT_QUIZ_QUESTION_LOCKOUT_TIME	3600	// 1 hour
+#define DEFAULT_QUIZ_CATEGORY_LOCKOUT_TIME	1800	// 30 mins
 #define DEFAULT_QUIZ_QUESTION_ASK_TIME		60	// 1 min
 #define DEFAULT_QUIZ_QUESTION_BETWEEN_DELAY	15	// 15 secs
-#define DEFAULT_QUIZ_CATEGORY_BETWEEN_DELAY	45	// 45 secs
+#define DEFAULT_QUIZ_CATEGORY_BETWEEN_DELAY	60	// 1 min
 #define DEFAULT_QUIZ_QUESTION_NEXTHINT_DELAY	20	// 20 secs
 #define DEFAULT_QUIZ_ROUND_QUESTIONS		10	// 10 per round
 
@@ -82,6 +82,7 @@ class gameQuizChannel {
    short hintLevel;			// -1 = Make new hint, 0 = no hint...
    unsigned short questionNum;		// Question number (this round)
    bool answered;			// Question is answered?
+   char questionLevel;			// -1 = Normal, >= 0 are bonus-Q types
    
    gameQuizChannel(Channel *, 
 		   GameQuiz *);		// Class constructor
@@ -108,6 +109,12 @@ class GameQuiz {
 		  String);		// Parse a line of input
    
  public:
+   enum {				// Question types
+      Q_NORMAL = -1,
+      Q_BONUS_REVERSE = 0,
+      Q_BONUS_NO_VOWELS
+   };
+
    bool available;			// Is the quiz online?
    
    GameQuiz(Games *);			// Start up

@@ -7,7 +7,7 @@
 
 # include <stdio.h>
 
-# include "string.h"
+# include "str.h"
 
 # define LOGFLAG_IRC		0x0001	// Log IRC server stuff
 # define LOGFLAG_ALL		0xFFFF	// Log everything and anything

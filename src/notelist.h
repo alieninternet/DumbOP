@@ -8,7 +8,7 @@
 # include <time.h>
 # include <list.h>
 
-# include "string.h"
+# include "str.h"
 
 // Tricky flagging system which also includes folder allocation! :)
 # define NOTE_FUNREAD		0x0001	// Is note new

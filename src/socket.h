@@ -2,7 +2,7 @@
 #ifndef __SOCKET_H_
 # define __SOCKET_H_
 
-# include "string.h"
+# include "str.h"
 
 class Telnet;
 

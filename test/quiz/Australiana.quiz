@@ -1,18 +1,362 @@
-# Lines beginning with the '#' symbol are comments, and are ignored.
-# Lines beginning with the ':' symbol are questions. They must be
-# immediately followed by the answer. Answers are not case sensitive.
-# Blank lines are ignored, but are not allowed immediately after a
-# question line.
-
 :Which Australian state is known as the 'Garden State'?
 Victoria
-:What is Australia's Capital City?
+
+:What is the name of Australia's Capital City?
 Canberra
-:What Australian state has a 'golden coast'?
+
+:Which Australian state has a 'golden coast'?
 Queensland
 
-:What Australian city is known to have four seasons in one day?
+:Which Australian city is known to have four seasons in one day?
 Melbourne
-:What Australian city is known as the 'City of Churches'
+
+:Which Australian city is known as the 'City of Churches'
 Adelaide
+
+:What's the connection between the following? Victoria, Queensland and Tasmania.
+States in Australia 
+
+:In Australian slang , what is a 'sanger'? 
+A sausage 
+sausage
+
+:Where in Australia is the Riverina region? 
+New South Wales 
+
+:Who won the 1996 AFL Grand Final? 
+North Melbourne Kangaroos 
+
+:Airport Code: Canberra, Australia 
+CBR 
+
+:What country was once known as New Holland? 
+Australia 
+
+:Australian Sports: AFL teams '___________ Magpies'? 
+Collingwood 
+
+:Which Australian singer sings "Breathe"? 
+Kylie Minogue 
+Minogue
+
+:Who founded the 'Call to Australia' Party in 1977? 
+Fred Nile
+Nile 
+
+:On September 24, 1999, which Australian airline overshot the runway in Bangkok, Thailand? 
+Qantas 
+
+:Where in Perth was it dangerous to go to at night due to a serial killer lurking? 
+Claremont
+
+:What are the two major Australian Airlines? 
+Ansett Australia and Qantas
+Qantas and Ansett Australia
+Qantas and Ansett
+Ansett and Qantas 
+
+:What is Australia's national anthem? 
+Advance Australia Fair 
+
+:This Australian city was named after the wife of the British monarch William IV.
+Adelaide
+
+:What is the name of New Zealand's national rugby union team?
+All Blacks
+
+:What does ANZAC stand for?
+Australian and New Zealand Army Corps
+
+:What is the name of the art prize that is awarded each year for portrait painting?
+Archibald Prize
+
+:Which Danish architect designed the Sydney Opera House in 1957?
+Joern Utzon
+Utzon
+
+:In which year did the Sydney Opera House open?
+1973
+
+:What is the name of the oldest bridge still in existence in Australia?
+Richmond Bridge
+
+:What does the RAAF stand for?
+Royal Australian Air Force
+
+:What is the name of the Australia's worst bushfires that occurred on February 16th, 1983?
+Ash Wednesday
+
+:What is the term commonly used to describe the region containing Australia, New Zealand, New Guinea and other nearby islands of the Pacific Ocean?
+Australasia
+
+:The explorer James Cook first sighted the aurora australis in which year?
+1773
+
+:The Blue Mountains is located in which Australian state?
+New South Wales
+
+:What is the name of the biggest Australian state?
+Western Australia
+
+:Fraser Island is located off the coast of which Australian state?
+Queensland
+
+:Melville Island is located off the coast of which Australian state?
+Northern Territory
+
+:Kangaroo Island is located off the coast of which Australian state?
+South Australia
+
+:What is the name of the Australian cattle dog?
+Blue Heeler
+
+:What is celebrated as a national holiday throughout Australia on January 26?
+Australia Day
+
+:What are the two animals native animals that are on the Australian coat of arms?
+Kangaroo and Emu
+Emu and Kangaroo
+
+:This Aussie word is slang for 'a city lout or street tough'.
+Larrikin
+
+:This Aussie word is slang for 'a girl'.
+Sheila
+
+:If someone is your 'cobber', they are your what?
+Friend
+
+:The Aboriginal concept of long ago is called what?
+Dreamtime
+
+:Two-up is a gambling game played with two tossed what?
+Pennies
+
+:A 'mozzie' is a what?
+Mosquito
+
+:What does 'chewie' mean?
+Chewing Gum
+
+:What does 'lippie' mean?
+Lipstick
+
+:If you take a day away from work or school because of real or faked sickness, you take a what?
+Sickie
+
+:This Aussie word is slang for 'afternoon'.
+Arvo
+
+:A person who is 'scungy' is what?
+Dirty
+
+:Finish the line: 'Australians all let us rejoice, for we are..'
+Young and Free
+
+:What is the name of the Royal Anthem of Australia?
+God Save the Queen
+
+:Which Australian Rules footballer is nicknamed 'Plugger'?
+Tony Lockett
+Lockett
+
+:In Australian Rules football a goal counts as how many points?
+Six
+6
+
+:In Australian Rules football a behind counts as how many points?
+One
+1
+
+:In Australian Rules football, Quarter time lasts for how long?
+Three minutes
+3 minutes
+
+:In Australian Rules football, Half time lasts for how long?
+Twenty minutes
+20 minutes
+
+:In Australian Rules football, Three-quarter time lasts for how long?
+5 minutes
+Five minutes
+
+:Aussie Rules team: 'Essendon _______'
+Bombers
+
+:Aussie Rules team: 'North Melbourne _________'
+Kangaroos
+
+:Aussie Rules team: 'Geelong ____'
+Cats
+
+:Aussie Rules team: 'Hawthorn _____'
+Hawks
+
+:Aussie Rules team: 'Collingwood _______'
+Magpies
+
+:Aussie Rules team: 'Port Adelaide _____'
+Power
+
+:Aussie Rules team: 'West Coast ______'
+Eagles
+
+:Aussie Rules team: 'Fremantle ______'
+Dockers
+
+:Aussie Rules team: 'Brisbane _____'
+Lions
+
+:Aussie Rules team: 'Melbourne ______'
+Demons
+
+:Aussie Rules team: 'Carlton _____'
+Blues
+
+:Aussie Rules team: 'St Kilda ______'
+Saints
+
+:Aussie Rules team: 'Sydney _____'
+Swans
+
+:Aussie Rules team: 'Adelaide _____'
+Crows
+
+:Aussie Rules team: 'Richmond ______'
+Tigers
+
+:Aussie Rules team: 'Western ________'
+Bulldogs
+
+:Ayers Rock is located in which Australian state?
+Northern Territory
+
+:Ballarat was the scene of which Australian event?
+Eureka Stockade
+
+:The Bank of New South Wales was established in which year?
+1817
+
+:The Barossa Valley produces what percentage of Australia's wine?
+Thirty percent
+30 percent
+30%
+
+:Who was the first prime minister of Australia?
+Sir Edmund Barton
+Barton
+
+:Who was the judge at the trial of the bushranger Ned Kelly?
+Sir Redmond Barry
+Barry
+
+:Which body of water separates Tasmania from the Australian mainland?
+Bass Strait
+
+:Who is known as the 'Father of Melbourne'?
+John Batman
+Batman
+
+:Hobart is the capital of which Australian state?
+Tasmania
+
+:Who captained the Australian cricket team in 27 test matches, scored more than 2,000 runs in test matches, and took 248 wickets at an average of 27.06 runs.
+Richie Benaud
+Benaud
+
+:Bendigo is located in which Australian state?
+Victoria
+
+:Billabong is an Aboriginal word meaning what?
+Dead River
+
+:Mikey Robins was a team captain on what Australian TV show? 
+Good News Week 
+
+:What AFL team won back to back premierships in 1997 and 1998?
+Adelaide Crows
+
+:Which species of kangaroos is the largest in size? 
+Grey Kangaroos
+
+:What is the Fremantle Doctor?
+A Wind
+Wind
+
+:Who were the joint winners of the 1996 brownlow medal?
+James Hird and Michael Voss
+
+:Who was known as Mr Football, and died of cancer in 1995?
+Ted Whitten
+
+:How many players remain on West Coast's list from the 1992 and 1994 premiership teams? 
+Six
+6
+
+:Occasionally though Alice Springs a river flows. What is its name?
+The Todd River
+The Todd
+Todd River
+Todd
+
+:On New Zealand's South Island, What is the largest city?
+Christchurch
+
+:Named Uluru by Aborigines, what was the name given by Australian settlers?
+Ayer's Rock
+
+:Ending in Lake Alexandrina is which Australian river?
+The Murray
+Murray
+
+:Mount Wellington overlooks which Australian city?
+Hobart
+
+:Which country has the largest sheep population?
+Australia
+
+:Which famous building contains Australia's largest organ?
+The Sydney Opera House
+Sydney Opera House
+
+:Which is the largest country that lies entirely within the Southern Hemisphere?
+Australia
+
+:What is the meaning of the New South wales town of Wagga Wagga?
+Many Crows
+
+:Mount Baw Baw is located in which Australian state?
+Victoria
+
+:Which Australian shared the 1945 Nobel Prize for medicine following his work in the development of penicillin?
+Howard Florey
+Florey
+
+:How many stars make up Orion's belt?
+Three
+3
+
+:What is Australia's largest marsupial carnivore still known to exist?
+The Tasmanian Devil
+Tasmanian Devil
+
+:Which large dancing bird is the only Australian representative of the crane family?
+The Brolga
+Brolga
+
+:What famous Australian food product was developed in the 1920's by Melbourne entrepeneur Fred Walker and chemist C. P. Callister?
+Vegemite
+
+:What famous Australian scheme provides roughly 2300 giga-litres of water for irrigation each year?
+The Snowy Mountains Scheme
+The Snowy Mountain Scheme
+Snowy Mountains Scheme
+Snowy Mountain Scheme
+Snowy Mountains
+Snowy Mountain
+
+
+
+
+
 

@@ -4,7 +4,7 @@
 
 #include <list.h>
 
-#include "string.h"
+#include "str.h"
 #include "queue.h"
 #include "serverqueueitem.h"
 

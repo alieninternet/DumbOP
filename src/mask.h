@@ -2,7 +2,7 @@
 #ifndef __MASK_H_
 #define __MASK_H_
 
-#include "string.h"
+#include "str.h"
 
 class Mask {
   String mask;

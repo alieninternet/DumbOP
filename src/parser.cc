@@ -75,7 +75,7 @@ struct {
      { "303",   Parser::parse303     }, /* RPL_ISON  - ? */
    /* 305 - RPL_UNAWAY - Away turned off msg */
    /* 306 - RPL_NOWAWAY - Marked as AWAY */
-     { "311",	Parser::parse311     }, /* RPL_WHOISUSER - User details */
+//     { "311",	Parser::parse311     }, /* RPL_WHOISUSER - User details */
    /* 312 - RPL_WHOISSERVER - User is using this */
    /* 313 - RPL_WHOISOPERATOR - User is IRC OP */
    /* 314 - RPL_WHOWASUSER - WHOWAS details */
@@ -218,7 +218,7 @@ void Parser::parseLine(ServerConnection * cnx, String line)
       
    for (int i = 0; functions[i].name != 0; i++) {
       if (command == functions[i].name) {
-	 functions[i].function(cnx, from, rest);
+	 functions[i].function(cnx, from, Utils::dwindleSpaces(rest));
 	 break;
       }
    }
@@ -284,14 +284,14 @@ void
 Parser::parse311(ServerConnection *cnx,
                  Person *from, String rest)
 {
-  StringTokenizer st(rest);
-  st.nextToken();
-  String nuh = st.nextToken() + "!";
-  String uh = st.nextToken() + "@";
-  uh = uh + st.nextToken();
-  nuh = nuh + uh;
-  cnx->bot->userList->addUserFirst(nuh, "*", 0, 3, nuh, -1, -1, "");
-  cnx->bot->userHost = uh;
+//  StringTokenizer st(rest);
+//  st.nextToken();
+//  String nuh = st.nextToken() + "!";
+//  String uh = st.nextToken() + "@";
+//  uh = uh + st.nextToken();
+//  nuh = nuh + uh;
+//  cnx->bot->userList->addUserFirst(nuh, "*", 0, 3, nuh, -1, -1, "");
+//  cnx->bot->userHost = uh;
 }
 
 void
@@ -509,11 +509,15 @@ Parser::parseJoin(ServerConnection *cnx,
     if (!ch)
       return;
     ch->addNick(n, uh, 0, cnx->bot->userList);
-    if (ch->getUser(n)->getAop() && !(ch->getUser(n)->mode & User::OP_MODE) && cnx->bot->iAmOp(c)) {
-      // This is a part of the antispoof code
-      ch->getUser(n)->userkey = Utils::getKey();
-      cnx->queue->sendCTCP(n, "PING", ch->getUser(n)->userkey + " " + c);
-    }
+/*    if (ch->getUser(n)->getAop() && !(ch->getUser(n)->mode & User::OP_MODE) && cnx->bot->iAmOp(c)) {
+ *     ch->getUser(n)->userkey = Utils::getKey();
+ *     cnx->queue->sendCTCP(n, "PING", ch->getUser(n)->userkey + " " + c);
+ *   } */
+     
+     // Check if we have a greeting message we should send this user
+     if (cnx->bot->wantedChannels[ch->channelName]->greeting.length()) {
+	from->sendNotice(cnx->bot->wantedChannels[ch->channelName]->greeting);
+     }
   }
 
   if (joinAndMode)
@@ -641,9 +645,7 @@ Parser::parseNotice(ServerConnection *cnx,
    }
 }
 
-void
-Parser::parsePrivmsg(ServerConnection *cnx,
- 		    Person *from, String rest)
+void Parser::parsePrivmsg(ServerConnection *cnx, Person *from, String rest)
 {
    String nick = from->getNick();
    
@@ -897,31 +899,33 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	User::NONE,         	false 
      },
      { "HINT",        	UserCommands::Hint,        
-	User::USER,         	false 
+	User::USER,         	false
      },
-   //     { "IDENT",       	UserCommands::Ident,       User::NONE,         true, false  },
-     { "INVITE",      	UserCommands::Invite,      
+     { "IDENTIFY",     	UserCommands::Identify,
+	User::NONE,         	false
+     },
+     { "INVITE",      	UserCommands::Invite,
 	User::MANAGER, 		true // was trusted user
      },
-     { "JOIN",        	UserCommands::Join,        
-	User::MASTER,       	false 
+     { "JOIN",        	UserCommands::Join,
+	User::MASTER,       	false
      },
    //     { "KEEP",        	UserCommands::Keep,        User::MANAGER,       true, false  },
-     { "KICK",        	UserCommands::Kick,        
+     { "KICK",        	UserCommands::Kick,
 	User::MANAGER, 		true // was trusted user
      },
    //     { "KICKBAN",     	UserCommands::KickBan,     User::TRUSTED_USER, true, false  },
-     { "LASTSEEN",	UserCommands::LastSeen,	   
-	User::USER,	       	false  
+     { "LASTSEEN",	UserCommands::LastSeen,
+	User::USER,	       	false
      },
-     { "MODE",        	UserCommands::Mode,        
+     { "MODE",        	UserCommands::Mode,
 	User::MANAGER, 		true // was trusted user
      },
-     { "NAMES",       	UserCommands::Names,       
+     { "NAMES",       	UserCommands::Names,
 	User::MASTER,        	true
      },
-     { "NEXTSERVER",  	UserCommands::NextServer,  
-	User::MANAGER,       	false 
+     { "NEXTSERVER",  	UserCommands::NextServer,
+	User::MANAGER,       	false
      },
    //     { "NICK",        	UserCommands::Nick,        User::MANAGER,       false, false },
      { "NOTE",		UserCommands::Note,	   
@@ -946,8 +950,14 @@ struct userFunctionsStruct userFunctionsInit[] = {
      { "RECONNECT",   	UserCommands::Reconnect,   
 	User::MASTER,       	false // master guy
      },
+     { "REGISTER",   	UserCommands::Register,
+	User::NONE,       	false
+     },
      { "REPEAT",   	UserCommands::Repeat,
 	User::USER,       	false
+     },
+     { "RULES",        	UserCommands::Rules,
+	User::MASTER,       	true
      },
      { "SAVE",        	UserCommands::Save,        
 	User::MANAGER,       	false 
@@ -1059,13 +1069,13 @@ void Parser::parseMessage(ServerConnection *cnx, Person *from, String to,
 	    if (!u || !u->userListItem) {
 	       identified = true;
 	    } else {
-	       identified = u->userListItem->passwd == "" || u->userListItem->identified > 0;
+	       identified = u->userListItem->passwd == "" || u->userListItem->identified;
 	    }
 	 } else {
 	    level = Utils::getLevel(cnx->bot, from->getAddress());
 	    identified = true;
 	 }
-	 if (level >= (*it)->minLevel) {
+	 if ((level >= (*it)->minLevel) || ((*it)->minLevel == User::NONE)) {
 	    cnx->bot->logLine(from->getAddress() + " did " + command +
 			      " " + rest);
 	    (*it)->function(cnx, from, to, rest);

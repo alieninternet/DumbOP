@@ -5,7 +5,7 @@
 #ifndef __CTCP_H_
 # define __CTCP_H_
 
-# include "string.h"
+# include "str.h"
 # include "person.h"
 # include "serverconnection.h"
 

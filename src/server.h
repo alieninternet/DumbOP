@@ -2,7 +2,7 @@
 #ifndef __SERVER_H_
 #define __SERVER_H_
 
-#include "string.h"
+#include "str.h"
 
 class Server {
 

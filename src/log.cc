@@ -10,7 +10,7 @@
 #include <time.h>
 
 #include "log.h"
-#include "string.h"
+#include "str.h"
 #include "version.h"
 
 /* Log - Init logfile

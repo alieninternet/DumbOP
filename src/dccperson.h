@@ -2,7 +2,7 @@
 #ifndef __DCCPERSON_H_
 #define __DCCPERSON_H_
 
-#include "string.h"
+#include "str.h"
 #include "person.h"
 #include "dccconnection.h"
 

@@ -45,8 +45,8 @@ Channel::~Channel()
   while (channelMemory.size() != 0) {
     it = channelMemory.begin();
     u = (*it).second;
-    if (u && u->userListItem && u->userListItem->identified > 0)
-      u->userListItem->identified--;
+    if (u && u->userListItem && u->userListItem->identified)
+      u->userListItem->identified = false;
     channelMemory.erase(it);
     delete u;
  }
@@ -86,10 +86,10 @@ void Channel::addNick(String n, String uh, int mode, UserList *ul,
    
    if (u->userListItem) {
       if (u->userListItem->identified)
-	u->userListItem->identified++;
+	u->userListItem->identified = true;
       else {
 	 if (u->userListItem->passwd == "")
-	   u->userListItem->identified = 1;
+	   u->userListItem->identified = true;
       }
       u->userListItem->lastseen = 0;
    }
@@ -127,8 +127,8 @@ void Channel::delNick(String n)
    if (u->mode & User::VOICE_MODE)
      countVoice--;
    if (u->userListItem) {
-      if (u->userListItem->identified > 0)
-	u->userListItem->identified--;
+      if (u->userListItem->identified)
+	u->userListItem->identified = false;
       u->userListItem->lastseen = cnx->bot->currentTime.time;
    }
    delete u;  
