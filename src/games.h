@@ -27,6 +27,8 @@ class Games {
    ~Games();				// Shutdown
 
    void attend(void);			// Main game loop called from main loop
+   bool parseLine(Channel *, Person *, 
+		  String);		// Parse a line of input
    
    friend class GameQuiz;
    friend class gameQuizChannel;

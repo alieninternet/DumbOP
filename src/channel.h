@@ -87,10 +87,12 @@ public:
 
   void sendNotice(String);
    
-  friend class Bot;
-  friend class Parser;
-  friend class Commands;
-  friend class UserCommands;
+   friend class Bot;
+   friend class Parser;
+   friend class Commands;
+   friend class UserCommands;
+   friend class Games;
+   friend class GameQuiz;
 };
 
 #endif

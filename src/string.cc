@@ -108,7 +108,7 @@ String::operator=(const char *s)
 String &
 String::operator=(const String & s)
 {
-  s.p->n++; // protection contre st = st
+  s.p->n++; // protection against st = st
   if (--p->n == 0) {
     delete[] p->s;
     delete p;
@@ -381,3 +381,4 @@ operator>>(istream & s, String & st)
 
   return s;
 }
+

@@ -18,25 +18,23 @@ class Games;
 #include "games.h"
 
 // Timing and sequencing values
-#define DEFAULT_QUIZ_CATEGORY_LOCKOUT_TIME	1800	// 30 mins
+#define DEFAULT_QUIZ_CATEGORY_LOCKOUT_TIME	3600	// 1 hour
 #define DEFAULT_QUIZ_QUESTION_LOCKOUT_TIME	3600	// 1 hour
-#define DEFAULT_QUIZ_QUESTION_ASK_TIME		90	// 1 min 30 secs
-#define DEFAULT_QUIZ_QUESTION_BETWEEN_DELAY	30	// 30 secs
-#define DEFAULT_QUIZ_CATEGORY_BETWEEN_DELAY	90	// 1 min 30 secs
+#define DEFAULT_QUIZ_QUESTION_ASK_TIME		60	// 1 min
+#define DEFAULT_QUIZ_QUESTION_BETWEEN_DELAY	15	// 15 secs
+#define DEFAULT_QUIZ_CATEGORY_BETWEEN_DELAY	45	// 45 secs
 #define DEFAULT_QUIZ_QUESTION_NEXTHINT_DELAY	20	// 20 secs
-//#define DEFAULT_QUIZ_ROUND_QUESTIONS		20	// 20 per round
-#define DEFAULT_QUIZ_ROUND_QUESTIONS		3	// 3 per round
+#define DEFAULT_QUIZ_ROUND_QUESTIONS		10	// 10 per round
 
 // Scoring and cost values
 #define DEFAULT_QUIZ_QUESTION_NORMAL_POINTS	1
 #define DEFAULT_QUIZ_QUESTION_BONUS_POINTS	3
-#define DEFAULT_QUIZ_CATEGORY_BASE_CHANGE_COST	5
-#define DEFAULT_QUIZ_CATEGORY_CHANGE_MULTIPLIER	2
+#define DEFAULT_QUIZ_CATEGORY_CHANGE_COST	5
 
 // These effect the randomness of "stuff"
 #define DEFAULT_QUIZ_CATEGORY_RANDOM_ATTEMPTS	1 // no random cats yet
 #define DEFAULT_QUIZ_QUESTION_RANDOM_ATTEMPTS	5
-#define DEFAULT_QUIZ_BONUS_QUESTION_PERCENTILE	20
+#define DEFAULT_QUIZ_BONUS_QUESTION_PERCENTILE	5 // 5%
 
 
 // Class for quiz questions
@@ -76,14 +74,13 @@ class gameQuizChannel {
    
    String category;			// Current category
    String nextCategory;			// Next category
-   unsigned int nextCategoryCost;	// Cost to change next category
    
    gameQuizQuestion *question;		// Current question pointer
    String questionStr;			// Current question (may be warped)
    time_t timeAsked;			// Time question was asked
    
-   int hintLevel;			// -1 = Make new hint, 0 = no hint...
-   unsigned int questionNum;		// Question number (this round)
+   short hintLevel;			// -1 = Make new hint, 0 = no hint...
+   unsigned short questionNum;		// Question number (this round)
    bool answered;			// Question is answered?
    
    gameQuizChannel(Channel *, 
@@ -106,6 +103,9 @@ class GameQuiz {
    map<String, gameQuizChannel *, less<String> > channels;
 
    void attend(void);			// Run the quiz!
+   
+   void parseLine(Channel *, Person *, 
+		  String);		// Parse a line of input
    
  public:
    bool available;			// Is the quiz online?

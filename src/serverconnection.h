@@ -46,6 +46,8 @@ public:
    friend class CTCP;
    friend class Version;
    friend class ServerQueue;
+   friend class Games;
+   friend class GameQuiz;
 };
 
 #endif

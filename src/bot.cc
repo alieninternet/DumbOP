@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <time.h>
+#include <stdlib.h>
 
 #include "bot.h"
 #include "dccconnection.h"
@@ -67,9 +68,12 @@ Bot::Bot(String filename)
 {
    extern userFunctionsStruct userFunctionsInit[];
    extern CTCPFunctionsStruct CTCPFunctionsInit[];
-   
+
    // Set up first clock run
    ftime(&currentTime);
+
+   // Spawn the random seed for this run
+   srand((unsigned int)currentTime.time);
    
 #ifdef DEBUG
    if (debug)

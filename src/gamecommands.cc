@@ -30,6 +30,35 @@ void UserCommands::Category(ServerConnection *cnx, Person *from,
 		       String("\002 has not started yet, sorry."));
       return;
    }
+
+   // Are we are being requested to look for a category and set it.
+   if (rest.length() && (rest != '*') && (rest != '-')) {
+      // Check if the next category has been already set
+      if (gqc->nextCategory.length()) {
+	 from->sendNotice(String("The category for the next round in \002") +
+			  c->channelName +
+			  String("\002 has already been set to \002") +
+			  gqc->nextCategory + String("\002, sorry."));
+	 return;
+      }
+      
+      // Otherwise, check that the category exists
+      if (cnx->bot->games->quiz->categories[rest.toUpper()]) {
+	 // Set the next category
+	 gqc->nextCategory = rest.toUpper();
+	 
+	 // Tell them we are setting the category
+	 from->sendNotice(String("The category for the next round in \002") +
+			  c->channelName + String("\002 will be \002") +
+			  rest.toUpper() + String("\002"));
+	 return;
+      } else {
+	 // Could not find the category
+	 from->sendNotice(String("I could not find the category \"\002") +
+			  rest.toUpper() + String("\002\", sorry."));
+	 return; // get rid of this?
+      }
+   }
    
    // If we get HERE, we know the category was not specified or was invalid.
    from->sendNotice(String("Current Quiz Category in \002") +
@@ -37,9 +66,10 @@ void UserCommands::Category(ServerConnection *cnx, Person *from,
 		    gqc->category + String("\002. ") +
 		    ((gqc->nextCategory.length() > 0) ?
 		     (String("Next category selected is \002") +
-		      gqc->nextCategory + String("\002. ")) : String("")) +
-		    String("Changing the category for the next round will cost \002") +
-		    String(gqc->nextCategoryCost) + String("\002 points."));
+		      gqc->nextCategory + String("\002. ")) : 
+		     (String("Changing the category for the next round will cost \002") +
+		      String(DEFAULT_QUIZ_CATEGORY_CHANGE_COST) + 
+		      String("\002 points."))));
    
    // Have we been requested to list the categories too?
    if ((rest[0] == '-') || (rest[0] == '*')) {
@@ -55,7 +85,9 @@ void UserCommands::Category(ServerConnection *cnx, Person *from,
 	    totalQuestions += (*it).second->numQuestions;
 	    
 	    // Start the category string with a space
-	    result = result + String(" ");
+	    if (result.length()) {
+	       result = result + String(" ");
+	    }
 	    
 	    // Check the age of this category
 	    if ((cnx->bot->currentTime.time - (*it).second->lastPlayed) <
@@ -123,8 +155,7 @@ void UserCommands::Repeat(ServerConnection *cnx, Person *from,
    }
 
    // Do we actually HAVE a question to repeat?
-   if ((!gqc->questionStr.length()) &&
-       (!gqc->answered)) {
+   if ((!gqc->questionStr.length()) || (gqc->answered)) {
       from->sendNotice(String("There is no question to repeat in \002") +
 		       c->channelName + String("\002."));
       return;
@@ -132,8 +163,7 @@ void UserCommands::Repeat(ServerConnection *cnx, Person *from,
    
    // Tell them the question
    from->sendNotice(String("The question from \002") + gqc->category +
-		    String("\002 is: \002") + gqc->questionStr +
-		    String("\002"));
+		    String("\002 is: ") + gqc->questionStr);
 }
 
 
@@ -163,5 +193,22 @@ void UserCommands::Hint(ServerConnection *cnx, Person *from,
       return;
    }
   
-   c->sendNotice("The hint command does not do anything.. yet..");
+   // Do we actually HAVE a question to hint for?
+   if ((!gqc->questionStr.length()) || (gqc->answered)) {
+      from->sendNotice(String("There is no question to hint for in \002") +
+		       c->channelName + String("\002."));
+      return;
+   }
+
+   // Are we being asked to pull up the expensive hint thingy?
+   if (true) {
+      // Make sure a hint is available for that question
+      if (gqc->question->hint.length()) {
+	 c->sendNotice(String("Extra Hint: ") +
+		       gqc->question->hint);
+      } else {
+	 from->sendNotice(String("There is no extra hint for the current question in \002") +
+			  c->channelName + String("\002, sorry."));
+      }
+   }
 }

@@ -96,6 +96,7 @@ void sigHandler(int sig)
       // Normal shutdown
     case SIGINT:
     case SIGQUIT:
+    case SIGPIPE:
     case SIGTERM:
     case SIGABRT:
 #ifdef SIGXCPU

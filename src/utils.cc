@@ -418,5 +418,70 @@ String Utils::intToMonth(int month)
  */
 unsigned long Utils::random(unsigned long max)
 {
-   return (int)(((max + 1.0) * rand()) / (RAND_MAX + 1.0));
+   return (int)((max * rand()) / (RAND_MAX + 1.0));
 }
+
+
+/* stripCRLF - Remove any carrage returns or linefeeds from a string
+ * Original 16/7/01, Simon Butcher <simonb@alien.net.au>
+ */
+String Utils::stripCRLF(String line)
+{
+   String temp = "";
+   
+   // Run through the line
+   for (int i = 0; i < line.length(); i++) {
+      switch (line[i]) {
+       case '\r':
+       case '\n': // These characters get this far, and no further.
+	 break;
+       default: // Everything else falls through
+	 temp = temp + String(line[i]);
+      }
+   }
+   
+   return temp;
+}
+
+/* stripCRLF - Remove any carrage returns or linefeeds from a string
+ * Original 16/7/01, Simon Butcher <simonb@alien.net.au>
+ * Note: No I wasn't on drugs during the writing of these comments.
+ */
+String Utils::dwindleSpaces(String line)
+{
+   String temp = "";
+   bool lastSpace = true; // Strip any prior spaces to the real string
+   int i;
+   
+   // Start at the beginning and end at the end, hopefully
+   for (i = 0; i < line.length(); i++) {
+      switch (line[i]) {
+       case ' ': // A space - Just the very thing we are dwindling
+	 /* Check if we are going to ignore this from being a first offense
+	  * offense in this spacial sequence! :) Any further offenders are
+	  * not admitted to the club.
+	  */
+	 if (!lastSpace) {
+	    /* Allow the first offender, he's a mate */
+	    temp = temp + String(line[i]);
+	    lastSpace = true;
+	 }
+	 break;
+       default: // Every other character is good! No really!
+	 temp = temp + String(line[i]);
+	 lastSpace = false;
+      }
+   }
+   
+   /* We need to check the end of the line, just in case there is a space
+    * lurking there that should not be allowed! This space MUST DIE! DIE!
+    * BWA HA HA HA HA HA HA HA HA!!!!!! Remember i is already glued at the
+    * end of the line...
+    */
+   if ((temp.length() > 1) && (temp[temp.length() - 1] == ' ')) {
+      temp = temp.subString(0, temp.length() - 2);
+   }
+   
+   return temp;
+}
+

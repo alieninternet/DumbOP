@@ -43,8 +43,10 @@ class Utils {
    static String intToDayOfWeek(int);
    static String intToMonth(int);
    
-   static unsigned long random(unsigned long max);
-   
+   static unsigned long random(unsigned long);
+
+   static String stripCRLF(String);
+   static String dwindleSpaces(String);
 };
 
 #endif

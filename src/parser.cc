@@ -11,6 +11,7 @@
 #include "utils.h"
 #include "bot.h"
 #include "telnetspy.h"
+#include "flags.h"
 
 struct {
    char *name;
@@ -657,9 +658,10 @@ Parser::parsePrivmsg(ServerConnection *cnx,
 	 cnx->bot->ignoredUserhosts[fromUserhost] += Bot::IGNORE_DELAY;
 	 cnx->bot->logLine(from->getAddress() +
 			   " is flooding me. We will ignore him/her/it.");
-	 if (!Utils::isChannel(to))
-	   from->sendNotice(String("Stop flooding me. You are now being ignored for ") +
-			    String((long)Bot::IGNORE_DELAY) + " seconds.\002");
+	 if (!Utils::isChannel(to)) {
+	    from->sendNotice(String("Stop flooding me. You are now being ignored for ") +
+			     String((long)Bot::IGNORE_DELAY) + " seconds.\002");
+	 }
       }
       // The following lines reset the counter if you use the
       // command "!sorry" (if '!' is your command char).
@@ -850,7 +852,7 @@ void Parser::parseCTCP(ServerConnection *cnx,
 // userFunctionsInit - Table of user functions
 struct userFunctionsStruct userFunctionsInit[] = {
      { "ACCESS",	UserCommands::Access,      
-	User::USER,		true 
+	User::MASTER,		true 
      },
      { "ADDUSER",     	UserCommands::AddUser,     
 	User::MASTER,		false 
@@ -945,7 +947,7 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	User::MASTER,       	false // master guy
      },
      { "REPEAT",   	UserCommands::Repeat,
-	User::MANAGER,       	false
+	User::USER,       	false
      },
      { "SAVE",        	UserCommands::Save,        
 	User::MANAGER,       	false 
@@ -988,56 +990,90 @@ void Parser::parseMessage(ServerConnection *cnx, Person *from, String to,
 			  String parameters)
 {
    if (parameters[0] != cnx->bot->commandChar) {
-      // Stuff goes here.
-   } else {
-      StringTokenizer st(parameters);
-      
-      String command = st.nextToken().subString(1).toUpper();
-      String rest = st.rest().trim();
-      int level;
-      bool identified = false;
-      
-      list<userFunction *>::iterator it;
-      for (it = cnx->bot->userFunctions.begin();
-	   it != cnx->bot->userFunctions.end();
-	   ++it) {
-	 if (command == (*it)->name) {
-	    if ((*it)->needsChannelName) {
-	       if (Utils::isChannel(rest)) {
-		  StringTokenizer st2(rest);
-		  to = st.nextToken();
-		  rest = st.rest();
-	       }
-	       if (!Utils::isChannel(to)) {
-		  from->sendNotice("I don't know which channel you're referring to.");
-		  return;
-	       }
-	       if (!cnx->bot->channelList->getChannel(to)) {
-		  from->sendNotice(String("I am not on \002") + to +
-				   String("\002"));
-		  return;
-	       }
-	       level = Utils::getLevel(cnx->bot, from->getAddress(), to);
-	       User * u = 0;
-	       if (Channel *c = cnx->bot->channelList->getChannel(to))
-		 u = c->getUser(from->getNick());
-	       if (!u || !u->userListItem)
-		 identified = true;
-	       else
-		 identified = u->userListItem->passwd == "" || u->userListItem->identified > 0;
-	    } else {
-	       level = Utils::getLevel(cnx->bot, from->getAddress());
-	       identified = true;
+      /* If the command was not on a channel (private message) then we can
+       * consider that it might be a command, only the user has not prepended
+       * with the command char
+       */
+      if (Utils::isChannel(to)) {
+	 // Get the channel information
+	 Channel *c = cnx->bot->channelList->getChannel(to);
+	 
+	 // Make sure that actually works...
+	 if (!c || !cnx->bot->wantedChannels[to]) {
+	    return;
+	 }
+	 
+	 // If it is a game channel, see if the game engine wants the data
+	 if (cnx->bot->wantedChannels[to]->flags & CHANFLAG_ALLOW_GAMES) {
+	    if (cnx->bot->games->parseLine(c, from, parameters)) {
+	       return;
 	    }
-	    if (level >= (*it)->minLevel) {
-	       cnx->bot->logLine(from->getAddress() + " did " + command +
-				 " " + rest);
-	       (*it)->function(cnx, from, to, rest);
-	       break;
+	 }
+	 
+	 /* Nothing more to do, and we do not want to continue into the 
+	  * command parser. If we got here, we did not need to parse this line
+	  */
+	 return;
+      } else {
+	 // Prepend the command with the appropriate command char?
+      }
+   }
+
+   StringTokenizer st(parameters);
+   
+   String command = st.nextToken().subString(1).toUpper();
+   String rest = st.rest().trim();
+   int level;
+   bool identified = false;
+   
+   list<userFunction *>::iterator it;
+   for (it = cnx->bot->userFunctions.begin();
+	it != cnx->bot->userFunctions.end();
+	++it) {
+      if (command == (*it)->name) {
+	 if ((*it)->needsChannelName) {
+	    if (Utils::isChannel(rest)) {
+	       StringTokenizer st2(rest);
+	       to = st.nextToken();
+	       rest = st.rest();
+	    }
+	    
+	    if (!Utils::isChannel(to)) {
+	       from->sendNotice("I don't know which channel you're referring to.");
+	       return;
+	    }
+	    
+	    if (!cnx->bot->channelList->getChannel(to)) {
+	       from->sendNotice(String("I am not on \002") + to +
+				String("\002"));
+	       return;
+	    }
+	    
+	    level = Utils::getLevel(cnx->bot, from->getAddress(), to);
+	    User * u = 0;
+	    
+	    if (Channel *c = cnx->bot->channelList->getChannel(to)) {
+	       u = c->getUser(from->getNick());
+	    }
+	    
+	    if (!u || !u->userListItem) {
+	       identified = true;
 	    } else {
-	       if (!identified)
-		 from->sendNotice(String("You are not identified on channel \002") + 
-				  to + "\002 - Use \037!IDENT\037");
+	       identified = u->userListItem->passwd == "" || u->userListItem->identified > 0;
+	    }
+	 } else {
+	    level = Utils::getLevel(cnx->bot, from->getAddress());
+	    identified = true;
+	 }
+	 if (level >= (*it)->minLevel) {
+	    cnx->bot->logLine(from->getAddress() + " did " + command +
+			      " " + rest);
+	    (*it)->function(cnx, from, to, rest);
+	    break;
+	 } else {
+	    if (!identified) {
+	       from->sendNotice(String("You are not identified on channel \002") + 
+				to + "\002 - Use \037!IDENT\037");
 	    }
 	 }
       }

@@ -9,6 +9,10 @@ Pickle: gamecommands.cc - Added pointer checking while running through the
 	output while compiled as DEBUG, right?)
 Pickle: gamequiz.cc - Timing routines under attend() written, seem pretty
 	solid and configurable.
+Pickle: utils.cc - Added random function for random number generation
+Pickle: utils.cc - Added dwindleSpaces function to remove white space.
+Pickle: .. and fixed a vast array of STUPID bugs that shouldn't have been 
+	there in the first place..
 
 
 Version 0.34
