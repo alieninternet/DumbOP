@@ -35,8 +35,8 @@ TARGET=dumbop
 SOURCES=banentry.cc bot.cc config.cc connection.cc ctcp.cc flags.cc log.cc \
 	main.cc mask.cc server.cc serverconnection.cc serverlist.cc todolist.cc
 
-SUB_DIRS=channels commands dcc games notes parser queue smtp snmp strings \
-	system telnet users utils
+SUB_DIRS=channels commands dcc games garbage notes parser queue smtp snmp \
+	strings system telnet users utils
 	
 VER_SRC=version.cc
 VER_OBJ=version.@OBJEXT@
@@ -45,8 +45,9 @@ VER_FLG=-DCOMPILE_STRING="\"`uname -n -m`\"" -DBUILD_STRING="\"`date`\""
 # this needs to be fixed...
 OBJECTS=$(SOURCES:.cc=.@OBJEXT@) \
 	channels/channels.o commands/commands.o dcc/dcc.o games/games.o \
-	notes/notes.o parser/parser.o queue/queue.o strings/strings.o \
-	system/system.o telnet/telnet.o users/users.o utils/utils.o
+	garbage/garbage.o notes/notes.o parser/parser.o queue/queue.o \
+	smtp/smtp.o snmp/snmp.o strings/strings.o system/system.o \
+	telnet/telnet.o users/users.o utils/utils.o
 
 ########################################################################
 

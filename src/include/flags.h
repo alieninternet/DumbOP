@@ -15,7 +15,9 @@
 // User flags
 # define USERFLAG_IS_BOT		0x00000001 // User is actually a bot
 # define USERFLAG_IS_SUSPENDED		0x00000002 // User is suspended completely
+# define USERFLAG_IS_ON_HOLIDAY		0x00000004 // User is on holiday
 # define USERFLAG_USE_PRIVMSG		0x00000010 // Use PRIVMSG, not NOTICE
+# define USERFLAG_USE_EMAIL		0x00000020 // Forward NOTES to EMAIL
 # define USERFLAG_LASTSEEN_AUTH		0x00000100 // Lastseen was identified
 # define USERFLAG_HAS_MONEY_TREE	0x00100000 // User has endless credits
 

@@ -2,8 +2,10 @@
  * Quiz run-time parsing routines
  */
 
+#include "config.h"
 #include "gamequiz.h"
 #include "userlist.h"
+#include "utils.h"
 
 
 /* parseLine - Parse a potential correct answer to a question

@@ -17,35 +17,9 @@ class Games;
 
 #include "games.h"
 
-// Timing and sequencing values
-#define DEFAULT_QUIZ_QUESTION_LOCKOUT_TIME	7200	// 2 hours
-#define DEFAULT_QUIZ_CATEGORY_LOCKOUT_TIME	1800	// 30 mins
-#define DEFAULT_QUIZ_QUESTION_ASK_TIME		120	// 2 mins
-#define DEFAULT_QUIZ_QUESTION_BETWEEN_DELAY	12	// 12 secs
-#define DEFAULT_QUIZ_CATEGORY_BETWEEN_DELAY	50	// 50 secs
-#define DEFAULT_QUIZ_QUESTION_NEXTHINT_DELAY	25	// 25 secs
-#define DEFAULT_QUIZ_ROUND_QUESTIONS		10	// 10 per round
-
-// Scoring and cost values
-#define DEFAULT_QUIZ_QUESTION_NORMAL_POINTS	1
-#define DEFAULT_QUIZ_QUESTION_BONUS_POINTS	5
-#define DEFAULT_QUIZ_CATEGORY_CHANGE_COST	5
-#define DEFAULT_QUIZ_QUESTION_HINT_COST		3
-#define DEFAULT_QUIZ_QUESTION_CLUE_COST		1
-
-// These effect the randomness of "stuff"
-#define DEFAULT_QUIZ_CATEGORY_RANDOM_ATTEMPTS	1 // no random cats yet
-#define DEFAULT_QUIZ_QUESTION_RANDOM_ATTEMPTS	5
-#define DEFAULT_QUIZ_BONUS_QUESTION_PERCENTILE	5 // 5%
-
-// Auto-Hint controls
+// Auto-Hint things. Do not change unless you want to make a mess!!
 #define DEFAULT_QUIZ_HINT_SPECIAL_CHAR		'\001'	// Internal mask char
 #define DEFAULT_QUIZ_HINT_SPECIAL_CHAR_OUTPUT	'-'	// As seen by user
-#define DEFAULT_QUIZ_HINT_MIN_LENGTH		0	// Length to auto-hint
-#define DEFAULT_QUIZ_HINT_BLOCK_PERCENTAGE	40	// % hints before block
-
-// These thingies effect the answering mechanism
-#define DEFAULT_QUIZ_ANSWER_MAX_FAST_TIME	4000	// 4 sec
 
 // Class for quiz questions
 class gameQuizQuestion {

@@ -2,6 +2,7 @@
  * Version and Compile information
  */
 
+#include "config.h"
 #include "version.h"
 #include "person.h"
 #include "serverconnection.h"

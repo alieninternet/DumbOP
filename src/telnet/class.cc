@@ -2,6 +2,8 @@
  * Handle telnet connections
  */
 
+#include "config.h"
+
 #include <list.h>
 #include <time.h>
 #include <sys/types.h>
@@ -17,8 +19,8 @@
 Telnet::Telnet(Bot *b, int portNum)
  : port(portNum), 
  sock(0), 
- bot(b),
- lastBarUpdate(b->currentTime.time)
+ lastBarUpdate(b->currentTime.time),
+ bot(b)
 {
    if (makeSocket()) {
       // umm..

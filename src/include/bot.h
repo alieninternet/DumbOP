@@ -15,6 +15,8 @@
 # include "todolist.h"
 # include "parser.h"
 # include "telnet.h"
+# include "smtp.h"
+# include "snmp.h"
 # include "signals.h"
 # include "version.h"
 # include "games.h"
@@ -78,11 +80,15 @@ class Bot {
    
    time_t startTime, lastNickNameChange, lastChannelJoin;
    
-   ServerConnection * serverConnection;
+   ServerConnection *serverConnection;
    list<DCCConnection *> dccConnections;
    
    static const long TELNET_PORT = 4000; // Default port is 4000
-   Telnet * telnetDaemon;
+   Telnet *telnetDaemon;		// Telnet Management Daemon
+
+   SMTP *SMTPagent;			// E-mail agent
+
+   SNMP *SNMPagent;			// SNMP (Network Management) agent
    
    Games *games;
    

@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "dccperson.h"
 
 DCCPerson::DCCPerson(DCCConnection *cnx)

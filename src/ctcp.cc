@@ -2,6 +2,8 @@
  * Parse CTCP commands
  */
 
+#include "config.h"
+
 #include <time.h>
 
 #include "ctcp.h"

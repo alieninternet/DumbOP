@@ -27,7 +27,7 @@ LIBS=
 
 TARGET=game.o
 
-SOURCES=category.cc clue.cc give.cc hint.cc repeat.cc
+SOURCES=answer.cc category.cc clue.cc give.cc hint.cc repeat.cc
 
 INCLUDES=
 

@@ -10,6 +10,7 @@ class Commands {
    static void Access(ServerConnection *, Person *, String, String);
    static void AddServer(ServerConnection *, Person *, String, String);
    static void Alias(ServerConnection *, Person *, String, String);
+   static void Answer(ServerConnection *, Person *, String, String);
    static void Ban(ServerConnection *, Person *, String, String);
    static void BanList(ServerConnection *, Person *, String, String);
    static void Beep(ServerConnection *, Person *, String, String);

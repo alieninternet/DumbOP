@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "serverqueueitem.h"
 
 ServerQueueOtherItem::ServerQueueOtherItem(String l, int pr, int pen, int t)

@@ -1,8 +1,10 @@
 
+#include "config.h"
 #include "parser.h"
 #include "commands.h"
 #include "flags.h"
 #include "bot.h"
+#include "utils.h"
 
 // userFunctionsInit - Table of user functions
 struct userFunctionsStruct userFunctionsInit[] = {
@@ -14,6 +16,9 @@ struct userFunctionsStruct userFunctionsInit[] = {
      },
      { "ALIAS",      	Commands::Alias,       
 	User::MASTER,       	false 
+     },
+     { "ANSWER",      	Commands::Answer,
+	User::MANAGER,       	true 
      },
 //     { "BAN",         	Commands::Ban,         User::TRUSTED_USER, true, false  },
      { "BANLIST",     	Commands::BanList,     
@@ -130,7 +135,7 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	User::USER,	       	false
      },
      { "TEST",		Commands::Test,	   
-	User::MASTER,       	true  
+	User::MANAGER,       	false // THIS SHOULD BE MASTER, TRUE
      },
      { "TIME",       	Commands::Time,       
 	User::USER, 		false

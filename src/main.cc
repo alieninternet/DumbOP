@@ -2,6 +2,8 @@
  * The beginning, and the end, but not the middle
  */
 
+#include "config.h"
+
 #include <unistd.h>
 #include <iostream.h>
 #include <stdio.h>

@@ -1,7 +1,9 @@
 
+#include "config.h"
 #include "commands.h"
 #include "flags.h"
 #include "bot.h"
+#include "utils.h"
 
 /* Join - Join a channel
  * Original 16/12/00, Pickle <pickle@alien.net.au>

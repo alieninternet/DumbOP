@@ -1,6 +1,7 @@
 
+#include "config.h"
 #include "parser.h"
-#include "telnetspy.h"
+#include "utils.h"
 
 struct {
    char *name;
@@ -219,6 +220,7 @@ struct {
      { 0, 0 }
 };
 
+
 /* parseLine - Parse a line from the server then act upon it
  * Original 12/12/00, Pickle <pickle@alien.net.au>
  */
@@ -246,7 +248,9 @@ void Parser::parseLine(ServerConnection * cnx, String line)
       }
    }
 
-   TelnetSpy::spyLine(cnx->bot, fromMask, command, rest);
+   // Feed this line to the monitoring and logging agents, it may be wanted
+   cnx->bot->telnetDaemon->monitorLine(fromMask, command, rest);
+   // logging here?
    
    delete from;
 }

@@ -150,6 +150,7 @@ src/commands/user/Makefile \
 src/dcc/Makefile \
 src/games/Makefile \
 src/games/quiz/Makefile \
+src/garbage/Makefile \
 src/notes/Makefile \
 src/parser/Makefile \
 src/queue/Makefile \
@@ -160,6 +161,8 @@ src/strings/Makefile \
 src/system/Makefile \
 src/telnet/Makefile \
 src/telnet/dialogue/Makefile \
+src/telnet/dialogue/login/Makefile \
+src/telnet/dialogue/monitor/Makefile \
 src/users/Makefile \
 src/utils/Makefile)
 

@@ -15,8 +15,6 @@ class Bot;
 class Parser;
 class Commands;
 
-#define DEFAULT_KEEPMODES "iklmnpst"
-
 // This struct is used to keep information about
 // the channel we want to join, the modes we
 // want to set/keep on these channels, and the

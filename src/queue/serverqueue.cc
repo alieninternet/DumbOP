@@ -1,5 +1,8 @@
 
+#include "config.h"
+
 #include <limits.h>
+
 #include "serverqueue.h"
 #include "bot.h"
 

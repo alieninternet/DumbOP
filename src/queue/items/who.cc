@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "serverqueueitem.h"
 
 /* merge - Throw a who or two together to speed things up

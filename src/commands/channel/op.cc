@@ -1,10 +1,15 @@
+/* src/commands/channel/op.cc
+ * OP command
+ */
 
+#include "config.h"
 #include "commands.h"
 #include "flags.h"
 #include "bot.h"
+#include "utils.h"
 
-/* Op
- * Original 14/12/00, Pickle <pickle@alien.net.au>
+/* Op - Give a user +o (channel operator) status
+ * Original 14/12/00, Simon Butcher <simonb@alien.net.au>
  */
 void Commands::Op(ServerConnection *cnx, Person *from,
 		      String channel, String rest)

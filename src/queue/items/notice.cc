@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "serverqueueitem.h"
 
 bool ServerQueueNoticeItem::merge(ServerQueueItem *sqi)

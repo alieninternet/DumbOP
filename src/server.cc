@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "server.h"
 
 Server::Server(String h, int p, String pass)

@@ -80,6 +80,14 @@ SNMP section for stats etc
 
 SMTP section for e-mail forwarding of 'notes', channel logging etc.
 
+Currently the help-file thing sucks. It opens the file, and probably chews up
+descriptors and is very very ugly. Searching a file everytime someone does
+!help is a really gay idea, especially since the help file is endlessly
+getting fatter and fatter. What do to? Convert it to a memory based system
+instead, using a map for the help items, and output as strings, etc etc. This
+also allows for quite a fair bit more flexibility, such as merging the command
+name/access level banner with the command usage line.
+
 
 Probably not needed :)
 ----------------------

@@ -2,6 +2,7 @@
  * Built in games for the heck of it
  */
 
+#include "config.h"
 #include "games.h"
 #include "gamequiz.h"
 #include "flags.h"

@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "serverqueue.h"
 
 void ServerQueue::sendCTCP(String to, String command,

@@ -64,6 +64,29 @@ simonb: Added GIVE command (src/commands/game/give.cc), to give the users the
 	ability to be friendly and give mates some credits (may be good for
 	gambling addicted 'mates' if I ever write a gambling style game, eg.
 	card game or something :)
+simonb: Added an include for 'config.h' to every .cc file, finally. This is
+	for auto-configure to be implemented properly.
+simonb: Added ANSWER command to sneak out the answer to a current question in
+	a quiz channel
+simonb: src/telnet/dialogue/login directory created, login.cc broken up
+	into separate components and placed within this directory to
+	lessen the load of each files. This file is big, future dialogue
+	files may become enormous depending on their complexity.
+simonb: src/smtp directory created for the e-mail engine. This will be for
+	e-mail errors, channel logs, statistics, and forwarding notes.
+simonb: /src/snmp directory created for the SNMP engine. This will mainly be
+	for statistics/tracking etc.
+simonb: src/garbage directory created for our own 'Garbo' dude. Our Garbage
+	Man will clean out users who haven't visited for ages, old notes,
+	and other unwanted things. May also become a socket-killer, too.
+simonb: src/telnet/dialogue/monitor directory and dialogue sub-class created
+simonb: src/telnet/spy.cc renamed to monitor.cc
+simonb: TelnetSpy class split in two and merged with Telnet and
+	TelnetDialogueMonitor classes
+simonb: src/commands/general/help.cc - HELP command now blocks users from
+	getting help on commands they cannot access. It uses a 'blind' system
+	which simply declares that it could not find the command in the
+	help file, even if it really did.
 
 
 Version 0.37

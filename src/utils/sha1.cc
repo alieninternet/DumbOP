@@ -3,6 +3,8 @@
  * Copyright (c) 2001 Alien Internet Services
  */
 
+#include "config.h"
+
 #include <string.h>
 #include <stdlib.h>
 

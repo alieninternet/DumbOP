@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "channellist.h"
 
 ChannelList::ChannelList(String filename, Bot *b)

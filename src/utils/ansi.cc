@@ -2,6 +2,8 @@
  * Basic ANSI/VT-102 implementation for telnet sessions
  */
 
+#include "config.h"
+
 #include <ctype.h>
 
 #include "ansi.h"

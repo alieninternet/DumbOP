@@ -2,6 +2,7 @@
  * GIVE command
  */
 
+#include "config.h"
 #include "commands.h"
 #include "user.h"
 #include "flags.h"

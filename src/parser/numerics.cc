@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "parser.h"
 #include "bot.h"
 #include "serverqueue.h"

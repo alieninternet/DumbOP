@@ -1,4 +1,6 @@
 
+#include "config.h"
+
 #include <fstream.h>
 
 #include "userlist.h"
@@ -190,8 +192,9 @@ bool UserList::isNickInUserList(String nick)
 /* identify - Identify a user via a given mask and password
  * Original 19/7/01, Simon Butcher <simonb@alien.net.au>
  */
-bool UserList::identify(String nick, String password)
+bool UserList::identify(String nick, String password, bool online = true)
 {
+   bool identified = false;
    UserListItem *uli = 0;
 
    // Run through the userlist and find this nickname
@@ -205,22 +208,24 @@ bool UserList::identify(String nick, String password)
    if (!uli) {
       return false;
    }
-
+   
    // If the password is blank, they are automatically identified...
    if (uli->passwd.length()) {
-      // Check the password and see if they match
       if (Utils::generateSHA1(password.toLower()) == uli->passwd) {
-	 uli->identified = true;
-      } else {
-	 uli->identified = false;
+	 identified = true;
       }
    } else {
-      // no password!
-      uli->identified = true;
+      // no password = automatically identified
+      identified = true;
+   }
+   
+   // If we are on-line, mark this user with the identification result
+   if (online) {
+     uli->identified = identified;
    }
    
    // Return the identified status
-   return uli->identified;
+   return identified;
 }
 
 

@@ -2,7 +2,9 @@
  * Quiz running routines
  */
 
+#include "config.h"
 #include "gamequiz.h"
+#include "utils.h"
 
 
 /* attend - Run the quiz channel, or channels

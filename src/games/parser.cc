@@ -2,6 +2,7 @@
  * Built in game channel data parsing routines
  */
 
+#include "config.h"
 #include "games.h"
 #include "gamequiz.h"
 #include "flags.h"

@@ -27,7 +27,7 @@ LIBS=
 
 TARGET=telnet.o
 
-SOURCES=class.cc descriptor.cc spy.cc
+SOURCES=class.cc descriptor.cc monitor.cc
 
 SUB_DIRS=dialogue
 

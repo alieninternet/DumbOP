@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "serverqueueitem.h"
 
 ServerQueueKickItem::ServerQueueKickItem(String c, String w, String r)

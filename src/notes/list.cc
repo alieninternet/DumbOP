@@ -2,6 +2,8 @@
  * Note list for note server
  */
 
+#include "config.h"
+
 #include <fstream.h>
 #include <stdlib.h>
 

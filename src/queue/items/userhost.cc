@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "serverqueueitem.h"
 
 /* merge - Throw a userhost together. RFC2812 says we can only have 5 :(

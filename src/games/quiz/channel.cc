@@ -2,10 +2,13 @@
  * Quiz channel class
  */
 
+#include "config.h"
+
 #include <ctype.h>
 #include <stdlib.h>
 
 #include "gamequiz.h"
+#include "utils.h"
 
 
 /* gameQuizChannel - Initialise the quiz game run-time class

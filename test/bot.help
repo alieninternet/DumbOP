@@ -10,6 +10,9 @@ Add a server to the server list.
 :ALIAS fix me
 Create an alias for a command.
 
+:ANSWER (<channel>)
+Return the answer to a question asked in the specified channel.
+
 :BAN (<channel>) [<nick> | <mask>]
 Ban someone from a channel.
 

@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "serverqueueitem.h"
 
 /* merge - Throw an ison together. The RFC says we can do HEAPS of them!!

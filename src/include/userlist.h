@@ -34,7 +34,7 @@ class UserList {
    bool isInUserList(String);
    bool isNickInUserList(String);
 
-   bool identify(String, String);
+   bool identify(String, String, bool = true);
 
    friend class Commands;
 };

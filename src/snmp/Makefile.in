@@ -27,7 +27,7 @@ LIBS=
 
 TARGET=snmp.o
 
-SOURCES=
+SOURCES=class.cc
 
 INCLUDES=
 

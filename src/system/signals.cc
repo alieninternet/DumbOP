@@ -2,6 +2,8 @@
  * Signal handling code
  */
 
+#include "config.h"
+
 #include <signal.h>
 
 #include "signals.h"

@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "serverqueueitem.h"
 
 ServerQueueChannelModeItem::ServerQueueChannelModeItem(String c, String m, 

@@ -1,4 +1,6 @@
 
+#include "config.h"
+
 #include <iostream.h>
 
 #include "queue.h"

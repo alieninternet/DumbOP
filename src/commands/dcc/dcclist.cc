@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "commands.h"
 #include "dccconnection.h"
 

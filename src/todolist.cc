@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "todolist.h"
 
 TodoList::TodoList()

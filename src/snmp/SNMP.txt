@@ -1,0 +1,96 @@
+
+
+Scratch pad :)
+
+SNMP reference
+
+implementation should be SNMPv1. Reason is that this is the most common
+version, everything can use it and the MIB files, and it makes the
+implementation easier. Although SNMPv1 does not include special
+authentication routines like SNMPv2, SNMPv1 can be accessed in a secure mode
+via an SNMPv2 (which can act like a proxy) which can give security. The
+server doesn't block certain IP addresses, so it shouldn't have to
+authenticate SNMP connections either. In the future it may be necessary to
+add SNMPv2 & SNMPv3 support (v3 is a combination of 1 and 2 with more features)
+
+enterprises is defined as .1.3.6.1.4.1 (from root)
+alien internet services (ais) is defined as 4379 under 'enterprises'
+game software (games) is defined as '2' under our pen
+evolution (egs) is defined as '1' under 'games'
+
+                     1 iso
+		     3 identified organisation
+		     6 department of defense (dod)
+		     1 internet (ARPA)
+		     4 private space
+		     1 enterprise (IANA allocated PENs)
+		  4379 alien internet services (ais)
+      -----------------------------------------------------------------
+       		     3 (automation)
+		     1 DumbOP (dumbop)
+		     * tree below
+		     
+.iso.identifiedOrganization.dod.internet.private.enterprise.ais-pen.automation.dumbop
+.1  .3                     .6  .1       .4      .1         .4379   .3	      .1
+
+(dod-arpa iana ais pen? confused? hehehe :)
+
+the sub sub subsubsubsubsubsubsubsubsubsubsubsubsub groups are used to allow
+flexibility in the future. Eg. game software, so we can have categories.
+What if we develop more game software later? What if we suddenly become a
+hardware company that develops large rack-mountable boxes with flashing
+lights that have snmp capability (yeah, I wish ;) etc etc etc
+
+The tree under evolution is then split up further, into components of
+software, like the server, the relay etc. Under that there some generic and
+specific categories that I will go into later.
+
+object types: 
+	INTEGER - 32bit number (generic, signed)
+		note, an enumerated integer of value '0' is excluded in 
+		a list of enumerations as it is invalid and is apparently
+		prohibited.
+	OCTET STRING - string of 8-bit 'chars' (char array)
+	OBJECT IDENTIFIER - an OID reference
+	NULL - nothing.
+	SEQUENCE (type1, type2, ...typeN) - sequence of types (structure)
+	NetworkAddress - inaddr address, but could be any type ('CHOICE')
+	IpAddress - ('OCTET STRING' length 4)
+	Counter - 32-bit number (unsigned) that only increments
+		note, it is allowed to overflow, obviously resetting it from
+		0. It is defined as 2^32-1 (4294967295 decimal) in rfc1065.
+	Guage - 32-bit number (unsigned) that can float, but gets latched at
+		peak (4294967295), therefore cannot overflow (or 'overfloat')
+	TimeTicks - 32-bit integer (unsigned) that counts time in 100ths of
+		a second. This object identifies the reference from epoch.
+	(there are more.. I am lazy)
+	
+
+Evolution SNMP OID tree for MIB
+enterprise(.1.3.6.1.4.1)->
+ ais(4379)
+  automation(3)
+   dumbop(1)
+
+
+
+
+
+// vvvvvv from evolution
+    evolServer(1)
+     evolServerInfo(1)
+      evolServerUpTime(1) [TimeTicks; read-only]
+      evolServerStartTime(2) [TimeTicks; read-only]
+     evolServerConfig(2)
+     evolServerSockets(3)
+    evolRelay(2)
+     evolRelayInfo(1)
+     evolRelayConfig(2)
+     evolRelaySockets(3)
+     evolRelayCache(4)
+    evolTelnetIF(3)
+     evolTelnetIFInfo(1)
+     evolTelnetIFConfig(2)
+     evolTelnetIFSockets(3)
+
+

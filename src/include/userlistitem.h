@@ -48,6 +48,8 @@ class UserListItem {
    friend class Commands;
    
    friend class GameQuiz;
+   
+   friend class TelnetDialogueLogin;
 };
 
 #endif

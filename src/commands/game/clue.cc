@@ -1,4 +1,8 @@
+/* src/commands/game/clue.cc
+ * CLUE command
+ */
 
+#include "config.h"
 #include "commands.h"
 #include "games.h"
 #include "gamequiz.h"

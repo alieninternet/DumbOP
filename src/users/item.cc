@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "userlistitem.h"
 #include "user.h"
 #include "flags.h"

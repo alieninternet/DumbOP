@@ -2,6 +2,7 @@
  * 'Quiz' game, modelled on numerous quizbots that have been around for ages
  */
 
+#include "config.h"
 #include "gamequiz.h"
 
 

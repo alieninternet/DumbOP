@@ -2,6 +2,8 @@
  * Telnet descriptor (connection) routines
  */
 
+#include "config.h"
+
 #include <list.h>
 #include <time.h>
 #include <sys/types.h>
@@ -12,6 +14,7 @@
 #include "telnetdialogue.h"
 #include "socket.h"
 #include "ansi.h"
+#include "utils.h"
 
 
 /* TelnetDescriptor - Descriptor constructor
@@ -20,13 +23,15 @@
 TelnetDescriptor::TelnetDescriptor(Telnet *t, Socket *s)
 : telnet(t), 
   sock(s),
+  user(0),
   connectedTime(telnet->bot->currentTime.time),
   lastActed(connectedTime),
   flags(TELNETFLAG_CONNECTED),
   rows(TELNET_ASSUMED_TTY_ROWS),
   columns(TELNET_ASSUMED_TTY_COLUMNS), 
   barMessage(TELNET_DEFAULT_BAR_MESSAGE),
-  dialogue(new TelnetDialogueLogin(this))
+  dialogue(new TelnetDialogueLogin(this)),
+  nextDialogue(0)
 {
    /* TEMPORARY */
    flags |= TELNETFLAG_HAS_ANSI;
@@ -40,7 +45,7 @@ TelnetDescriptor::TelnetDescriptor(Telnet *t, Socket *s)
 /* handleInput - Handle telnet server input
  * Original 02/01/01, Simon Butcher <simonb@alien.net.au>
  */
-void TelnetDescriptor::handleInput()
+void TelnetDescriptor::handleInput(void)
 {
    // Glue the 'last spoke' to the time now
    lastActed = telnet->bot->currentTime.time;
@@ -89,7 +94,8 @@ void TelnetDescriptor::handleInput()
 	    }
 	    
 	    // The dialogue routines may need this char too
-	    dialogue->parseInput(chr);
+	    dialogue->parseInput('\b');
+	    bumpDialogue();
 	    break;
 	  case '\f':	// FF - Form Feed (or Page Eject/Redraw Screen)
 	    /* Reinitialise the header. This will also clear the screen, 
@@ -99,16 +105,18 @@ void TelnetDescriptor::handleInput()
 	    
 	    // Draw the page
 	    dialogue->drawPage();
+	    bumpDialogue();
 	    break;
 	  case '\n':	// CR - Carrage return
 	  case '\025':	// NAK - Negative Acknowledge (Modern use: clear line)
 	    // The dialogue routines may need this char
 	    dialogue->parseInput(chr);
+	    bumpDialogue();
 	    break;
 	  case '\021':	// DC1 - Device Control 1 (was XON, paper reader on)
 	    // start output.
 	    break;
-	  case '\022':	// DC3 - Device Control 3 (was XOFF, paper reader off
+	  case '\022':	// DC3 - Device Control 3 (was XOFF, paper reader off)
 	    // stop output.
 	    break;
 	 }
@@ -120,7 +128,7 @@ void TelnetDescriptor::handleInput()
 /* goodbyeSocket - Say goodbye and close the socket down
  * Original 02/01/01, Simon Butcher <simonb@alien.net.au>
  */
-void TelnetDescriptor::goodbyeSocket()
+void TelnetDescriptor::goodbyeSocket(void)
 {
    flags |= ~TELNETFLAG_CONNECTED;
    sock->close();
@@ -133,11 +141,12 @@ void TelnetDescriptor::goodbyeSocket()
 void TelnetDescriptor::write(String s)
 {
    if ((flags & TELNETFLAG_CONNECTED) && 
-       (sock->isConnected()))
-     if (!sock->write(s)) {
-	sock->close();
-	flags |= ~TELNETFLAG_CONNECTED;
-     }
+       (sock->isConnected())) {
+      if (!sock->write(s)) {
+	 sock->close();
+	 flags |= ~TELNETFLAG_CONNECTED;
+      }
+   }
 }
 
 
@@ -146,7 +155,7 @@ void TelnetDescriptor::write(String s)
  * Note: Clears the screen, draws the basic header, and flows through to
  *       further header routines to draw the message and time.
  */
-void TelnetDescriptor::headerInit()
+void TelnetDescriptor::headerInit(void)
 {
    write(String(ANSI_CLR_SCREEN) + String(ANSI_CUR_HOME) + 
 	 String(ANSI_FINVERSE) + String(ANSI_CLR_LINE) + String(" ") + 
@@ -165,7 +174,7 @@ void TelnetDescriptor::headerInit()
  * 	 does not support this ANSI string, TO HELL WITH THEM! Pretty bad
  * 	 client if it doesn't even support THAT.
  */
-void TelnetDescriptor::headerUpdate()
+void TelnetDescriptor::headerUpdate(void)
 {
    struct tm *timeNow = localtime(&telnet->bot->currentTime.time);
    String timeStr = (Utils::intToMonth(timeNow->tm_mon) + String(" ") +
@@ -202,3 +211,24 @@ void TelnetDescriptor::headerMessage(String message = "")
    headerUpdate();
 }
 
+
+/* bumpDialogue - Change the dialogue to the next one, if required
+ * Original 01/08/01, Simon Butcher <simonb@alien.net.au>
+ */
+void TelnetDescriptor::bumpDialogue(void)
+{
+   // Check if there is another dialogue to bump in
+   if (nextDialogue) {
+      // Bump out the old one, if it is safe
+      if (dialogue) {
+	 delete dialogue;
+      }
+      
+      // Bump in the new one, and reset the nextDialogue variable
+      dialogue = nextDialogue;
+      nextDialogue = 0;
+      
+      // Draw the new dialogue page
+      dialogue->drawPage();
+   }
+}

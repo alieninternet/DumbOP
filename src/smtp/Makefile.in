@@ -27,7 +27,7 @@ LIBS=
 
 TARGET=smtp.o
 
-SOURCES=
+SOURCES=class.cc
 
 INCLUDES=
 

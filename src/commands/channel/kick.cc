@@ -1,13 +1,19 @@
+/* src/commands/channel/kick.cc
+ * KICK command
+ */
 
+#include "config.h"
 #include "commands.h"
 #include "flags.h"
 #include "bot.h"
+#include "utils.h"
+
 
 /* Kick - Kick a user
- * Original 17/12/00, Pickle <pickle@alien.net.au>
+ * Original 17/12/00, Simon Butcher <simonb@alien.net.au>
  */
 void Commands::Kick(ServerConnection *cnx, Person *from,
-			String channel, String rest)
+		    String channel, String rest)
 {
    String nick = from->getNick();
    

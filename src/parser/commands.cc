@@ -1,8 +1,10 @@
 
+#include "config.h"
 #include "parser.h"
 #include "bot.h"
 #include "serverqueue.h"
 #include "flags.h"
+#include "utils.h"
 
 void Parser::parseError(ServerConnection *cnx, Person *from, String rest)
 {

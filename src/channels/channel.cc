@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "macros.h"
 #include "utils.h"
 #include "channel.h"

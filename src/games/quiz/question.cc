@@ -2,6 +2,7 @@
  * Quiz question class
  */
 
+#include "config.h"
 #include "gamequiz.h"
 
 /* gameQuizQuestion - Initialise the question class

@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "serverlist.h"
 
 ServerList::ServerList()

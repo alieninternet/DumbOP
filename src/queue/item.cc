@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "serverqueueitem.h"
 
 ServerQueueItem::ServerQueueItem(int pr, int pen, int t)

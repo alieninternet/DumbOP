@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "commands.h"
 #include "flags.h"
 #include "utils.h"

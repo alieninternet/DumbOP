@@ -2,6 +2,8 @@
  * 'Quiz' game, modelled on numerous quizbots that have been around for ages
  */
 
+#include "config.h"
+
 #include <string.h>
 #include <dirent.h>
 #include <fstream.h>
@@ -10,6 +12,7 @@
 #include <ctype.h>
 
 #include "gamequiz.h"
+#include "utils.h"
 
 #define QUIZ_FILE_SUFFIX ".quiz"
 

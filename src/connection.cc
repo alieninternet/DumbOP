@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "connection.h"
 
 Connection::Connection(String h, int p, String lip)

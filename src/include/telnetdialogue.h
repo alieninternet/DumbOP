@@ -11,11 +11,16 @@ class TelnetDescriptor;
 class TelnetDialogue {
  private:
    TelnetDescriptor *desc;			// Recursive back
-
+   enum {
+      LOGIN,
+      MONITOR
+   };
+   char type;					// Type of dialogue
+   
    unsigned char boxX, boxY;			// Box starting vector
    
  public:
-   TelnetDialogue(TelnetDescriptor *);		// Default constructor
+   TelnetDialogue(TelnetDescriptor *, char);	// Default constructor
    virtual ~TelnetDialogue(void);		// Fake destructor
    
    virtual void drawPage(void);			// Fake routines
@@ -24,8 +29,10 @@ class TelnetDialogue {
    void calcBoxTLHC(unsigned char, unsigned char);
    void clearWindow(void);
    
+   friend class Telnet;
    friend class TelnetDescriptor;
    friend class TelnetDialogueLogin;
+   friend class TelnetDialogueMonitor;
 };
 
 // Login page - the first page
@@ -45,6 +52,17 @@ class TelnetDialogueLogin : public TelnetDialogue {
    
  public:
    TelnetDialogueLogin(TelnetDescriptor *);	// Constructor
+   
+   void drawPage(void);				// Draw the login box
+   void parseInput(char);			// Read an incoming char
+};
+
+// Monitor page - Used for monitoring IRC activity/logging etc
+class TelnetDialogueMonitor : public TelnetDialogue {
+ private:
+
+ public:
+   TelnetDialogueMonitor(TelnetDescriptor *);	// Constructor
    
    void drawPage(void);				// Draw the login box
    void parseInput(char);			// Read an incoming char

@@ -1,4 +1,6 @@
 
+#include "config.h"
+
 #include <fstream.h>
 #include <iomanip.h>
 #include <string.h>
@@ -60,7 +62,9 @@ Bot::Bot(String filename)
   lastNickNameChange(startTime), 
   lastChannelJoin(startTime),
   serverConnection(0), 
-  telnetDaemon(0), 
+  telnetDaemon(0),
+  SMTPagent(new SMTP(this)),
+  SNMPagent(0),
   games(0),
   sentUserhostID(0), 
   receivedUserhostID(0)
@@ -189,6 +193,13 @@ Bot::Bot(String filename)
 #endif
    
    telnetDaemon = new Telnet(this, TELNET_PORT);
+
+#ifdef DEBUG
+   if (debug)
+     cout << "Starting SNMP agent" << endl;
+#endif
+   
+   SNMPagent = new SNMP(this);
    
 #ifdef DEBUG
    if (debug)

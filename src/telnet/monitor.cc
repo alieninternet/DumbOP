@@ -1,43 +1,50 @@
-/* telnetspy.cc
- * Off-relay spy code for debugging
+/* src/telnet/monitor.cc
+ * Off-relay monitoring, an integral part of the MONITOR dialogue
  */
+
+#include "config.h"
 
 #include <list.h>
 
-#include "telnetspy.h"
 #include "telnet.h"
+#include "telnetdialogue.h"
 #include "ansi.h"
 #include "utils.h"
-#include "bot.h"
 
-void TelnetSpy::spyLine(Bot *bot, String mask, String command, String rest)
+
+/* monitorLine - Send a freshly parsed line to any monitoring terminals
+ * Original 1/1/01, Pickle <pickle@alien.net.au>
+ * Note: Yes, this is how I spent my lifeless millenium new-years morning.
+ *       Party. Woo. Yay. :-/
+ */
+void Telnet::monitorLine(String mask, String command, String rest)
 {
-   return; // skip this
-   
    StringTokens t(rest);
    String to = t.nextToken(' ');
    String line = t.rest();
-   
-   if (line[0] == ':')
-     line = line.subString(1);
-   
-   for (list<TelnetDescriptor *>::iterator it = bot->telnetDaemon->descList.begin();
-	it != bot->telnetDaemon->descList.end(); it++)
-     if (((*it)->flags & TELNETFLAG_CONNECTED) &&
-	 (true)) {
-	// this really should change sometime......
-	(*it)->write(ANSI::toANSI(IRCtoANSI(mask, command, to, line),
-				  (*it)->columns));
-     }
 
+   // If the line is a multi-worded line, rip away the little marker guy
+   if (line[0] == ':') {
+      line = line.subString(1);
+   }
+   
+   for (list<TelnetDescriptor *>::iterator it = descList.begin();
+	it != descList.end(); it++) {
+      if (((*it)->flags & TELNETFLAG_CONNECTED) &&
+	  ((*it)->dialogue->type == TelnetDialogue::MONITOR)) {
+	 // this really should change sometime......
+	 (*it)->write(ANSI::toANSI(IRCtoANSI(mask, command, to, line),
+				   (*it)->columns));
+      }
+   }
 }
 
 /* IRCtoANSI - Convert a line from the IRC server into a pretty Ansi line
  * Original 1/1/01, Pickle <pickle@alien.net.au>
  * Note: Modelled from ircII output with style a'la 'The Gathering' :)
  */
-String TelnetSpy::IRCtoANSI(String mask, String command, String to, 
-			    String rest)
+String Telnet::IRCtoANSI(String mask, String command, String to, 
+			 String rest)
 {
    String nick;
    String host;
@@ -53,7 +60,7 @@ String TelnetSpy::IRCtoANSI(String mask, String command, String to,
     * dim? This seems to induce ANSI crud (bleeding) sometimes on a lot of
     * terminals (shows how well some people follow standards *COUGH*)
     */
-   String line = (String(ANSI_NORMAL) + ANSI::scrollRegion(2,23) +
+   String line = (String(ANSI_NORMAL) + ANSI::scrollRegion(2, 24) +
 		  ANSI::gotoXY(80, 23) + String("\r\n") + String(ANSI_DIM) +
 		  String("[") + String(timeNow->tm_hour).prepad(2, '0') +
 		  String(":") + String(timeNow->tm_min).prepad(2, '0') +
@@ -141,8 +148,9 @@ String TelnetSpy::IRCtoANSI(String mask, String command, String to,
       String kickNick = k.nextToken(' ');
       String reason = k.rest();
 	
-      if (reason[0] == ':')
-	reason = reason.subString(1);
+      if (reason[0] == ':') {
+	 reason = reason.subString(1);
+      }
       
       line = line + (String(ANSI_HEAD_IRC) + kickNick +
 		     String(" was kicked by ") + nick + 
@@ -164,26 +172,5 @@ String TelnetSpy::IRCtoANSI(String mask, String command, String to,
    
 
    return line;
-}
-
-/* spyHeaderInit - Initialise a subheader for the spy session
- * Original 1/1/01, Pickle <pickle@alien.net.au>
- */
-String TelnetSpy::spyHeaderInit()
-{
-   return ANSI::gotoXY(1, 24) + String(ANSI_FINVERSE) + String(ANSI_CLR_LINE) +
-     ANSI::scrollRegion(25, 25) + String(ANSI_NORMAL) + ANSI::gotoXY(1, 25) +
-     TelnetSpy::spyHeaderUpdate();
-}
-
-/* spyHeaderUpdate - Update the subheader for spy sessions
- * Original 1/1/01, Pickle <pickle@alien.net.au>
- */
-String TelnetSpy::spyHeaderUpdate()
-{
-   return String(ANSI_CUR_SAVE) + String(ANSI_FINVERSE) +
-     ANSI::gotoXY(1, 24) +
-     String("") +
-     String(ANSI_CUR_RESTORE) + String(ANSI_NORMAL);
 }
 
