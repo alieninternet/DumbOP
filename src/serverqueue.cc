@@ -3,11 +3,15 @@
 #include "serverqueue.h"
 
 #ifdef DEBUG
-ServerQueue::ServerQueue(/*Bot *b,*/ Socket *s, bool d)
-  :/* Bot(b),*/ Queue(s,d), penalty(0)
+ServerQueue::ServerQueue(ServerConnection *c, Socket *s, bool d)
+: cnx(c),
+  Queue(s,d), 
+  penalty(0)
 #else
-ServerQueue::ServerQueue(/*Bot *b,*/ Socket *s)
-  :/* Bot(b),*/ Queue(s), penalty(0)
+ServerQueue::ServerQueue(ServerConnection *c, Socket *s)
+: cnx(c),
+  Queue(s), 
+  penalty(0)
 #endif
 {
   serverQueue.clear();
@@ -22,29 +26,29 @@ ServerQueue::~ServerQueue()
 void
 ServerQueue::addItem(ServerQueueItem *sqi)
 {
-  list<ServerQueueItem *>::iterator it, it2;
-
-  for (it = serverQueue.begin(); it != serverQueue.end(); ++it) {
-    if ((*it)->priority > sqi->priority)
-      break;
-  }
-  it2 = it; --it2;
-  if (it2 != serverQueue.end() && *it2) {
-    // try to merge this item to the previous
-    if ((*it2)->merge(sqi)) {
-      delete sqi;
-      return;
-    }
-  }
-  serverQueue.insert(it, sqi);
+   // We want to keep track of how much we are sending out
+   cnx->sentLen += (sqi->getLine().length() - 1);
+   
+   list<ServerQueueItem *>::iterator it, it2;
+   
+   for (it = serverQueue.begin(); it != serverQueue.end(); ++it) {
+      if ((*it)->priority > sqi->priority)
+	break;
+   }
+   it2 = it; --it2;
+   if (it2 != serverQueue.end() && *it2) {
+      // try to merge this item to the previous
+      if ((*it2)->merge(sqi)) {
+	 delete sqi;
+	 return;
+      }
+   }
+   serverQueue.insert(it, sqi);
 }
 
 void
 ServerQueue::addLine(String l, int pr, int pen, int t)
 {
-   // We want to keep track of how much we are sending out
-//   bot->sentLen += l.length();
-   
    ServerQueueOtherItem * sqoi =
      new ServerQueueOtherItem(l, pr, pen, t);
    addItem(sqoi);

@@ -8,20 +8,27 @@
 ServerConnection::ServerConnection(Bot *b, Server *s, String localIP)
   : Connection(s->getHostName(),
                s->getPort(), localIP),
-    server(s),
-    bot(b),
+  server(s),
+  bot(b),
+  receivedLen(0), 
+  sentLen(0), 
 #ifdef DEBUG
-    queue(new ServerQueue(/*bot,*/ &socket, b->debug)),
+  queue(new ServerQueue(this, &socket, b->debug)),
 #else
-    queue(new ServerQueue(/*bot,*/ &socket)),
+  queue(new ServerQueue(this, &socket)),
 #endif
-    pingTime(bot->currentTime), lag(0), 
+  pingTime(bot->currentTime),
+  lag(0),
 #ifdef DEBUG
-    debug(b->debug),
+  debug(b->debug),
 #endif
-    serverLastSpoken(time(NULL))
+  serverLastSpoken(time(NULL))
 {
-  b->connected = false;
+   // We want a lag check ping to run first time around
+   pingTime.time = 0;
+   
+   // We are not connected.
+   b->connected = false;
 }
 
 ServerConnection::~ServerConnection()

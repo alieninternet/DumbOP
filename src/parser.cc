@@ -204,7 +204,7 @@ void Parser::parseLine(ServerConnection * cnx, String line)
    Person * from = 0;
    String fromMask = "";
    
-   cnx->bot->receivedLen += line.length();
+   cnx->receivedLen += line.length();
 
    if (line[0] == ':') {
       fromMask = st.nextToken().subString(1);
@@ -632,9 +632,11 @@ Parser::parseNotice(ServerConnection *cnx,
       
       from->sendNotice(String("Ping shows a lag between us of \002") +
 		       Utils::timeBigToStr((long)pingpong) +
-		       String("\002 (My connection is lagged by \002") +
-		       Utils::timeBigToStr(cnx->lag) +
-		       String("\002)"));
+		       String("\002") +
+		       ((cnx->lag > 0) ? 
+			(String(" (My connection is lagged by \002") +
+			 Utils::timeBigToStr(cnx->lag) + String("\002)")) :
+			(String(""))));
    }
 }
 
@@ -848,123 +850,132 @@ void Parser::parseCTCP(ServerConnection *cnx,
 // userFunctionsInit - Table of user functions
 struct userFunctionsStruct userFunctionsInit[] = {
      { "ACCESS",	UserCommands::Access,      
-	  User::USER,		true 
+	User::USER,		true 
      },
      { "ADDUSER",     	UserCommands::AddUser,     
-	  User::MASTER,		false 
+	User::MASTER,		false 
      },
      { "ADDSERVER",   	UserCommands::AddServer,   
-	  User::MASTER,      	false 
+	User::MASTER,      	false 
      },
      { "ALIAS",      	UserCommands::Alias,       
-	  User::MASTER,       	false 
+	User::MASTER,       	false 
      },
-//     { "BAN",         	UserCommands::Ban,         User::TRUSTED_USER, true, false  },
+   //     { "BAN",         	UserCommands::Ban,         User::TRUSTED_USER, true, false  },
      { "BANLIST",     	UserCommands::BanList,     
-	  User::MASTER,        	true 
+	User::MASTER,        	true 
      },
-//     { "CHANGELEVEL", UserCommands::ChangeLevel, User::MASTER,       false, false },
+     { "CATEGORY",	UserCommands::Category,
+	User::MANAGER,		true
+     },
+     //     { "CHANGELEVEL", UserCommands::ChangeLevel, User::MASTER,       false, false },
      { "CYCLE",       	UserCommands::Cycle,       
-	  User::MASTER,       	true
+	User::MASTER,       	true
      },
      { "DCCLIST",     	UserCommands::DCCList,     
-	  User::MASTER,       	false 
+	User::MASTER,       	false 
      },
-//     { "DEBAN",       	UserCommands::Deban,       User::TRUSTED_USER, true, false  },
+   //     { "DEBAN",       	UserCommands::Deban,       User::TRUSTED_USER, true, false  },
      { "DELSERVER",   	UserCommands::DelServer,   
-	  User::MASTER,       	false 
+	User::MASTER,       	false 
      },
      { "DELUSER",     	UserCommands::DelUser,     
-	  User::MASTER,       	false 
+	User::MASTER,       	false 
      },
      { "DEOP",        	UserCommands::Deop,        
-	  User::MASTER, 	true 
+	User::MASTER, 	true 
      },
      { "DIE",         	UserCommands::Die,         
-	  User::MASTER,       	false 
+	User::MASTER,       	false 
      },
      { "DO",		UserCommands::Do,	   
-	  User::MANAGER,	       	true  
+	User::MANAGER,	       	true  
      },
      { "HELP",        	UserCommands::Help,        
-	  User::NONE,         	false 
+	User::NONE,         	false 
      },
-//     { "IDENT",       	UserCommands::Ident,       User::NONE,         true, false  },
+     { "HINT",        	UserCommands::Hint,        
+	User::MANAGER,         	false 
+     },
+   //     { "IDENT",       	UserCommands::Ident,       User::NONE,         true, false  },
      { "INVITE",      	UserCommands::Invite,      
-	  User::TRUSTED_USER, 	true  
+	User::TRUSTED_USER, 	true  
      },
      { "JOIN",        	UserCommands::Join,        
-	  User::MASTER,       	false 
+	User::MASTER,       	false 
      },
-//     { "KEEP",        	UserCommands::Keep,        User::MANAGER,       true, false  },
+   //     { "KEEP",        	UserCommands::Keep,        User::MANAGER,       true, false  },
      { "KICK",        	UserCommands::Kick,        
-	  User::TRUSTED_USER, 	true  
+	User::TRUSTED_USER, 	true  
      },
-//     { "KICKBAN",     	UserCommands::KickBan,     User::TRUSTED_USER, true, false  },
+   //     { "KICKBAN",     	UserCommands::KickBan,     User::TRUSTED_USER, true, false  },
      { "LASTSEEN",	UserCommands::LastSeen,	   
-	  User::USER,	       	true  
+	User::USER,	       	true  
      },
      { "MODE",        	UserCommands::Mode,        
-	  User::TRUSTED_USER, 	true  
+	User::TRUSTED_USER, 	true  
      },
      { "NAMES",       	UserCommands::Names,       
-	  User::MASTER,        	true
+	User::MASTER,        	true
      },
      { "NEXTSERVER",  	UserCommands::NextServer,  
-	  User::MANAGER,       	false 
+	User::MANAGER,       	false 
      },
-//     { "NICK",        	UserCommands::Nick,        User::MANAGER,       false, false },
+   //     { "NICK",        	UserCommands::Nick,        User::MANAGER,       false, false },
      { "NOTE",		UserCommands::Note,	   
-	  User::MASTER,		false
+	User::MASTER,		false
      },
      { "NSLOOKUP",    	UserCommands::NsLookup,    
-	  User::MASTER,        	false 
+	User::MASTER,        	false 
      },
      { "OP",          	UserCommands::Op,          
-	  User::TRUSTED_USER, 	true  
+	User::TRUSTED_USER, 	true  
      },
      { "PART",        	UserCommands::Part,        
-	  User::MASTER,       	true  
+	User::MASTER,       	true  
      },
 //     { "PASSWORD",    	UserCommands::Password,    User::USER,         true, false  },
      { "PING",        	UserCommands::Ping,
-	  User::USER,       	false
+	User::USER,       	false
      },
      { "RAW",		UserCommands::Raw,	   
-	  User::MASTER,       	false 
+	User::MASTER,       	false 
      },
      { "RECONNECT",   	UserCommands::Reconnect,   
-	  User::MANAGER,       	false 
+	User::MANAGER,       	false 
+     },
+     { "REPEAT",   	UserCommands::Repeat,
+	User::MANAGER,       	false
      },
      { "SAVE",        	UserCommands::Save,        
-	  User::MANAGER,       	false 
+	User::MANAGER,       	false 
      },
      { "SAY",         	UserCommands::Say,         
-	  User::MANAGER,        	true 
+	User::MANAGER,        	true 
      },
      { "SERVER",      	UserCommands::Server,      
-	  User::MANAGER,       	false 
+	User::MANAGER,       	false 
      },
      { "SERVERLIST",  	UserCommands::ServerList,  
-	  User::MANAGER,       	false 
+	User::MANAGER,       	false 
      },
      { "STATS",		UserCommands::Stats,	   
-	  User::MASTER,	       	false 
+	User::MASTER,	       	false 
      },
      { "TEST",		UserCommands::Test,	   
-	  User::MASTER,       	true  
+	User::MASTER,       	true  
      },
      { "TIME",       	UserCommands::Time,       
-	  User::USER, 		false
+	User::USER, 		false
      },
      { "TOPIC",       	UserCommands::Topic,       
-	  User::TRUSTED_USER, 	true 
+	User::TRUSTED_USER, 	true 
      },
      { "USERLIST",	UserCommands::UserList,	   
-	  User::MANAGER,       	false 
+	User::MANAGER,       	false 
      },
      { "VOICE",		UserCommands::Voice,
-	  User::MASTER,  	false 
+	User::MASTER,  	false 
      },
      { "",	0,	0,	false }
 };

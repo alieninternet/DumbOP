@@ -1,7 +1,8 @@
 #include <fstream.h>
 #include <string.h>
 
-#include "../../src/string.h"
+#include "../src/string.h"
+#include "../src/stringtokenizer.h"
 
 int main(int argc, char **argv)
 {
@@ -29,22 +30,26 @@ int main(int argc, char **argv)
       // Read a line
       file >> line;
       
+      // Skip empty line
       if (line.length() < 1) {
-	 // an empty line
-	 cout << endl;
-      } else if (!strncasecmp("Question: ",(const char *)line,10)) {
-	 // a question
-	 count++;
-	 cout << "# Question " << count << endl << ":" << 
-	   line.subString(10) << endl;
-      } else if (!strncasecmp("Answer: ",(const char *)line,8)) {
-	 // an answer
-	 cout << line.subString(8) << endl;
-      } else {
-	 // Dunno about this line.. write it as a comment
-	 cout << "#??" << line << endl;
+	 continue;
       }
+      
+      // Do it
+      StringTokenizer st(line);
+      String question = st.nextToken(':');
+      String answer = st.rest().toLower();
+      
+      count++;
+      cout << endl;
+      cout << "# Question " << count << endl;
+      cout << ":" << 
+	String(question[0]).toUpper() << question.subString(1) << "?" << endl;
+      cout << answer << endl;
    }
+
+   // Write two empty lines
+   cout << endl << endl;
    
    // Close file
    file.close();

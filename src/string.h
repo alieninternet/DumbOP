@@ -32,8 +32,8 @@ public:
   int length() const;
   int find(char);
   void fill(char);
-  String pad(int);
-  String prepad(int);
+   String pad(int);
+   String prepad(long, char = ' ');
    
   String subString(int);
   String subString(int, int);

@@ -16,7 +16,8 @@ Connection::Connection(unsigned long a, int p)
 }
 
 Connection::~Connection()
-{ }
+{ 
+}
 
 int
 Connection::getFileDescriptor() const

@@ -56,23 +56,24 @@ String TelnetSpy::IRCtoANSI(String mask, String command, String to,
       host = "";
    }
    
-   if (command.toUpper() == "JOIN") { // People joining
-      return START_LINE + String(ANSI_HEAD_IRC) + nick +
-	((host == "") ? String("") :
-	 (String(" (") + host + String(")"))) +
-	String(" has joined channel ") + to.subString(1) + END_LINE;
+   if (command == "JOIN") { // People joining
+      return (START_LINE + String(ANSI_HEAD_IRC) + nick +
+	      ((host == "") ? String("") :
+	       (String(" (") + host + String(")"))) +
+	      String(" has joined channel ") + to.subString(1) + END_LINE);
    } else if (command == "PART") { // People leaving
-      return START_LINE + String(ANSI_HEAD_IRC) + nick +
-	String(" has left channel ") + to +
-	(((rest == "") || rest == ":") ? String("") :
-	 (String(" (") + rest + String(")"))) + END_LINE;
+      return (START_LINE + String(ANSI_HEAD_IRC) + nick +
+	      String(" has left channel ") + to +
+	      ((rest == "") ? String("") :
+	       (String(" (") + rest + String(")"))) + 
+	      END_LINE);
    } else if (command == "QUIT") { // People signing off
-      return START_LINE + String(ANSI_HEAD_IRC) + 
-	String("Signoff: ") + nick + String(" (") + rest + String(")") + 
-	END_LINE;
+      return (START_LINE + String(ANSI_HEAD_IRC) + 
+	      String("Signoff: ") + nick + String(" (") + to.subString(1) + 
+	      String(" ") + rest + String(")") + END_LINE);
    } else if (command == "NICK") { // People changing their aliases
-      return START_LINE + String(ANSI_HEAD_IRC) + nick +
-	String(" is now known as ") + to.subString(1) + END_LINE;
+      return (START_LINE + String(ANSI_HEAD_IRC) + nick +
+	      String(" is now known as ") + to.subString(1) + END_LINE);
    } else if (command == "PRIVMSG") { // Messages
       if (rest[0] == '\001') { // CTCP request
 	 StringTokenizer c(rest);
@@ -81,49 +82,49 @@ String TelnetSpy::IRCtoANSI(String mask, String command, String to,
 	 
 	 if (cCommand == "ACTION") { // The /me command
 	    if (Utils::isChannel(to)) { // /me to channel
-	       return START_LINE + String(ANSI_NGREEN) + String("* ") + 
-		 String(ANSI_HGREEN) + nick + String(":") + to +
-		 String(ANSI_NGREEN) + String(" ") + 
-		 cQuery.subString(0, (cQuery.length() - 2)) + END_LINE;
+	       return (START_LINE + String(ANSI_NGREEN) + String("* ") + 
+		       String(ANSI_HGREEN) + nick + String(":") + to +
+		       String(ANSI_NGREEN) + String(" ") + 
+		       cQuery.subString(0, (cQuery.length() - 2)) + END_LINE);
 	    } else { // /me to bot
-	       return START_LINE + String(ANSI_NGREEN) + String("* ") + 
-		 String(ANSI_HGREEN) + nick + String(ANSI_NGREEN) + 
-		 String(" ") + cQuery.subString(0, (cQuery.length() - 2)) + 
-		 END_LINE;
+	       return (START_LINE + String(ANSI_NGREEN) + String("* ") + 
+		       String(ANSI_HGREEN) + nick + String(ANSI_NGREEN) + 
+		       String(" ") + 
+		       cQuery.subString(0, (cQuery.length() - 2)) + END_LINE);
 	    }
 	 }
       } else { // Normal
 	 if (Utils::isChannel(to)) { // Message to channel
-	    return START_LINE + String(ANSI_NGREEN) + String("<") + 
-	      String(ANSI_HWHITE) + nick + String(":") + to +
-	      String(ANSI_NGREEN) + String("> ") + String(ANSI_NORMAL) + 
-	      rest + END_LINE;
+	    return (START_LINE + String(ANSI_NGREEN) + String("<") + 
+		    String(ANSI_HWHITE) + nick + String(":") + to +
+		    String(ANSI_NGREEN) + String("> ") + String(ANSI_NORMAL) + 
+		    rest + END_LINE);
 	 } else { // Message to bot
-	    return START_LINE + String(ANSI_NGREEN) + String("*") + 
-	      String(ANSI_HWHITE) + nick + String(ANSI_NGREEN) + 
-	      String("* ") + String(ANSI_NORMAL) + rest + END_LINE;
+	    return (START_LINE + String(ANSI_NGREEN) + String("*") + 
+		    String(ANSI_HWHITE) + nick + String(ANSI_NGREEN) + 
+		    String("* ") + String(ANSI_NORMAL) + rest + END_LINE);
 	 }
       }
    } else if (command == "NOTICE") { // Notices and notifications
       if (rest[0] != '\001') { // CTCP reply
 	 if (Utils::isChannel(to)) { // To channel
-	    return START_LINE + String(ANSI_NGREEN) + String("-") + 
-	      String(ANSI_HWHITE) + nick + String(":") + to + 
-	      String(ANSI_NGREEN) + String("- ") + String(ANSI_NORMAL) + 
-	      rest + END_LINE;
+	    return (START_LINE + String(ANSI_NGREEN) + String("-") + 
+		    String(ANSI_HWHITE) + nick + String(":") + to + 
+		    String(ANSI_NGREEN) + String("- ") + String(ANSI_NORMAL) + 
+		    rest + END_LINE);
 	 } else { // To bot
-	    return START_LINE + String(ANSI_NGREEN) + String("-") + 
-	      String(ANSI_HWHITE) + nick + String(ANSI_NGREEN) + 
-	      String("- ") + String(ANSI_NORMAL) + rest + END_LINE;
+	    return (START_LINE + String(ANSI_NGREEN) + String("-") + 
+		    String(ANSI_HWHITE) + nick + String(ANSI_NGREEN) + 
+		    String("- ") + String(ANSI_NORMAL) + rest + END_LINE);
 	 }
       }
    } else if (command == "MODE") { // Mode changes
-      return START_LINE + String(ANSI_HEAD_IRC) + nick + 
-	String(" sets mode: ") + to + String(" ") + rest + END_LINE;
+      return (START_LINE + String(ANSI_HEAD_IRC) + nick + 
+	      String(" sets mode: ") + to + String(" ") + rest + END_LINE);
    } else if (command == "TOPIC") { // Topic changes
-      return START_LINE + String(ANSI_HEAD_IRC) + nick + 
-	String(" changed topic to \"") + rest + String("\"") + 
-	END_LINE;
+      return (START_LINE + String(ANSI_HEAD_IRC) + nick + 
+	      String(" changed topic to \"") + rest + String("\"") + 
+	      END_LINE);
    } else if (command == "KICK") { // Kicks
       StringTokenizer k(rest);
       String kickNick = k.nextToken(' ');
@@ -132,15 +133,16 @@ String TelnetSpy::IRCtoANSI(String mask, String command, String to,
       if (reason[0] == ':')
 	reason = reason.subString(1);
       
-      return START_LINE + String(ANSI_HEAD_IRC) + kickNick + 
-	String(" was kicked by ") + nick + 
-	(((reason == "") || (reason == ":")) ? String("") :
-	 (String(" (") + reason + String(")"))) + END_LINE;
+      return (START_LINE + String(ANSI_HEAD_IRC) + kickNick + 
+	      String(" was kicked by ") + nick + 
+	      (((reason == "") || (reason == ":")) ? String("") :
+	       (String(" (") + reason + String(")"))) + END_LINE);
    } else if (command == "WALLOPS") { // Wallops broadcast
-      return START_LINE + String(ANSI_NRED) + String("!") +
-	String(ANSI_HWHITE) + nick + String(ANSI_NRED) +
-	String("! ") + String(ANSI_NORMAL) + rest + String(ANSI_HRED) +
-	String(ANSI_NORMAL) + END_LINE;
+      return (START_LINE + String(ANSI_NRED) + String("!") +
+	      String(ANSI_HWHITE) + nick + String(ANSI_NRED) +
+	      String("! ") + String(ANSI_NORMAL) + to.subString(1) + 
+	      String(" ") + rest + String(ANSI_HRED) + String(ANSI_NORMAL) + 
+	      END_LINE);
    }
 
    return String(""); // The line wasn't anything worth displaying.
@@ -163,7 +165,7 @@ String TelnetSpy::spyHeaderUpdate()
 {
    return String(ANSI_CUR_SAVE) + String(ANSI_FINVERSE) +
      ANSI::gotoXY(1, 24) +
-     String(" [DumbOP] [#channel] [flags] [stuff] ") + String((long)time(NULL)) +
+     String("") +
      String(ANSI_CUR_RESTORE) + String(ANSI_NORMAL);
 }
 

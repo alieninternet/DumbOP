@@ -150,24 +150,20 @@ String::pad(int n)
   return res;
 }
 
-String String::prepad(int n)
+/* prepad - Make string exactly n by cropping or adding spaces to the start
+ *  * Original 15/12/00, Simon Butcher <simonb@alien.net.au>
+ *  */
+String String::prepad(long n, char c = ' ')
 {
-   int l = len;
+      char *temp = new char[n+1];
+      strcpy(temp, p->s);
+      String out(temp);
+      delete temp;
    
-   if (n <= l)
-     return subString(0, n-1);
+      while (out.length() < n)
+          out = String((char)c) + out;
    
-   char *temp = new char[n+1];
-   strcpy(temp, p->s);
-   
-   for (int i = l; i < n; i++)
-     temp[i] = ' ';
-   temp[n] = '\0';
-   
-   String res(temp);
-   delete temp;
-   
-   return res;
+      return out;
 }
 
 String

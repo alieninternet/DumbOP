@@ -16,8 +16,12 @@ class Commands;
 class UserCommands;
 
 class ServerConnection : public Connection {
-  Server * server;
-  Bot * bot; // Recursive
+   Server * server;
+   Bot * bot; // Recursive
+
+   long receivedLen;
+   long sentLen;
+   
   ServerQueue * queue;
   struct timeb pingTime;
   long long lag;
@@ -32,15 +36,16 @@ public:
 
   bool connect();
   bool handleInput();
-
-  friend class Bot;
-  friend class Person;
-  friend class Parser;
-  friend class Channel;
-  friend class Commands;
-  friend class UserCommands;
-  friend class CTCP;
-  friend class Version;
+   
+   friend class Bot;
+   friend class Person;
+   friend class Parser;
+   friend class Channel;
+   friend class Commands;
+   friend class UserCommands;
+   friend class CTCP;
+   friend class Version;
+   friend class ServerQueue;
 };
 
 #endif

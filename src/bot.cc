@@ -35,30 +35,35 @@ Bot::Bot(String filename, bool debug_on)
 #else
 Bot::Bot(String filename)
 #endif
-  : nickName(DEFAULT_NICKNAME),
-    wantedNickName(DEFAULT_NICKNAME),
-    userName(DEFAULT_USERNAME),
-    ircName(DEFAULT_IRCNAME),
-    userHost(""), localIP(""),
-    commandChar(DEFAULT_COMMANDCHAR),
-    configFileName(filename),
-    userListFileName(DEFAULT_USERLISTFILENAME),
-    channelListFileName(DEFAULT_CHANNELLISTFILENAME),
-    noteListFileName(DEFAULT_NOTELISTFILENAME),
-    logFileName(DEFAULT_LOGFILENAME),
-    helpFileName(DEFAULT_HELPFILENAME),
-    initFileName(DEFAULT_INITFILENAME),
-    quizDirectory(DEFAULT_QUIZDIRECTORY),
-    receivedLen(0), sentLen(0), connected(false),
+: nickName(DEFAULT_NICKNAME),
+  wantedNickName(DEFAULT_NICKNAME),
+  userName(DEFAULT_USERNAME),
+  ircName(DEFAULT_IRCNAME),
+  userHost(""), localIP(""),
+  commandChar(DEFAULT_COMMANDCHAR),
+  configFileName(filename),
+  userListFileName(DEFAULT_USERLISTFILENAME),
+  channelListFileName(DEFAULT_CHANNELLISTFILENAME),
+  noteListFileName(DEFAULT_NOTELISTFILENAME),
+  logFileName(DEFAULT_LOGFILENAME),
+  helpFileName(DEFAULT_HELPFILENAME),
+  initFileName(DEFAULT_INITFILENAME),
+  quizDirectory(DEFAULT_QUIZDIRECTORY),
+  connected(false),
 #ifdef DEBUG
-    debug(debug_on),
+  debug(debug_on),
 #endif
-    stop(false), sentPing(false),
-    sigs(new Signal(this)),
-    startTime(time(NULL)), 
-    lastNickNameChange(startTime), lastChannelJoin(startTime),
-    serverConnection(0), telnetDaemon(0), games(0),
-    sentUserhostID(0), receivedUserhostID(0)
+  stop(false), 
+  sentPing(false),
+  sigs(new Signal(this)),
+  startTime(time(NULL)), 
+  lastNickNameChange(startTime), 
+  lastChannelJoin(startTime),
+  serverConnection(0), 
+  telnetDaemon(0), 
+  games(0),
+  sentUserhostID(0), 
+  receivedUserhostID(0)
 {
    extern userFunctionsStruct userFunctionsInit[];
    extern CTCPFunctionsStruct CTCPFunctionsInit[];
@@ -555,15 +560,17 @@ void Bot::waitForInput()
 	(currentTime.time >= (time_t)(serverConnection->serverLastSpoken + Bot::PING_TIME))) &&
        !sentPing) {
       serverConnection->queue->sendPing(nickName);
+//      serverConnection->pingTime.time = currentTime.time;
+//      serverConnection->pingTime.millitm = currentTime.millitm;
       serverConnection->pingTime = currentTime;
       sentPing = true;
    }
    
    // If the server is ignoring us, it is probably dead. Time to reconnect.
-   if ((currentTime.time >= (time_t)(serverConnection->serverLastSpoken + Bot::TIMEOUT)) ||
+   if ((currentTime.time >= (time_t)(serverConnection->serverLastSpoken + Bot::TIMEOUT)) /*||
        ((currentTime.time >= (time_t)(serverConnection->pingTime.time +
 				      Bot::PING_TIME)) && 
-	sentPing)) {
+	sentPing) */) {
 #ifdef DEBUG
       if (debug) {
 	 cout << "Reconnection... (Server timed out)" << endl;

@@ -68,7 +68,7 @@ void ChannelList::read()
    
    while (file >> temp, temp.length() != 0) {
       StringTokenizer st(temp);
-      if (st.countTokens(':') != 5) {
+      if (st.countTokens(':') != 6) {
 	 cerr << "Error when reading channel list (" << listFilename <<
 	   ") line " << line << "...\n";
 	 return;
@@ -79,11 +79,13 @@ void ChannelList::read()
       String key = st.nextToken(':');
       String flags = st.nextToken(':');
       String gameflags = st.rest().trim();
-      
+
       if (mode == "-")
 	mode = "";
       if (keep == "-")
 	keep = "";
+      if (key == "-")
+	key = "";
       
       bot->wantedChannels[name] = new wantedChannel(mode, keep, key, 
 						    atoi(flags), 

@@ -8,9 +8,9 @@
 #include "queue.h"
 #include "serverqueueitem.h"
 
-//class ServerConnection;
+class ServerConnection;
 
-//#include "bot.h"
+#include "serverconnection.h"
 
 enum {
   QUIT_PRIORITY, USERMODE_PRIORITY, CHANNELMODE_PRIORITY,
@@ -40,18 +40,19 @@ static const int NOTICE_PENALTY = 1;
 
 class ServerQueue : public Queue {
 
-//  Bot *bot;   
+  ServerConnection *cnx;
    
   list<ServerQueueItem *> serverQueue;
   int penalty;
 
 public:
 #ifdef DEBUG
-   ServerQueue(/*Bot *,*/ Socket *, bool);
+   ServerQueue(ServerConnection *, Socket *, bool);
 #else
-   ServerQueue(/*Bot *,*/ Socket *);
+   ServerQueue(ServerConnection *, Socket *);
 #endif
   ~ServerQueue();
+   
   void addItem(ServerQueueItem *);
   void addLine(String, int, int, int);
   bool flush();

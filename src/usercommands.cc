@@ -574,18 +574,15 @@ void UserCommands::Help(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
    if (rest.length() == 0) {
-      from->sendNotice("\002Commands available to you are:\002");
       int level = Utils::getLevel(cnx->bot, from->getAddress());
-      String result = "";
-      int length = 0;
+      String result = "\002Commands available to you are:\002 ";
       for (list<userFunction *>::iterator it = cnx->bot->userFunctions.begin(); 
 	   it != cnx->bot->userFunctions.end(); ++it)
 	if ((*it)->minLevel <= level) {
 	   result = result + (*it)->name + " ";
-	   length += strlen((*it)->name) + 1;
-	   if (length >= 256) {
+	   if (result.length() >= 350) {
 	      from->sendNotice(result);
-	      result = ""; length = 0;
+	      result = "";
 	   }
 	}
       if (result != "")
@@ -720,7 +717,7 @@ UserCommands::Join(ServerConnection *cnx, Person *from,
     return;
   }
 
-  // We change the key only if we are not on the channel. We don't trust
+  // We change the key only if we are not on the channel. We do not trust
   // the user...
   if (!cnx->bot->channelList->getChannel(channel)) {
     if (cnx->bot->wantedChannels[channel])
@@ -1023,7 +1020,7 @@ void UserCommands::Names(ServerConnection *cnx, Person *from,
 		  (((*itB).second->userListItem) ?
 		   "\037" : "") + " ";
 		length += (*it).first.length() + 1;
-		if (length >= 256) {
+		if (length >= 350) {
 		   from->sendNotice(result);
 		   result = ""; length = 0;
 		}
@@ -1052,7 +1049,7 @@ void UserCommands::Names(ServerConnection *cnx, Person *from,
 	     (((*it).second->userListItem) ?
 	      "\037" : "") + " ";
 	   length += (*it).first.length() + 1;
-	   if (length >= 256) {
+	   if (length >= 350) {
 	      from->sendNotice(result);
 	      result = ""; length = 0;
 	   }
@@ -1472,53 +1469,55 @@ void UserCommands::Stats(ServerConnection *cnx, Person *from,
 		       Utils::timelenToStr(uptime));
 #endif
       from->sendNotice(String("IRC data received: ").prepad(20) +
-		       (String((long)(cnx->bot->receivedLen / 1024)) +
+		       (String((long)(cnx->receivedLen / 1024)) +
 			String("k")).pad(15) +
 		       String("IRC data sent: ").prepad(20) +
-		       (String((long)(cnx->bot->sentLen / 1024)) +
+		       (String((long)(cnx->sentLen / 1024)) +
 			String("k")));
 
-      from->sendNotice(String("\002\037Number of users:\037 ") + 
-		       String(num_users) + String(" (") + 
-		       String(num_online) + String(" currently online)\002"));
-      from->sendNotice(String("Number of Bots: ").prepad(18) +
-		       String(num_bots).pad(6) +
-		       String("Channel Admins: ").prepad(18) +
-		       String(num_chanowns).pad(6) +
-		       String("Suspended: ").prepad(18) +
-		       String(num_suspend));
-      from->sendNotice(String("Normal Users: ").prepad(18) +
-		       String(num_lvluser).pad(6) +
-		       String("Trusted Users: ").prepad(18) +
-		       String(num_lvltrusted).pad(6) +
-		       String("Bot Friends: ").prepad(18) +
-		       String(num_lvlfriend));
-      from->sendNotice(String("Bot Masters: ").prepad(18) +
-		       String(num_lvlmaster).pad(6) +
-		       String("Identified Users: ").prepad(18) +
-		       String(num_ident).pad(6) +
-		       String("Users w/o passwd: ").prepad(18) +
-		       String(num_nopass));
+      /*
+       from->sendNotice(String("\002\037Number of users:\037 ") + 
+			String(num_users) + String(" (") + 
+			String(num_online) + String(" currently online)\002"));
+       from->sendNotice(String("Number of Bots: ").prepad(18) +
+			String(num_bots).pad(6) +
+			String("Channel Admins: ").prepad(18) +
+			String(num_chanowns).pad(6) +
+			String("Suspended: ").prepad(18) +
+			String(num_suspend));
+       from->sendNotice(String("Normal Users: ").prepad(18) +
+			String(num_lvluser).pad(6) +
+			String("Trusted Users: ").prepad(18) +
+			String(num_lvltrusted).pad(6) +
+			String("Bot Friends: ").prepad(18) +
+			String(num_lvlfriend));
+       from->sendNotice(String("Bot Masters: ").prepad(18) +
+			String(num_lvlmaster).pad(6) +
+			String("Identified Users: ").prepad(18) +
+			String(num_ident).pad(6) +
+			String("Users w/o passwd: ").prepad(18) +
+			String(num_nopass));
 
-      from->sendNotice(String("\002\037Number of channels:\037 ") + 
-		       String(num_chans) + String(" (") +
-		       String(num_chans_on) + 
-		       String(" currently active)\002"));
-      from->sendNotice(String("Total People: ").prepad(16) +
-		       (String(num_chanppl) + String(" (Peak: ") +
-			String(peak_chanppl) + String(")")).pad(19) +
-		       String("Total Banned: ").prepad(16) +
-		       (String(num_chanbans) + String(" (Peak: ") +
-			String(peak_chanbans) + String(")")));
-      from->sendNotice(String("Total Opped: ").prepad(16) +
-		       (String(num_chanops) + String(" (Peak: ") +
-			String(peak_chanops) + String(")")).pad(19) +
-		       String("Total Voiced: ").prepad(16) +
-		       (String(num_chanvoiced) + String(" (Peak: ") +
-			String(peak_chanvoiced) + String(")")));
+       from->sendNotice(String("\002\037Number of channels:\037 ") + 
+			String(num_chans) + String(" (") +
+			String(num_chans_on) + 
+			String(" currently active)\002"));
+       from->sendNotice(String("Total People: ").prepad(16) +
+			(String(num_chanppl) + String(" (Peak: ") +
+			 String(peak_chanppl) + String(")")).pad(19) +
+			String("Total Banned: ").prepad(16) +
+			(String(num_chanbans) + String(" (Peak: ") +
+			 String(peak_chanbans) + String(")")));
+       from->sendNotice(String("Total Opped: ").prepad(16) +
+			(String(num_chanops) + String(" (Peak: ") +
+			 String(peak_chanops) + String(")")).pad(19) +
+			String("Total Voiced: ").prepad(16) +
+			(String(num_chanvoiced) + String(" (Peak: ") +
+			 String(peak_chanvoiced) + String(")")));
 
-      from->sendNotice(String("\002\037Number of DCC Fileserver Connections:\037 ") +
-		       String(num_dcc_con) + String("\002"));
+       from->sendNotice(String("\002\037Number of DCC Fileserver Connections:\037 ") +
+			String(num_dcc_con) + String("\002"));
+       */
  
    }
    from->sendNotice(String("\002End of statistics.\002"));
@@ -1536,7 +1535,7 @@ void UserCommands::Raw(ServerConnection *cnx, Person *from,
 
 /* merge with server */
 void
-UserCommands::Reconnect(ServerConnection *cnx, Person *from,
+ UserCommands::Reconnect(ServerConnection *cnx, Person *from,
                         String channel, String rest)
 {
   String nick = from->getNick();
@@ -1578,7 +1577,6 @@ void UserCommands::Test(ServerConnection *cnx, Person *from,
 	   
 	   for (list<String>::iterator it3 = (*it2)->answers.begin();
 		it3 != (*it2)->answers.end(); ++it3) {
-//	      from->sendNotice(String("A: ") + (const String &)it3);
 	      from->sendNotice(String("A: ") + (*it3));
 	   }
 	}
@@ -1592,29 +1590,19 @@ void UserCommands::Test(ServerConnection *cnx, Person *from,
  */
 void UserCommands::Time(ServerConnection *cnx, Person *from,
 			String channel, String rest)
- {
-    String time = String(ctime(&cnx->bot->currentTime.time));
-    
-    from->sendNotice(String("The time is \002") +
-		     time.subString(0,time.length()-2) +
-		     String("\002."));
-    
-   
-   /*
+{
    struct tm *timeNow = localtime(&cnx->bot->currentTime.time);
    
    from->sendNotice(String("The time is \002") +
-		    String(timeNow->tm_hour) + String(":") +
-		    String(timeNow->tm_min) + String(":") +
-		    String(timeNow->tm_sec) + String(".") +
-		    String(cnx->bot->currentTime.millitm) + String(" ") +
-		    String(cnx->bot->currentTime.timezone) + String(", ") +
-		    String(timeNow->tm_wday) + String(" ") +
+		    String(timeNow->tm_hour).prepad(2, '0') + String(":") +
+		    String(timeNow->tm_min).prepad(2, '0') + String(":") +
+		    String(timeNow->tm_sec).prepad(2, '0') + String(".") +
+		    String(cnx->bot->currentTime.millitm).prepad(3, '0') + 
+		    String("\002, \002") + 
+		    Utils::intToDayOfWeek(timeNow->tm_wday) + String(" ") + 
 		    String(timeNow->tm_mday) + String(" ") +
-		    String(timeNow->tm_mon) + String(" ") +
-		    String(timeNow->tm_year + 1900) +
-		    String("\002."));
-    */
+		    Utils::intToMonth(timeNow->tm_mon) + String(" ") +
+		    String(timeNow->tm_year + 1900) + String("\002."));
 }
 
 /* Topic - Change the channel's topic
@@ -1628,11 +1616,11 @@ UserCommands::Topic(ServerConnection *cnx, Person *from,
 
   if (rest.length() == 0) {
     if (cnx->bot->channelList->getChannel(channel)->channelTopic == "")
-      from->sendNotice(String("\002No topic is set for channel\002 ") +
-                        channel + "\002.\002");
+      from->sendNotice(String("No topic is set for channel\002 ") +
+                        channel + "\002.");
     else
-      from->sendNotice(String("\002Topic for\002 ") +
-                        channel + " \002is:\002 " +
+      from->sendNotice(String("\037Topic for\002 ") +
+                        channel + " \002is:\037 " +
                         cnx->bot->channelList->getChannel(channel)->channelTopic);
   } else {
     if (cnx->bot->channelList->getChannel(channel)->lockedTopic)

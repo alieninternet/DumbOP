@@ -14,7 +14,7 @@
  */
 String ANSI::moveLeft(int num)
 {
-   return String(ANSI_BEGIN) + String(num) + String("D");
+   return (String(ANSI_BEGIN) + String(num) + String("D"));
 }
 
 /* moveRight - Move cursor left a number of characters
@@ -22,7 +22,7 @@ String ANSI::moveLeft(int num)
  */
 String ANSI::moveRight(int num)
 {
-   return String(ANSI_BEGIN) + String(num) + String("C");
+   return (String(ANSI_BEGIN) + String(num) + String("C"));
 }
 
 /* moveUp - Move cursor up a number of characters
@@ -30,7 +30,7 @@ String ANSI::moveRight(int num)
  */
 String ANSI::moveUp(int num)
 {
-   return String(ANSI_BEGIN) + String(num) + String("A");
+   return (String(ANSI_BEGIN) + String(num) + String("A"));
 }
 
 /* moveDown - Move cursor down a number of characters
@@ -38,7 +38,7 @@ String ANSI::moveUp(int num)
  */
 String ANSI::moveDown(int num)
 {
-   return String(ANSI_BEGIN) + String(num) + String("B");
+   return (String(ANSI_BEGIN) + String(num) + String("B"));
 }
 
 /* gotoXY - Move cursor to a specific location
@@ -46,8 +46,8 @@ String ANSI::moveDown(int num)
  */
 String ANSI::gotoXY(int x, int y)
 {
-   return String(ANSI_BEGIN) + String(y) + String(";") + String(x) + 
-     String("H");
+   return (String(ANSI_BEGIN) + String(y) + String(";") + String(x) + 
+	   String("H"));
 }
 
 /* scrollRegion - Set the scrolling region on the screen
@@ -55,8 +55,8 @@ String ANSI::gotoXY(int x, int y)
  */
 String ANSI::scrollRegion(int top, int bottom)
 {
-   return String(ANSI_BEGIN) + String(top) + String(";") + String(bottom) +
-     String("r");
+   return (String(ANSI_BEGIN) + String(top) + String(";") + String(bottom) +
+	   String("r"));
 }
 
 /* telnetHeaderInit - Initialise header for telnet sessions
@@ -64,26 +64,28 @@ String ANSI::scrollRegion(int top, int bottom)
  */
 String ANSI::telnetHeaderInit()
 {
-   return String(ANSI_CUR_HOME) + String(ANSI_FINVERSE) + String(ANSI_BOLD) +
-     String(ANSI_CLR_LINE) + String(" ") + String(VERSION_STRING) +
-     ANSI::scrollRegion(2, 25) + String(ANSI_NORMAL) + ANSI::gotoXY(1, 25) +
-     ANSI::telnetHeaderUpdate();
+   return (String(ANSI_CUR_HOME) + String(ANSI_FINVERSE) + String(ANSI_BOLD) +
+	   String(ANSI_CLR_LINE) + String(" ") + String(VERSION_STRING) +
+	   scrollRegion(2, 25) + String(ANSI_NORMAL) + gotoXY(1, 25) + 
+	   telnetHeaderUpdate());
 }
 
 /* telnetHeaderUpdate - Update header for telnet sessions
  * Original 30/12/00, Pickle <pickle@alien.net.au>
- * Note: We chop ctime() down by 10 chars to get rid of the seconds, timezone
- * 	 and year.
  */
 String ANSI::telnetHeaderUpdate()
 {
    time_t currentTime = time(NULL);
-   String timeStr = String(ctime(&currentTime));
+   struct tm *timeNow = localtime(&currentTime);
    
-   return String(ANSI_CUR_SAVE) + String(ANSI_FINVERSE) + String(ANSI_BOLD) +
-     ANSI::gotoXY(26, 1) + String(ANSI_CLR_EOL) +
-     ANSI::gotoXY(64, 1) + timeStr.subString(0,(timeStr.length() - 10)) +
-     String(ANSI_CUR_RESTORE) + String(ANSI_NORMAL);
+   return (String(ANSI_CUR_SAVE) + String(ANSI_FINVERSE) + String(ANSI_BOLD) +
+	   ANSI::gotoXY(20, 1) + String(ANSI_CLR_EOL) + ANSI::gotoXY(54, 1) + 
+	   (Utils::intToMonth(timeNow->tm_mon) + String(" ") +
+	    String(timeNow->tm_mday) + String(" ") +
+	    String(timeNow->tm_year + 1900) + String(", ") +
+	    String(timeNow->tm_hour).prepad(2, '0') + String(":") +
+	    String(timeNow->tm_min).prepad(2, '0')).prepad(26) +
+	   String(ANSI_CUR_RESTORE) + String(ANSI_NORMAL));
 }
 
 // Table roughly converting "Khaled Colour" to base ANSI

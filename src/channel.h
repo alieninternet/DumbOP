@@ -26,10 +26,11 @@ struct wantedChannel {
    String mode;
    String keep;
    String key;
-   long flags;
-   long gameflags;
+   unsigned long flags;
+   unsigned long gameflags;
    
-   wantedChannel(String m, String kp, String ky, long f, long gf)
+   wantedChannel(String m, String kp, String ky, 
+		 unsigned long f, unsigned long gf)
      : mode(m), keep(kp), key(ky), flags(f), gameflags(gf) { }
 };
 

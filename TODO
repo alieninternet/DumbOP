@@ -40,14 +40,13 @@ Add 'RESTART' command (actually quit/respawn process)
 
 Add setuser and setchan flag manipulation commands
 
+Merge wanted channels and channels structures together and add a boolean
+"joined" variable. This would be easier to work with considering the flags
+etc.
 
 Low Priority
 ------------
 Finish !ping to perhaps ping other people.
-
-Add lag counter to !ping.
-
-Add millisecond support to lag counter.
 
 Add a line wrapper for the Telnet 'spy' code so that words can wrap around to
 the following line correctly (in ANSI::toANSI()?)
@@ -76,9 +75,6 @@ to be saved, such as peak levels (ops etc) to be kept properly.
 
 Finish !names (- returns all; should only return channels user has access to)
 
-Add cnx->bot->sendLen += to output, where appropriate (most likely in 
-serverqueue.c)
-
 Make a types.h file and put the different types in there rather than repeat
 them over and over again throughout the source code (esp. the lists/maps etc)
 
@@ -86,7 +82,7 @@ them over and over again throughout the source code (esp. the lists/maps etc)
 Probably not needed :)
 ----------------------
 Add WALLOPS support to check for netsplits? Will this be accurate across most
-networks or just AustNet??
+networks or just AustNet?? (WALLOPS is supported by telnetspy)
 
 Command Counter
 

@@ -40,6 +40,8 @@ class Utils {
    static String replaceVowels(String, char);
    static String reverseStr(String);
 
+   static String intToDayOfWeek(int);
+   static String intToMonth(int);
 };
 
 #endif

@@ -12,7 +12,7 @@ Pickle: ansi.cc - Added toANSI function, now using it with TelnetSpy::
 Pickle: signal.cc - Rough signal code added. Bot will shut down properly upon
 	death signals. No support for rehashing via SIGHUP as yet. All other
 	superfluous signals ignored. Did I mention 'rough'? hehe :)
-Pickle: bot.cc - Changed PING/PONG to only send the nick name rather than
+Pickle: bot.cc - Changed PING/PONG to only send a string rather than
 	waste time referencing memory to get the time. We no longer depend on
 	the server reply. AustNET returns a traditional PING (everything sent),
 	traditional IRCd returns just the PINGer's nick name. Many networks
@@ -23,6 +23,17 @@ Pickle: bot.cc - Changed PING/PONG to only send the nick name rather than
 Pickle: gamequiz.cc and gamequiz.h created
 Pickle: INFO merged into STATS command (dodgey!)
 Pickle: MSG command removed
+Pickle: CATEGORY command created for quiz game (sketchy so far)
+Pickle: bot.cc: Moved receivedLen and sentLen into ServerConnection class
+Pickle: serverqueue.cc: Finally added the incrementor for sentLen!!!
+Pickle: HINT and REPEAT quiz commands created (shells)
+Pickle: telnetspy.cc: Fixed 'bug' (rather, oversight) where signoff messages
+	were devoid of their first word.
+Pickle: channel.cc: Fixed bug with reading data from the file. It appears I
+	neglected a field, which made everything after the mode/topic locks
+	off-alignment and causes a slight inconvenience with the flagging
+	system. Channel list files should still be replaced with something
+	better though, right?
 
 
 Version 0.33

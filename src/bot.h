@@ -55,9 +55,6 @@ class Bot {
    
    ofstream logFile;
    
-   long receivedLen;
-   long sentLen;
-   
    bool connected;
 # ifdef DEBUG
    bool debug;
@@ -99,9 +96,9 @@ class Bot {
    static const time_t CHANNEL_JOIN = 600; // 10 mins
    static const time_t IGNORE_DELAY = 120; // 2 mins
    static const time_t DCC_DELAY = 300; // 5 mins
-   static const time_t PING_TIME = 180; // 3 mins *MUST BE SHORTED THAN TIMEOUT*
+   static const time_t PING_TIME = 120; // 2 mins *MUST BE SHORTED THAN TIMEOUT*
    static const time_t TIMEOUT = 300; // 5 mins
-   
+
  public:
 
    struct timeb currentTime;

@@ -14,6 +14,7 @@ class UserCommands {
    static void Ban(ServerConnection *, Person *, String, String);
    static void BanList(ServerConnection *, Person *, String, String);
    static void Beep(ServerConnection *, Person *, String, String);
+   static void Category(ServerConnection *, Person *, String, String);
    static void ChangeLevel(ServerConnection *, Person *, String, String);
    static void Cycle(ServerConnection *, Person *, String, String);
    static void DCCList(ServerConnection *, Person *, String, String);
@@ -24,6 +25,7 @@ class UserCommands {
    static void Die(ServerConnection *, Person *, String, String);
    static void Do(ServerConnection *, Person *, String, String);
    static void Help(ServerConnection *, Person *, String, String);
+   static void Hint(ServerConnection *, Person *, String, String);
    static void Ident(ServerConnection *, Person *, String, String);
    static void Invite(ServerConnection *, Person *, String, String);
    static void Join(ServerConnection *, Person *, String, String);
@@ -43,6 +45,7 @@ class UserCommands {
    static void Ping(ServerConnection *, Person *, String, String);
    static void Raw(ServerConnection *, Person *, String, String);
    static void Reconnect(ServerConnection *, Person *, String, String);
+   static void Repeat(ServerConnection *, Person *, String, String);
    static void Save(ServerConnection *, Person *, String, String);
    static void Say(ServerConnection *, Person *, String, String);
    static void Server(ServerConnection *, Person *, String, String);
