@@ -21,18 +21,17 @@ class UserList {
    void save();
    void clear();
    
-   void addUser(String, time_t, int, int, String,
+   void addUser(String, time_t, int, unsigned long, String,
 		long = 0, time_t = -1, String = "");
-   void removeUser(String, String);
+   void removeUser(String);
 
-   UserListItem * getUserListItem(String, String = "#*");
+   UserListItem *getUserListItem(String);
+   UserListItem *getUserListItemNick(String);
    
    int getMaxLevel(String);
-   int getLevel(String, String);
+   int getLevel(String);
    
-   int getMaxProt(String, String);
-   
-   bool isInUserList(String, String = "");
+   bool isInUserList(String);
    bool isNickInUserList(String);
 
    bool identify(String, String);

@@ -89,7 +89,7 @@ void Channel::addNick(String n, String uh, int mode, UserList *ul,
    if (names)
      u = new User(n, mode);
    else
-     u = new User(n, uh, channelName, mode, ul);
+     u = new User(n, uh, mode, ul);
    
    channelMemory[n.toLower()] = u;
    

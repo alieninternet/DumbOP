@@ -165,7 +165,7 @@ int Utils::getLevel(Bot * b, String nuh, String channel)
       return -1;
    }
    
-   return b->userList->getLevel(nuh, channel);
+   return b->userList->getLevel(nuh);
 }
 
 
@@ -517,6 +517,13 @@ String Utils::dwindleSpaces(String line)
  */
 String Utils::generateSHA1(String line)
 {
+   /* Make sure we got something. The SHA1 generator doesn't like to be fed
+    * nothings
+    */
+   if (!line.length()) {
+      return "";
+   }
+   
    union {
       char c[20];
       unsigned long l[5];

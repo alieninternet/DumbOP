@@ -23,6 +23,10 @@
 #include "utils.h"
 
 
+// this should be elsewhere.
+#define USER_REGISTRATION_CREDIT	50
+
+
 /* Register - Add a user, or channel, at somebody's request
  * Original 19/07/01, Simon Butcher <simonb@alien.net.au>
  */
@@ -60,9 +64,11 @@ void Commands::Register(ServerConnection *cnx, Person *from,
 
       // Tell the user we are adding them, and add them
       from->sendNotice(String("Registering you as \002") + mask +
-		       String("\002 with the password specified."));
+		       String("\002 with the password specified, and a registration credit of \002") +
+		       String(USER_REGISTRATION_CREDIT) + String("\002."));
       cnx->bot->userList->addUser(mask, cnx->bot->currentTime.time, 
-				  User::USER, 0, from->getNick(), 0, 0, 
+				  User::USER, USER_REGISTRATION_CREDIT, 
+				  from->getNick(), 0, 0,
 				  Utils::generateSHA1(word.toLower()));
       
       // They have registered, technically they have also identified too.

@@ -27,7 +27,7 @@ LIBS=
 
 TARGET=users.o
 
-SOURCES=user.cc list.cc
+SOURCES=item.cc list.cc user.cc
 
 INCLUDES=
 

@@ -39,7 +39,7 @@ void UserList::read()
       String mask = st.nextToken(':');
       String regTime = st.nextToken(':');
       String level = st.nextToken(':');
-      String prot = st.nextToken(':');
+      String credits = st.nextToken(':');
       String nick = st.nextToken(':');
       String flags = st.nextToken(':');
       String lastseen = st.nextToken(':');
@@ -50,7 +50,9 @@ void UserList::read()
       }
       
       l.push_back(new UserListItem(mask, atol(regTime), atoi(level),
-				   atoi(prot), nick, atol(flags),
+				   ((atol(credits) < 0) ?
+				    0 : atol(credits)),
+				   nick, atol(flags),
 				   ((atol(lastseen) == 0) ? 
 				    -1 : atol(lastseen)),
 				   password));
@@ -71,7 +73,7 @@ void UserList::save()
       file << (*it)->mask.getMask().toLower() << ":"
 	<< (*it)->registered << ":"
 	<< (*it)->level << ":"
-	<< (*it)->prot << ":"
+	<< (*it)->credits << ":"
 	<< (*it)->nick << ":"
 	<< (*it)->flags << ":"
 	<< (*it)->lastseen << ":";
@@ -94,22 +96,39 @@ void UserList::clear()
      }
   }
 
-void UserList::addUser(String m, time_t r, int lev, int p, String n,
+void UserList::addUser(String m, time_t r, int lev, unsigned long c, String n,
 		       long f, time_t ls, String pa)
 {
-   l.push_back(new UserListItem(m, r, lev, p, n, f, ls, pa));
+   l.push_back(new UserListItem(m, r, lev, c, n, f, ls, pa));
 }
 
-UserListItem *UserList::getUserListItem(String nuh, String channel = "#*")
+UserListItem *UserList::getUserListItem(String nuh)
   {
      for (list<UserListItem *>::iterator it = l.begin();
 	  it != l.end(); ++it)
-       if ((*it)->matches(nuh, channel)) {
+       if ((*it)->matches(nuh)) {
 	  return (*it);
        }
      
      return 0;
   }
+
+
+/* getUserListItemNick - Grab a userlist item by a nickname
+ * Original 31/07/01, Simon Butcher
+ * Note: This is a little rough...
+ */
+UserListItem *UserList::getUserListItemNick(String nick)
+{
+   for (list<UserListItem *>::iterator it = l.begin();
+	it != l.end(); ++it) {
+      if ((*it)->nick.toLower() == nick.toLower()) {
+	 return (*it);
+      }
+   }
+   
+   return 0;
+}
 
 int UserList::getMaxLevel(String nuh)
   {
@@ -131,35 +150,20 @@ int UserList::getMaxLevel(String nuh)
      return level;
   }
 
-int UserList::getLevel(String nuh, String channel)
+int UserList::getLevel(String nuh)
   {
-     if (UserListItem *uli = getUserListItem(nuh, channel))
+     if (UserListItem *uli = getUserListItem(nuh))
        return uli->level;
      
      return -1;
   }
 
-int UserList::getMaxProt(String nuh, String channel)
-  {
-     int prot = -1;
-     
-     for (list<UserListItem *>::iterator it = l.begin();
-	  it != l.end(); it++) {
-	Mask m(nuh), mc(channel), msc((*it)->channelMask.getMask());
-	if (m.matches((*it)->mask) &&
-	    (mc.matches((*it)->channelMask) || msc.matches(channel)) &&
-	    prot < (*it)->prot) {
-	   prot = (*it)->prot;
-	}
-     }
-     return prot;
-  }
 
-bool UserList::isInUserList(String nuh, String maskChannel)
+bool UserList::isInUserList(String nuh)
   {
      for (list<UserListItem *>::iterator it = l.begin();
 	  it != l.end(); ++it) {
-	if ((*it)->matches(nuh, maskChannel)) {
+	if ((*it)->matches(nuh)) {
 	   return true;
 	}
      }
@@ -220,13 +224,12 @@ bool UserList::identify(String nick, String password)
 }
 
 
-void UserList::removeUser(String mask, String maskChannel)
+void UserList::removeUser(String mask)
   {
      for (list<UserListItem *>::iterator it = l.begin();
 	  it != l.end();
 	  ++it)
-       if ((*it)->mask.getMask() == mask &&
-	   (*it)->channelMask.getMask() == maskChannel) {
+       if ((*it)->mask.getMask() == mask) {
 	  delete (*it);
 	  l.erase(it);
 	  return;

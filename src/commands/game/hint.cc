@@ -49,6 +49,24 @@ void Commands::Hint(ServerConnection *cnx, Person *from,
       return;
    }
    
+   // Make sure they can pay for this!
+   UserListItem *uli = 
+     cnx->bot->userList->getUserListItem(from->getAddress());
+   
+   if ((!uli) || 
+       !uli->canAfford(DEFAULT_QUIZ_QUESTION_HINT_COST)) {
+      c->sendNotice(String("Sorry, you need at least ") +
+		    String(DEFAULT_QUIZ_QUESTION_HINT_COST) +
+		    String(" credits to get a hint."));
+      return;
+   }
+   
+   // Charge them!
+   uli->charge(DEFAULT_QUIZ_QUESTION_HINT_COST);
+   
+   // We hinted, turn that autohint thing on now
+   gqc->autoHint = true;
+   
    // Ok well we must have a hint waiting for us if we got here...
    c->sendNotice(String("Hint: ") + gqc->nextHint());
 }

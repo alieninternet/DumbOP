@@ -17,6 +17,7 @@
 # define USERFLAG_IS_SUSPENDED		0x00000002 // User is suspended completely
 # define USERFLAG_USE_PRIVMSG		0x00000010 // Use PRIVMSG, not NOTICE
 # define USERFLAG_LASTSEEN_AUTH		0x00000100 // Lastseen was identified
+# define USERFLAG_HAS_MONEY_TREE	0x00100000 // User has endless credits
 
 // Channel flags
 # define CHANFLAG_PROTECT_NOFLOOD	0x00000001 // Protect from flooding

@@ -8272,3 +8272,556 @@
 [29/07/2001 - 23:49:00] Joined channel #quiz.
 [30/07/2001 - 00:17:02] Caught Signal SIGINT: Shutting down.
 [30/07/2001 - 00:17:03] Stopping log.
+[30/07/2001 - 00:59:42] Starting log.
+[30/07/2001 - 00:59:42] DumbOP v0.38
+[30/07/2001 - 00:59:43] Caught Signal SIGINT: Shutting down.
+[30/07/2001 - 01:00:01] Starting log.
+[30/07/2001 - 01:00:01] DumbOP v0.38
+[30/07/2001 - 01:00:03] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[30/07/2001 - 01:00:03] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[30/07/2001 - 01:00:04] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[30/07/2001 - 01:00:04] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[30/07/2001 - 01:00:05] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[30/07/2001 - 01:00:06] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[30/07/2001 - 01:00:08] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[30/07/2001 - 01:00:09] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[30/07/2001 - 01:00:09] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[30/07/2001 - 01:00:10] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[30/07/2001 - 01:00:10] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[30/07/2001 - 01:00:10] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[30/07/2001 - 01:00:10] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[30/07/2001 - 01:00:10] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[30/07/2001 - 01:00:11] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[30/07/2001 - 01:00:11] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[30/07/2001 - 01:00:11] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[30/07/2001 - 01:00:11] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[30/07/2001 - 01:00:14] Connected to server mothership.alien.intranet (6667).
+[30/07/2001 - 01:00:15] Joined channel #chaty.
+[30/07/2001 - 01:00:15] Joined channel #quiz.
+[30/07/2001 - 03:32:55] Caught Signal SIGINT: Shutting down.
+[30/07/2001 - 03:32:55] Stopping log.
+[31/07/2001 - 00:05:43] Starting log.
+[31/07/2001 - 00:05:43] DumbOP v0.38
+[31/07/2001 - 00:05:44] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 00:05:44] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 00:05:44] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 00:05:45] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 00:05:45] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 00:05:46] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 00:05:47] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 00:05:49] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 00:05:49] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 00:05:49] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 00:05:49] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 00:05:49] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 00:05:50] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 00:05:50] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 00:05:50] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 00:05:51] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 00:05:51] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 00:05:51] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 00:05:52] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 00:05:53] Joined channel #chaty.
+[31/07/2001 - 00:05:53] Joined channel #quiz.
+[31/07/2001 - 00:07:57] Caught Signal SIGINT: Shutting down.
+[31/07/2001 - 00:08:00] Caught Signal SIGINT: Shutting down.
+[31/07/2001 - 00:08:03] Caught Signal SIGINT: Shutting down.
+[31/07/2001 - 00:08:03] Stopping log.
+[31/07/2001 - 00:13:28] Starting log.
+[31/07/2001 - 00:13:28] DumbOP v0.38
+[31/07/2001 - 00:13:29] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 00:13:29] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 00:13:30] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 00:13:30] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 00:13:30] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 00:13:31] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 00:13:32] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 00:13:34] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 00:13:34] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 00:13:34] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 00:13:34] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 00:13:34] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 00:13:35] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 00:13:35] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 00:13:35] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 00:13:36] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 00:13:36] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 00:13:36] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 00:13:37] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 00:13:37] Joined channel #chaty.
+[31/07/2001 - 00:13:37] Joined channel #quiz.
+[31/07/2001 - 00:16:07] pickle!~pickle@vw-27238.alien.intranet did DIE
+[31/07/2001 - 00:16:08] Stopping log.
+[31/07/2001 - 00:18:03] Starting log.
+[31/07/2001 - 00:18:03] DumbOP v0.38
+[31/07/2001 - 00:18:04] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 00:18:05] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 00:18:05] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 00:18:05] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 00:18:05] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 00:18:06] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 00:18:08] Caught Signal SIGINT: Shutting down.
+[31/07/2001 - 00:24:06] Starting log.
+[31/07/2001 - 00:24:07] DumbOP v0.38
+[31/07/2001 - 00:24:08] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 00:24:08] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 00:24:08] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 00:24:09] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 00:24:09] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 00:24:09] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 00:24:11] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 00:24:12] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 00:24:12] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 00:24:13] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 00:24:13] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 00:24:13] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 00:24:13] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 00:24:14] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 00:24:14] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 00:24:14] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 00:24:14] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 00:24:14] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 00:24:16] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 00:24:16] Joined channel #chaty.
+[31/07/2001 - 00:24:16] Joined channel #quiz.
+[31/07/2001 - 00:24:44] pickle!~pickle@vw-27238.alien.intranet did HELP
+[31/07/2001 - 00:24:49] Left channel #quiz.
+[31/07/2001 - 00:24:49] Joined channel #quiz.
+[31/07/2001 - 00:24:49] Left channel #chaty.
+[31/07/2001 - 00:24:53] Joined channel #chaty.
+[31/07/2001 - 00:27:00] pickle!~pickle@vw-27238.alien.intranet did DIE
+[31/07/2001 - 00:27:00] Stopping log.
+[31/07/2001 - 01:47:45] Starting log.
+[31/07/2001 - 01:47:45] DumbOP v0.38
+[31/07/2001 - 01:47:46] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 01:47:46] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 01:47:47] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 01:47:47] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 01:47:47] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 01:47:48] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 01:47:49] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 01:47:51] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 01:47:51] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 01:47:51] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 01:47:51] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 01:47:51] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 01:47:52] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 01:47:52] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 01:47:52] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 01:47:53] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 01:47:53] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 01:47:53] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 01:47:53] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 01:47:54] Joined channel #chaty.
+[31/07/2001 - 01:47:54] Joined channel #quiz.
+[31/07/2001 - 01:48:01] pickle!~pickle@vw-27238.alien.intranet did PING
+[31/07/2001 - 01:50:05] Caught Signal SIGINT: Shutting down.
+[31/07/2001 - 01:50:05] Stopping log.
+[31/07/2001 - 06:02:51] Starting log.
+[31/07/2001 - 06:02:51] DumbOP v0.38
+[31/07/2001 - 06:02:52] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 06:02:53] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 06:02:53] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 06:02:53] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 06:02:53] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 06:02:54] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 06:02:56] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 06:02:57] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 06:02:57] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 06:02:58] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 06:02:58] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 06:02:58] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 06:02:58] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 06:02:58] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 06:02:58] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 06:02:59] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 06:02:59] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 06:02:59] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 06:03:00] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 06:03:00] Joined channel #chaty.
+[31/07/2001 - 06:03:00] Joined channel #quiz.
+[31/07/2001 - 06:03:18] Left channel #quiz.
+[31/07/2001 - 06:03:18] Joined channel #quiz.
+[31/07/2001 - 06:03:25] Left channel #chaty.
+[31/07/2001 - 06:03:27] Joined channel #chaty.
+[31/07/2001 - 06:05:13] foo!~pickle@vw-27238.alien.intranet did HELP
+[31/07/2001 - 06:05:16] foo!~pickle@vw-27238.alien.intranet did REGISTER
+[31/07/2001 - 06:05:18] foo!~pickle@vw-27238.alien.intranet did REGISTER
+[31/07/2001 - 06:05:33] fud!~pickle@vw-27238.alien.intranet did REGISTER
+[31/07/2001 - 06:05:39] fud!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 06:05:44] fud!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 06:05:45] fud!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 06:05:46] fud!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 06:05:48] fud!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 06:05:50] fud!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 06:05:58] fud!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 06:06:02] fud!~pickle@vw-27238.alien.intranet did IDENTIFY
+[31/07/2001 - 06:06:03] fud!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 06:06:04] fud!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 06:06:06] fud!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 06:06:08] fud!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 06:06:44] fud!~pickle@vw-27238.alien.intranet did CATEGORY
+[31/07/2001 - 06:06:46] fud!~pickle@vw-27238.alien.intranet did CATEGORY
+[31/07/2001 - 06:06:49] fud!~pickle@vw-27238.alien.intranet did CATEGORY
+[31/07/2001 - 06:07:08] pickle!~pickle@vw-27238.alien.intranet did CATEGORY
+[31/07/2001 - 06:07:10] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 06:07:12] pickle!~pickle@vw-27238.alien.intranet did HELP
+[31/07/2001 - 06:07:15] pickle!~pickle@vw-27238.alien.intranet did USERLIST
+[31/07/2001 - 06:07:41] Caught Signal SIGINT: Shutting down.
+[31/07/2001 - 06:07:41] Stopping log.
+[31/07/2001 - 06:16:59] Starting log.
+[31/07/2001 - 06:16:59] DumbOP v0.38
+[31/07/2001 - 06:17:00] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 06:17:01] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 06:17:01] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 06:17:01] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 06:17:01] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 06:17:02] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 06:17:04] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 06:17:05] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 06:17:05] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 06:17:05] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 06:17:06] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 06:17:06] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 06:17:06] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 06:17:06] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 06:17:06] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 06:17:07] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 06:17:07] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 06:17:07] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 06:17:08] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 06:17:09] Joined channel #chaty.
+[31/07/2001 - 06:17:09] Joined channel #quiz.
+[31/07/2001 - 06:17:17] fud!~pickle@vw-27238.alien.intranet did IDENTIFY
+[31/07/2001 - 06:17:41] fud!~pickle@vw-27238.alien.intranet did HELP
+[31/07/2001 - 06:17:49] fud!~pickle@vw-27238.alien.intranet did LASTSEEN
+[31/07/2001 - 06:17:52] fud!~pickle@vw-27238.alien.intranet did LASTSEEN
+[31/07/2001 - 06:18:28] fud!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 06:18:31] fud!~pickle@vw-27238.alien.intranet did CATEGORY
+[31/07/2001 - 06:18:34] fud!~pickle@vw-27238.alien.intranet did CATEGORY
+[31/07/2001 - 06:18:53] Left channel #quiz.
+[31/07/2001 - 06:18:53] Joined channel #quiz.
+[31/07/2001 - 06:18:58] pickle!~pickle@vw-27238.alien.intranet did USERLIST
+[31/07/2001 - 06:20:18] Caught Signal SIGINT: Shutting down.
+[31/07/2001 - 06:20:18] Stopping log.
+[31/07/2001 - 09:52:51] Starting log.
+[31/07/2001 - 09:52:51] DumbOP v0.38
+[31/07/2001 - 09:52:52] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 09:52:52] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 09:52:53] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 09:52:53] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 09:52:53] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 09:52:54] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 09:52:55] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 09:52:57] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 09:52:57] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 09:52:58] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 09:52:58] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 09:52:58] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 09:52:58] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 09:52:59] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 09:52:59] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 09:52:59] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 09:52:59] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 09:53:00] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 09:53:00] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 09:53:01] Joined channel #chaty.
+[31/07/2001 - 09:53:01] Joined channel #quiz.
+[31/07/2001 - 09:53:11] Left channel #quiz.
+[31/07/2001 - 09:53:15] Joined channel #quiz.
+[31/07/2001 - 09:53:26] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 09:53:36] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 09:53:38] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 09:56:13] Caught Signal SIGINT: Shutting down.
+[31/07/2001 - 09:56:13] Stopping log.
+[31/07/2001 - 09:58:32] Starting log.
+[31/07/2001 - 09:58:32] DumbOP v0.38
+[31/07/2001 - 09:58:33] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 09:58:34] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 09:58:34] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 09:58:34] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 09:58:34] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 09:58:35] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 09:58:37] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 09:58:38] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 09:58:38] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 09:58:39] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 09:58:39] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 09:58:39] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 09:58:39] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 09:58:39] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 09:58:39] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 09:58:40] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 09:58:40] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 09:58:40] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 09:58:40] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 09:58:40] Joined channel #chaty.
+[31/07/2001 - 09:58:40] Joined channel #quiz.
+[31/07/2001 - 09:58:43] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 09:59:09] Left channel #chaty.
+[31/07/2001 - 09:59:09] Joined channel #chaty.
+[31/07/2001 - 09:59:13] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 09:59:16] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 10:00:49] pickle!~pickle@vw-27238.alien.intranet did TEST
+[31/07/2001 - 10:02:33] Starting log.
+[31/07/2001 - 10:02:34] DumbOP v0.38
+[31/07/2001 - 10:02:36] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 10:02:36] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 10:02:37] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 10:02:37] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 10:02:38] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 10:02:39] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 10:02:41] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 10:02:42] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 10:02:42] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 10:02:43] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 10:02:43] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 10:02:43] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 10:02:44] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 10:02:44] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 10:02:44] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 10:02:45] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 10:02:45] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 10:02:45] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 10:02:49] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 10:02:49] Joined channel #chaty.
+[31/07/2001 - 10:02:49] Joined channel #quiz.
+[31/07/2001 - 10:03:10] pickle!~pickle@vw-27238.alien.intranet did TEST
+[31/07/2001 - 10:03:12] pickle!~pickle@vw-27238.alien.intranet did TEST
+[31/07/2001 - 10:07:42] Starting log.
+[31/07/2001 - 10:07:42] DumbOP v0.38
+[31/07/2001 - 10:07:43] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 10:07:43] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 10:07:44] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 10:07:44] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 10:07:44] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 10:07:45] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 10:07:47] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 10:07:48] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 10:07:48] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 10:07:48] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 10:07:49] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 10:07:49] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 10:07:49] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 10:07:49] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 10:07:49] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 10:07:50] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 10:07:50] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 10:07:50] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 10:07:51] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 10:07:51] Joined channel #chaty.
+[31/07/2001 - 10:07:51] Joined channel #quiz.
+[31/07/2001 - 10:08:34] pickle!~pickle@vw-27238.alien.intranet did TEST
+[31/07/2001 - 10:08:38] pickle!~pickle@vw-27238.alien.intranet did TEST
+[31/07/2001 - 10:08:42] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 10:08:44] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 10:08:58] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 10:09:02] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 10:09:05] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 10:09:07] pickle!~pickle@vw-27238.alien.intranet did USERLIST
+[31/07/2001 - 10:11:59] Caught Signal SIGINT: Shutting down.
+[31/07/2001 - 10:11:59] Stopping log.
+[31/07/2001 - 10:24:52] Starting log.
+[31/07/2001 - 10:24:53] DumbOP v0.38
+[31/07/2001 - 10:24:54] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 10:24:54] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 10:24:55] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 10:24:55] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 10:24:55] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 10:24:56] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 10:24:57] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 10:24:59] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 10:24:59] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 10:24:59] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 10:24:59] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 10:24:59] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 10:24:59] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 10:25:00] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 10:25:00] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 10:25:01] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 10:25:01] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 10:25:01] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 10:25:04] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 10:25:04] Joined channel #chaty.
+[31/07/2001 - 10:25:04] Joined channel #quiz.
+[31/07/2001 - 10:29:18] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 10:29:21] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 10:29:24] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 10:31:55] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 10:31:56] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 10:31:59] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 10:32:02] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 10:33:28] Caught Signal SIGINT: Shutting down.
+[31/07/2001 - 10:33:28] Stopping log.
+[31/07/2001 - 11:02:57] Starting log.
+[31/07/2001 - 11:02:57] DumbOP v0.38
+[31/07/2001 - 11:02:59] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 11:02:59] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 11:02:59] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 11:02:59] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 11:03:00] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 11:03:00] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 11:03:02] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 11:03:03] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 11:03:03] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 11:03:04] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 11:03:04] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 11:03:04] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 11:03:04] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 11:03:04] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 11:03:05] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 11:03:05] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 11:03:05] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 11:03:05] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 11:03:06] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 11:03:07] Joined channel #chaty.
+[31/07/2001 - 11:03:07] Joined channel #quiz.
+[31/07/2001 - 11:03:22] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 11:03:31] pickle!~pickle@vw-27238.alien.intranet did GIVE
+[31/07/2001 - 11:03:32] pickle!~pickle@vw-27238.alien.intranet did GIVE
+[31/07/2001 - 11:03:36] pickle!~pickle@vw-27238.alien.intranet did GIVE
+[31/07/2001 - 11:03:41] pickle!~pickle@vw-27238.alien.intranet did GIVE
+[31/07/2001 - 11:03:45] pickle!~pickle@vw-27238.alien.intranet did GIVE
+[31/07/2001 - 11:03:48] pickle!~pickle@vw-27238.alien.intranet did STATS
+[31/07/2001 - 11:03:52] pickle!~pickle@vw-27238.alien.intranet did GIVE
+[31/07/2001 - 11:03:54] pickle!~pickle@vw-27238.alien.intranet did GIVE
+[31/07/2001 - 11:03:55] pickle!~pickle@vw-27238.alien.intranet did GIVE
+[31/07/2001 - 11:03:59] pickle!~pickle@vw-27238.alien.intranet did GIVE
+[31/07/2001 - 11:06:21] pickle!~pickle@vw-27238.alien.intranet did GIVE
+[31/07/2001 - 11:06:24] pickle!~pickle@vw-27238.alien.intranet did GIVE
+[31/07/2001 - 11:06:27] pickle!~pickle@vw-27238.alien.intranet did GIVE
+[31/07/2001 - 11:06:49] Caught Signal SIGINT: Shutting down.
+[31/07/2001 - 11:06:49] Caught Signal SIGINT: Shutting down.
+[31/07/2001 - 11:06:49] Stopping log.
+[31/07/2001 - 13:18:41] Starting log.
+[31/07/2001 - 13:18:41] DumbOP v0.38
+[31/07/2001 - 13:18:43] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 13:18:43] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 13:18:43] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 13:18:43] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 13:18:44] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 13:18:44] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 13:18:46] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 13:18:47] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 13:18:47] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 13:18:48] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 13:18:48] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 13:18:48] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 13:18:48] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 13:18:49] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 13:18:49] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 13:18:49] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 13:18:49] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 13:18:49] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 13:18:50] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 13:18:50] Joined channel #chaty.
+[31/07/2001 - 13:18:50] Joined channel #quiz.
+[31/07/2001 - 13:20:26] pickle!~pickle@vw-27238.alien.intranet did ASK
+[31/07/2001 - 13:21:43] pickle!~pickle@vw-27238.alien.intranet did CLUE
+[31/07/2001 - 13:22:27] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 13:22:29] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 13:22:54] Caught Signal SIGINT: Shutting down.
+[31/07/2001 - 13:22:54] Stopping log.
+[31/07/2001 - 13:31:18] Starting log.
+[31/07/2001 - 13:31:19] DumbOP v0.38
+[31/07/2001 - 13:31:20] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 13:31:20] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 13:31:21] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 13:31:21] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 13:31:21] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 13:31:22] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 13:31:24] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 13:31:25] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 13:31:25] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 13:31:25] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 13:31:25] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 13:31:26] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 13:31:26] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 13:31:26] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 13:31:26] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 13:31:27] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 13:31:27] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 13:31:27] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 13:31:28] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 13:31:28] Joined channel #chaty.
+[31/07/2001 - 13:31:28] Joined channel #quiz.
+[31/07/2001 - 13:32:00] Left channel #quiz.
+[31/07/2001 - 13:32:00] Joined channel #quiz.
+[31/07/2001 - 13:35:29] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 13:35:38] pickle!~pickle@vw-27238.alien.intranet did OP
+[31/07/2001 - 13:35:49] pickle!~pickle@vw-27238.alien.intranet kicked me out of channel #quiz (feg).
+[31/07/2001 - 13:35:49] Joined channel #quiz.
+[31/07/2001 - 13:38:10] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 13:38:12] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 13:39:55] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 13:40:14] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 13:40:40] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 13:40:42] pickle!~pickle@vw-27238.alien.intranet did CLUE
+[31/07/2001 - 13:42:07] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 13:42:09] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 13:42:15] pickle!~pickle@vw-27238.alien.intranet did DIE
+[31/07/2001 - 13:42:15] Stopping log.
+[31/07/2001 - 14:10:24] Starting log.
+[31/07/2001 - 14:10:24] DumbOP v0.38
+[31/07/2001 - 14:10:26] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 14:10:26] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 14:10:26] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 14:10:26] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 14:10:27] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 14:10:27] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 14:10:29] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 14:10:30] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 14:10:30] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 14:10:31] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 14:10:31] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 14:10:31] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 14:10:31] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 14:10:31] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 14:10:32] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 14:10:32] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 14:10:32] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 14:10:32] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 14:10:33] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 14:10:33] Joined channel #chaty.
+[31/07/2001 - 14:10:33] Joined channel #quiz.
+[31/07/2001 - 14:21:55] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 14:21:55] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 14:21:57] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 14:21:58] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 14:22:02] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 14:22:24] pickle!~pickle@vw-27238.alien.intranet did DIE
+[31/07/2001 - 14:22:26] Stopping log.
+[31/07/2001 - 14:26:49] Starting log.
+[31/07/2001 - 14:26:49] DumbOP v0.38
+[31/07/2001 - 14:26:51] Loaded QUIZ category 'SCIENCE AND MEDICINE' (1706 lines, 347 questions)
+[31/07/2001 - 14:26:51] Loaded QUIZ category 'ARTS AND LITERATURE' (435 lines, 115 questions)
+[31/07/2001 - 14:26:51] Loaded QUIZ category 'ASTRONOMY' (443 lines, 139 questions)
+[31/07/2001 - 14:26:51] Loaded QUIZ category 'AUSTRALIANA' (359 lines, 106 questions)
+[31/07/2001 - 14:26:52] Loaded QUIZ category 'CARTOONS' (323 lines, 97 questions)
+[31/07/2001 - 14:26:52] Loaded QUIZ category 'ENTERTAINMENT' (903 lines, 254 questions)
+[31/07/2001 - 14:26:54] Loaded QUIZ category 'GEOGRAPHY' (3642 lines, 980 questions)
+[31/07/2001 - 14:26:55] Loaded QUIZ category 'HISTORY' (1879 lines, 369 questions)
+[31/07/2001 - 14:26:55] Loaded QUIZ category 'MATHS' (244 lines, 48 questions)
+[31/07/2001 - 14:26:56] Loaded QUIZ category 'MUSIC' (1028 lines, 199 questions)
+[31/07/2001 - 14:26:56] Loaded QUIZ category 'MYTHOLOGY AND RELIGION' (215 lines, 41 questions)
+[31/07/2001 - 14:26:56] Loaded QUIZ category 'PSYCH' (46 lines, 10 questions)
+[31/07/2001 - 14:26:56] Loaded QUIZ category 'PUTERS' (139 lines, 33 questions)
+[31/07/2001 - 14:26:56] Loaded QUIZ category 'ANIMALS AND NATURE' (690 lines, 206 questions)
+[31/07/2001 - 14:26:57] Loaded QUIZ category 'SCI-FI' (227 lines, 56 questions)
+[31/07/2001 - 14:26:57] Loaded QUIZ category 'SPORTS' (1028 lines, 221 questions)
+[31/07/2001 - 14:26:57] Loaded QUIZ category 'TECHNOLOGY' (44 lines, 13 questions)
+[31/07/2001 - 14:26:57] Loaded QUIZ category 'TOTALLY UNRELATED STUFF THAT WILL PROBABLY CONFUSE US ALL' (214 lines, 59 questions)
+[31/07/2001 - 14:26:58] Connected to server mothership.alien.intranet (6667).
+[31/07/2001 - 14:26:58] Joined channel #chaty.
+[31/07/2001 - 14:26:58] Joined channel #quiz.
+[31/07/2001 - 14:27:20] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 14:33:38] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 14:33:39] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 14:33:39] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 14:33:42] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 14:33:44] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 14:34:01] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 14:34:21] pickle!~pickle@vw-27238.alien.intranet did HINT
+[31/07/2001 - 14:34:39] pickle!~pickle@vw-27238.alien.intranet did TIME
+[31/07/2001 - 14:34:48] pickle!~pickle@vw-27238.alien.intranet did DIE
+[31/07/2001 - 14:34:48] Stopping log.

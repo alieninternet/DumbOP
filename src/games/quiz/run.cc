@@ -28,16 +28,15 @@ void GameQuiz::attend(void)
 	       // Tell them nobody answered the question
 	       (*it).second->channel->sendNotice("Nobody got that question. \003");
 	    } else {
-#ifdef QUIZ_AUTOHINT_THINGY // waste of time and it was not wanted
 	       // Are we in a question, and it is time for another hint?
 	       if (((period % DEFAULT_QUIZ_QUESTION_NEXTHINT_DELAY) == 0) &&
-		   ((*it).second->hintLevel > 0)) {
+		   ((*it).second->hintLevel > 0) &&
+		   ((*it).second->autoHint)) {
 		  // Send another hint
 		  (*it).second->channel->sendNotice(String("Hint: ") +
 						    (*it).second->nextHint() +
 						    String(" \003"));
 	       }
-#endif
 	    }
 	 } else {
 	    // Next question time? or next category time?
@@ -57,7 +56,7 @@ void GameQuiz::attend(void)
 		     (*it).second->questionStr = (*it).second->question->question;
 		     
 		     // Tell the rest of the software this question is normal
-		     (*it).second->questionLevel = Q_NORMAL;
+		     (*it).second->questionLevel = gameQuizChannel::NORMAL;
 		     
 		     // Set the points correctly
 		  } else {
@@ -70,11 +69,11 @@ void GameQuiz::attend(void)
 		     // Select the type of mangling we will do...
 		     switch ((*it).second->questionLevel) {
 		      default:
-		      case Q_BONUS_REVERSE: // Reverse the string
+		      case gameQuizChannel::REVERSE: // Reverse the string
 			(*it).second->questionStr =
 			  Utils::reverseStr(questionStr);
 			break;
-		      case Q_BONUS_NO_VOWELS: // Hide the vowels
+		      case gameQuizChannel::NO_VOWELS: // Hide the vowels
 			(*it).second->questionStr = 
 			  Utils::replaceVowels(questionStr, '-');
 			break;

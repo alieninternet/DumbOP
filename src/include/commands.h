@@ -23,6 +23,7 @@ class Commands {
    static void Deop(ServerConnection *, Person *, String, String);
    static void Die(ServerConnection *, Person *, String, String);
    static void Do(ServerConnection *, Person *, String, String);
+   static void Give(ServerConnection *, Person *, String, String);
    static void Help(ServerConnection *, Person *, String, String);
    static void Hint(ServerConnection *, Person *, String, String);
    static void Identify(ServerConnection *, Person *, String, String);

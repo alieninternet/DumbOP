@@ -65,9 +65,22 @@ void Commands::Category(ServerConnection *cnx, Person *from,
 						 playedTimeAgo) +
 			     String("\002."));
 	 } else {
-	    // We are OK! Set the next category..
+	    // Make sure they can pay for this!
+	    UserListItem *uli = 
+	      cnx->bot->userList->getUserListItem(from->getAddress());
+
+	    if ((!uli) || 
+		!uli->canAfford(DEFAULT_QUIZ_CATEGORY_CHANGE_COST)) {
+	       c->sendNotice(String("Sorry, you need at least ") +
+			     String(DEFAULT_QUIZ_CATEGORY_CHANGE_COST) +
+			     String(" credits to change the category."));
+	       return;
+	    }
+
+	    // We are OK! Set the next category, and take some credits away
 	    gqc->nextCategory = potentialCategory;
-	    
+	    uli->charge(DEFAULT_QUIZ_CATEGORY_CHANGE_COST);
+
 	    // Tell them we are setting the category
 	    c->sendNotice(String("The category for the next round in \002") +
 			  c->channelName + String("\002 has been changed by \002") +
@@ -93,7 +106,7 @@ void Commands::Category(ServerConnection *cnx, Person *from,
 		      gqc->nextCategory + String("\002. ")) : 
 		     (String("Changing the category for the next round will cost \002") +
 		      String(DEFAULT_QUIZ_CATEGORY_CHANGE_COST) + 
-		      String("\002 points."))));
+		      String("\002 credits."))));
    
    // Have we been requested to list the categories too?
    if ((rest[0] == '-') || (rest[0] == '*')) {

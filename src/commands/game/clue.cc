@@ -41,6 +41,21 @@ void Commands::Clue(ServerConnection *cnx, Person *from,
 
    // Make sure a clue is available for that question
    if (gqc->question->clue.length()) {
+      // Make sure they can pay for this!
+      UserListItem *uli = 
+	cnx->bot->userList->getUserListItem(from->getAddress());
+      
+      if ((!uli) || 
+	  !uli->canAfford(DEFAULT_QUIZ_QUESTION_CLUE_COST)) {
+	 c->sendNotice(String("Sorry, you need at least ") +
+		       String(DEFAULT_QUIZ_QUESTION_HINT_COST) +
+		       String(" credits to get this clue."));
+	 return;
+      }
+      
+      // Charge them!
+      uli->charge(DEFAULT_QUIZ_QUESTION_CLUE_COST);
+   
       c->sendNotice(String("Clue: ") +
 		    gqc->question->clue + String(" \003"));
    } else {

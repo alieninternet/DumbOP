@@ -39,6 +39,31 @@ simonb: src/telnet/descriptor.cc - Terminals make the background normal/bold
 	thing is totally normal-reverse instead of having the message bold.
 	Did that make any sense?
 simonb: src/utils/class.cc - Added repeatChar() routine.
+simonb: src/game/quiz/parser.cc - Added support for answering reversed
+	questions with reversed answers, and obtaining double the score.
+simonb: src/game/quiz/parser.cc - Added support for 'amazingly quick'
+	responces from users in a #quiz channel. The bot will tell the time
+	a user took to answer a question if it is less than 2.5 seconds
+	(configurable with a define)
+simonb: src/users/*.cc - 'prot' field changed to 'credits'. Credits are
+	planned to be 'earned' by playing games, eg. the quiz game. This way
+	some form of scoring and interoperability can be formed. Functions
+	related to 'prot' have been left (defaulting to NONE); they will have
+	to be rewritten at a later stage when the database controls are 
+	redone. (Soon, I hope)
+simonb: src/users/*.cc - channelMask field finally removed. It was defaulting
+	to '#*', but that's crap so it's gone now :)
+simonb: Added 'USERFLAG_HAS_MONEY_TREE' flag.
+simonb: src/users/item.cc - created. Includes new functions canAfford(), 
+	charge() and pay(), all designed to help the credit system.
+simonb: Added credit system to game commands CATEGORY, HINT and CLUE, where
+	appropriate.
+simonb: Added credit functionality to GameQuiz::parseLine(), adds credits
+	depending on points scored, etc.
+simonb: Added GIVE command (src/commands/game/give.cc), to give the users the
+	ability to be friendly and give mates some credits (may be good for
+	gambling addicted 'mates' if I ever write a gambling style game, eg.
+	card game or something :)
 
 
 Version 0.37

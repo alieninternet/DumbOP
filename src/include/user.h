@@ -15,7 +15,7 @@ class User {
    
    int mode;
    int floodNum;
-   UserListItem * userListItem;
+   UserListItem *userListItem;
    String nick;
    String userhost;
    String userkey;
@@ -43,7 +43,7 @@ class User {
       NO_DEOP = 3
    };
    
-   User(String, String, String, int, UserList *);
+   User(String, String, int, UserList *);
    User(String, int);
    
    int getLevel();

@@ -13,14 +13,12 @@ class Commands;
 class UserListItem {
    // Mask on the user
    Mask mask;
-   // Mask on the channel
-   Mask channelMask; // LEGACY
    // Time the user was registered with the bot
    time_t registered;
    // Level (from 0 to 4)
    int level;
-   // Protection (from 0 to 2)
-   int prot;
+   // Credits this user has accumulated (used in games)
+   unsigned long credits;
    // Nickname
    String nick;
    // 32-bits of flags (flags.h)
@@ -33,19 +31,14 @@ class UserListItem {
    bool identified;
    
  public:
-   UserListItem(String m, time_t r, int l, int p, String n = "",
-		long f = 0, time_t ls = -1, String pass = "")
-     : mask(m), channelMask("#*"), registered(r), level(l), prot(p), nick(n),
-   flags(f), lastseen(ls), passwd(pass), identified(0) { }
+   UserListItem(String, time_t, int, unsigned long, String, long, time_t,
+		String);
    
-   // Returns true if it matches <m> on channel(s) <mc>
-   bool matches(String m, String mc)
-     { if (mc.length()==0) return mask.matches(m);
-	else return mask.matches(m) && channelMask.matches(mc); }
-   
-   // Returns true if it matches <m>
-   bool matches(String m)
-     { return mask.matches(m); }
+   bool matches(String);			// Check for a mask match
+
+   bool canAfford(unsigned long);		// Can afford amount?
+   void charge(unsigned long);			// Charge user an amount
+   void pay(unsigned long);			// Pay user an amount
    
    friend class User;
    friend class Utils;
@@ -53,6 +46,8 @@ class UserListItem {
    friend class Channel;
    friend class UserList;
    friend class Commands;
+   
+   friend class GameQuiz;
 };
 
 #endif

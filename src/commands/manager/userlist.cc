@@ -13,7 +13,7 @@ void Commands::UserList(ServerConnection *cnx, Person *from,
      int num = 0;
      
      from->sendNotice("\002Userlist:\002");
-     from->sendNotice("\026 \037Nickname       \037 \037Mask            \037 \037Channel   \037 \037Level       \037 \037Flags     \037 \026");
+     from->sendNotice("\026 \037Nickname       \037 \037Mask            \037 \037Credit    \037 \037Level       \037 \037Flags     \037 \026");
      
      for (list<UserListItem *>::iterator it = cnx->bot->userList->l.begin();
 	  it != cnx->bot->userList->l.end();
@@ -26,7 +26,7 @@ void Commands::UserList(ServerConnection *cnx, Person *from,
 			 Utils::getFirstNick((*it)->nick).prepad(15) + " " +
 			 String("\002[\002") +
 			 (*it)->mask.getMask().pad(14) + String("\002]\002 ") +
-			 (*it)->channelMask.getMask().pad(10) + " " +
+			 String((*it)->credits).pad(10) + " " +
 			 Utils::levelToStr((*it)->level).pad(12) + " " +
 			 Utils::flagsToStr((*it)->flags).pad(10) + " " +
 			 String((*it)->flags));

@@ -56,6 +56,7 @@ AI engine is to ever be added, this would most likely be needed!
 Finish !lastseen (mask searching, channel mask searching)
 
 Finish !access (mask searching, channel mask searching)
+(Rewrite !access maybe?)
 
 Much better logging code needs to be implemented with levels, zones etc.
 This will require a log.c and log.h file

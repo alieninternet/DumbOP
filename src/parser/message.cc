@@ -43,7 +43,10 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	User::MASTER,       	false 
      },
      { "DO",		Commands::Do,	   
-	User::MANAGER,	       	true  
+	User::MASTER,	       	true  
+     },
+     { "GIVE",		Commands::Give,
+	User::USER,	       	false
      },
      { "HELP",        	Commands::Help,        
 	User::NONE,         	false 
@@ -100,7 +103,7 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	User::MASTER,       	false 
      },
      { "RECONNECT",   	Commands::Reconnect,   
-	User::MASTER,       	false // master guy
+	User::MANAGER,       	false
      },
      { "REGISTER",   	Commands::Register,
 	User::NONE,       	false
@@ -109,13 +112,13 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	User::USER,       	false
      },
      { "RULES",        	Commands::Rules,
-	User::MASTER,       	true
-     },
+	User::NONE,       	true
+     },   //  ^^^^ should be user?
      { "SAVE",        	Commands::Save,        
 	User::MANAGER,       	false 
      },
      { "SAY",         	Commands::Say,         
-	User::MANAGER,        	true 
+	User::MASTER,        	true
      },
      { "SERVER",      	Commands::Server,      
 	User::MANAGER,       	false 
@@ -124,7 +127,7 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	User::MANAGER,       	false 
      },
      { "STATS",		Commands::Stats,	   
-	User::MANAGER,	       	false 
+	User::USER,	       	false
      },
      { "TEST",		Commands::Test,	   
 	User::MASTER,       	true  

@@ -19,7 +19,7 @@ gameQuizChannel::gameQuizChannel(Channel *c, GameQuiz *gq)
   question(0),
   questionStr(""),
   questionNum(0),
-  questionLevel(GameQuiz::Q_NORMAL),
+  questionLevel(NORMAL),
   timeAsked(gameQuiz->games->bot->currentTime),
   answered(false),
   hintLevel(-1),
@@ -150,6 +150,7 @@ void gameQuizChannel::bumpQuestion(void) {
    // Reset the hint
    hintLevel = -1;
    hint = "";
+   autoHint = false;
    nextHint();
    
    // Increase the question number counter
@@ -267,7 +268,7 @@ String gameQuizChannel::nextHint(char chr = '\0') {
    
    // Fix up the 'new hint'
    hint = newHint;
-
+   
    // Return the user friendly hint
    return output;
 }

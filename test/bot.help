@@ -47,6 +47,9 @@ Kill me :(
 :DO (<channel>) <action>
 Make me do an action in a channel.
 
+:GIVE <nick> <amount> [<reason>]
+Give the amount of yours credits specified to another user, optionally giving them a reason for your actions.
+
 :HELP [<topic>]
 Get help on something, like you are right now! Options in brackets ('(',')') are only needed if being /msg'd to me. Options in square-brackets ('[',']') are optional. Names surrounded by right-angled-brackets ('<','>') are place-holders for your command data. For example, the usage for this topic ('HELP') contains an optional command parameter where you may enter a topic to display.
 The help system is currently quite small, and under-documentated in some areas. If you need more help, ask another user who has access to me.
@@ -55,7 +58,7 @@ The help system is currently quite small, and under-documentated in some areas. 
 Retreive the next hint! This command is only valid in a QUIZ channel.
 
 :IDENTIFY <password>
-Identify yourself to give you access to functions you are privellaged to
+Identify yourself to give you access to functions you have access to. For security reasons, you should only use this command privately (eg. with /msg).
 
 :INVITE (<channel>)
 Invite someone into the channel.
@@ -126,8 +129,8 @@ Report the current server, or change to the specified server. Incomplete. :(
 :SERVERLIST
 List the servers in my server list.
 
-:STATS
-Report some utterly useless and downright geeky statistics. Incomplete. :(
+:STATS [<nick>]
+Report some utterly useless statistics about someone, or yourself :) Incomplete :(
 
 :TIME
 Report the current time, local to where I am running. The machine that runs me is kept in regular synchronisation with reliable time observatories around the world. Having said that, however, you should be aware that the time may be slightly wrong due to lag between us, and you should consult the PING command should you require strict accuracy! :)
