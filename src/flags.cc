@@ -1,4 +1,4 @@
-/* flags.c
+/* flags.cc
  * Resource flagging system
  */
 

@@ -16,12 +16,14 @@ class UserCommands;
 
 class ServerConnection : public Connection {
   Server * server;
-  Bot * bot;  
+  Bot * bot; // Recursive
   ServerQueue * queue;
   time_t pingTime;
   int lag;
+#ifdef DEBUG
+   bool debug;
+#endif
   time_t serverLastSpoken;
-  bool debug;
   
 public:
   ServerConnection(Bot *, Server *, String);

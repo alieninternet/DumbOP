@@ -6,7 +6,9 @@ Users should be able to add themselves to DumbOP.
 
 PASSWORD CODE! Change password needs fixing, crypt fucked?
 
-Ban lists
+Ban lists - Should be better than ChanOP - check every nick change and join
+against banlist masks, so that DumbOP can properly ban name!*@* like ChanOP
+is incapable of.. (Cheeky`louise!*@* would be handy in #melbrave :)
 
 Command Counter
 

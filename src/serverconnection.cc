@@ -10,9 +10,16 @@ ServerConnection::ServerConnection(Bot *b, Server *s, String localIP)
                s->getPort(), localIP),
     server(s),
     bot(b),
+#ifdef DEBUG
     queue(new ServerQueue(&socket, b->debug)),
-    pingTime(0), lag(0), serverLastSpoken(time(0)), 
-    debug(b->debug)
+#else
+    queue(new ServerQueue(&socket)),
+#endif
+    pingTime(time(NULL)), lag(0), 
+#ifdef DEBUG
+    debug(b->debug),
+#endif
+    serverLastSpoken(time(NULL))
 {
   b->connected = false;
 }
@@ -50,8 +57,10 @@ bool ServerConnection::handleInput()
    if (line.length() == 0)
      return true;
    
+#ifdef DEBUG
    if (bot->debug)
      cout << line << "\n";
+#endif
    
    serverLastSpoken = time(NULL);
    

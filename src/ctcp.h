@@ -14,6 +14,7 @@ class CTCP {
    static void Action(ServerConnection *, Person *, String);
    static void ClientInfo(ServerConnection *, Person *, String);
    static void DCC(ServerConnection *, Person *, String);
+   static void Echo(ServerConnection *, Person *, String);
    static void ErrMsg(ServerConnection *, Person *, String);
    static void Finger(ServerConnection *, Person *, String);
    static void Lag(ServerConnection *, Person *, String);

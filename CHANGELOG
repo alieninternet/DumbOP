@@ -1,3 +1,26 @@
+Version 0.32
+------------
+Pickle: ctcp.cc - Ok, so DumbOP wasn't that compliant afterall. The TIME
+	command has been made compliant.
+Pickle: ctcp.cc - ECHO command added. _NOW_ we're fully compliant!! :)
+Pickle: bot.h - Lag counter PING_TIME changed again from 5 mins to 90 secs
+Pickle: bot.h - The non-pinging pinger now pings... :)
+Pickle: Makefile - Added stripping to the main MAKE loop. To make a debug-able
+	compile, run "make debug", otherwise enjoy the savings :)
+Pickle: notelist.cc and notelist.h created, working in list style similar to
+	the userlist functions.
+Pickle: ansi.h and ansi.cc - updated to conform just above standards (output)
+Pickle: bot.cc - Changed ping so that instead of just pinging with PING_TIME
+	seconds of inactivity instead of pinging every PING_TIME secs when
+	there's no activity on the server. This ensures the lag counter is
+	always current within PING_TIME secs. This also seems to stop 
+	anti-spoof servers constantly running checks on the DumbOP host.
+Pickle: signal.cc & signal.h created - Proper signal handling can now be done. 
+Pickle: config.cc & config.h created - Ready for new config format and
+	multiple server connections.
+Pickle: telnetspy.c - IRCtoANSI added, and does nice TG style ircII conversion
+
+
 Version 0.31
 ------------
 Pickle: bot.h - Changed server lag counter PING length from 90 secs to 5 mins

@@ -5,6 +5,11 @@
 # include "string.h"
 # include "bot.h"
 
+# define CHR_BOLD	'\002'
+# define CHR_INVERSE	'\026'
+# define CHR_UNDERLINE	'\037'
+# define CHR_COLOUR	'\003'
+
 class Utils {
  public:
    static String getNick(String);

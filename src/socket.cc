@@ -35,6 +35,14 @@ Socket::Socket(const Socket &s)
   fd = s.fd;
 }
 
+Socket::Socket(Socket &s)
+  : remotePort(s.remotePort), remoteAddress(s.remoteAddress),
+    localPort(s.localPort), localAddress(s.localAddress)
+{
+  s.fd->n++;
+  fd = s.fd;
+}
+
 Socket::~Socket()
 {
   if (--fd->n == 0) {
@@ -146,129 +154,184 @@ Socket::setLocalPort(int p)
   return true;
 }
 
-bool
-Socket::setNonBlocking(bool nonblock)
+/* setNonBlocking - Set socket NONBLOCKING so it doesn't slow us down
+ * Original 18/12/00, Pickle <pickle@alien.net.au>
+ */
+bool Socket::setNonBlocking(bool nonblock)
 {
-  long flags;
-
-  if (fd->fd == -1)
-    return false;
-
-  // We first get the file descriptor's flags
-  if (!fcntl(fd->fd, F_GETFL, &flags))
-    return false;
-
-  if (nonblock)
-    return fcntl(fd->fd, F_SETFL, flags | O_NONBLOCK);
-  else
-    return fcntl(fd->fd, F_SETFL, flags & ~O_NONBLOCK);
+   long flags;
+   
+   if (fd->fd == -1)
+     return false;
+   
+   // We first get the file descriptor's flags
+   if (!fcntl(fd->fd, F_GETFL, &flags))
+     return false;
+   
+   if (nonblock)
+     return fcntl(fd->fd, F_SETFL, flags | O_NONBLOCK);
+   else
+     return fcntl(fd->fd, F_SETFL, flags & ~O_NONBLOCK);
 }
 
-bool
-Socket::connect()
+/* bindPort - Bind socket to a port for incomming connections
+ * Original 2/1/01, Pickle <pickle@alien.net.au>
+ */
+bool Socket::bindPort(int portNum)
 {
-  struct sockaddr_in addr;
-  memset(&addr, 0, sizeof(addr));
-  addr.sin_family = AF_INET;
-  addr.sin_addr.s_addr = htonl(remoteAddress);
-  addr.sin_port = htons(remotePort);
-  if (::connect(fd->fd, (struct sockaddr *)&addr, sizeof(addr)) < 0)
-    return false;
-  
-  return true;
+   struct sockaddr_in addr;
+   
+   memset(&addr, 0, sizeof(addr));
+ 
+   addr.sin_family = AF_INET;
+   addr.sin_addr.s_addr = INADDR_ANY;
+   addr.sin_port = htons(portNum);
+   
+   if (bind(fd->fd, (struct sockaddr *)&addr, sizeof(addr)))
+     return false;
+   
+   return true;
 }
 
-bool
-Socket::listen(int backlog)
+/* connect - Connect a socket to a remote site
+ * Original 14/12/00, Pickle <pickle@alien.net.au>
+ */
+bool Socket::connect()
 {
-  return ::listen(fd->fd, backlog) == 0;
+   struct sockaddr_in addr;
+   
+   memset(&addr, 0, sizeof(addr));
+   
+   addr.sin_family = AF_INET;
+   addr.sin_addr.s_addr = htonl(remoteAddress);
+   addr.sin_port = htons(remotePort);
+   
+   if (::connect(fd->fd, (struct sockaddr *)&addr, sizeof(addr)) < 0)
+     return false;
+   
+   return true;
 }
 
-Socket
-Socket::accept()
+/* listen - Listen for connections on socket
+ * Original 21/12/00, Pickle <pickle@alien.net.au>
+ */
+bool Socket::listen(int backlog)
 {
-  struct sockaddr_in addr;
-  socklen_t addrlen=sizeof(addr);
-  int newfd = ::accept(fd->fd, (sockaddr *)&addr, &addrlen);
-  if (newfd == -1)
-    return Socket(-1, 0, 0);
-  unsigned long newRemoteAddress = ntohl(addr.sin_addr.s_addr);
-  int newRemotePort = ntohs(addr.sin_port);
-  return Socket(newfd, newRemoteAddress, newRemotePort);
+   return ::listen(fd->fd, backlog) == 0;
 }
 
-void
-Socket::close()
+/* accept - Accept a new connection on a socket
+ * Original 21/12/00, Pickle <pickle@alien.net.au>
+ */
+Socket Socket::accept()
 {
-  ::close(fd->fd);
-  fd->fd = -1;
+   struct sockaddr_in addr;
+   socklen_t addrlen=sizeof(addr);
+   int newfd = ::accept(fd->fd, (sockaddr *)&addr, &addrlen);
+
+   if (newfd == -1)
+     return Socket(-1, 0, 0);
+
+   unsigned long newRemoteAddress = ntohl(addr.sin_addr.s_addr);
+   int newRemotePort = ntohs(addr.sin_port);
+
+   return Socket(newfd, newRemoteAddress, newRemotePort);
 }
 
-bool
-Socket::write(String s, bool m)
+/* close - Close down the socket
+ * Original 13/12/00, Pickle <pickle@alien.net.au>
+ */
+void Socket::close()
 {
-  if (fd->fd == -1)
-    return false;
-  
-  if (m) {
-    if (::write(fd->fd, (const char *)s, s.length()) +
-        ::write(fd->fd, "\n", 1) != s.length() + 1)
-      return false;
-  }
-  else
-    if (::write(fd->fd, (const char *)s, s.length()) +
-        ::write(fd->fd, "\r\n", 2) != s.length() + 2)
-      return false;
-
-  return true;
+   ::close(fd->fd);
+   fd->fd = -1;
 }
 
-String
-Socket::readLine()
+/* writeln - Write a line to a socket
+ * Original 14/12/00, Pickle <pickle@alien.net.au>
+ */
+bool Socket::writeln(String s, bool m)
 {
-  static char buf[512];
-  int pos = 0, nb;
-  char r;
-  
-  do {
-    nb = ::read(fd->fd, &r, 1);
-    switch (nb) {
+   if (fd->fd == -1)
+     return false;
+   
+   if (m) {
+      if (::write(fd->fd, (const char *)s, s.length()) +
+	  ::write(fd->fd, "\n", 1) != s.length() + 1)
+	return false;
+   }
+   else
+     if (::write(fd->fd, (const char *)s, s.length()) +
+	 ::write(fd->fd, "\r\n", 2) != s.length() + 2)
+       return false;
+   
+   return true;
+}
+
+/* write - Write text to a socket
+ * Original 2/1/01, Pickle <pickle@alien.net.au>
+ */
+bool Socket::write(String s)
+{
+   if (fd->fd == -1)
+     return false;
+   
+   if (::write(fd->fd, (const char *)s, s.length()) != s.length())
+     return false;
+   
+   return true;
+}
+
+/* readLine - Read a line from the socket
+ * Original 14/12/00, Pickle <pickle@alien.net.au>
+ */
+String Socket::readLine()
+{
+   static char buf[512];
+   int pos = 0, nb;
+   char r;
+   
+   do {
+      nb = ::read(fd->fd, &r, 1);
+      switch (nb) {
+       case 0:
+	 return String("");
+       case -1:
+	 if (errno != EINTR && errno != EAGAIN)
+	   return String("");
+	 sleep(1);
+      }
+      
+      if (nb != -1)
+	buf[pos++] = r;
+   } while (r != '\n');
+   
+   if (pos > 1 && buf[pos-2] == '\r')
+     buf[pos-2] = '\0';
+   else
+     buf[pos-1] = '\0';
+   
+   return String(buf);
+}
+
+/* readChar - Read a single character from socket
+ * Original 14/12/00, Pickle <pickle@alien.net.au>
+ */
+String Socket::readChar()
+{
+   char r[2];
+   int nb;
+   nb = ::read(fd->fd, &r, 1);
+   switch (nb) {
     case 0:
       return String("");
     case -1:
-      if (errno != EINTR && errno != EAGAIN)
-        return String("");
+      if(errno != EINTR && errno != EAGAIN)
+	return String("");
       sleep(1);
-    }
-
-    if (nb != -1)
-      buf[pos++] = r;
-  } while (r != '\n');
-  
-  if (pos > 1 && buf[pos-2] == '\r')
-    buf[pos-2] = '\0';
-  else
-    buf[pos-1] = '\0';
-
-  return String(buf);
-}
-
-String
-Socket::readChar()
-{
-  char r[2];
-  int nb;
-  nb = ::read(fd->fd, &r, 1);
-  switch (nb) {
-  case 0:
-    return String("");
-  case -1:
-    if(errno != EINTR && errno != EAGAIN)
-      return String("");
-    sleep(1);
-  }
-  r[1] = '\0';
-  return String(r);
+   }
+   r[1] = '\0';
+   return String(r);
 }
 
 
@@ -319,6 +382,8 @@ Socket::readChar()
 // bool
 // Socket::hasData()
 // {
+// #ifdef DEBUG
 //   cout << "DEBUG hasData = " << (begin != end) << endl;
 //   return begin != end;
+// #endif
 // }

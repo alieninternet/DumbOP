@@ -1,4 +1,4 @@
-/* ctcp.c
+/* ctcp.cc
  * Parse CTCP commands
  */
 
@@ -98,6 +98,14 @@ void CTCP::DCC(ServerConnection *cnx, Person *from, String rest)
 			 String("Unsupported DCC type"));
 }
 
+/* Echo - Return whatever was sent to us
+ * Original 30/12/00, Pickle <pickle@alien.net.au>
+ */
+void CTCP::Echo(ServerConnection *cnx, Person *from, String rest)
+{
+   from->sendCTCPReply("ECHO", String(rest));
+}
+
 /* ErrMsg - Parse an error message
  * Original 29/12/00, Pickle <pickle@alien.net.au>
  * Notes: Format - ERRMSG <string query> :<string errormsg>
@@ -160,14 +168,13 @@ void CTCP::Source(ServerConnection *cnx, Person *from, String rest)
 
 /* Time - Show the current local system time
  * Original 29/12/00, Pickle <pickle@alien.net.au>
- * Notes: Format - TIME <time_t time>:<string human_readable>
- * Needs: Human readable time to be fixed.. Rather, finished. Rather, done. :)
+ * Notes: Format - TIME <string human_readable>
  */
 void CTCP::Time(ServerConnection *cnx, Person *from, String rest)
 {
    time_t timenow = time(NULL);
    
-   from->sendCTCPReply("TIME", String((long)timenow) + String(":"));
+   from->sendCTCPReply("TIME", String(ctime(&timenow)));
 }
 
 /* Uptime - Show current program uptime

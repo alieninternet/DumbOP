@@ -324,7 +324,7 @@ void
 UserCommands::BanList(ServerConnection *cnx, Person *from,
                       String channel, String rest)
 {
-  time_t current = time(0);
+  time_t current = time(NULL);
   Channel *c = cnx->bot->channelList->getChannel(channel);
   from->sendNotice(String("\002Banlist for channel\002 ") +
                    channel + "\002:\002");
@@ -1316,7 +1316,7 @@ UserCommands::Password(ServerConnection *cnx, Person *from,
   static char saltChars[] = "abcdefghijklmnopqrstuvwxyz"
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./";
   char salt[3];
-  srand(time(0));
+  srand(time(NULL));
   salt[0] = saltChars[rand() % 64];
   salt[1] = saltChars[rand() % 64];
   salt[2] = '\0';
@@ -1332,7 +1332,8 @@ void UserCommands::Save(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
    cnx->bot->userList->save();
-   from->sendNotice("Database saved.");
+   cnx->bot->noteList->save();
+   from->sendNotice("Databases saved.");
 }
 
 /* Say
@@ -1488,11 +1489,16 @@ void UserCommands::Stats(ServerConnection *cnx, Person *from,
 			      cnx->bot->wantedNickName + ")").pad(32) +
 		       String("  Lag Count: ") +
 		       Utils::timelenToStr(cnx->lag));
+#ifdef DEBUG
       from->sendNotice(String("Up time: ").prepad(10) +
 		       (!(cnx->bot->debug) ?
 			Utils::timelenToStr(uptime) :
 			(Utils::timelenToStr(uptime).pad(45) +
 			 String("\026 DEBUG MODE \026"))));
+#else
+      from->sendNotice(String("Up time: ").prepad(10) +
+		       Utils::timelenToStr(uptime));
+#endif
       from->sendNotice(String("IRC data received: ").prepad(20) +
 		       (String((long)(cnx->bot->receivedLen / 1024)) +
 			String("k")).pad(15) +

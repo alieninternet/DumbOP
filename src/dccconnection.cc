@@ -6,7 +6,7 @@
 
 DCCConnection::DCCConnection(Bot *b, String n, unsigned long address, int port)
  : Connection(address, port), bot(b), nuh(n),
-   lastSpoken(time(0)), autoRemove(true)
+   lastSpoken(time(NULL)), autoRemove(true)
 { }
 
 bool
@@ -23,19 +23,21 @@ DCCConnection::handleInput()
 {
   String line = socket.readLine();
 
-  lastSpoken = time(0);
+  lastSpoken = time(NULL);
 
   if (line.length() == 0)
     return true;
 
-  if (bot->debug)
+#ifdef DEBUG
+   if (bot->debug)
     cout << "DCC: <" << line << ">" << endl;
-
+#endif
+   
   return false;
 }
 
 void
 DCCConnection::sendNotice(String message)
 {
-  socket.write(message, true);
+  socket.writeln(message, true);
 }

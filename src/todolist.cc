@@ -21,7 +21,7 @@ String
 TodoList::getNext()
 {
   multiset<TodoListItem, less<TodoListItem> >::iterator it;
-  time_t current_time = time(0);
+  time_t current_time = time(NULL);
 
   it = todoQueue.begin();
 

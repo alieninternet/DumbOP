@@ -4,13 +4,20 @@
 #include "socket.h"
 
 class Queue {
-  Socket * sock;
-  bool debug;
-public:
-  Queue(Socket *, bool=false);
-  virtual ~Queue();
-  
-  virtual bool sendLine(String);
+   Socket * sock;
+#ifdef DEBUG
+   bool debug;
+#endif
+   
+ public:
+#ifdef DEBUG
+   Queue(Socket *, bool=false);
+#else
+   Queue(Socket *);
+#endif
+   virtual ~Queue();
+   
+   virtual bool sendLine(String);
 };
 
 #endif

@@ -12,21 +12,27 @@
 #include "stringtokenizer.h"
 #include "serverconnection.h"
 #include "utils.h"
+#include "telnet.h"
 
 #define DEFAULT_NICKNAME "DumbOP"
 #define DEFAULT_USERNAME "dumbop"
 #define DEFAULT_IRCNAME "DumbOP"
 #define DEFAULT_COMMANDCHAR '!'
 #define DEFAULT_USERLISTFILENAME "bot.users"
+#define DEFAULT_NOTELISTFILENAME "bot.notes"
 #define DEFAULT_HELPFILENAME "bot.help"
 #define DEFAULT_SCRIPTLOGFILENAME "script.log"
 #define DEFAULT_LOGFILENAME "bot.log"
 #define DEFAULT_INITFILENAME "bot.init"
 
-/* Bot - Start the incredible hulk
+/* Bot - Initialise the incredible hulk
  * Original 11/12/00, Pickle <pickle@alien.net.au>
  */
+#ifdef DEBUG
 Bot::Bot(String filename, bool debug_on)
+#else
+Bot::Bot(String filename)
+#endif
   : nickName(DEFAULT_NICKNAME),
     wantedNickName(DEFAULT_NICKNAME),
     userName(DEFAULT_USERNAME),
@@ -35,27 +41,36 @@ Bot::Bot(String filename, bool debug_on)
     commandChar(DEFAULT_COMMANDCHAR),
     configFileName(filename),
     userListFileName(DEFAULT_USERLISTFILENAME),
+    noteListFileName(DEFAULT_NOTELISTFILENAME),
     logFileName(DEFAULT_LOGFILENAME),
     helpFileName(DEFAULT_HELPFILENAME),
     initFileName(DEFAULT_INITFILENAME),
     receivedLen(0), sentLen(0), connected(false),
-    debug(debug_on), stop(false), sentPing(false),
+#ifdef DEBUG
+    debug(debug_on),
+#endif
+    stop(false), sentPing(false),
     startTime(time(NULL)), currentTime(startTime),
     lastNickNameChange(startTime), lastChannelJoin(startTime),
-    serverConnection(0), sentUserhostID(0), receivedUserhostID(0)
+    serverConnection(0), telnetDaemon(0), sentUserhostID(0), 
+    receivedUserhostID(0)
 {
    extern userFunctionsStruct userFunctionsInit[];
    extern CTCPFunctionsStruct CTCPFunctionsInit[];
    
+#ifdef DEBUG
    if (debug)
      cout << "Clearing lists..." << endl;
+#endif
    
    wantedChannels.clear();
    ignoredUserhosts.clear();
    userhostMap.clear();
    
+#ifdef DEBUG
    if (debug)
      cout << "Setting up base UserFunctions..." << endl;
+#endif
    
    for (int i = 0; userFunctionsInit[i].name[0] != '\0'; i++) {
       userFunctions.push_back(new
@@ -65,8 +80,10 @@ Bot::Bot(String filename, bool debug_on)
 					   userFunctionsInit[i].needsChannelName));
    }
 
+#ifdef DEBUG
    if (debug)
      cout << "Setting up base CTCPFunctions..." << endl;
+#endif
    
    for (int i = 0; CTCPFunctionsInit[i].name[0] != '\0'; i++) {
       CTCPFunctions.push_back(new 
@@ -77,23 +94,30 @@ Bot::Bot(String filename, bool debug_on)
 					   String(CTCPFunctionsInit[i].usage)));
    }
    
+#ifdef DEBUG
    if (debug)
      cout << "Opening logfile" << endl;
+#endif
    
    logFile.open(logFileName, ios::out | ios::ate | ios::app);
    logLine("Starting log.");
    
+#ifdef DEBUG
    if (debug)
      cout << "Setting up lists..." << endl;
+#endif
    
    channelList = new ChannelList();
    serverList = new ServerList();
    readConfig();
    userList = new UserList(userListFileName);
+   noteList = new NoteList(noteListFileName);
    todoList = new TodoList();
    
+#ifdef DEBUG
    if (debug)
      cout << "Adding aliases..." << endl;
+#endif
    
    ifstream initFile(initFileName);
    
@@ -141,10 +165,18 @@ Bot::Bot(String filename, bool debug_on)
 						  u->needsChannelName));
       }
    }
+
+#ifdef DEBUG
+   if (debug)
+     cout << "Starting telnet Daemon on port " << TELNET_PORT << endl;
+#endif
    
+   telnetDaemon = new Telnet(this, TELNET_PORT);
+   
+#ifdef DEBUG
    if (debug)
      cout << "Initialised!" << endl;
-   
+#endif
 }
 
 /* ~Bot - Shutdown procedure for Bot (clear our memory hogging crap)
@@ -152,9 +184,11 @@ Bot::Bot(String filename, bool debug_on)
  */
 Bot::~Bot()
 {
+#ifdef DEBUG
    if (debug)
      cout << "Killing DCC connections..." << endl;
-
+#endif
+   
    DCCConnection *d;
    while (dccConnections.size() != 0) {
       d = *dccConnections.begin();
@@ -162,8 +196,10 @@ Bot::~Bot()
       delete d;
    }
    
+#ifdef DEBUG
    if (debug)
      cout << "Killing UserFunctions..." << endl;
+#endif
    
    userFunction *u;
    while (userFunctions.size() != 0) {
@@ -172,8 +208,10 @@ Bot::~Bot()
       delete u;
    }
    
+#ifdef DEBUG
    if (debug)
      cout << "Killing lists..." << endl;
+#endif
 
    wantedChannel *w;
    while (wantedChannels.size() != 0) {
@@ -182,22 +220,31 @@ Bot::~Bot()
       delete w;
    }
    
+#ifdef DEBUG
    if (debug)
-     cout << "Dumping userlist..." << endl;
+     cout << "Dumping userlist and note list..." << endl;
+#endif
    
    userList->save();
+   noteList->save();
    
+#ifdef DEBUG
    if (debug)
      cout << "Killing old pointers..." << endl;
+#endif
    
    delete channelList;
    delete userList;
+   delete noteList;
    delete todoList;
    delete serverList;
    delete serverConnection;
+   delete telnetDaemon;
    
+#ifdef DEBUG
    if (debug)
      cout << "Ending logfile..." << endl;
+#endif
    
    logLine("Stopping log.");
    logFile.close();
@@ -209,7 +256,7 @@ Bot::~Bot()
 void Bot::logLine(String line)
 {
    struct tm *d;
-   time_t current_time = time(0);
+   time_t current_time = time(NULL);
    
    d = localtime(&current_time);
    logFile << "[" <<  setfill('0') << setw(2)
@@ -260,6 +307,8 @@ void Bot::readConfig()
 	commandChar = parameters[0];
       else if (command == "USERLIST")
 	userListFileName = parameters;
+      else if (command == "NOTELIST")
+	noteListFileName == parameters;
       else if (command == "CHANNEL") {
 	 StringTokenizer st2(parameters);
 	 String name = st2.nextToken(':').toLower();
@@ -302,18 +351,29 @@ void Bot::readConfig()
  */
 void Bot::run()
 {
+#ifdef DEBUG
+   if (debug)
+     cout << "Connecting..." << endl;
+#endif
+   
    nextServer();
    
    // This one little while holds the key to my extraordinary multitasking! :)
    while (!stop) {
       waitForInput();
-      if (!serverConnection->queue->flush())
-	nextServer();
+      if (!serverConnection->queue->flush()) {
+#ifdef DEBUG
+	 if (debug)
+	   cout << "Reconnecting... (Queue flushing error)" << endl;
+#endif
+	 nextServer();
+      }
    }
 }
 
 /* waitForInput - The main loop procedure for this whole damned contraption
  * Original 12/12/00, Pickle <pickle@alien.net.au>
+ * 30/12/00 Pickle - Will ping every PING_TIME secs, regardless of inactivity
  */
 void Bot::waitForInput()
 {
@@ -322,8 +382,25 @@ void Bot::waitForInput()
    int sock = serverConnection->getFileDescriptor();
    int maxSocketNumber = sock;
    
-   // Clear the file descriptor records and add the IRC server socket
+   // Clear the file descriptor records
    FD_ZERO(&rd);
+   
+   // Add the Telnet Daemon socket
+   FD_SET(telnetDaemon->sock->getFileDescriptor(), &rd);
+   if (telnetDaemon->sock->getFileDescriptor() > maxSocketNumber)
+     maxSocketNumber = telnetDaemon->sock->getFileDescriptor();
+   
+   // Add live telnet connections
+   for (list<telnetDescriptor *>::iterator it = telnetDaemon->descList.begin();
+	it != telnetDaemon->descList.end(); it++)
+     if (((*it)->flags & TELNETFLAG_CONNECTED) &&
+	 ((*it)->sock->isConnected())) {
+	FD_SET((*it)->sock->getFileDescriptor(), &rd);
+	if ((*it)->sock->getFileDescriptor() > maxSocketNumber)
+	  maxSocketNumber = (*it)->sock->getFileDescriptor();
+     }
+   
+   // Add the IRC server socket
    FD_SET(sock, &rd);
    
    // Make a list of DCC connections and their sockets for select
@@ -346,13 +423,42 @@ void Bot::waitForInput()
     case 0: // Select timed out
       break;
     case -1: // Select broke :(
-      logLine("Select broke on us :(");
+#ifdef DEBUG
+      if (debug) {
+	 cout << "Select broke!" << endl;
+	 logLine("Select broke on us :(");
+      }
+#endif
       break;
     default: // Select says there is something to process
-      if (FD_ISSET(sock, &rd))
-	if (serverConnection->handleInput())
-	  nextServer();
+      // New connection from the telnet socket
+      if (FD_ISSET(telnetDaemon->sock->getFileDescriptor(), &rd))
+	if (!telnetDaemon->newConnection()) {
+#ifdef DEBUG
+	   if (debug)
+	     cout << "Could not establish incoming telnet connection" << endl;
+#endif
+	}
       
+      // Check for activity on live telnet sockets
+      for (list<telnetDescriptor *>::iterator it = telnetDaemon->descList.begin();
+	   it != telnetDaemon->descList.end(); it++)
+	if (((*it)->flags & TELNETFLAG_CONNECTED) &&
+	    ((*it)->sock->isConnected()) &&
+	    FD_ISSET((*it)->sock->getFileDescriptor(), &rd)) {
+	   // Stuff should really happen here.
+	}
+      
+      // Something from the IRC socket
+      if (FD_ISSET(sock, &rd))
+	if (serverConnection->handleInput()) {
+#ifdef DEBUG
+	   if (debug)
+	     cout << "Reconnection... (Input handling error)" << endl;
+#endif	   
+	   
+	   nextServer();
+	}
       list<DCCConnection *>::iterator it = dccConnections.begin();
       list<DCCConnection *>::iterator it2;
       
@@ -413,16 +519,32 @@ void Bot::waitForInput()
 	 dccConnections.erase(it2);
       }
    }
-   
+
    // Ping the server and calculate our current client <-> server lag
-   if (currentTime >= (time_t)(serverConnection->serverLastSpoken + Bot::PING_TIME) && !sentPing) {
-      serverConnection->queue->sendPing("Hello?");
-      serverConnection->pingTime = time(NULL);
+   if (((currentTime >= (time_t)(serverConnection->pingTime + Bot::PING_TIME)) ||
+	(currentTime >= (time_t)(serverConnection->serverLastSpoken + Bot::PING_TIME))) &&
+       !sentPing) {
+#ifdef DEBUG
+      serverConnection->queue->sendPing(String((long)currentTime) + ":" +
+					String((long)serverConnection->pingTime) + 
+					":Check");
+#else
+      serverConnection->queue->sendPing("Check");
+#endif
+
+      serverConnection->pingTime = currentTime;
       sentPing = true;
    }
    
    // If the server is ignoring us, it is probably dead. Time to reconnect.
-   if (currentTime >= (time_t)(serverConnection->serverLastSpoken + Bot::TIMEOUT)) {
+   if ((currentTime >= (time_t)(serverConnection->serverLastSpoken + Bot::TIMEOUT)) ||
+       ((currentTime >= (time_t)(serverConnection->pingTime + Bot::PING_TIME)) && 
+	sentPing)) {
+#ifdef DEBUG
+      if (debug)
+	cout << "Reconnection... (Server timed out)" << endl;
+#endif
+      
       sentPing = false;
       nextServer();
    }

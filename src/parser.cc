@@ -58,11 +58,12 @@ void Parser::parseLine(ServerConnection * cnx, String line)
 {
    StringTokenizer st(line);
    Person * from = 0;
+   String fromMask = "";
    
    cnx->bot->receivedLen += line.length();
    
    if (line[0] == ':') {
-      String fromMask = st.nextToken().subString(1);
+      fromMask = st.nextToken().subString(1);
       if (fromMask.find('!') != -1)
 	from = new Person(cnx->bot, fromMask);
    }
@@ -76,7 +77,7 @@ void Parser::parseLine(ServerConnection * cnx, String line)
 	break;
      }
 
-   TelnetSpy::spyLine(line);
+   TelnetSpy::spyLine(cnx->bot, fromMask, command, rest);
    
    delete from;
 }
@@ -94,7 +95,7 @@ Parser::parse001(ServerConnection * cnx,
     cnx->bot->nickName = realNick;
     cnx->bot->userList->removeFirst();
     cnx->bot->userList->addUserFirst(realNick + "!" + cnx->bot->userHost, "*", 0, 3, realNick, -1, -1, "");
-    cnx->bot->lastNickNameChange = time(0);
+    cnx->bot->lastNickNameChange = time(NULL);
     cnx->bot->rehash();
   }
    
@@ -445,7 +446,7 @@ Parser::parseNick(ServerConnection *cnx,
   if ((cnx->bot->nickName).toLower() == on) {
     cnx->bot->userList->removeFirst();
     cnx->bot->userList->addUserFirst(nn + "!" + cnx->bot->userHost, "*", 0, 3, nn, -1, -1, "");
-    cnx->bot->lastNickNameChange = time(0);
+    cnx->bot->lastNickNameChange = time(NULL);
     cnx->bot->nickName = nn;
     cnx->bot->rehash();
   }
@@ -623,6 +624,8 @@ struct CTCPFunctionsStruct CTCPFunctionsInit[] =
 	  "[<string query>]" },
      { "DCC",		CTCP::DCC,		false,	false,
 	  "<string type> [<string argument>] [<int address>] [<int port>] [<int size>]" },
+     { "ECHO",		CTCP::Echo,		false,	false,
+	  "[<string echo>]" },
      { "ERRMSG",	CTCP::ErrMsg,		false,	false,
 	  "[<string query>]" },
      { "FINGER",	CTCP::Finger,		false,	false,

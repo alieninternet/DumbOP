@@ -2,44 +2,58 @@
 DEFINES=
 
 RM=rm -f
-CXX=c++ -g
-CXXFLAGS=$(DEFINES) -Wall
+CPP=c++
+CC=gcc
+STRIP=strip
+CFLAGS=$(DEFINES) -Wall
 LDFLAGS=-lnsl -lcrypt  
 
-SOURCES=ansi.c banentry.c bot.c channel.c channellist.c commands.c \
-	       connection.c ctcp.c dccconnection.c dccperson.c flags.c \
-	       games.c main.c mask.c note.c parser.c person.c queue.c \
-	       server.c serverconnection.c serverlist.c serverqueue.c \
-	       serverqueueitem.c socket.c string.c stringtokenizer.c \
-	       telnet.c telnetspy.c todolist.c user.c usercommands.c \
-	       userlist.c utils.c version.c
+# This really should be fused with the make debug tag
+DEBUG_FLAGS=-g -DDEBUG
 
-INCLUDES=ansi.h banentry.h bot.h channel.h channellist.h connection.h \
-		ctcp.h dccconnection.h dccperson.h flags.h games.h macros.h \
-		mask.h message.h note.h parser.h person.h queue.h server.h \
-		serverconnection.h serverlist.h serverqueue.h \
-		serverqueueitem.h socket.h string.h stringtokenizer.h \
+SOURCES=ansi.cc banentry.cc bot.cc channel.cc channellist.cc commands.cc \
+	       config.cc connection.cc ctcp.cc dccconnection.cc dccperson.cc \
+	       flags.cc games.cc log.cc main.cc mask.cc note.cc notelist.cc \
+	       parser.cc person.cc queue.cc server.cc serverconnection.cc \
+	       serverlist.cc serverqueue.cc serverqueueitem.cc signal.cc \
+	       socket.cc string.cc stringtokenizer.cc telnet.cc telnetspy.cc \
+	       todolist.cc user.cc usercommands.cc userlist.cc utils.cc
+
+INCLUDES=ansi.h banentry.h bot.h channel.h channellist.h config.h connection.h \
+		ctcp.h dccconnection.h dccperson.h flags.h games.h log.h \
+		macros.h mask.h message.h note.h notelist.h parser.h person.h \
+		queue.h server.h serverconnection.h serverlist.h serverqueue.h \
+		serverqueueitem.h signal.h socket.h string.h stringtokenizer.h \
 		telnet.h telnetspy.h todolist.h user.h usercommands.h \
-		userlist.h userlistitem.h utils.h version.h
+		userlist.h userlistitem.h utils.h
 
-OBJECTS=$(SOURCES:.c=.o)
+VER_SRC=version.cc
+VER_OBJ=version.o
+VER_INC=version.h
+VER_FLG=-DCOMPILE_STRING="\"`uname -a`\"" -DBUILD_STRING="\"`date`\""
+
+OBJECTS=$(SOURCES:.cc=.o)
 
 TARGET=dumbop
 
 all: $(TARGET)
+	$(STRIP) $(TARGET)
+
+debug: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CXX) -o $@ $(OBJECTS) $(LIBS) $(LDFLAGS)
+	   $(CPP) $(CFLAGS) $(DEBUG_FLAGS) $(VER_FLG) -c $(VER_SRC)
+	   $(CPP) -o $@ $(OBJECTS) $(VER_OBJ) $(LIBS) $(LDFLAGS) $(DEBUG_FLAGS)
+
+%.o: %.cc
+	$(CPP) $(CFLAGS) $(DEBUG_FLAGS) -c $<
 
 %.o: %.c
-	$(CXX) $(CXXFLAGS) -c $<
+	$(CC) $(CFLAGS) $(DEBUG_FLAGS) -c $<
 
 dep depend:
 	makedepend $(SOURCES) 2> /dev/null
 
 clean:
 	$(RM) *~ *.o $(TARGET) core Makefile.bak gmon.out
-
-distclean: clean
-	$(RM) .pure log TAGS Makefile config.* configure
 

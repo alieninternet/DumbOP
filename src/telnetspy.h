@@ -5,11 +5,20 @@
 #ifndef __TELNETSPY_H_
 # define __TELNETSPY_H_
 
-#include "string.h"
+# include "string.h"
+# include "utils.h" 
+# include "bot.h"
 
 class TelnetSpy {
  public:
-   static void spyLine(String);
+   static void spyLine(Bot *, String, String, String);
+
+   static String IRCtoANSI(String, String, String, String);
+
+   static String spyHeaderInit();
+   static String spyHeaderUpdate();
+   
+   friend class Utils;
 };
 
 #endif

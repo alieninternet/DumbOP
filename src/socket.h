@@ -1,9 +1,10 @@
 
 #ifndef __SOCKET_H_
-#define __SOCKET_H_
+# define __SOCKET_H_
 
+# include "string.h"
 
-#include "string.h"
+class Telnet;
 
 class Socket {
   struct s_fd {
@@ -27,7 +28,8 @@ public:
   Socket();
   Socket(int, unsigned long, int);
   Socket(const Socket &);
-
+  Socket(Socket &);
+   
   ~Socket();
 
   int getRemotePort() const;
@@ -46,17 +48,18 @@ public:
 
   bool setNonBlocking(bool = true);
 
+  bool bindPort(int);
   bool connect();
   bool listen(int = 5);
   Socket accept();
   void close();
   
-  bool write(String, bool = false);
+  bool writeln(String, bool = false);
+  bool write(String);
+
   String readLine();
   String readChar();
   bool hasData();
-private:
-  Socket(Socket &);
 };
 
 #endif

@@ -40,7 +40,11 @@ class ServerQueue : public Queue {
   int penalty;
 
 public:
-  ServerQueue(Socket *, bool);
+#ifdef DEBUG
+   ServerQueue(Socket *, bool);
+#else
+   ServerQueue(Socket *);
+#endif
   ~ServerQueue();
   void addItem(ServerQueueItem *);
   void addLine(String, int, int, int);
@@ -54,8 +58,8 @@ public:
   void sendJoin(String, String);
   void sendKick(String, String, String);
   void sendNick(String);
-   void sendNickopIdent(String);
-   void sendNotice(String, String);
+  void sendNickopIdent(String);
+  void sendNotice(String, String);
   void sendPart(String, String);
   void sendPass(String);
   void sendPing(String);

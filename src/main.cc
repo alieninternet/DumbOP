@@ -5,18 +5,11 @@
 #include <unistd.h>
 #include <iostream.h>
 #include <stdio.h>
-#include <signal.h>
 
 #include "bot.h"
+#include "signal.h"
 
 Bot *b;
-
-void sig_hup(int) {
-   if (b) {
-      b->userList->read();
-      b->reconnect();
-   }
-}
 
 void printUsage(char *name)
 {
@@ -24,8 +17,10 @@ void printUsage(char *name)
      " -h        Shows this help.\n"
      " -b        Do not run in background.\n"
      " -f file   Use file as config file.\n"
-     " -d dir    Use dir as current dir.\n"
-     " -D        Debug mode (input/output printing and no background mode.\n";
+     " -d dir    Use dir as current dir.\n";
+#ifdef DEBUG
+   cout << " -D        Debug mode (input/output printing and no background mode.\n";
+#endif
 }
 
 int main(int argc, char **argv)
@@ -35,18 +30,20 @@ int main(int argc, char **argv)
    bool background = true;
    String configFile = "bot.conf";
    String directory = "";
+#ifdef DEBUG
    bool debug = false;
+#endif
    
-   // Our dumb signal handler
-   signal(SIGPIPE, SIG_IGN);
-   signal(SIGALRM, SIG_IGN);
-   signal(SIGHUP,  sig_hup);
+   // Setup out signal handling stuff
+   Signal::SetSignals();
    
    // We parse the command line options
    while ((opt = getopt(argc,argv,"hbf:d:D")) != EOF)
      switch (opt) {
       case 'h':
-	printUsage(argv[0]); exit(0);
+	printUsage(argv[0]); 
+	exit(0);
+	break;
       case 'b':
 	background = false;
 	break;
@@ -56,17 +53,23 @@ int main(int argc, char **argv)
       case 'd':
 	directory = optarg;
 	break;
+#ifdef DEBUG
       case 'D':
 	debug = true;
 	break;
+#endif
       default:
-	printUsage(argv[0]); exit(1);
+	printUsage(argv[0]); 
+	exit(1);
+	break;
      }
    
    if ((directory != "") && (chdir((const char *)directory)<0))
      perror("Warning: ");
    
+#ifdef DEBUG
    if (!debug) {
+#endif
       if (background)
 	switch (fork()) {
 	 case -1:
@@ -79,9 +82,16 @@ int main(int argc, char **argv)
 	   cout << "Running in the background...\n";
 	   exit(0);
 	}
+#ifdef DEBUG
    }
+#endif
    
+#ifdef DEBUG
    b = new Bot(configFile, debug);
+#else
+   b = new Bot(configFile);
+#endif
+   
    b->run();
    delete b;
    

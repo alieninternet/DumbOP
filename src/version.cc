@@ -1,4 +1,4 @@
-/* version.h
+/* version.cc
  * Version and Compile information
  */
 

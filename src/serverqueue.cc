@@ -2,8 +2,13 @@
 #include <limits.h>
 #include "serverqueue.h"
 
-ServerQueue::ServerQueue(Socket * s, bool d)
+#ifdef DEBUG
+ServerQueue::ServerQueue(Socket *s, bool d)
   : Queue(s,d), penalty(0)
+#else
+ServerQueue::ServerQueue(Socket *s)
+  : Queue(s), penalty(0)
+#endif
 {
   serverQueue.clear();
 }
