@@ -5,8 +5,7 @@ ChanOP resync
 Add !ping
 Finish !lastseen (mask searching, channel mask searching)
 Finish !access (mask searching, channel mask searching)
-Tban+ban+kick merge
-Completely remove tkick
+Tban+Tkban+ban+kick merge
 Combine !server and !serverlist, !nextserver and !reconnect
 Add command to force nickop/other bot identification
 Move channel list to a file (Add save/load channel list commands, peak saving)

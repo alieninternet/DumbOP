@@ -36,6 +36,9 @@
 char * crypt(const char *p, const char *s) { return p; }
 #endif
 
+/* Access
+ * Original 20/12/00, Pickle <pickle@alien.net.au>
+ */
 void UserCommands::Access(ServerConnection *cnx, Person *from,
 			  String channel, String rest)
 {
@@ -141,7 +144,9 @@ void UserCommands::Access(ServerConnection *cnx, Person *from,
    }
 }
 
-// FIXME: Convert
+/* AddUser
+ * Original 18/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::AddUser(ServerConnection *cnx, Person *from,
                       String channel, String rest)
@@ -210,7 +215,9 @@ UserCommands::AddUser(ServerConnection *cnx, Person *from,
   cnx->bot->rehash();
 }
 
-// FIXME: Convert
+/* AddServer
+ * Original 18/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::AddServer(ServerConnection *cnx, Person *from,
                         String channel, String rest)
@@ -239,7 +246,9 @@ UserCommands::AddServer(ServerConnection *cnx, Person *from,
                      "to the server list.\002");
 }
 
-// FIXME: Convert (and change ?)
+/* Alias
+ * Original 18/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::Alias(ServerConnection *cnx, Person *from,
                     String channel, String rest)
@@ -289,6 +298,9 @@ UserCommands::Alias(ServerConnection *cnx, Person *from,
   from->sendNotice("\002Alias added.\002");
 }
 
+/* Ban
+ * Original 15/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::Ban(ServerConnection *cnx, Person *from,
                   String channel, String rest)
@@ -304,6 +316,9 @@ UserCommands::Ban(ServerConnection *cnx, Person *from,
     from->sendNotice(m.getMessage());
 }
 
+/* BanList
+ * Original 15/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::BanList(ServerConnection *cnx, Person *from,
                       String channel, String rest)
@@ -323,12 +338,16 @@ UserCommands::BanList(ServerConnection *cnx, Person *from,
   from->sendNotice("\002End of banlist.\002");
 }
 
+/* Beep
+ * Unfinished
+ */
 void UserCommands::Beep(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
    from->sendNotice("Since this command doesn't work yet.. \007*BEEP*!");
 }
 
+/* MOVE COMMENTED CODE TO SETUSER */
 // void
 // UserCommands::ChangeLevel(ServerConnection *cnx, Person *from,
 //                           String channel, String rest)
@@ -386,6 +405,9 @@ void UserCommands::Beep(ServerConnection *cnx, Person *from,
 //   cnx->bot->rehash();
 // }
 
+/* Cycle
+ * Original 16/12/00, Pickle <pickle@alien.net.au>
+ */
 void UserCommands::Cycle(ServerConnection *cnx, Person *from,
 			 String channel, String rest)
 {
@@ -397,6 +419,9 @@ void UserCommands::Cycle(ServerConnection *cnx, Person *from,
 		      String("\002"));
 }
 
+/* DCCList
+ * Original 19/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::DCCList(ServerConnection *cnx, Person *from,
                       String channel, String rest)
@@ -418,6 +443,9 @@ UserCommands::DCCList(ServerConnection *cnx, Person *from,
   from->sendNotice("\002End of dcclist.\002");
 }
 
+/* Deban
+ * Original 15/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::Deban(ServerConnection *cnx, Person *from,
                     String channel, String rest)
@@ -432,7 +460,9 @@ UserCommands::Deban(ServerConnection *cnx, Person *from,
     from->sendNotice(m.getMessage());
 }
 
-// FIXME: Convert
+/* DelServer
+ * Original 18/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::DelServer(ServerConnection *cnx, Person *from,
                         String channel, String rest)
@@ -455,7 +485,9 @@ UserCommands::DelServer(ServerConnection *cnx, Person *from,
                      ").");
 }
 
-// FIXME: Convert
+/* DelUser
+ * Original 18/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::DelUser(ServerConnection *cnx, Person *from,
                       String channel, String rest)
@@ -491,7 +523,10 @@ UserCommands::DelUser(ServerConnection *cnx, Person *from,
   cnx->bot->rehash();
 }
 
-// UNCONVERT!! :)
+/* Deop
+ * Original 14/12/00, Pickle <pickle@alien.net.au>
+ * Needs: Convertion from using commands.c
+ */
 void UserCommands::Deop(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
@@ -505,19 +540,27 @@ void UserCommands::Deop(ServerConnection *cnx, Person *from,
      from->sendNotice(m.getMessage());
 }
 
+/* Die - Make the bot quit
+ * Original 13/12/00, Pickle <pickle@alien.net.au>
+ * 28/12/00, Pickle - Changed default quit message to VERSION_STRING
+ */
 void UserCommands::Die(ServerConnection *cnx, Person *from,
 		       String channel, String rest)
 {
    String reason;
    
    if (rest.length() == 0)
-     reason = "Duh...";
+     reason = VERSION_STRING;
    else
      reason = rest;
    
    Commands::Die(cnx->bot, reason);
 }
 
+/* Do
+ * Original 16/12/00, Pickle <pickle@alien.net.au>
+ * Needs: Remove command.c dependancy
+ */
 void UserCommands::Do(ServerConnection *cnx, Person *from,
 		      String channel, String rest)
 {
@@ -534,6 +577,10 @@ void UserCommands::Do(ServerConnection *cnx, Person *from,
    }
 }
 
+/* Help - Display help
+ * Original 15/12/00, Pickle <pickle@alien.net.au>
+ * 26/12/00, Pickle - Changed header output depending on command or topic
+ */
 void UserCommands::Help(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
@@ -607,6 +654,9 @@ void UserCommands::Help(ServerConnection *cnx, Person *from,
 		    command + "\002 in the helpfile.");
 }
 
+/* Ident
+ * Original 16/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::Ident(ServerConnection *cnx, Person *from,
                     String channel, String rest)
@@ -651,6 +701,10 @@ UserCommands::Ident(ServerConnection *cnx, Person *from,
     from->sendNotice("\002This is a wrong password.\002");
 }
 
+/* Info - General information on the bot
+ * Original 22/12/00, Pickle <pickle@alien.net.au>
+ * 28/12/00, Pickle - Added trigger to the start of hint commands
+ */
 void UserCommands::Info(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
@@ -660,9 +714,17 @@ void UserCommands::Info(ServerConnection *cnx, Person *from,
    from->sendNotice("AustNet whenever it went down. DumbOP simply the peace for a while,");
    from->sendNotice("but is now gradually growing into something a little more useful.");
    from->sendNotice("Many thanks to o0 and ONION.");
-   from->sendNotice("Use \002!HELP\002 for more information, or \002!STATS\002 for statistical nonsense.");
+   from->sendNotice(String("Type \002") + String(cnx->bot->commandChar) +
+		    "HELP\002 for more information, or \002" +
+		    String(cnx->bot->commandChar) +
+		    "STATS\002 for statistical junk.");
 }
 
+/* Invite
+ * Original 16/12/00, Pickle <pickle@alien.net.au>
+ * Needs: Convert from command.c dependancy
+ * Needs: Self-invite ability without specifying originating nick
+ */
 void
 UserCommands::Invite(ServerConnection *cnx, Person *from,
                      String channel, String rest)
@@ -673,7 +735,9 @@ UserCommands::Invite(ServerConnection *cnx, Person *from,
   from->sendNotice(String("\002Inviting\002 ") + rest + " \002on channel\002 " + channel);
 }
 
-/* FIXME: Convert */
+/* Join - Join a channel
+ * Original 16/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::Join(ServerConnection *cnx, Person *from,
                    String channel, String rest)
@@ -699,7 +763,9 @@ UserCommands::Join(ServerConnection *cnx, Person *from,
   cnx->queue->sendJoin(channel, cnx->bot->wantedChannels[channel]->key);
 }
 
-/* FIXME: Convert */
+/* Keep - Channel modes to lock
+ * Original 16/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::Keep(ServerConnection *cnx, Person *from,
                    String channel, String rest)
@@ -717,6 +783,9 @@ UserCommands::Keep(ServerConnection *cnx, Person *from,
                     channel);
 }
 
+/* Kick - Kick a user
+ * Original 17/12/00, Pickle <pickle@alien.net.au>
+ */
 void UserCommands::Kick(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
@@ -783,7 +852,7 @@ void UserCommands::Kick(ServerConnection *cnx, Person *from,
    }
 }
 
-// FIXME: Convert
+/* Merge with ban. */
 void
 UserCommands::KickBan(ServerConnection *cnx, Person *from,
                       String channel, String rest)
@@ -794,6 +863,9 @@ UserCommands::KickBan(ServerConnection *cnx, Person *from,
   Kick(cnx, from, channel, rest);
 }
 
+/* LastSeen - Find out when a user was seen last
+ * Original 15/12/00, Pickle <pickle@alien.net.au>
+ */
 void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
 			    String channel, String rest)
   {
@@ -906,7 +978,7 @@ void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
 				 Utils::timelenToStr(diff) +
 				 String(" ago.") + 
 				 (((*it)->flags & USERFLAG_LASTSEEN_AUTH) ?
-				  String(" (Confirmed)") : String(""))) :
+				  String("") : String(" (Unconfirmed)"))) :
 				(((*it)->lastseen == 0) ?
 				 (String(" Currently online.") +
 				  (((*it)->flags & USERFLAG_IDENTIFIED) ?
@@ -924,7 +996,9 @@ void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
      }
   }
 
-// FIXME: Convert
+/* Mode - Change a channel mode
+ * Original 16/12/00, Pickle <pickle@alien.net.au>
+ */
 void
   UserCommands::Mode(ServerConnection *cnx, Person *from,
 		     String channel, String rest)
@@ -945,7 +1019,7 @@ void
   cnx->queue->sendChannelMode(String("MODE ") + channel + " " + rest);
 }
 
-// FIXME: Convert
+/* Merge with Say? */
 void
 UserCommands::Msg(ServerConnection *cnx, Person *from,
                    String channel, String rest)
@@ -959,6 +1033,10 @@ UserCommands::Msg(ServerConnection *cnx, Person *from,
     from->sendNotice(m.getMessage());
 }
 
+/* Names - List names on a channel, or channels
+ * Original 23/12/00, Pickle <pickle@alien.net.au>
+ * Needs: Channel authorisation checking
+ */
 void UserCommands::Names(ServerConnection *cnx, Person *from,
 			 String channel, String rest)
   {
@@ -966,45 +1044,43 @@ void UserCommands::Names(ServerConnection *cnx, Person *from,
      String result = "";
      int length = 0;
      
-     if (rest == "-") {
-	from->sendNotice("Warning, this command is incomplete.");
-	
-	for (map<String, Channel *, less<String> >::iterator it = cnx->bot->channelList->begin(); 
-	     it != cnx->bot->channelList->end(); ++it) {
-	   Channel *c = cnx->bot->channelList->getChannel((*it).first);
-
-	   if (true) {
-	      result = "";
-	      length = 0;
-	      
-	      from->sendNotice(String("Names on \002") + c->channelName + 
-			       "\002:");
-	      
-	      for (map<String, User *, less<String> >::iterator itB = 
-		   c->channelMemory.begin();
-		   itB != c->channelMemory.end(); ++itB) {
-		 result = result +
-		   ((((*itB).second->mode & User::OP_MODE) ?
-		     "@" :
-		     (((*itB).second->mode & User::VOICE_MODE) ? 
-		      "+" : ""))) +
-		   (((*itB).second->userListItem) ?
-		    "\037" : "" ) +
-		   (*itB).second->nick +
-		   (((*itB).second->userListItem) ?
-		    "\037" : "") + " ";
-		 length += (*it).first.length() + 1;
-		 if (length >= 256) {
-		    from->sendNotice(result);
-		    result = ""; length = 0;
-		 }
-	      }
-	      
-	      if (result != "")
-		from->sendNotice(result);
-	   }
-	}
-     } else {
+     if (rest == "-")
+       for (map<String, Channel *, less<String> >::iterator it = cnx->bot->channelList->begin(); 
+	    it != cnx->bot->channelList->end(); ++it) {
+	  Channel *c = cnx->bot->channelList->getChannel((*it).first);
+	  
+	  if (true) {
+	     result = "";
+	     length = 0;
+	     
+	     from->sendNotice(String("Names on \002") + c->channelName + 
+			      "\002:");
+	     
+	     for (map<String, User *, less<String> >::iterator itB = 
+		  c->channelMemory.begin();
+		  itB != c->channelMemory.end(); ++itB) {
+		result = result +
+		  ((((*itB).second->mode & User::OP_MODE) ?
+		    "@" :
+		    (((*itB).second->mode & User::VOICE_MODE) ? 
+		     "+" : ""))) +
+		  (((*itB).second->userListItem) ?
+		   "\037" : "" ) +
+		  (*itB).second->nick +
+		  (((*itB).second->userListItem) ?
+		   "\037" : "") + " ";
+		length += (*it).first.length() + 1;
+		if (length >= 256) {
+		   from->sendNotice(result);
+		   result = ""; length = 0;
+		}
+	     }
+	     
+	     if (result != "")
+	       from->sendNotice(result);
+	  }
+       }
+     else {
 	Channel *c = cnx->bot->channelList->getChannel(channel);
 
 	from->sendNotice(String("Names on \002") + channel + "\002:");
@@ -1036,7 +1112,7 @@ void UserCommands::Names(ServerConnection *cnx, Person *from,
      from->sendNotice("\002End of names.\002");
   }
 
-// FIXME: Convert
+/* Merge with Server */
 void
 UserCommands::NextServer(ServerConnection *cnx, Person *from,
                          String channel, String rest)
@@ -1061,12 +1137,13 @@ UserCommands::NextServer(ServerConnection *cnx, Person *from,
                      " losing op on a channel I am on.\002");
 }
 
-// FIXME: Convert
+/* Nick - Change nickname
+ * Original 14/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::Nick(ServerConnection *cnx, Person *from,
                    String channel, String rest)
 {
-  // We parse the parameters
   StringTokenizer st(rest);
   String nick = st.nextToken();
 
@@ -1085,6 +1162,10 @@ UserCommands::Nick(ServerConnection *cnx, Person *from,
   cnx->queue->sendNick(nick);
 }
 
+/* NsLookup - Do a name server lookup
+ * Original 15/12/00, Pickle <pickle@alien.net.au>
+ * Needs: Reverse lookup capabilities
+ */
 void
 UserCommands::NsLookup(ServerConnection *cnx, Person *from,
                        String channel, String rest)
@@ -1138,6 +1219,9 @@ UserCommands::NsLookup(ServerConnection *cnx, Person *from,
                     target);
 }
 
+/* Op
+ * Original 14/12/00, Pickle <pickle@alien.net.au>
+ */
 void UserCommands::Op(ServerConnection *cnx, Person *from,
 		      String channel, String rest)
 {
@@ -1181,6 +1265,9 @@ void UserCommands::Op(ServerConnection *cnx, Person *from,
    }
 }
 
+/* Part - leave a channel
+ * Original 16/12/00, Pickle <pickle@alien.net.au>
+ */
 void UserCommands::Part(ServerConnection *cnx, Person *from,
 			String channel, String rest)
 {
@@ -1191,6 +1278,10 @@ void UserCommands::Part(ServerConnection *cnx, Person *from,
    cnx->queue->sendPart(channel, rest);
 }
 
+/* Password - change a password
+ * Original 16/12/00, Pickle <pickle@alien.net.au>
+ * Needs: Fixing.
+ */
 void
 UserCommands::Password(ServerConnection *cnx, Person *from,
                        String channel, String rest)
@@ -1198,7 +1289,7 @@ UserCommands::Password(ServerConnection *cnx, Person *from,
   Channel *c = cnx->bot->channelList->getChannel(channel);
 
   if (rest.length() == 0) {
-    from->sendNotice("\002No password.\002");
+    from->sendNotice("\002No password given.\002");
     return;
   }
 
@@ -1233,13 +1324,19 @@ UserCommands::Password(ServerConnection *cnx, Person *from,
   from->sendNotice("\002Password changed.\002");
 }
 
- void UserCommands::Save(ServerConnection *cnx, Person *from,
-			 String channel, String rest)
- {
-    cnx->bot->userList->save();
-    from->sendNotice("Userlist saved.");
- }
+/* Save - Force a database save
+ * Original 15/12/00, Pickle <pickle@alien.net.au>
+ */
+void UserCommands::Save(ServerConnection *cnx, Person *from,
+			String channel, String rest)
+{
+   cnx->bot->userList->save();
+   from->sendNotice("Database saved.");
+}
 
+/* Say
+ * Original 16/12/00, Pickle <pickle@alien.net.au>
+ */
 void UserCommands::Say(ServerConnection *cnx, Person *from,
 		       String channel, String rest)
   {
@@ -1252,9 +1349,11 @@ void UserCommands::Say(ServerConnection *cnx, Person *from,
 			       from->getNick());
   }
 
-// FIXME: Convert
-void
-UserCommands::Server(ServerConnection *cnx, Person *from,
+/* Server
+ * Original 14/12/00, Pickle <pickle@alien.net.au>
+ * Needs: Join serverlist and nextserver and reconnect into this command
+ */
+void UserCommands::Server(ServerConnection *cnx, Person *from,
                      String channel, String rest)
 {
   int serverNumber;
@@ -1282,6 +1381,7 @@ UserCommands::Server(ServerConnection *cnx, Person *from,
     from->sendNotice("\002I can not change server without losing op on a channel I am on.\002");
 }
 
+/* merge with server */
 void
 UserCommands::ServerList(ServerConnection *cnx, Person *from,
                      String channel, String rest)
@@ -1304,6 +1404,9 @@ UserCommands::ServerList(ServerConnection *cnx, Person *from,
   from->sendNotice("\002End of server list.\002");
 }
 
+/* Stats - Show a list of statistical mumbo jumbo to impress stupid people
+ * Original 19/12/00, Pickle <pickle@alien.net.au>
+ */
 void UserCommands::Stats(ServerConnection *cnx, Person *from,
 			 String channel, String rest)
 {
@@ -1441,6 +1544,9 @@ void UserCommands::Stats(ServerConnection *cnx, Person *from,
    from->sendNotice(String("\002End of statistics.\002"));
 }
 
+/* Raw - Write a raw line to the server
+ * Original - 11/12/00, Pickle <pickle@alien.net.au>
+ */
 void UserCommands::Raw(ServerConnection *cnx, Person *from,
 		       String channel, String rest)
   {
@@ -1448,7 +1554,7 @@ void UserCommands::Raw(ServerConnection *cnx, Person *from,
        Commands::Do(cnx->bot, rest);
   }
 
-// FIXME: Convert
+/* merge with server */
 void
 UserCommands::Reconnect(ServerConnection *cnx, Person *from,
                         String channel, String rest)
@@ -1463,23 +1569,9 @@ UserCommands::Reconnect(ServerConnection *cnx, Person *from,
     from->sendNotice("\002I can not change server without losing op on a channel I am on.\002");
 }
 
-void
-UserCommands::RSpyMessage(ServerConnection *cnx, Person *from,
-                        String channel, String rest)
-{
-  String nick = from->getNick().toLower();
-
-  if (cnx->bot->spyList.find(nick) == cnx->bot->spyList.end()) {
-    from->sendNotice("\002You are not in the spy list.\002");
-    return;
-  }
-
-  delete cnx->bot->spyList[nick];
-  cnx->bot->spyList.erase(nick);
-  from->sendNotice("\002You have been removed from the "
-                   "spy list.\002");
-}
-
+/* Test - Test command to try out funky new stuff
+ * Do not allow public access!! :)
+ */
 void UserCommands::Test(ServerConnection *cnx, Person *from,
 			String channel, String rest)
   {
@@ -1489,7 +1581,7 @@ void UserCommands::Test(ServerConnection *cnx, Person *from,
      from->sendNotice("\002End of test dump.\002");
   }
 
-// FIXME: Convert
+/* merge with ban */
 void
 UserCommands::TBan(ServerConnection *cnx, Person *from,
                    String channel, String rest)
@@ -1569,7 +1661,7 @@ UserCommands::TBan(ServerConnection *cnx, Person *from,
   cnx->bot->todoList->addDeban(channel, dest, (time_t)w);
 }
 
-// FIXME: Convert
+/* merge with ban */
 void
 UserCommands::TKBan(ServerConnection *cnx, Person *from,
                    String channel, String rest)
@@ -1582,7 +1674,9 @@ UserCommands::TKBan(ServerConnection *cnx, Person *from,
   Kick(cnx, from, channel, who + " " + st.rest());
 }
 
-// FIXME: Convert
+/* Topic - Change the channel's topic
+ * Original 15/12/00, Pickle <pickle@alien.net.au>
+ */
 void
 UserCommands::Topic(ServerConnection *cnx, Person *from,
                     String channel, String rest)
@@ -1606,7 +1700,10 @@ UserCommands::Topic(ServerConnection *cnx, Person *from,
   }
 }
 
-
+/* UserList - Display a list of users
+ * Original 14/12/00, Pickle <pickle@alien.net.au>
+ * 22/12/00, Pickle - Reformatted
+ */
 void UserCommands::UserList(ServerConnection *cnx, Person *from,
 			    String channel, String rest)
   {

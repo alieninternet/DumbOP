@@ -1,0 +1,22 @@
+
+Version 0.30
+------------
+Pickle: Started to add comments in front of commands in usercommands.c.
+	Format should probably start to become a standard, as follows in
+       	semi-BNF:
+	/* <FunctionName> - <Description>
+	 * Original <date>, <who> <e-mail address>
+	 * <date> <who> - <change made>
+	   ...
+	 * Needs: <required future modifications>
+	   ...
+	 */
+Pickle: Removed Tkick
+Pickle: DumbOP password moved to bot.h as a define (parser.c changed)
+Pickle: Changed default nick change time from 1 min to 10 mins
+Pickle: bot.c - Added nickop identification after retry wantedNickname attempt
+
+
+Version 0.29 and beyond
+-----------------------
+No change log information

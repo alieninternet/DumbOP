@@ -1,14 +1,9 @@
-
 #ifndef __USERCOMMANDS_H_
-#define __USERCOMMANDS_H_
+# define __USERCOMMANDS_H_
 
-#include "string.h"
-#include "person.h"
-#include "serverconnection.h"
-
-#ifdef USESCRIPTS
-#include "Interp.H"
-#endif
+# include "string.h"
+# include "person.h"
+# include "serverconnection.h"
 
 class UserCommands {
  public:
@@ -48,7 +43,6 @@ class UserCommands {
    static void Password(ServerConnection *, Person *, String, String);
    static void Raw(ServerConnection *, Person *, String, String);
    static void Reconnect(ServerConnection *, Person *, String, String);
-   static void RSpyMessage(ServerConnection *, Person *, String, String);
    static void Save(ServerConnection *, Person *, String, String);
    static void Say(ServerConnection *, Person *, String, String);
    static void Server(ServerConnection *, Person *, String, String);

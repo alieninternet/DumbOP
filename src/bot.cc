@@ -46,7 +46,6 @@ Bot::Bot(String filename, bool debug_on)
 
   wantedChannels.clear();
   ignoredUserhosts.clear();
-  spyList.clear();
   userhostMap.clear();
 
   for (int i = 0; userFunctionsInit[i].name[0] != '\0'; i++) {
@@ -119,11 +118,6 @@ Bot::Bot(String filename, bool debug_on)
 Bot::~Bot()
 {
   Person *p;
-  while (spyList.size() != 0) {
-    p = (*spyList.begin()).second;
-    spyList.erase(spyList.begin());
-    delete p;
-  }
   DCCConnection *d;
   while (dccConnections.size() != 0) {
     d = *dccConnections.begin();
@@ -347,27 +341,14 @@ Bot::waitForInput()
     while ((line = todoList->getNext()) != "") {
       serverConnection->queue->sendChannelMode(line);
     }
-#ifdef USESCRIPTS
-    botInterp->RunTimers(currentTime);
-#endif
-
-#ifdef USESCRIPTS
-    struct tm *thisTime = localtime(&currentTime);
-    if (thisTime->tm_sec == 0) {
-      char s[6];
-      sprintf(s, "%2d:%2d", thisTime->tm_hour, thisTime->tm_min);
-      botInterp->RunHooks(Hook::TIMER, String(s),
-                          gh_list(Utils::string2SCM(String(s)), SCM_UNDEFINED));
-    }
-#endif
-
   }
 
-  if (currentTime >= (time_t)(lastNickNameChange + Bot::NICK_CHANGE) &&
-      nickName != wantedNickName) {
-    lastNickNameChange = currentTime;
-    serverConnection->queue->sendNick(wantedNickName);
-  }
+     if (currentTime >= (time_t)(lastNickNameChange + Bot::NICK_CHANGE) &&
+	 nickName != wantedNickName) {
+	lastNickNameChange = currentTime;
+	serverConnection->queue->sendNick(wantedNickName);
+	serverConnection->queue->sendNickopIdent(AUSTNET_PASSWORD);
+     }
 
   if (currentTime >= (time_t)(lastChannelJoin + Bot::CHANNEL_JOIN)) {
     lastChannelJoin = currentTime;

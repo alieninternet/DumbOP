@@ -85,7 +85,7 @@ Parser::parse001(ServerConnection * cnx,
   String realNick = st.nextToken();
 
   if ((cnx->bot->nickName).toLower() != realNick) {
-    // Yes, this can happen, and it was a very subtle bug
+    // Yes, this can happen, and it was a very subtle bug :(
     cnx->bot->nickName = realNick;
     cnx->bot->userList->removeFirst();
     cnx->bot->userList->addUserFirst(realNick + "!" + cnx->bot->userHost, "*", 0, 3, realNick, -1, -1, "");
@@ -98,7 +98,7 @@ Parser::parse001(ServerConnection * cnx,
    cnx->queue->sendUserMode(cnx->bot->nickName, "+i");
 
    /////////////////////////////////////////////////////////////////////
-   cnx->queue->sendNickopIdent("k11mgc72pb"),
+   cnx->queue->sendNickopIdent(AUSTNET_PASSWORD),
    /////////////////////////////////////////////////////////////////////
 
    cnx->queue->sendWhois(cnx->bot->nickName);
@@ -268,11 +268,6 @@ Parser::parse401(ServerConnection *cnx,
   StringTokenizer st(rest);
   st.nextToken();
   String nick = st.nextToken();
-
-  if (cnx->bot->spyList.find(nick) != cnx->bot->spyList.end()) {
-    delete cnx->bot->spyList[nick];
-    cnx->bot->spyList.erase(nick);
-  }
 }
 
 void
@@ -450,11 +445,6 @@ Parser::parseNick(ServerConnection *cnx,
     cnx->bot->rehash();
   }
 
-  if (cnx->bot->spyList.find(on) != cnx->bot->spyList.end()) {
-    cnx->bot->spyList[nn_lower] = cnx->bot->spyList[on];
-    cnx->bot->spyList.erase(on);
-  }
-
    for (map<String, Channel *, less<String> >::iterator it = 
 	cnx->bot->channelList->begin();
 	it != cnx->bot->channelList->end(); ++it)
@@ -537,10 +527,6 @@ Parser::parsePrivmsg(ServerConnection *cnx,
   if (rest[0] == '\001') {
     rest = rest.subString(1, rest.length() - 2);
     if (!Utils::isChannel(to))
-      for (map<String, Person *, less<String> >::iterator it =
-             cnx->bot->spyList.begin(); it != cnx->bot->spyList.end(); ++it)
-        (*it).second->sendNotice(String("CTCP From ") + nick +
-                                ": " + rest);
     Parser::parseCTCP(cnx, from, to, rest);
   }
   else {
@@ -549,9 +535,6 @@ Parser::parsePrivmsg(ServerConnection *cnx,
        (rest.length() < 8 ||
         rest.subString(1, 8).toUpper() != "PASSWORD") &&
         !Utils::isChannel(to))
-      for (map<String, Person *, less<String> >::iterator it =
-             cnx->bot->spyList.begin(); it != cnx->bot->spyList.end(); ++it)
-        (*it).second->sendNotice(String("*") + nick + "* " + rest);
     Parser::parseMessage(cnx, from, to, rest);
   }
 }
@@ -713,7 +696,6 @@ struct userFunctionsStruct userFunctionsInit[] =
 //     { "PASSWORD",    	UserCommands::Password,    User::USER,         true, false  },
      { "RAW",		UserCommands::Raw,	   User::MASTER,       false },
      { "RECONNECT",   	UserCommands::Reconnect,   User::MASTER,       false },
-//     { "RSPYMESSAGE", 	UserCommands::RSpyMessage, User::USER,         false, false },
      { "SAVE",        	UserCommands::Save,        User::MASTER,       false },
      { "SAY",         	UserCommands::Say,         User::USER,         true   },
      { "SERVER",      	UserCommands::Server,      User::FRIEND,       false },

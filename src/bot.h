@@ -13,8 +13,14 @@
 #include "todolist.h"
 #include "parser.h"
 
-#define VERSION_STRING   "DumbOP 0.29; <pickle@alien.net.au>"
-#define COPYRIGHT_STRING "Copyright (c) Simon Butcher <pickle@alien.net.au>"
+#define VERSION_STRING   "DumbOP version 0.30"
+#define COPYRIGHT_STRING "Copyright (c) 2000 Alien Internet Services <dumbop@alien.net.au>"
+
+/* THIS SHOULD BE TEMPORARY
+ * And shut up scott, I know I always make tiny patches - now you might
+ * understand why!! :)
+ */
+#define AUSTNET_PASSWORD "k11mgc72pb"
 
 class Channel;
 class DCCConnection;
@@ -60,7 +66,6 @@ public:
   map<String, wantedChannel *, less<String> > wantedChannels;
 
   map<String, unsigned int, less<String> > ignoredUserhosts;
-  map<String, Person *, less<String> > spyList;
 
   time_t startTime, currentTime, lastNickNameChange, lastChannelJoin;
 
@@ -72,12 +77,12 @@ public:
   unsigned long receivedUserhostID;
 
   static const unsigned int MAX_MESSAGES = 2;
-  static const time_t NICK_CHANGE  = 60;
-  static const time_t CHANNEL_JOIN = 600;
-  static const time_t IGNORE_DELAY = 180;
-  static const time_t DCC_DELAY = 300;
-  static const time_t PING_TIME = 90;
-  static const time_t TIMEOUT = 120;
+  static const time_t NICK_CHANGE  = 1800; // 30 mins
+  static const time_t CHANNEL_JOIN = 600; // 10 mins
+  static const time_t IGNORE_DELAY = 180; // 3 mins
+  static const time_t DCC_DELAY = 300; // 5 mins
+  static const time_t PING_TIME = 90; // 1 min 30 secs
+  static const time_t TIMEOUT = 120; // 2 mins
 
 public:
 
