@@ -19,11 +19,13 @@
 #define DEFAULT_IRCNAME "DumbOP"
 #define DEFAULT_COMMANDCHAR '!'
 #define DEFAULT_USERLISTFILENAME "bot.users"
+#define DEFAULT_CHANNELLISTFILENAME "bot.channels"
 #define DEFAULT_NOTELISTFILENAME "bot.notes"
 #define DEFAULT_HELPFILENAME "bot.help"
 #define DEFAULT_SCRIPTLOGFILENAME "script.log"
 #define DEFAULT_LOGFILENAME "bot.log"
 #define DEFAULT_INITFILENAME "bot.init"
+#define DEFAULT_QUIZDIRECTORY "quiz"
 
 /* Bot - Initialise the incredible hulk
  * Original 11/12/00, Pickle <pickle@alien.net.au>
@@ -41,22 +43,28 @@ Bot::Bot(String filename)
     commandChar(DEFAULT_COMMANDCHAR),
     configFileName(filename),
     userListFileName(DEFAULT_USERLISTFILENAME),
+    channelListFileName(DEFAULT_CHANNELLISTFILENAME),
     noteListFileName(DEFAULT_NOTELISTFILENAME),
     logFileName(DEFAULT_LOGFILENAME),
     helpFileName(DEFAULT_HELPFILENAME),
     initFileName(DEFAULT_INITFILENAME),
+    quizDirectory(DEFAULT_QUIZDIRECTORY),
     receivedLen(0), sentLen(0), connected(false),
 #ifdef DEBUG
     debug(debug_on),
 #endif
     stop(false), sentPing(false),
-    startTime(time(NULL)), currentTime(startTime),
+    sigs(new Signal(this)),
+    startTime(time(NULL)), 
     lastNickNameChange(startTime), lastChannelJoin(startTime),
     serverConnection(0), telnetDaemon(0), sentUserhostID(0), 
     receivedUserhostID(0)
 {
    extern userFunctionsStruct userFunctionsInit[];
    extern CTCPFunctionsStruct CTCPFunctionsInit[];
+   
+   // Set up first clock run
+   ftime(&currentTime);
    
 #ifdef DEBUG
    if (debug)
@@ -101,16 +109,17 @@ Bot::Bot(String filename)
    
    logFile.open(logFileName, ios::out | ios::ate | ios::app);
    logLine("Starting log.");
+   logLine(VERSION_STRING);
    
 #ifdef DEBUG
    if (debug)
      cout << "Setting up lists..." << endl;
 #endif
    
-   channelList = new ChannelList();
    serverList = new ServerList();
    readConfig();
    userList = new UserList(userListFileName);
+   channelList = new ChannelList(channelListFileName, this);
    noteList = new NoteList(noteListFileName);
    todoList = new TodoList();
    
@@ -232,7 +241,8 @@ Bot::~Bot()
    if (debug)
      cout << "Killing old pointers..." << endl;
 #endif
-   
+
+   delete sigs;
    delete channelList;
    delete userList;
    delete noteList;
@@ -307,19 +317,16 @@ void Bot::readConfig()
 	commandChar = parameters[0];
       else if (command == "USERLIST")
 	userListFileName = parameters;
+      else if (command == "CHANNELLIST")
+	channelListFileName == parameters;
       else if (command == "NOTELIST")
 	noteListFileName == parameters;
-      else if (command == "CHANNEL") {
-	 StringTokenizer st2(parameters);
-	 String name = st2.nextToken(':').toLower();
-	 String mode = st2.nextToken(':');
-	 String keep = st2.nextToken(':');
-	 String key = st2.nextToken(':');
-	 wantedChannels[name] = new wantedChannel(mode, keep, key);
-      } else if (command == "LOGFILE")
-	   logFileName = parameters;
+      else if (command == "LOGFILE")
+	logFileName = parameters;
       else if (command == "INITFILE")
 	initFileName = parameters;
+      else if (command == "QUIZDIRECTORY")
+	quizDirectory = parameters;
       else if (command == "LOCALIP")
 	localIP = parameters;
       else if (command == "SERVER") {
@@ -382,6 +389,9 @@ void Bot::waitForInput()
    int sock = serverConnection->getFileDescriptor();
    int maxSocketNumber = sock;
    
+   // Grab the current time
+   ftime(&currentTime);
+   
    // Clear the file descriptor records
    FD_ZERO(&rd);
    
@@ -425,8 +435,8 @@ void Bot::waitForInput()
     case -1: // Select broke :(
 #ifdef DEBUG
       if (debug) {
-	 cout << "Select broke!" << endl;
-	 logLine("Select broke on us :(");
+	 cout << "Select prematurely returned!" << endl;
+	 logLine("Select prematurely returned!");
       }
 #endif
       break;
@@ -475,8 +485,8 @@ void Bot::waitForInput()
    }
    
    // Check ignore list for expired ignores, and run current TODO items
-   if (currentTime < time(NULL)) {
-      currentTime = time(NULL);
+   if (currentTime.time < time(NULL)) {
+      currentTime.time = time(NULL);
       for (map<String, unsigned int, less<String> >::iterator
            it = ignoredUserhosts.begin();
 	   it != ignoredUserhosts.end(); ++it)
@@ -490,17 +500,17 @@ void Bot::waitForInput()
    }
    
    // If we are not called what we want to be called, try changing nick
-   if ((currentTime >= (time_t)(lastNickNameChange + Bot::NICK_CHANGE)) &&
+   if ((currentTime.time >= (time_t)(lastNickNameChange + Bot::NICK_CHANGE)) &&
        (nickName != wantedNickName)) {
-      lastNickNameChange = currentTime;
+      lastNickNameChange = currentTime.time;
       serverConnection->queue->sendNick(wantedNickName);
       // Authentication should be a little "smarter" I think, using ISON?
       serverConnection->queue->sendNickopIdent(AUSTNET_PASSWORD);
    }
    
    // If we need to join a channel we're supposed to be on, give it a shot
-   if (currentTime >= (time_t)(lastChannelJoin + Bot::CHANNEL_JOIN)) {
-      lastChannelJoin = currentTime;
+   if (currentTime.time >= (time_t)(lastChannelJoin + Bot::CHANNEL_JOIN)) {
+      lastChannelJoin = currentTime.time;
       for (map<String, wantedChannel *, less<String> >::iterator it =
            wantedChannels.begin(); it != wantedChannels.end();
 	   ++it)
@@ -514,31 +524,27 @@ void Bot::waitForInput()
 	it != dccConnections.end(); ) {
       it2 = it;
       ++it;
-      if ((*it2)->autoRemove && currentTime >= (time_t)((*it2)->lastSpoken + Bot::DCC_DELAY)) {
+      if ((*it2)->autoRemove && 
+	  currentTime.time >= (time_t)((*it2)->lastSpoken + Bot::DCC_DELAY)) {
 	 delete *it2;
 	 dccConnections.erase(it2);
       }
    }
 
    // Ping the server and calculate our current client <-> server lag
-   if (((currentTime >= (time_t)(serverConnection->pingTime + Bot::PING_TIME)) ||
-	(currentTime >= (time_t)(serverConnection->serverLastSpoken + Bot::PING_TIME))) &&
+   if (((currentTime.time >= (time_t)(serverConnection->pingTime + Bot::PING_TIME)) ||
+	(currentTime.time >= (time_t)(serverConnection->serverLastSpoken + Bot::PING_TIME))) &&
        !sentPing) {
-#ifdef DEBUG
-      serverConnection->queue->sendPing(String((long)currentTime) + ":" +
-					String((long)serverConnection->pingTime) + 
-					":Check");
-#else
-      serverConnection->queue->sendPing("Check");
-#endif
-
-      serverConnection->pingTime = currentTime;
+      serverConnection->queue->sendPing(String((long)currentTime.time) + ":" +
+					String((long)serverConnection->pingTime));
+      
+      serverConnection->pingTime = currentTime.time;
       sentPing = true;
    }
    
    // If the server is ignoring us, it is probably dead. Time to reconnect.
-   if ((currentTime >= (time_t)(serverConnection->serverLastSpoken + Bot::TIMEOUT)) ||
-       ((currentTime >= (time_t)(serverConnection->pingTime + Bot::PING_TIME)) && 
+   if ((currentTime.time >= (time_t)(serverConnection->serverLastSpoken + Bot::TIMEOUT)) ||
+       ((currentTime.time >= (time_t)(serverConnection->pingTime + Bot::PING_TIME)) && 
 	sentPing)) {
 #ifdef DEBUG
       if (debug)

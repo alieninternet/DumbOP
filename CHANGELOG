@@ -1,3 +1,33 @@
+Version 0.33
+------------
+Pickle: parser.cc - Fixed retarded bug that shouldn't have happened in the
+	first place. The bug stopped the bot being hear on channels.
+Pickle: Removed 'BEEP' command. It's purpose was both obscure and quite
+	useless in many respects other than there to shit people up the wall.
+Pickle:	Restricted 'SAY' and 'DO' commands tightly, and removed spoof-breaking
+	output (the hidden <=- alias at the end, and the '%%' prefix.)
+Pickle: Channels are now read from a separate file, default to bot.channels.
+	This now allows for greater flexibility, saving list files etc.
+Pickle: bot.cc - Changed currentTime into a structure fit for ftime(). This
+	allows for more precise timings to be calculated including millisecond
+	length lag checks and ping replies.
+Pickle: Various time(NULL) commands have now been replaced with pointers to
+	to the existing time(NULL) point found in the Bot::currentTime
+	structure. This is more efficient use, using memory instead of a
+	system call.
+Pickle: Added "PING" command; Ping reply uses the above timing routine to
+	provide the user with a highly accurate lag response.
+Pickle: parser.cc - Removed CTCP restriction to be destined for users only
+	and not channels. The specifications do not specificially mention
+	whether or not it is allowed to work in a channel broadcast form. Most
+	modern IRC clients, including ircII these days, do allow this which
+	allows people who are voiced to CTCP the entire channel. This is most
+	likely because most modern servers parse CTCP these days and do 
+	restrict channel CTCP's to voiced users within that channel only.
+	Hopefully the IRC-3 specs will make this manditory so we can leave it
+	like that, because it's kinda handy.
+
+
 Version 0.32
 ------------
 Pickle: ctcp.cc - Ok, so DumbOP wasn't that compliant afterall. The TIME

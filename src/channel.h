@@ -23,12 +23,14 @@ class UserCommands;
 // want to set/keep on these channels, and the
 // channel keys
 struct wantedChannel {
-  String mode;
-  String keep;
-  String key;
-
-  wantedChannel(String m, String kp, String ky)
-    : mode(m), keep(kp), key(ky) { }
+   String mode;
+   String keep;
+   String key;
+   long flags;
+   long gameflags;
+   
+   wantedChannel(String m, String kp, String ky, long f, long gf)
+     : mode(m), keep(kp), key(ky), flags(f), gameflags(gf) { }
 };
 
 class Channel {

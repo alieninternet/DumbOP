@@ -75,10 +75,9 @@ ServerQueue::sendCTCP(String to, String command,
 
 void
 ServerQueue::sendCTCPReply(String to, String command,
-                           String message)
+			   String message)
 {
-  sendNotice(to, String("\001") + command + " " +
-             message + "\001");
+  sendNotice(to, String("\001") + command + " " + message + "\001");
 }
 
 void

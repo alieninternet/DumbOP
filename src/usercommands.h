@@ -42,6 +42,7 @@ class UserCommands {
    static void Op(ServerConnection *, Person *, String, String);
    static void Part(ServerConnection *, Person *, String, String);
    static void Password(ServerConnection *, Person *, String, String);
+   static void Ping(ServerConnection *, Person *, String, String);
    static void Raw(ServerConnection *, Person *, String, String);
    static void Reconnect(ServerConnection *, Person *, String, String);
    static void Save(ServerConnection *, Person *, String, String);
@@ -54,6 +55,7 @@ class UserCommands {
    static void TKBan(ServerConnection *, Person *, String, String);
    static void Topic(ServerConnection *, Person *, String, String);
    static void UserList(ServerConnection *, Person *, String, String);
+   static void Voice(ServerConnection *, Person *, String, String);
 };
 
 #endif

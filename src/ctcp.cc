@@ -13,6 +13,7 @@
 #include "person.h"
 #include "version.h"
 
+
 /* Action - If in logging mode, log a /me for the appropriate channel
  * Notes: No reply, informative only
  */
@@ -20,6 +21,7 @@ void CTCP::Action(ServerConnection *cnx, Person *from, String rest)
 {
    // Add stuff here when the channel logging code is made.. whenever that is
 }
+
 
 /* ClientInfo - For other hackers, to show off what CTCP commands we can do :)
  * Notes: Format - CLIENTINFO :<string command> [<string command>]...
@@ -65,6 +67,7 @@ void CTCP::ClientInfo(ServerConnection *cnx, Person *from, String rest)
    }
 }
 
+
 /* DCC - Parse DCC commands
  */
 void CTCP::DCC(ServerConnection *cnx, Person *from, String rest)
@@ -98,6 +101,7 @@ void CTCP::DCC(ServerConnection *cnx, Person *from, String rest)
 			 String("Unsupported DCC type"));
 }
 
+
 /* Echo - Return whatever was sent to us
  * Original 30/12/00, Pickle <pickle@alien.net.au>
  */
@@ -105,6 +109,7 @@ void CTCP::Echo(ServerConnection *cnx, Person *from, String rest)
 {
    from->sendCTCPReply("ECHO", String(rest));
 }
+
 
 /* ErrMsg - Parse an error message
  * Original 29/12/00, Pickle <pickle@alien.net.au>
@@ -118,6 +123,7 @@ void CTCP::ErrMsg(ServerConnection *cnx, Person *from, String rest)
 		       String("No error, test responce OK."));
 }
 
+
 /* Finger - Parse a finger request (idle time)
  * Original 29/12/00, Pickle <pickle@alien.net.au>
  * Notes: Format - FINGER :<string human_readable>
@@ -127,6 +133,7 @@ void CTCP::Finger(ServerConnection *cnx, Person *from, String rest)
 {
    from->sendCTCPReply("FINGER", String(":") + VERSION_STRING);
 }
+
 
 /* Lag - Show current Client <-> Server lag count
  * Original 29/12/00, Pickle <pickle@alien.net.au>
@@ -138,6 +145,7 @@ void CTCP::Lag(ServerConnection *cnx, Person *from, String rest)
 		       Utils::timelenToStr(cnx->lag));
 }
 
+
 /* Ping - Respond to a ping request, or reply
  * Original 29/12/00, Pickle <pickle@alien.net.au>
  * Notes: Format - PING <string query>
@@ -147,14 +155,16 @@ void CTCP::Ping(ServerConnection *cnx, Person *from, String rest)
    from->sendCTCPReply("PING", String(rest));
 }
 
+
 /* Sex - Show what sex I apparenly am
  * Original 29/12/00, Pickle <pickle@alien.net.au>
  * Notes: This command is non-conventional
  */
 void CTCP::Sex(ServerConnection *cnx, Person *from, String rest)
 {
-   from->sendCTCPReply("SEX", ":Possibly Male");
+   from->sendCTCPReply("SEX", "With you? HAHAHAHA!");
 }
+
 
 /* Source - Show where a user can grab a copy of this software
  * Original 29/12/00, Pickle <pickle@alien.net.au>
@@ -166,6 +176,7 @@ void CTCP::Source(ServerConnection *cnx, Person *from, String rest)
    from->sendCTCPReply("SOURCE", "www.alien.net.au::");
 }
 
+
 /* Time - Show the current local system time
  * Original 29/12/00, Pickle <pickle@alien.net.au>
  * Notes: Format - TIME <string human_readable>
@@ -176,6 +187,7 @@ void CTCP::Time(ServerConnection *cnx, Person *from, String rest)
    
    from->sendCTCPReply("TIME", String(ctime(&timenow)));
 }
+
 
 /* Uptime - Show current program uptime
  * Original 29/12/00, Pickle <pickle@alien.net.au>
@@ -189,6 +201,7 @@ void CTCP::Uptime(ServerConnection *cnx, Person *from, String rest)
 		       Utils::timelenToStr(diff));
 }
 
+
 /* Userinfo - Show user info string (generated)
  * Original 29/12/00, Pickle <pickle@alien.net.au>
  * Notes: Format - USERINFO :<string human_readable>
@@ -198,8 +211,9 @@ void CTCP::UserInfo(ServerConnection *cnx, Person *from, String rest)
    // Really should be a nicer string I think.. 
    // DumbOP is smarter than people give him credit for.
    from->sendCTCPReply("USERINFO", 
-		       ":DumbOP, the stupidest bot on IRC.");
+		       "DumbOP, the stupidest bot on IRC.");
 }
+
 
 /* Version - Show version information
  * Original 29/12/00, Pickle <pickle@alien.net.au>

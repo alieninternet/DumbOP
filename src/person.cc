@@ -43,6 +43,14 @@ void Person::sendNotice(String message)
    bot->serverConnection->queue->sendNotice(getNick(), message);
 }
 
+/* sendCTCP (virtual) - Quick way of sending CTCP replies
+ * Original 30/12/00, Pickle <pickle@alien.net.au>
+ */
+void Person::sendCTCP(String command, String query)
+{
+   bot->serverConnection->queue->sendCTCP(getNick(), command, query);
+}
+
 /* sendCTCPReply (virtual) - Quick way of sending CTCP replies
  * Original 30/12/00, Pickle <pickle@alien.net.au>
  */

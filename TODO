@@ -1,3 +1,14 @@
+Add configuration file
+
+Add 'SPELL' command.. ispell library? gnu dictionary use most likely. If an
+AI engine is to ever be added, this would most likely be needed!
+
+Add WALLOPS support to check for netsplits?
+
+Add 'REHASH' command
+
+Add 'RESTART' command (actually quit/respawn process)
+
 Change over to GDBM Databases. Channel Masks should be removed and replaced
 with references to channel database entries as to make it act more like
 ChanOP, and to remove multiple user entries.
@@ -14,7 +25,7 @@ Command Counter
 
 ChanOP resync
 
-Add !ping
+Add !ping.. well finish the shell that's there
 
 Finish !lastseen (mask searching, channel mask searching)
 
@@ -27,8 +38,6 @@ Combine !server and !serverlist, !nextserver and !reconnect
 Add command to force nickop/other bot identification
 
 Move channel list to a file (Add save/load channel list commands, peak saving)
-
-Finish !beep
 
 Finish !names (- returns all; should only return channels user has access to)
 

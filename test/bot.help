@@ -1,0 +1,109 @@
+:ACCESS (<channel>) [<user>]
+Check your, or another user's access.
+
+:ADDUSER fix me
+Add a user to the user list.
+
+:ADDSERVER fix me
+Add a server to the server list.
+
+:ALIAS fix me
+Create an alias for a command.
+
+:BAN (<channel>) [<user> | <mask>]
+Ban someone from a channel.
+
+:BANLIST (<channel>)
+List banned users for a channel.
+
+:CYCLE (<channel>)
+Part and re-join the channel.
+
+:DEBAN (<channel>) [<user> | <mask>]
+Deban someone from the channel.
+
+:DELSERVER fix me
+Remove a server from the server list.
+
+:DELUSER fix me
+Remove a user from the user list.
+
+:DEOP (<channel>) [<user>]
+Deop yourself or someone on the channel.
+
+:DIE [<message>]
+Kill me :(
+
+:DO (<channel>) <action>
+Make me do an action in a channel.
+
+:HELP [<topic>]
+Get help on something. The help file at the moment is very minimal, and quite
+possibly highly imcomplete in many areas. Don't trust it with your life :)
+
+:INFO
+Return information about me! :)
+
+:INVITE (<channel>)
+Invite someone into the channel.
+
+:JOIN <channel>
+Join a channel.
+
+:KICK fix me
+Kick a person out of a channel.
+
+:LASTSEEN (<channel>) [<nick>]
+Find out when someone was last seen.
+
+:MODE fix me
+Change channel mode settings.
+
+:NAMES (<channel>)
+Find out who's in a channel. Underlined usernames are people in my userlist.
+
+:NEXTSERVER
+Cause me to disconnect and reconnect to the next server in the server list.
+
+:NOTE fix me
+Send or receive notes to or from other users.
+
+:NSLOOKUP <hostname>
+Do a nameserver lookup. Very incomplete command... sorry :(
+
+:OP (<channel>) [<nick>]
+Give someone operator status in a channel.
+
+:PART (<channel>) [<reason>]
+Leave a channel, optionally giving a reason for leaving.
+
+:PING
+Ping yourself :) Not fully functional yet, sorry.
+
+:RAW <IRC data>
+USE WITH CAUTION!!! Send raw data to the IRC server.
+
+:RECONNECT
+This causes me to disconnect and reconnect to my current server.
+
+:SAVE
+Force a save of the database information.
+
+:SAY (<channel>) <message>
+Make me say something.
+
+:SERVER fix me
+Report the current server, or change to the specified server. Incomplete. :(
+
+:SERVERLIST
+List the servers in my server list.
+
+:STATS
+Report some utterly useless and downright geeky statistics. Incomplete. :(
+
+:TOPIC (<channel>) <topic>
+Change the topic of a channel.
+
+:USERLIST
+Show a list of users with access to me       Access Required: USER
+

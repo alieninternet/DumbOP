@@ -16,38 +16,182 @@ struct {
    char *name;
    void (*function)(ServerConnection *, Person *, String);
 } functions[] = {
-     { "001",	Parser::parse001     }, /* RPL_WELCOME */
-     { "302",	Parser::parse302     }, /* RPL_USERHOST */
-     { "303",   Parser::parse303     }, /* RPL_ISON */
-     { "311",	Parser::parse311     }, /* RPL_WHOISUSER */
-     { "315",	Parser::parse315     }, /* RPL_ENDOFWHO */
-     { "324",   Parser::parse324     }, /* RPL_CHANNELMODEIS */
-     { "332",   Parser::parse332     }, /* RPL_TOPIC */
-     { "352",   Parser::parse352     }, /* RPL_WHOREPLY */
-     { "353",   Parser::parse353     }, /* RPL_NAMESREPLY */
-     { "366",   Parser::parse366     }, /* RPL_ENDOFNAMES */
-     { "367",   Parser::parse367     }, /* RPL_BANLIST */
-     { "401",   Parser::parse401     }, /* ERR_NOSUCHNICK */
-     { "433",   Parser::parse433     }, /* ERR_NICKNAMEINUSE */
-     { "437",   Parser::parse433     }, /* ERR_UNAVAILRESOURCE */
-     { "471",   Parser::parse473     }, /* ERR_CHANNELISFULL */
-     { "473",   Parser::parse473     }, /* ERR_INVITEONLYCHAN */
-     { "474",   Parser::parse473     }, /* ERR_BANNEDFROMCHAN */
-     { "475",   Parser::parse473     }, /* ERR_BADCHANNELKEY */
-     { "ERROR", Parser::parseError   },
-     { "INVITE",Parser::parseInvite  },
-     { "JOIN",  Parser::parseJoin    },
-     { "KICK",  Parser::parseKick    },
-     { "MODE",  Parser::parseMode    },
-     { "NICK",  Parser::parseNick    },
-     { "NOTICE",Parser::parseNotice  },
-     { "PART",  Parser::parsePart    },
-     { "PING",  Parser::parsePing    },
-     { "PONG",  Parser::parsePong    },
-     { "PRIVMSG",Parser::parsePrivmsg },
-     { "QUIT",  Parser::parseQuit    },
-     { "TOPIC", Parser::parseTopic   },
-     { "",      Parser::parseError   },
+     { "001",	Parser::parse001     }, /* RPL_WELCOME - Welcome message */
+   /* 002 - RPL_YOURHOST - Server/Version info */
+   /* 003 - RPL_CREATED - Date server built */
+   /* 004 - RPL_MYINFO - Detailed server info */
+   /* 005 - RPL_BOUNCE - Use given server */
+   /* 200 - RPL_TRACELINK - Trace link info */
+   /* 201 - RPL_TRACECONNECTING - Try trace on... */
+   /* 202 - RPL_TRACEHANDSHAKE - Trace handshake */
+   /* 203 - RPL_TRACEUNKNOWN - Unknown trace */
+   /* 204 - RPL_TRACEOPERATOR - Trace +O entry */
+   /* 205 - RPL_TRACEUSER - Trace user entry */
+   /* 206 - RPL_TRACESERVER - Trace server entry */
+   /* 207 - RPL_TRACESERVICE - Trace service entry */
+   /* 208 - RPL_TRACENEWTYPE - Trace other entry */
+   /* 209 - RPL_TRACECLASS - Trace class entry */
+   /* 210 - RPL_TRACERECONNECT - Reconnect trace */
+   /* 211 - RPL_STATSLINKINFO - Link info stats */
+   /* 212 - RPL_STATSCOMMANDS - Command stats */
+   /* 213 - RPL_STATSCLINE - ? */
+   /* 214 - RPL_STATSNLINE - ? */
+   /* 215 - RPL_STATSILINE - ? */
+   /* 216 - RPL_STATSKLINE - ? */
+   /* 217 - RPL_STATSQLINE - ? */
+   /* 218 - RPL_STATSYLINE - ? */
+   /* 219 - RPL_ENDOFSTATS - End of stats */
+   /* 221 - RPL_UMODEIS - User mode is... */
+   /* 231 - RPL_SERVICEINFO - ? */
+   /* 232 - RPL_ENDOFSERVICES - ? */
+   /* 233 - RPL_SERVICE - ? */
+   /* 234 - RPL_SERVLIST - Server list entry */
+   /* 235 - RPL_SERVLISTEND - End of server list */
+   /* 240 - RPL_STATSVLINE - ? */
+   /* 241 - RPL_STATSLLINE - ? */
+   /* 242 - RPL_STATSUPTIME - Uptime stats */
+   /* 243 - RPL_STATSONLINE - Online stats */
+   /* 244 - RPL_STATSHLINE - ? */
+   /* 245 - RPL_STATSSLINE - ??? */
+   /* 246 - RPL_STATSPING - ? */
+   /* 247 - RPL_STATSBLINE - ? */
+   /* 250 - RPL_STATSDLINE - ? */
+   /* 251 - RPL_LUSERCLIENT - User connections info */
+   /* 252 - RPL_LUSEROP - +O connections info */
+   /* 253 - RPL_LUSERUNKNOWN - Unknown connections info */
+   /* 254 - RPL_LUSERCHANNELS - Number of channels info */
+   /* 255 - RPL_LUSERME - Local connections info */
+   /* 256 - RPL_ADMINME - Local admin info */
+   /* 257 - RPL_ADMINLOC1 - Local admin info (1) */
+   /* 258 - RPL_ADMINLOC2 - Local admin info (2) */
+   /* 259 - RPL_ADMINEMAIL - Local admin e-mail info */
+   /* 261 - RPL_TRACELOG - Trace log file */
+   /* 262 - RPL_TRACEEND - End of trace */
+   /* 263 - RPL_TRYAGAIN - Try again soon */
+   /* 300 - RPL_NONE - ? */
+   /* 301 - RPL_AWAY - User is away */
+     { "302",	Parser::parse302     }, /* RPL_USERHOST - ? */
+     { "303",   Parser::parse303     }, /* RPL_ISON  - ? */
+   /* 305 - RPL_UNAWAY - Away turned off msg */
+   /* 306 - RPL_NOWAWAY - Marked as AWAY */
+     { "311",	Parser::parse311     }, /* RPL_WHOISUSER - User details */
+   /* 312 - RPL_WHOISSERVER - User is using this */
+   /* 313 - RPL_WHOISOPERATOR - User is IRC OP */
+   /* 314 - RPL_WHOWASUSER - WHOWAS details */
+     { "315",	Parser::parse315     }, /* RPL_ENDOFWHO - End of WHO */
+   /* 316 - RPL_WHOISCHANOP - ? */
+   /* 317 - RPL_WHOISIDLE - User idle stats */
+   /* 318 - RPL_ENDOFWHOIS - End of WHOIS list */
+   /* 319 - RPL_WHOISCHANNELS - User is on these */
+   /* 321 - RPL_LISTSTART - Start of channel LIST */
+   /* 322 - RPL_LIST - Channel LIST entry */
+   /* 323 - RPL_LISTEND - End of channel LIST */
+     { "324",   Parser::parse324     }, /* RPL_CHANNELMODEIS - Channel mode is...*/
+   /* 325 - RPL_UNIQOPIS - ?? */
+   /* 331 - RPL_NOTOPIC - No topic is set */
+     { "332",   Parser::parse332     }, /* RPL_TOPIC - Topic is now... */
+   /* 341 - RPL_INVITING - INVITEd someone OK */
+   /* 342 - RPL_SUMMONING - SUMMONing someone */
+   /* 346 - RPL_INVITELIST - INVITE list entry */
+   /* 347 - RPL_ENDOFINVITELIST - End of INVITE list */
+   /* 348 - RPL_EXCEPTLIST - EXCEPTION list entry */
+   /* 349 - RPL_ENDOFEXCEPTLIST - End of EXCEPTION list */
+   /* 351 - RPL_VERSION - Server version details */
+     { "352",   Parser::parse352     }, /* RPL_WHOREPLY - WHO entry */
+     { "353",   Parser::parse353     }, /* RPL_NAMESREPLY - NAMES entry */
+   /* 361 - RPL_KILLDONE - ? */
+   /* 362 - RPL_CLOSING - ? */
+   /* 363 - RPL_CLOSEEND - ? */
+   /* 364 - RPL_LINKS - LINKS entry */
+   /* 365 - RPL_ENDOFLINKS - End of LINKS list */
+     { "366",   Parser::parse366     }, /* RPL_ENDOFNAMES - End of NAMES list */
+     { "367",   Parser::parse367     }, /* RPL_BANLIST - BANLIST entry */
+   /* 368 - RPL_ENDOFBANDLIST - End of BANLIST */
+   /* 369 - RPL_ENDOFWHOWAS - End of WHOWAS */
+   /* 371 - RPL_INFO - INFO entry */
+   /* 372 - RPL_MOTD - MOTD entry */
+   /* 373 - RPL_INFOSTART - ? */
+   /* 374 - RPL_ENDOFINFO - End of INFO list */
+   /* 375 - RPL_MOTDSTART - Start of MOTD list */
+   /* 376 - RPL_ENDOFMOTD - End of MOTD list */
+   /* 381 - RPL_YOUREOPER - You got +O */
+   /* 382 - RPL_REHASHING - Rehashing */
+   /* 383 - RPL_YOURESERVICE - You are service.. */
+   /* 384 - RPL_MYPORTIS - ? */
+   /* 391 - RPL_TIME - Server time */
+   /* 392 - RPL_USERSSTART - Users list */
+   /* 393 - RPL_USERS - Users list entry */
+   /* 394 - RPL_ENDOFUSERS - End of user list */
+   /* 395 - RPL_NOUSERS - Nobody logged in */
+     { "401",   Parser::parse401     }, /* ERR_NOSUCHNICK - No such nick */
+   /* 402 - ERR_NOSUCHSERVER - No such server */
+   /* 403 - ERR_NOSUCHCHANNEL - No such channel */
+   /* 404 - ERR_CANNOTSENDTOCHAN - Cannot send to channel */
+   /* 405 - ERR_TOOMANYCHANNELS - On too many channels */
+   /* 406 - ERR_WASNOSUCHNICK - No nick in WHOWAS history */
+   /* 407 - ERR_TOOMANYTARGETS - Target list overloaded */
+   /* 408 - ERR_NOSUCHSERVICE - No such service */
+   /* 409 - ERR_NOORIGIN - No origin given */
+   /* 411 - ERR_NORECIPIENT - No recipient given */
+   /* 412 - ERR_NOTEXTTOSEND - No text given */
+   /* 413 - ERR_NOTOPLEVEL - No top level domain give */
+   /* 414 - ERR_WILDTOPLEVEL - Top level was wildcard */
+   /* 415 - ERR_BADMASK - Invalid mask given */
+   /* 421 - ERR_UNKNOWNCOMMAND - Unknown command */
+   /* 422 - ERR_NOMOTD - No MOTD on server */
+   /* 423 - ERR_NOADMININFO - No admin info */
+   /* 424 - ERR_FILEERROR - File error */
+   /* 431 - ERR_NONICKNAMEGIVEN - No nick given */
+   /* 432 - ERR_ERRONEUSNICKNAME - Bad nick given */
+     { "433",   Parser::parse433     }, /* ERR_NICKNAMEINUSE - Nick in use */
+   /* 436 - ERR_NICKCOLLISION - Nick collision KILL */
+     { "437",   Parser::parse433     }, /* ERR_UNAVAILRESOURCE - Delay block */
+   /* 441 - ERR_USERNOTINCHANNEL - User not in channel */
+   /* 442 - ERR_NOTONCHANNEL - Not in channel */
+   /* 443 - ERR_USERONCHANNEL - Already on channel */
+   /* 444 - ERR_NOLOGIN - Not logged on */
+   /* 445 - ERR_SUMMONDISABLED - No SUMMON command */
+   /* 446 - ERR_USERSDISABED - No USERS command */
+   /* 451 - ERR_NOTREGISTERS - Not registered */
+   /* 461 - ERR_NEEDMOREPARAMS - Not enough params */
+   /* 462 - ERR_ALREADYREGISTERD - Already registered */
+   /* 463 - ERR_NOPERMFORHOST - Host not privileged */
+   /* 464 - ERR_PASSWDMISMATCH - Bad password */
+   /* 465 - ERR_YOUREBANNEDCREEP - Banned from server */
+   /* 466 - ERR_YOUWILLBEBANNED - Access to be denied soon */
+   /* 467 - ERR_KEYSET - Channel key already set */
+     { "471",   Parser::parse473     }, /* ERR_CHANNELISFULL - +l overflow */
+   /* 472 - ERR_UNKNOWNMODE - Unknown mode char */
+     { "473",   Parser::parse473     }, /* ERR_INVITEONLYCHAN - +i channel */
+     { "474",   Parser::parse473     }, /* ERR_BANNEDFROMCHAN - +b channel */
+     { "475",   Parser::parse473     }, /* ERR_BADCHANNELKEY - +k channel */
+   /* 476 - ERR_BADCHANMASK - Channel mask bad */
+   /* 477 - ERR_NOCHANMODES - Channel has no modes */
+   /* 478 - ERR_BANLISTFULL - Too many banned masks */
+   /* 481 - ERR_NOPRIVILEGES - Not a +O */
+   /* 482 - ERR_CHANOPRIVSNEEDED - Not a +o */
+   /* 483 - ERR_CANTKILLSERVER - Cannot kill a server */
+   /* 484 - ERR_RESTRICTED - Connection restricted */
+   /* 485 - ERR_UNIQOPPRIVSNEEDED - Not original +o */
+   /* 491 - ERR_NOOPERHOST - No O-line for host */
+   /* 492 - ERR_NOSERVICEHOST - ? */
+   /* 501 - ERR_UMODEUNKNOWNFLAG - Unknown user mode char */
+   /* 502 - ERR_USERSDONTMATCH - No mode change for other users */
+     { "ERROR", 	Parser::parseError	},
+     { "INVITE",	Parser::parseInvite	},
+     { "JOIN",  	Parser::parseJoin	},
+     { "KICK",  	Parser::parseKick	},
+     { "MODE",  	Parser::parseMode	},
+     { "NICK",		Parser::parseNick	},
+     { "NOTICE",	Parser::parseNotice	},
+     { "PART",  	Parser::parsePart	},
+     { "PING",  	Parser::parsePing	},
+     { "PONG",		Parser::parsePong	},
+     { "PRIVMSG",	Parser::parsePrivmsg	},
+     { "QUIT",		Parser::parseQuit	},
+     { "TOPIC", 	Parser::parseTopic	},
+//     { "WALLOPS",	Parser::parseWallops	},
+     { "",	    	Parser::parseError	},
      { 0,         0                    }
 };
 
@@ -61,7 +205,7 @@ void Parser::parseLine(ServerConnection * cnx, String line)
    String fromMask = "";
    
    cnx->bot->receivedLen += line.length();
-   
+
    if (line[0] == ':') {
       fromMask = st.nextToken().subString(1);
       if (fromMask.find('!') != -1)
@@ -70,12 +214,13 @@ void Parser::parseLine(ServerConnection * cnx, String line)
    
    String command = st.nextToken();
    String rest = st.rest();
-   
-   for (int i = 0; functions[i].name != 0; i++)
-     if (command == functions[i].name) {
-	functions[i].function(cnx, from, rest);
-	break;
-     }
+      
+   for (int i = 0; functions[i].name != 0; i++) {
+      if (command == functions[i].name) {
+	 functions[i].function(cnx, from, rest);
+	 break;
+      }
+   }
 
    TelnetSpy::spyLine(cnx->bot, fromMask, command, rest);
    
@@ -90,18 +235,18 @@ Parser::parse001(ServerConnection * cnx,
   StringTokenizer st(rest);
   String realNick = st.nextToken();
 
-  if ((cnx->bot->nickName).toLower() != realNick) {
-    // Yes, this can happen, and it was a very subtle bug :(
-    cnx->bot->nickName = realNick;
-    cnx->bot->userList->removeFirst();
-    cnx->bot->userList->addUserFirst(realNick + "!" + cnx->bot->userHost, "*", 0, 3, realNick, -1, -1, "");
-    cnx->bot->lastNickNameChange = time(NULL);
-    cnx->bot->rehash();
-  }
+/*  if ((cnx->bot->nickName).toLower() != realNick) {
+ *   // Yes, this can happen, and it was a very subtle bug :(
+ *   cnx->bot->nickName = realNick;
+ *   cnx->bot->userList->removeFirst();
+ *   cnx->bot->userList->addUserFirst(realNick + "!" + cnx->bot->userHost, "*", 0, 3, realNick, -1, -1, "");
+ *   cnx->bot->lastNickNameChange = time(NULL);
+ *   cnx->bot->rehash();
+ * } */
    
    cnx->bot->connected = true;
 
-   cnx->queue->sendUserMode(cnx->bot->nickName, "+i");
+   cnx->queue->sendUserMode(cnx->bot->nickName, "+iw");
 
    /////////////////////////////////////////////////////////////////////
    cnx->queue->sendNickopIdent(AUSTNET_PASSWORD),
@@ -443,13 +588,13 @@ Parser::parseNick(ServerConnection *cnx,
   String nn = rest.subString(1);
   String nn_lower = nn.toLower();
 
-  if ((cnx->bot->nickName).toLower() == on) {
-    cnx->bot->userList->removeFirst();
-    cnx->bot->userList->addUserFirst(nn + "!" + cnx->bot->userHost, "*", 0, 3, nn, -1, -1, "");
-    cnx->bot->lastNickNameChange = time(NULL);
-    cnx->bot->nickName = nn;
-    cnx->bot->rehash();
-  }
+/*  if ((cnx->bot->nickName).toLower() == on) {
+ *   cnx->bot->userList->removeFirst();
+ *   cnx->bot->userList->addUserFirst(nn + "!" + cnx->bot->userHost, "*", 0, 3, nn, -1, -1, "");
+ *   cnx->bot->lastNickNameChange = time(NULL);
+ *   cnx->bot->nickName = nn;
+ *   cnx->bot->rehash();
+ * } */
 
    for (map<String, Channel *, less<String> >::iterator it = 
 	cnx->bot->channelList->begin();
@@ -481,68 +626,69 @@ Parser::parseNotice(ServerConnection *cnx,
   String command = st2.nextToken();
   rest = st2.rest();
 
-  if (command == "PING") {
-    StringTokenizer st3(rest);
-    rest = st3.nextToken();
-    String c = st3.rest();
-    if (cnx->bot->channelList->getChannel(c) &&
-        cnx->bot->channelList->getChannel(c)->getUser(nick) &&
-        cnx->bot->channelList->getChannel(c)->getUser(nick)->getAop() &&
-        !(cnx->bot->channelList->getChannel(c)->getUser(nick)->mode & User::OP_MODE)
-        && cnx->bot->channelList->getChannel(c)->getUser(nick)->userkey == rest)
-      cnx->queue->sendChannelMode(c, "+o", nick);
-  }
+/*  if (command == "PING") {
+ *    StringTokenizer st3(rest);
+ *    rest = st3.nextToken();
+ *    String c = st3.rest();
+ *    if (cnx->bot->channelList->getChannel(c) &&
+ *	 cnx->bot->channelList->getChannel(c)->getUser(nick) &&
+ *	 cnx->bot->channelList->getChannel(c)->getUser(nick)->getAop() &&
+ *	 !(cnx->bot->channelList->getChannel(c)->getUser(nick)->mode & User::OP_MODE)
+ *	 && cnx->bot->channelList->getChannel(c)->getUser(nick)->userkey == rest)
+ *      cnx->queue->sendChannelMode(c, "+o", nick);
+ * } */
+   if (command == "PING") {
+      StringTokenizer st3(rest);
+      time_t time_secs = atol(st3.nextToken(':'));
+      unsigned short time_usecs = atoi(st3.rest());
+      
+      /* The internals of this process can be big -- eg. long long */
+      long long pingpong = ((cnx->bot->currentTime.time * 1000) + 
+			    cnx->bot->currentTime.millitm) -
+	((time_secs * 1000) + time_usecs);
+      
+      from->sendNotice(String("Ping shows a lag between us of \002") +
+		       Utils::timeBigToStr((long)pingpong));
+   }
 }
 
 void
 Parser::parsePrivmsg(ServerConnection *cnx,
-                     Person *from, String rest)
+ 		    Person *from, String rest)
 {
-  String nick = from->getNick();
-
-  StringTokenizer st(rest);
-  String to = st.nextToken();
-  String fromUserhost = Utils::getUserhost(from->getAddress());
-
-  rest = st.rest().subString(1);
-
-  if (++(cnx->bot->ignoredUserhosts[fromUserhost])
-      > Bot::MAX_MESSAGES) {
-    if (cnx->bot->ignoredUserhosts[fromUserhost]
-        == Bot::MAX_MESSAGES+1) {
-      cnx->bot->ignoredUserhosts[fromUserhost] += Bot::IGNORE_DELAY;
-      cnx->bot->logLine(from->getAddress() +
-                   " is flooding me. We will ignore him/her/it.");
-      if (!Utils::isChannel(to))
-        from->sendNotice(String("Stop flooding me. You are now being ignored for ") +
-                         String((long)Bot::IGNORE_DELAY) + " seconds.\002");
-    }
-    // The following lines reset the counter if you use the
-    // command "!sorry" (if '!' is your command char).
-    // This is not documented, I know. But one probably does
-    // not want that every users can bypass the flood control
-    // Of course, if you want this feature to remain 'secret',
-    // do not use it in public.
-    if (rest.toUpper() == String(cnx->bot->commandChar) + "SORRY") {
-      cnx->bot->ignoredUserhosts[fromUserhost] = 0;
-      from->sendNotice("\002Don't do it again!\002");
-    }
-    return;
-  }
-
-  if (rest[0] == '\001') {
-    rest = rest.subString(1, rest.length() - 2);
-    if (!Utils::isChannel(to))
-    Parser::parseCTCP(cnx, from, to, rest);
-  }
-  else {
-    if ((rest.length() < 5 ||
-        rest.subString(1, 5).toUpper() != "IDENT") &&
-       (rest.length() < 8 ||
-        rest.subString(1, 8).toUpper() != "PASSWORD") &&
-        !Utils::isChannel(to))
-    Parser::parseMessage(cnx, from, to, rest);
-  }
+   String nick = from->getNick();
+   
+   StringTokenizer st(rest);
+   String to = st.nextToken();
+   String fromUserhost = Utils::getUserhost(from->getAddress());
+   
+   rest = st.rest().subString(1);
+   
+   if (++(cnx->bot->ignoredUserhosts[fromUserhost]) > Bot::MAX_MESSAGES) {
+      if (cnx->bot->ignoredUserhosts[fromUserhost] == Bot::MAX_MESSAGES+1) {
+	 cnx->bot->ignoredUserhosts[fromUserhost] += Bot::IGNORE_DELAY;
+	 cnx->bot->logLine(from->getAddress() +
+			   " is flooding me. We will ignore him/her/it.");
+	 if (!Utils::isChannel(to))
+	   from->sendNotice(String("Stop flooding me. You are now being ignored for ") +
+			    String((long)Bot::IGNORE_DELAY) + " seconds.\002");
+      }
+      // The following lines reset the counter if you use the
+      // command "!sorry" (if '!' is your command char).
+      if (rest.toUpper() == String(cnx->bot->commandChar) + "SORRY") {
+	 cnx->bot->ignoredUserhosts[fromUserhost] = 0;
+	 from->sendNotice("\002Don't do it again!\002");
+      }
+      return;
+   }
+   
+   if (rest[0] == '\001') {
+      rest = rest.subString(1, rest.length() - 2);
+/*      if (!Utils::isChannel(to)) */
+      Parser::parseCTCP(cnx, from, to, rest);
+   } else {
+      Parser::parseMessage(cnx, from, to, rest);
+   }
 }
 
 void Parser::parsePart(ServerConnection *cnx, Person *from, String rest)
@@ -615,35 +761,63 @@ Parser::parseTopic(ServerConnection *cnx,
   c->channelTopic = newTopic;
 }
 
+   
+void Parser::parseWallops(ServerConnection *cnx, Person *from, String rest)
+{
+   cnx->bot->logLine(String("WALLOPS from ") + from->getAddress() +
+		     String(" (") + rest + String(")"));
+}
+
+
+   
+   
+   
+/*
+ * 
+ * anything below here should go to another file?
+ * 
+ * 
+ * 
+ */
+   
+   
+   
+   
+   
+   
+   
+   
 // CTCPFunctionList - Table of CTCP commands
 struct CTCPFunctionsStruct CTCPFunctionsInit[] =
 {
      { "ACTION",	CTCP::Action,		false,	true,
-	  "" },
+	"" },
      { "CLIENTINFO",	CTCP::ClientInfo,	false,	false,
-	  "[<string query>]" },
+	"[<string query>]" },
      { "DCC",		CTCP::DCC,		false,	false,
-	  "<string type> [<string argument>] [<int address>] [<int port>] [<int size>]" },
+	"<string type> [<string argument>] [<int address>] [<int port>] [<int size>]" },
      { "ECHO",		CTCP::Echo,		false,	false,
-	  "[<string echo>]" },
+	"[<string echo>]" },
      { "ERRMSG",	CTCP::ErrMsg,		false,	false,
-	  "[<string query>]" },
+	"[<string query>]" },
      { "FINGER",	CTCP::Finger,		false,	false,
-	  "" },
+	"" },
      { "LAG",		CTCP::Lag,		false,	false,
-	  "" },
+	"" },
      { "PING",		CTCP::Ping,		false,	false,
-	  "<time_t time>" },
+	"<time_t time>" },
      { "SEX",		CTCP::Sex,		false,	false,
-	  "" },
+	"" },
+     { "SOURCE",	CTCP::Source,		false,	false,
+	"" },
      { "TIME",		CTCP::Time,		false,	false,
-	  "" },
+	"" },
      { "UPTIME",	CTCP::Uptime,		false,	false,
-	  "" },
+	"" },
      { "USERINFO",	CTCP::UserInfo,		false,	false,
-	  "" },
+	"" },
      { "VERSION",	CTCP::Version,		false,	false,
-	  "" },
+	"" },
      { "",		0,			false,	false,	"" }
    
 };
@@ -692,40 +866,37 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	  User::MASTER,		false 
      },
      { "ADDSERVER",   	UserCommands::AddServer,   
-	  User::FRIEND,      	false 
+	  User::MASTER,      	false 
      },
      { "ALIAS",      	UserCommands::Alias,       
 	  User::MASTER,       	false 
      },
 //     { "BAN",         	UserCommands::Ban,         User::TRUSTED_USER, true, false  },
      { "BANLIST",     	UserCommands::BanList,     
-	  User::USER,        	true 
-     },
-     { "BEEP",		UserCommands::Beep,	   
-	  User::TRUSTED_USER, 	false 
+	  User::MASTER,        	true 
      },
 //     { "CHANGELEVEL", UserCommands::ChangeLevel, User::MASTER,       false, false },
      { "CYCLE",       	UserCommands::Cycle,       
-	  User::FRIEND,       	true 
+	  User::MASTER,       	true
      },
      { "DCCLIST",     	UserCommands::DCCList,     
 	  User::MASTER,       	false 
      },
 //     { "DEBAN",       	UserCommands::Deban,       User::TRUSTED_USER, true, false  },
      { "DELSERVER",   	UserCommands::DelServer,   
-	  User::FRIEND,       	false 
+	  User::MASTER,       	false 
      },
      { "DELUSER",     	UserCommands::DelUser,     
 	  User::MASTER,       	false 
      },
      { "DEOP",        	UserCommands::Deop,        
-	  User::TRUSTED_USER, 	true 
+	  User::MASTER, 	true 
      },
      { "DIE",         	UserCommands::Die,         
 	  User::MASTER,       	false 
      },
      { "DO",		UserCommands::Do,	   
-	  User::USER,	       	true  
+	  User::FRIEND,	       	true  
      },
      { "HELP",        	UserCommands::Help,        
 	  User::NONE,         	false 
@@ -755,17 +926,17 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	  User::MASTER,       	false 
      },
      { "NAMES",       	UserCommands::Names,       
-	  User::USER,         	true
+	  User::MASTER,        	true
      },
      { "NEXTSERVER",  	UserCommands::NextServer,  
 	  User::FRIEND,       	false 
      },
 //     { "NICK",        	UserCommands::Nick,        User::FRIEND,       false, false },
      { "NOTE",		UserCommands::Note,	   
-	  User::USER,		false
+	  User::MASTER,		false
      },
      { "NSLOOKUP",    	UserCommands::NsLookup,    
-	  User::USER,         	false 
+	  User::MASTER,        	false 
      },
      { "OP",          	UserCommands::Op,          
 	  User::TRUSTED_USER, 	true  
@@ -774,17 +945,20 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	  User::MASTER,       	true  
      },
 //     { "PASSWORD",    	UserCommands::Password,    User::USER,         true, false  },
+     { "PING",        	UserCommands::Ping,
+	  User::USER,       	false
+     },
      { "RAW",		UserCommands::Raw,	   
 	  User::MASTER,       	false 
      },
      { "RECONNECT",   	UserCommands::Reconnect,   
-	  User::MASTER,       	false 
+	  User::FRIEND,       	false 
      },
      { "SAVE",        	UserCommands::Save,        
-	  User::MASTER,       	false 
+	  User::FRIEND,       	false 
      },
      { "SAY",         	UserCommands::Say,         
-	  User::USER,         	true 
+	  User::FRIEND,        	true 
      },
      { "SERVER",      	UserCommands::Server,      
 	  User::FRIEND,       	false 
@@ -793,7 +967,7 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	  User::FRIEND,       	false 
      },
      { "STATS",		UserCommands::Stats,	   
-	  User::USER,	       	false 
+	  User::MASTER,	       	false 
      },
 //     { "TBAN",        	UserCommands::TBan,        User::TRUSTED_USER, true, false  },
 //     { "TKBAN",       	UserCommands::TKBan,       User::USER,         true, false  },
@@ -806,63 +980,73 @@ struct userFunctionsStruct userFunctionsInit[] = {
      { "USERLIST",	UserCommands::UserList,	   
 	  User::FRIEND,       	false 
      },
+     { "VOICE",		UserCommands::Voice,
+	  User::TRUSTED_USER,  	false 
+     },
      { "",	0,	0,	false }
 };
 
+   
+/* parseMessage - Parse a message, checking access levels naturally
+ * Original 16/12/00, Pickle <pickle@alien.net.au>
+ */
 void Parser::parseMessage(ServerConnection *cnx, Person *from, String to,
 			  String parameters)
 {
-   if (parameters[0] != cnx->bot->commandChar)
-     return;
-   
-   StringTokenizer st(parameters);
-   
-   String command = st.nextToken().subString(1).toUpper();
-   String rest = st.rest().trim();
-   int level;
-   bool identified = false;
-   
-   for (list<userFunction *>::iterator it = cnx->bot->userFunctions.begin();
-	it != cnx->bot->userFunctions.end();
-	++it)
-     if (command == (*it)->name) {
-	if ((*it)->needsChannelName) {
-	   if (Utils::isChannel(rest)) {
-	      StringTokenizer st2(rest);
-	      to = st.nextToken();
-	      rest = st.rest();
-	   }
-	   if (!Utils::isChannel(to)) {
-	      from->sendNotice("I don't know which channel you're referring to.");
-	      return;
-	   }
-	   if (!cnx->bot->channelList->getChannel(to)) {
-	      from->sendNotice(String("I am not on \002") + to +
-			       String("\002"));
-	      return;
-	   }
-	   level = Utils::getLevel(cnx->bot, from->getAddress(), to);
-	   User * u = 0;
-	   if (Channel *c = cnx->bot->channelList->getChannel(to))
-	     u = c->getUser(from->getNick());
-	   if (!u || !u->userListItem)
-	     identified = true;
-	   else
-	     identified = u->userListItem->passwd == "" || u->userListItem->identified > 0;
-	} else {
-	   level = Utils::getLevel(cnx->bot, from->getAddress());
-	   identified = true;
-	}
-	if (level >= (*it)->minLevel) {
-	   cnx->bot->logLine(from->getAddress() + " did " + command +
-			     " " + rest);
-	   (*it)->function(cnx, from, to, rest);
-	   break;
-	} else {
-	   if (!identified)
-	     from->sendNotice(String("You are not identified on channel \002") + 
-			      to + "\002 - Use \037!IDENT\037");
-	}
-     }
+   if (parameters[0] != cnx->bot->commandChar) {
+      // Stuff goes here.
+   } else {
+      StringTokenizer st(parameters);
+      
+      String command = st.nextToken().subString(1).toUpper();
+      String rest = st.rest().trim();
+      int level;
+      bool identified = false;
+      
+      list<userFunction *>::iterator it;
+      for (it = cnx->bot->userFunctions.begin();
+	   it != cnx->bot->userFunctions.end();
+	   ++it) {
+	 if (command == (*it)->name) {
+	    if ((*it)->needsChannelName) {
+	       if (Utils::isChannel(rest)) {
+		  StringTokenizer st2(rest);
+		  to = st.nextToken();
+		  rest = st.rest();
+	       }
+	       if (!Utils::isChannel(to)) {
+		  from->sendNotice("I don't know which channel you're referring to.");
+		  return;
+	       }
+	       if (!cnx->bot->channelList->getChannel(to)) {
+		  from->sendNotice(String("I am not on \002") + to +
+				   String("\002"));
+		  return;
+	       }
+	       level = Utils::getLevel(cnx->bot, from->getAddress(), to);
+	       User * u = 0;
+	       if (Channel *c = cnx->bot->channelList->getChannel(to))
+		 u = c->getUser(from->getNick());
+	       if (!u || !u->userListItem)
+		 identified = true;
+	       else
+		 identified = u->userListItem->passwd == "" || u->userListItem->identified > 0;
+	    } else {
+	       level = Utils::getLevel(cnx->bot, from->getAddress());
+	       identified = true;
+	    }
+	    if (level >= (*it)->minLevel) {
+	       cnx->bot->logLine(from->getAddress() + " did " + command +
+				 " " + rest);
+	       (*it)->function(cnx, from, to, rest);
+	       break;
+	    } else {
+	       if (!identified)
+		 from->sendNotice(String("You are not identified on channel \002") + 
+				  to + "\002 - Use \037!IDENT\037");
+	    }
+	 }
+      }
+   }
 }
-
+   

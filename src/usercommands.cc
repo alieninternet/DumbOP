@@ -339,15 +339,6 @@ UserCommands::BanList(ServerConnection *cnx, Person *from,
   from->sendNotice("\002End of banlist.\002");
 }
 
-/* Beep
- * Unfinished
- */
-void UserCommands::Beep(ServerConnection *cnx, Person *from,
-			String channel, String rest)
-{
-   from->sendNotice("Since this command doesn't work yet.. \007*BEEP*!");
-}
-
 /* MOVE COMMENTED CODE TO SETUSER */
 // void
 // UserCommands::ChangeLevel(ServerConnection *cnx, Person *from,
@@ -548,14 +539,12 @@ void UserCommands::Deop(ServerConnection *cnx, Person *from,
 void UserCommands::Die(ServerConnection *cnx, Person *from,
 		       String channel, String rest)
 {
-   String reason;
-   
    if (rest.length() == 0)
-     reason = String("Leaving [") + VERSION_STRING + String("]");
+     Commands::Die(cnx->bot, from->getNick() +
+		   String(" requested me to leave [") + 
+		   VERSION_STRING + String("]"));
    else
-     reason = rest;
-   
-   Commands::Die(cnx->bot, reason);
+     Commands::Die(cnx->bot, rest);
 }
 
 /* Do
@@ -569,10 +558,7 @@ void UserCommands::Do(ServerConnection *cnx, Person *from,
      from->sendNotice("And do what?");
    else {
       
-      Message m = Commands::Action(cnx->bot, channel, 
-				   String("\002\037%%\037\002") +
-				   rest + String(" \00300<=- ") +
-				   from->getNick());
+      Message m = Commands::Action(cnx->bot, channel, rest);
       if (m.getCode() != 0)
 	from->sendNotice(m.getMessage());
    }
@@ -749,7 +735,8 @@ UserCommands::Join(ServerConnection *cnx, Person *from,
     if (cnx->bot->wantedChannels[channel])
       cnx->bot->wantedChannels[channel]->key = st.rest();
     else {
-      cnx->bot->wantedChannels[channel] = new wantedChannel("", "", st.rest());
+      cnx->bot->wantedChannels[channel] = new wantedChannel("", "", st.rest(),
+							    0, 0);
     }
   }
   cnx->queue->sendJoin(channel, cnx->bot->wantedChannels[channel]->key);
@@ -1325,6 +1312,18 @@ UserCommands::Password(ServerConnection *cnx, Person *from,
   from->sendNotice("\002Password changed.\002");
 }
 
+/* Ping - Ping a user back, tell them the time
+ * Original 21/06/01, Pickle <pickle@alien.net.au>
+ * Note: This only sends out the ping! The rest of the code is with the PING
+ *       reply parser.
+ */
+void UserCommands::Ping(ServerConnection *cnx, Person *from,
+			String channel, String rest)
+{
+   from->sendCTCP("PING",String(cnx->bot->currentTime.time) + 
+		  String(":") + String(cnx->bot->currentTime.millitm));
+}
+
 /* Save - Force a database save
  * Original 15/12/00, Pickle <pickle@alien.net.au>
  */
@@ -1341,15 +1340,12 @@ void UserCommands::Save(ServerConnection *cnx, Person *from,
  */
 void UserCommands::Say(ServerConnection *cnx, Person *from,
 		       String channel, String rest)
-  {
-     if (!rest.length())
-       from->sendNotice("And say what?");
-     else
-       cnx->queue->sendPrivmsg(channel,
-			       String("\002\037%%\037\002") + rest +
-			       String(" \00300<=- ") +
-			       from->getNick());
-  }
+{
+   if (!rest.length())
+     from->sendNotice("And say what?");
+   else
+     cnx->queue->sendPrivmsg(channel,rest);
+}
 
 /* Server
  * Original 14/12/00, Pickle <pickle@alien.net.au>
@@ -1425,6 +1421,7 @@ void UserCommands::Stats(ServerConnection *cnx, Person *from,
       int peak_chanvoiced, num_dcc_con, num_chanbans, peak_chanbans;
       time_t uptime = time(NULL) - cnx->bot->startTime;
       
+      // This is a scarey way of zeroing every variable!
       num_chans = num_users = num_bots = num_chanowns = num_suspend = 
 	num_ident = num_online = num_chanppl, num_chanops = num_chans_on =
 	num_lvluser = num_lvltrusted = num_lvlfriend = num_lvlmaster = 
@@ -1486,8 +1483,8 @@ void UserCommands::Stats(ServerConnection *cnx, Person *from,
       from->sendNotice(String("\002\037General Statistics:\037\002"));
       from->sendNotice(String("Name: ").prepad(10) +
 		       String(cnx->bot->nickName + " (" +
-			      cnx->bot->wantedNickName + ")").pad(32) +
-		       String("  Lag Count: ") +
+			      cnx->bot->wantedNickName + ")").pad(23) +
+		       String("  Lag Check: ") +
 		       Utils::timelenToStr(cnx->lag));
 #ifdef DEBUG
       from->sendNotice(String("Up time: ").prepad(10) +
@@ -1513,7 +1510,7 @@ void UserCommands::Stats(ServerConnection *cnx, Person *from,
 		       String(num_bots).pad(6) +
 		       String("Channel Admins: ").prepad(18) +
 		       String(num_chanowns).pad(6) +
-		       String("Suspended Users: ").prepad(18) +
+		       String("Suspended: ").prepad(18) +
 		       String(num_suspend));
       from->sendNotice(String("Normal Users: ").prepad(18) +
 		       String(num_lvluser).pad(6) +
@@ -1547,6 +1544,7 @@ void UserCommands::Stats(ServerConnection *cnx, Person *from,
 
       from->sendNotice(String("\002\037Number of DCC Fileserver Connections:\037 ") +
 		       String(num_dcc_con) + String("\002"));
+ 
    }
    from->sendNotice(String("\002End of statistics.\002"));
 }
@@ -1743,4 +1741,46 @@ void UserCommands::UserList(ServerConnection *cnx, Person *from,
        from->sendNotice(String("\002End of userlist\002 (") +
 			String((int)num) + " entries)");
   }
+
+
+/* Voice
+ * Original 26/06/01, Pickle <pickle@alien.net.au>
+ */
+void UserCommands::Voice(ServerConnection *cnx, Person *from,
+			 String channel, String rest)
+{
+   String nick = from->getNick();
+   
+   if (!cnx->bot->iAmOp(channel)) {
+      from->sendNotice(String("I'm not a channel op on \002") +
+		       channel + String("\002 :("));
+      return;
+   }
+   
+   String target;
+   
+   if (rest.length() == 0)
+     target = nick;
+   else
+     target = rest;
+   
+   User *u = cnx->bot->channelList->getChannel(channel)->getUser(target);
+   if (!u) {
+      from->sendNotice(String("I couldn't find \002") + target + 
+		       "\002 on \002" + channel + "\002");
+      return;
+   }
+   
+   if (!(u->mode & User::VOICE_MODE))
+     cnx->queue->sendChannelMode(channel, "+v", target);
+   else {
+      if (target == nick)
+	from->sendNotice(String("Hey, you're already voiced on \002") 
+			 + channel + "\002!!");
+      else
+	from->sendNotice(String("But \002") + target + 
+			 "\002 is already voiced on\002 " + channel +
+			 "\002!");
+   }
+}
 

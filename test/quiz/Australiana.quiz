@@ -1,0 +1,17 @@
+# Lines beginning with the '#' symbol are comments, and are ignored.
+# Lines beginning with the ':' symbol are questions. They must be
+# immediately followed by the answer. Answers are not case sensitive.
+# Blank lines are ignored, but are not allowed immediately after a
+# question line.
+
+:Which Australian state is known as the 'Garden State'?
+Victoria
+:What is Australia's Capital City?
+Canberra
+:What Australian state has a 'golden coast'?
+Queensland
+
+:What Australian city is known to have four seasons in one day?
+Melbourne
+:What Australian city is known as the 'City of Churches'
+Adelaide

@@ -7,6 +7,7 @@
 #include "flags.h"
 #include "ansi.h"
 
+
 /* getNick - Grab a nickname from a mask
  * Original 14/12/00, Pickle <pickle@alien.net.au>
  */
@@ -15,6 +16,7 @@ String Utils::getNick(String in)
    StringTokenizer st(in);
    return st.nextToken('!');
 }
+
 
 /* getUserhost - Grab the userhost from a mask
  * Original 14/12/00, Pickle <pickle@alien.net.au>
@@ -25,6 +27,7 @@ String Utils::getUserhost(String in)
    st.nextToken('@');
    return st.rest();
 }
+
 
 /* getFirstNick - Grab the first nickname from a nick list
  * Original 18/12/00, Pickle <pickle@alien.net.au>
@@ -38,6 +41,7 @@ String Utils::getFirstNick(String in)
    return in;
 }
 
+
 /* getKey - Generate a random number key
  * Original 14/12/00, Pickle <pickle@alien.net.au>
  */
@@ -45,6 +49,7 @@ String Utils::getKey()
 {
    return String((long)rand());
 }
+
 
 /* isIP - Check if a string is an IP address
  * Original 14/12/00, Pickle <pickle@alien.net.au>
@@ -56,6 +61,7 @@ bool Utils::isIP(String host)
        return false;
    return true;
 }
+
 
 /* makeWildcard - Generate a wildcard from a complete user variable
  * Original 12/12/00, Pickle <pickle@alien.net.au>
@@ -97,6 +103,7 @@ String Utils::makeWildcard(String mask)
    return nick + "!" + user + "@" + host;
 }
 
+
 /* isChannel - Check if a string is a channel name
  * Original 14/12/00, Pickle <pickle@alien.net.au>
  */
@@ -104,6 +111,7 @@ bool Utils::isChannel(String c)
 {
    return (c[0] == '#' || c[0] == '&');
 }
+
 
 /* isWildcard - Check if string is a wildcarded string
  * Original 14/12/00, Pickle <pickle@alien.net.au>
@@ -113,6 +121,7 @@ bool Utils::isWildcard(String c)
    return (c.find('*') != -1);
 }
 
+
 /* isValidChannelName - Check if a channel name is allowed
  * Original 14/12/00, Pickle <pickle@alien.net.au>
  */
@@ -120,6 +129,7 @@ bool Utils::isValidChannelName(String c)
 {
    return isChannel(c) && c.find(',') == -1;
 }
+
 
 /* isValidNickName - Check if a nickname is allowed
  * Original 14/12/00, Pickle <pickle@alien.net.au>
@@ -158,6 +168,7 @@ int Utils::getLevel(Bot * b, String nuh, String channel)
    return b->userList->getLevel(nuh, channel);
 }
 
+
 String Utils::levelToStr(int l)
 {
    switch (l) {
@@ -169,6 +180,7 @@ String Utils::levelToStr(int l)
    return "None";
 }
 
+
 String Utils::protToStr(int p)
 {
    switch (p) {
@@ -179,15 +191,18 @@ String Utils::protToStr(int p)
    return "None";
 }
 
+
 String Utils::boolToStr(bool b)
 {
    return b ? "Yes" : "No";
 }
 
+
 String Utils::flagsToStr(long flags)
 {
    return "----------";
 }
+
 
 /* timelenToStr - Convert a length of time_t into a nice string
  * Original 19/12/00, Pickle <pickle@alien.net.au>
@@ -210,6 +225,19 @@ String Utils::timelenToStr(time_t len)
       (String((long)(len % 60)) + " sec" + 
        (((long)(len % 60) == 1) ? String("") : String("s"))));
 }
+
+/* timeBigToStr - Convert time in millisecs (time_t * 1000 + millitm) to string
+ * Original 27/06/01, Pickle <pickle@alien.net.au>
+ */
+String Utils::timeBigToStr(long long usecs)
+{
+   return 
+     (timelenToStr(usecs / 1000) +
+      ((usecs % 1000 == 0) ? String("") :
+       (String(", ") + String((long)usecs % 1000) + String(" millisec") +
+	((usecs % 1000 >= 2) ? String("s") : String("")))));
+}
+
 
 time_t Utils::strToTime(String str)
 {

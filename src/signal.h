@@ -5,10 +5,14 @@
 #ifndef __SIGNAL_H_
 # define __SIGNAL_H_
 
+class Signal;
+
+# include "bot.h" 
+
 class Signal {
  public:
-   static void SetSignals(void);
-   static void UnsetSignals(void);
+   Signal(Bot *);
+   ~Signal(void);
 };
 
 #endif

@@ -4,6 +4,7 @@
 # include <time.h>
 # include <set.h>
 # include <fstream.h>
+# include <sys/timeb.h>
 
 # include "string.h"
 # include "person.h"
@@ -14,10 +15,11 @@
 # include "todolist.h"
 # include "parser.h"
 # include "telnet.h"
+# include "signal.h"
+# include "version.h"
 
 /* THIS SHOULD BE TEMPORARY
- * And shut up scott, I know I always make tiny patches - now you might
- * understand why!! :)
+ * shhh scott :)
  */
 # define AUSTNET_PASSWORD "k11mgc72pb"
 
@@ -43,10 +45,12 @@ class Bot {
    
    String configFileName;
    String userListFileName;
+   String channelListFileName;
    String noteListFileName;
    String logFileName;
    String helpFileName;
    String initFileName;
+   String quizDirectory;
    
    ofstream logFile;
    
@@ -59,6 +63,8 @@ class Bot {
 # endif
    bool stop;
    bool sentPing;
+
+   Signal *sigs;
    
    ChannelList * channelList;
    UserList * userList;
@@ -73,7 +79,7 @@ class Bot {
    
    map<String, unsigned int, less<String> > ignoredUserhosts;
    
-   time_t startTime, currentTime, lastNickNameChange, lastChannelJoin;
+   time_t startTime, lastNickNameChange, lastChannelJoin;
    
    ServerConnection * serverConnection;
    list<DCCConnection *> dccConnections;
@@ -94,7 +100,9 @@ class Bot {
    static const time_t TIMEOUT = 300; // 5 mins
    
  public:
-   
+
+   struct timeb currentTime;
+
 # ifdef DEBUG
    Bot(String, bool=false);
 # else

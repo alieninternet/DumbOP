@@ -11,6 +11,7 @@
 
 #include "log.h"
 #include "string.h"
+#include "version.h"
 
 /* Log - Init logfile
  * Original 1/1/01, Pickle <pickle@alien.net.au>
@@ -24,7 +25,8 @@ Log::Log(String filename)
       logFile = (int)&stderr;
    }
 
-   Log::logRawLine("Starting log file.");
+   Log::logRawLine(String("Starting log file (v") + String(VERSION_STRING) + 
+		   String(")."));
 }
 
 /* ~Log - Deinit logfile

@@ -7,14 +7,21 @@
 #include "serverconnection.h"
 #include "channel.h"
 
+class ChannelList;
+
+#include "bot.h"
+
 class Utils;
 class UserCommands;
 
 class ChannelList {
-  map<String, Channel *, less<String> > list;
-  
+   String listFilename;
+   map<String, Channel *, less<String> > list;
+
+   Bot *bot;
+   
 public:
-  ChannelList();
+  ChannelList(String, Bot *);
   ~ChannelList();
 
   void addChannel(ServerConnection *, String, String = "");
@@ -22,7 +29,9 @@ public:
   
   Channel * getChannel(String);
 
-  void clear();
+   void read();
+   void save();
+   void clear();
 
   map<String, Channel *, less<String> >::iterator begin()
     { return list.begin(); }

@@ -8,13 +8,16 @@
 # include "person.h"
 # include "serverconnection.h"
 
-# define VERNUM_STRING		"0.32"
+# define VERNUM_STRING		"0.33b"
 # define PROGNAME_STRING	"DumbOP"
 # define VERSION_STRING		String(PROGNAME_STRING) + String(" version ") + String(VERNUM_STRING)
-# define COPYRIGHT_STRING	"Copyright (c) 2000 Alien Internet Services <dumbop@alien.net.au>"
+# define COPYRIGHT_STRING	"(c)1994-2001 alien internet services"
 
 # ifndef COMPILE_STRING
-#  define COMPILE_STRING	"Void"
+#  define COMPILE_STRING	"(void)"
+# endif
+# ifndef BUILD_STRING
+#  define BUILD_STRING		"(void)"
 # endif
 
 class Version {

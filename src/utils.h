@@ -33,6 +33,7 @@ class Utils {
    static String flagsToStr(long);
    
    static String timelenToStr(time_t);
+   static String timeBigToStr(long long);
    
    static time_t strToTime(String);
 };

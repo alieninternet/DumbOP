@@ -81,6 +81,7 @@ class Parser {
    static void parsePrivmsg(ServerConnection *, Person *, String);
    static void parseQuit(ServerConnection *, Person *, String);
    static void parseTopic(ServerConnection *, Person *, String);
+   static void parseWallops(ServerConnection *, Person *, String);
    
    static void parseCTCP(ServerConnection *, Person *, String,
 			 String);

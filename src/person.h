@@ -24,6 +24,7 @@ public:
   virtual void keepAlive() { }
 
   virtual void sendNotice(String);
+  virtual void sendCTCP(String, String);
   virtual void sendCTCPReply(String, String);
    
   Person & operator=(const String &);

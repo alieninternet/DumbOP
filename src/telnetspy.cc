@@ -35,8 +35,10 @@ void TelnetSpy::spyLine(Bot *bot, String mask, String command, String rest)
  * Original 1/1/01, Pickle <pickle@alien.net.au>
  * Notes: Modelled from ircII output with some TG mapping :)
  */
+/*#define START_LINE	String(ANSI_NORMAL) + ANSI::scrollRegion(2,23) + \
+   ANSI::gotoXY(80, 23) + String("\n") */
 #define START_LINE	String(ANSI_NORMAL) + ANSI::scrollRegion(2,23) + \
-   ANSI::gotoXY(80, 23) + String("\n")
+   ANSI::gotoXY(1, 23) + String("\n")
 #define END_LINE	String(ANSI_NORMAL) + ANSI::scrollRegion(25, 25) + \
    ANSI::gotoXY(1, 25)
 String TelnetSpy::IRCtoANSI(String mask, String command, String to, 
@@ -124,6 +126,11 @@ String TelnetSpy::IRCtoANSI(String mask, String command, String to,
 	String(" was kicked by ") + nick + 
 	(((reason == "") || (reason == ":")) ? String("") :
 	 (String(" (") + reason + String(")"))) + END_LINE;
+//   } else if (command == "WALLOPS") { // Wallops broadcast
+//      return START_LINE + String(ANSI_NRED) + String("!") +
+//	String(ANSI_HWHITE) + nick + String(ANSI_NRED) +
+//	String("! ") + rest + String(ANSI_HRED) +
+//	String(ANSI_NORMAL) + END_LINE;
    }
 
    return String(""); // The line wasn't anything worth displaying.

@@ -1,9 +1,12 @@
 
 #include "channellist.h"
+#include "stringtokenizer.h"
 
-ChannelList::ChannelList()
+ChannelList::ChannelList(String filename, Bot *b)
+  : listFilename(filename), bot(b)
 {
-  list.clear();
+   list.clear();
+   read();
 }
 
 ChannelList::~ChannelList()
@@ -50,6 +53,51 @@ ChannelList::getChannel(String name)
   return 0;
 }
 
+void ChannelList::read()
+{
+   ifstream file(listFilename);
+   String temp, empty = "";
+   int line = 1;
+   
+   clear();
+   
+   if (!file) {
+      cerr << "I cannot find the file " << listFilename << endl;
+      return;
+   }
+   
+   while (file >> temp, temp.length() != 0) {
+      StringTokenizer st(temp);
+      if (st.countTokens(':') != 5) {
+	 cerr << "Error when reading channel list (" << listFilename <<
+	   ") line " << line << "...\n";
+	 return;
+      }
+      String name = st.nextToken(':').toLower();
+      String mode = st.nextToken(':');
+      String keep = st.nextToken(':');
+      String key = st.nextToken(':');
+      String flags = st.nextToken(':');
+      String gameflags = st.rest().trim();
+      
+      if (mode == "-")
+	mode = "";
+      if (keep == "-")
+	keep = "";
+      
+      bot->wantedChannels[name] = new wantedChannel(mode, keep, key, 
+						    atoi(flags), 
+						    atoi(gameflags));
+      
+      line++;
+   }
+   file.close();
+}
+
+void ChannelList::save()
+{
+}
+
 void
 ChannelList::clear()
 {
@@ -63,3 +111,4 @@ ChannelList::clear()
     delete c;
   }
 }
+

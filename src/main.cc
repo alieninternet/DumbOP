@@ -7,7 +7,6 @@
 #include <stdio.h>
 
 #include "bot.h"
-#include "signal.h"
 
 Bot *b;
 
@@ -33,9 +32,6 @@ int main(int argc, char **argv)
 #ifdef DEBUG
    bool debug = false;
 #endif
-   
-   // Setup out signal handling stuff
-   Signal::SetSignals();
    
    // We parse the command line options
    while ((opt = getopt(argc,argv,"hbf:d:D")) != EOF)
@@ -86,13 +82,17 @@ int main(int argc, char **argv)
    }
 #endif
    
+   // Initialise the bot
 #ifdef DEBUG
    b = new Bot(configFile, debug);
 #else
    b = new Bot(configFile);
 #endif
-   
+
+   // Shoot
    b->run();
+   
+   // The bot returned, kill it off
    delete b;
    
    return 0;
