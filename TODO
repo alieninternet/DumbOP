@@ -1,78 +1,95 @@
-Add configuration file
+High Priority
+-------------
+Users should be able to add themselves to DumbOP.
 
-Add 'SPELL' command.. ispell library? gnu dictionary use most likely. If an
-AI engine is to ever be added, this would most likely be needed!
+PASSWORD CODE! Change password needs fixing, crypt fucked?
 
-Add WALLOPS support to check for netsplits?
+Convert old flag code to use the new flags (FINALLY)
+Add channel flag (long int) to channel entries
+Add channel protection shit (see flags.h)
+Add flag table, flag command, flag, flag chr, flags name (one table for chan, one for users)
+Fix utils::flagToStr for the new flag table (above)
+
+
+Medium Priority
+---------------
+Import connection/string/tokenizer code from evolution (eg. the latest
+versions). Probably best to do this while reorganising the directories.
+
+Redo select() process -- The BOT blindly outputs data without truely checking
+if the output path is open. This is OK under low-traffic conditions, but when
+things get intense it's a requirement! It should check before being able to
+sent. Sockets should not be recreated each loop either, they should be created
+and removed as appropriate to increase efficiency.
+
+Finish parse command (shouldn't require ! on direct privmsgs)
+
+Kill off commands.cc - it sucks. Probably a good idea IF we were adding
+script services but we're not. So it can die.
+
+Use "ISON" irc command (rfc 1459) to check for bot-users online (this should
+also add support for ChanOP resyncronisation on AustNet, plus authentication
+with other BOTs)
+
+Add bot-authentication strings to userlist file (replace old prot variable
+spot) -- also add a command to force nickop/other bot identification.
 
 Add 'REHASH' command
 
 Add 'RESTART' command (actually quit/respawn process)
 
-Change over to GDBM Databases. Channel Masks should be removed and replaced
-with references to channel database entries as to make it act more like
-ChanOP, and to remove multiple user entries.
+Add setuser and setchan flag manipulation commands
 
-Users should be able to add themselves to DumbOP.
 
-PASSWORD CODE! Change password needs fixing, crypt fucked?
+Low Priority
+------------
+Finish !ping to perhaps ping other people.
 
-Ban lists - Should be better than ChanOP - check every nick change and join
-against banlist masks, so that DumbOP can properly ban name!*@* like ChanOP
-is incapable of.. (Cheeky`louise!*@* would be handy in #melbrave :)
+Add lag counter to !ping.
 
-Command Counter
+Add millisecond support to lag counter.
 
-ChanOP resync
+Add a line wrapper for the Telnet 'spy' code so that words can wrap around to
+the following line correctly (in ANSI::toANSI()?)
 
-Add !ping.. well finish the shell that's there
+Add 'SPELL' command.. ispell library? gnu dictionary use most likely. If an
+AI engine is to ever be added, this would most likely be needed!
 
 Finish !lastseen (mask searching, channel mask searching)
 
 Finish !access (mask searching, channel mask searching)
 
+Much better logging code needs to be implemented with levels, zones etc.
+This will require a log.c and log.h file
+
+Ban lists - Should be better than ChanOP - check every nick change and join
+against banlist masks, so that DumbOP can properly ban name!*@* like ChanOP
+is incapable of.. (Cheeky`louise!*@* would be handy in #melbrave :)
+
 Tban+Tkban+ban+kick merge
 
-Combine !server and !serverlist, !nextserver and !reconnect
-
-Add command to force nickop/other bot identification
-
-Move channel list to a file (Add save/load channel list commands, peak saving)
+Change over to GDBM Databases. Channel Masks should be removed and replaced
+with references to channel database entries as to make it act more like
+ChanOP, and to remove multiple user entries. Probably required prior to adding
+an AI engine (Scott?). This GDBM integration should also allow for statistics
+to be saved, such as peak levels (ops etc) to be kept properly.
 
 Finish !names (- returns all; should only return channels user has access to)
 
-Finish parse command (shouldn't require ! on direct privmsgs)
+Add cnx->bot->sendLen += to output, where appropriate (most likely in 
+serverqueue.c)
 
-Convert old flag code to use the new flags (FINALLY)
+Make a types.h file and put the different types in there rather than repeat
+them over and over again throughout the source code (esp. the lists/maps etc)
 
-Add channel flag (long int) to channel entries
 
-Add channel protection shit (see flags.h)
+Probably not needed :)
+----------------------
+Add WALLOPS support to check for netsplits? Will this be accurate across most
+networks or just AustNet??
+
+Command Counter
 
 Add channel logging [24hr e-mail log to channel owner(s)]??
 
-Remove the "add dumbop to userlist" bugfix in parser.c
-
-Add flag table, flag command, flag, flag chr, flags name (one table for chan, one for users)
-
-Fix utils::flagToStr for the new flag table (above)
-
-Add setuser and setchan flag manipulation commands
-
-Fix formatting in old ripped commands to suit new format
-
-Use "ISON" irc command (rfc 1459) to check for bot-users online
-
-Add bot-authentication strings to userlist file (replace old prot variable spot)
-
-Move hard-coded nickop authentication to userlist file (above)
-
-Add cnx->bot->sendLen += to output, where appropriate (most likely in serverqueue.c)
-
-Add signal checking code (maybe rip the old code from the gathering project) 
-to minimise hard crashes and panic race modes
-
-Game code bed should be completed
-
-Much better logging code needs to be implemented with levels, zones etc.
-This will require a log.c and log.h file
+Combine !server and !serverlist, !nextserver and !reconnect

@@ -49,6 +49,17 @@ String::String(long i)
   strcpy(p->s, temp);
 }
 
+String::String(unsigned long i)
+{
+  char temp[32];
+  sprintf(temp, "%ld", i);
+
+  p = new srep;
+  len = strlen(temp);
+  p->s = new char[len + 1];
+  strcpy(p->s, temp);
+}
+
 String::String(char c)
 {
   p = new srep;

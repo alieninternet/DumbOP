@@ -1,6 +1,37 @@
-:ABC?
-ABC
+# this is a test quiz file.
+#
+# answers are easy, and only here for testing.
+#
+# There are EXACTLY 5 questions, but one is broken.
 
-:Does DumbOP suck?
-Yes
-No
+# 1
+:The answer to this question is 'yes'.
+yes
+
+# 2
+:This question has a hint.
+$And the answer is 'hello there'
+hello there
+
+# 3
+:This question has a hint, the answer can be yes or no
+$This is a hint
+yes
+no
+
+# 4
+:This question's answer is a digit between 0 and 9 inclusive
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+# 5
+:This question is broken by having no answer
+

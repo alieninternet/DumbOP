@@ -1,4 +1,4 @@
-:ACCESS (<channel>) [<user>]
+:ACCESS (<channel>) [<nick>]
 Check your, or another user's access.
 
 :ADDUSER fix me
@@ -10,7 +10,7 @@ Add a server to the server list.
 :ALIAS fix me
 Create an alias for a command.
 
-:BAN (<channel>) [<user> | <mask>]
+:BAN (<channel>) [<nick> | <mask>]
 Ban someone from a channel.
 
 :BANLIST (<channel>)
@@ -19,7 +19,10 @@ List banned users for a channel.
 :CYCLE (<channel>)
 Part and re-join the channel.
 
-:DEBAN (<channel>) [<user> | <mask>]
+:DCCLIST
+List the current DCC transactions.
+
+:DEBAN (<channel>) [<nick> | <mask>]
 Deban someone from the channel.
 
 :DELSERVER fix me
@@ -28,7 +31,7 @@ Remove a server from the server list.
 :DELUSER fix me
 Remove a user from the user list.
 
-:DEOP (<channel>) [<user>]
+:DEOP (<channel>) [<nick>]
 Deop yourself or someone on the channel.
 
 :DIE [<message>]
@@ -38,11 +41,10 @@ Kill me :(
 Make me do an action in a channel.
 
 :HELP [<topic>]
-Get help on something. The help file at the moment is very minimal, and quite
-possibly highly imcomplete in many areas. Don't trust it with your life :)
+Get help on something. The help file at the moment is very minimal, and quite possibly highly imcomplete in many areas. Don't trust it with your life :)
 
-:INFO
-Return information about me! :)
+:IDENT [<nick name>] <password>
+Identify yourself to give you access to functions you are privellaged to
 
 :INVITE (<channel>)
 Invite someone into the channel.
@@ -50,7 +52,7 @@ Invite someone into the channel.
 :JOIN <channel>
 Join a channel.
 
-:KICK fix me
+:KICK (<channel>) <nick> [<reason>]
 Kick a person out of a channel.
 
 :LASTSEEN (<channel>) [<nick>]
@@ -77,8 +79,11 @@ Give someone operator status in a channel.
 :PART (<channel>) [<reason>]
 Leave a channel, optionally giving a reason for leaving.
 
+:PASSWORD <old password> <new password>
+Change your password. You must specify your old password, and you must already be identified and using your normal nick name before the password will be allowed to change for security reasons.
+
 :PING
-Ping yourself :) Not fully functional yet, sorry.
+Ping yourself :) Not fully functional yet, sorry, but give it a shot anyway :)
 
 :RAW <IRC data>
 USE WITH CAUTION!!! Send raw data to the IRC server.
@@ -87,7 +92,7 @@ USE WITH CAUTION!!! Send raw data to the IRC server.
 This causes me to disconnect and reconnect to my current server.
 
 :SAVE
-Force a save of the database information.
+Force a database checkpoint over all saveable files.
 
 :SAY (<channel>) <message>
 Make me say something.
@@ -101,9 +106,14 @@ List the servers in my server list.
 :STATS
 Report some utterly useless and downright geeky statistics. Incomplete. :(
 
+:TIME
+Report the current time, local to where I am running. The machine that runs me is kept in regular synchronisation with reliable time observatories around the world. Having said that, however, you should be aware that the time may be slightly wrong due to lag between us, and you should consult the PING command shld you require strict accuracy! :)
+
 :TOPIC (<channel>) <topic>
 Change the topic of a channel.
 
 :USERLIST
 Show a list of users with access to me       Access Required: USER
 
+:VOICE (<channel>) [<nick>]
+Give someone voiced status in a channel.

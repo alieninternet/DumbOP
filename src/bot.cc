@@ -57,8 +57,8 @@ Bot::Bot(String filename)
     sigs(new Signal(this)),
     startTime(time(NULL)), 
     lastNickNameChange(startTime), lastChannelJoin(startTime),
-    serverConnection(0), telnetDaemon(0), sentUserhostID(0), 
-    receivedUserhostID(0)
+    serverConnection(0), telnetDaemon(0), games(0),
+    sentUserhostID(0), receivedUserhostID(0)
 {
    extern userFunctionsStruct userFunctionsInit[];
    extern CTCPFunctionsStruct CTCPFunctionsInit[];
@@ -181,6 +181,13 @@ Bot::Bot(String filename)
 #endif
    
    telnetDaemon = new Telnet(this, TELNET_PORT);
+   
+#ifdef DEBUG
+   if (debug)
+     cout << "Setting up internal games..." << endl;
+#endif
+
+   games = new Games(this);
    
 #ifdef DEBUG
    if (debug)
@@ -406,8 +413,9 @@ void Bot::waitForInput()
      if (((*it)->flags & TELNETFLAG_CONNECTED) &&
 	 ((*it)->sock->isConnected())) {
 	FD_SET((*it)->sock->getFileDescriptor(), &rd);
-	if ((*it)->sock->getFileDescriptor() > maxSocketNumber)
-	  maxSocketNumber = (*it)->sock->getFileDescriptor();
+	if ((*it)->sock->getFileDescriptor() > maxSocketNumber) {
+	   maxSocketNumber = (*it)->sock->getFileDescriptor();
+	}
      }
    
    // Add the IRC server socket
@@ -418,10 +426,11 @@ void Bot::waitForInput()
 	it != dccConnections.end(); ++it) {
       int s = (*it)->getFileDescriptor();
       FD_SET(s, &rd);
-      if (s > maxSocketNumber)
-	maxSocketNumber = s;
+      if (s > maxSocketNumber) {
+	 maxSocketNumber = s;
+      }
    }
-  
+   
    /* This timer is pretty important, it controls how quickly the queue is
     * flushed during non-input wait states
     */
@@ -432,43 +441,48 @@ void Bot::waitForInput()
    switch (select(maxSocketNumber + 1, &rd, NULL, NULL, &timer)) {
     case 0: // Select timed out
       break;
-    case -1: // Select broke :(
+    case -1: // Select broke
 #ifdef DEBUG
       if (debug) {
 	 cout << "Select prematurely returned!" << endl;
-	 logLine("Select prematurely returned!");
       }
 #endif
       break;
     default: // Select says there is something to process
       // New connection from the telnet socket
-      if (FD_ISSET(telnetDaemon->sock->getFileDescriptor(), &rd))
-	if (!telnetDaemon->newConnection()) {
+      if (FD_ISSET(telnetDaemon->sock->getFileDescriptor(), &rd)) {
+	 if (!telnetDaemon->newConnection()) {
 #ifdef DEBUG
-	   if (debug)
-	     cout << "Could not establish incoming telnet connection" << endl;
+	    if (debug) {
+	       cout << "Could not establish incoming telnet connection" << endl;
+	    }
 #endif
-	}
+	 }
+      }
       
       // Check for activity on live telnet sockets
       for (list<telnetDescriptor *>::iterator it = telnetDaemon->descList.begin();
-	   it != telnetDaemon->descList.end(); it++)
-	if (((*it)->flags & TELNETFLAG_CONNECTED) &&
-	    ((*it)->sock->isConnected()) &&
-	    FD_ISSET((*it)->sock->getFileDescriptor(), &rd)) {
-	   // Stuff should really happen here.
-	}
+	   it != telnetDaemon->descList.end(); it++) {
+	 if (((*it)->flags & TELNETFLAG_CONNECTED) &&
+	     ((*it)->sock->isConnected()) &&
+	     FD_ISSET((*it)->sock->getFileDescriptor(), &rd)) {
+	    // Stuff should really happen here.
+	 }
+      }
       
       // Something from the IRC socket
-      if (FD_ISSET(sock, &rd))
-	if (serverConnection->handleInput()) {
+      if (FD_ISSET(sock, &rd)) {
+	 if (serverConnection->handleInput()) {
 #ifdef DEBUG
-	   if (debug)
-	     cout << "Reconnection... (Input handling error)" << endl;
+	    if (debug) {
+	       cout << "Reconnection... (Input handling error)" << endl;
+	    }
 #endif	   
 	   
-	   nextServer();
-	}
+	    nextServer();
+	 }
+      }
+      
       list<DCCConnection *>::iterator it = dccConnections.begin();
       list<DCCConnection *>::iterator it2;
       
@@ -489,9 +503,11 @@ void Bot::waitForInput()
       currentTime.time = time(NULL);
       for (map<String, unsigned int, less<String> >::iterator
            it = ignoredUserhosts.begin();
-	   it != ignoredUserhosts.end(); ++it)
-	if ((*it).second > 0)
-	  (*it).second--;
+	   it != ignoredUserhosts.end(); ++it) {
+	 if ((*it).second > 0) {
+	    (*it).second--;
+	 }
+      }
       
       String line;
       while ((line = todoList->getNext()) != "") {
@@ -508,17 +524,19 @@ void Bot::waitForInput()
       serverConnection->queue->sendNickopIdent(AUSTNET_PASSWORD);
    }
    
-   // If we need to join a channel we're supposed to be on, give it a shot
+   // If we need to join a channel we are supposed to be on, give it a shot
    if (currentTime.time >= (time_t)(lastChannelJoin + Bot::CHANNEL_JOIN)) {
       lastChannelJoin = currentTime.time;
       for (map<String, wantedChannel *, less<String> >::iterator it =
            wantedChannels.begin(); it != wantedChannels.end();
-	   ++it)
-	if (channelList->getChannel((*it).first) == 0)
-	  serverConnection->queue->sendJoin((*it).first, (*it).second->key);
+	   ++it) {
+	 if (channelList->getChannel((*it).first) == 0) {
+	    serverConnection->queue->sendJoin((*it).first, (*it).second->key);
+	 }
+      }
    }
    
-   // Do our businessed with current DCC connections
+   // Do our business with current DCC connections
    list<DCCConnection *>::iterator it2;
    for (list<DCCConnection *>::iterator it = dccConnections.begin();
 	it != dccConnections.end(); ) {
@@ -530,30 +548,37 @@ void Bot::waitForInput()
 	 dccConnections.erase(it2);
       }
    }
-
+   
    // Ping the server and calculate our current client <-> server lag
-   if (((currentTime.time >= (time_t)(serverConnection->pingTime + Bot::PING_TIME)) ||
+   if (((currentTime.time >= (time_t)(serverConnection->pingTime.time + 
+				      Bot::PING_TIME)) ||
 	(currentTime.time >= (time_t)(serverConnection->serverLastSpoken + Bot::PING_TIME))) &&
        !sentPing) {
-      serverConnection->queue->sendPing(String((long)currentTime.time) + ":" +
-					String((long)serverConnection->pingTime));
-      
-      serverConnection->pingTime = currentTime.time;
+      serverConnection->queue->sendPing(nickName);
+      serverConnection->pingTime = currentTime;
       sentPing = true;
    }
    
    // If the server is ignoring us, it is probably dead. Time to reconnect.
    if ((currentTime.time >= (time_t)(serverConnection->serverLastSpoken + Bot::TIMEOUT)) ||
-       ((currentTime.time >= (time_t)(serverConnection->pingTime + Bot::PING_TIME)) && 
+       ((currentTime.time >= (time_t)(serverConnection->pingTime.time +
+				      Bot::PING_TIME)) && 
 	sentPing)) {
 #ifdef DEBUG
-      if (debug)
-	cout << "Reconnection... (Server timed out)" << endl;
+      if (debug) {
+	 cout << "Reconnection... (Server timed out)" << endl;
+      }
 #endif
       
       sentPing = false;
       nextServer();
    }
+   
+   // The telnet console may need our attention - give it a slice
+   telnetDaemon->attend();
+   
+   // The game engine may have some need for some attention too
+   games->attend();
 }
 
 // We can change server if we will not lose op on a channel

@@ -43,7 +43,7 @@ struct flagLookupStruct flagLookup[] = {
 	  FLAG_NONE
      },
      { "CHANOWNER",	USERFLAG_IS_CHAN_OWNER,		false,	TYPE_USER,
-	  '%',	"User is a channel operator",		User::FRIEND,
+	  '%',	"User is a channel operator",		User::MANAGER,
 	  FLAG_NONE,			
 	  FLAG_NONE
      },
@@ -53,7 +53,7 @@ struct flagLookupStruct flagLookup[] = {
 	  FLAG_NONE
      },
      { "ISBOT",		PERSONFLAG_IS_BOT,		false,	TYPE_PERSON,
-	  '~',	"User is actually a bot",		User::FRIEND,
+	  '~',	"User is actually a bot",		User::MANAGER,
 	  FLAG_NONE,			
 	  FLAG_NONE
      },
@@ -98,7 +98,7 @@ struct flagLookupStruct flagLookup[] = {
 	  FLAG_NONE
      },
      { "SUSPENDED",	PERSONFLAG_SUSPENDED,		false,	TYPE_PERSON,
-	  '!',	"This person is suspended",		User::FRIEND,
+	  '!',	"This person is suspended",		User::MANAGER,
 	  FLAG_NONE,			
 	  FLAG_NONE
      },
@@ -108,7 +108,7 @@ struct flagLookupStruct flagLookup[] = {
 	  FLAG_NONE
      },
      { "SUSPENDED",	CHANFLAG_SUSPENDED,		false,	TYPE_CHANNEL,
-	  '!',	"This channel is suspended",		User::FRIEND,
+	  '!',	"This channel is suspended",		User::MANAGER,
 	  FLAG_NONE,
 	  FLAG_NONE
      },

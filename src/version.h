@@ -8,9 +8,9 @@
 # include "person.h"
 # include "serverconnection.h"
 
-# define VERNUM_STRING		"0.33b"
+# define VERNUM_STRING		"0.34b"
 # define PROGNAME_STRING	"DumbOP"
-# define VERSION_STRING		String(PROGNAME_STRING) + String(" version ") + String(VERNUM_STRING)
+# define VERSION_STRING		String(PROGNAME_STRING) + String(" v") + String(VERNUM_STRING)
 # define COPYRIGHT_STRING	"(c)1994-2001 alien internet services"
 
 # ifndef COMPILE_STRING

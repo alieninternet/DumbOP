@@ -32,6 +32,8 @@
 #include "bot.h"
 #include "flags.h"
 #include "version.h"
+#include "games.h"
+#include "gamequiz.h"
 
 #ifdef NOCRYPT
 char * crypt(const char *p, const char *s) { return p; }
@@ -189,7 +191,7 @@ UserCommands::AddUser(ServerConnection *cnx, Person *from,
   long f;
 
   l = atoi((const char *)level);
-  if (l < 0 || l > User::FRIEND)
+  if (l < 0 || l > User::MANAGER)
     return;
   if (l > Utils::getLevel(cnx->bot, from->getAddress())) {
     from->sendNotice("\002You can not give a level greater than yours.\002");
@@ -324,18 +326,20 @@ void
 UserCommands::BanList(ServerConnection *cnx, Person *from,
                       String channel, String rest)
 {
-  time_t current = time(NULL);
   Channel *c = cnx->bot->channelList->getChannel(channel);
   from->sendNotice(String("\002Banlist for channel\002 ") +
                    channel + "\002:\002");
   from->sendNotice("\002Mask                           Expires (seconds)\002");
-  for (vector<BanEntry *>::iterator it = c->channelBanlist.begin();
-       it != c->channelBanlist.end(); ++it)
-    if ((*it)->getExpirationDate() == -1)
-      from->sendNotice((*it)->getMask().pad(30) + " -1");
-    else
-      from->sendNotice((*it)->getMask().pad(30) + " " + 
-                       String((long)((*it)->getExpirationDate()-current)));
+   for (vector<BanEntry *>::iterator it = c->channelBanlist.begin();
+	it != c->channelBanlist.end(); ++it) {
+      if ((*it)->getExpirationDate() == -1) {
+	 from->sendNotice((*it)->getMask().pad(30) + " -1");
+      } else {
+	 from->sendNotice((*it)->getMask().pad(30) + " " + 
+			  String((long)((*it)->getExpirationDate() - 
+					cnx->bot->currentTime.time)));
+      }
+  }
   from->sendNotice("\002End of banlist.\002");
 }
 
@@ -418,8 +422,6 @@ void
 UserCommands::DCCList(ServerConnection *cnx, Person *from,
                       String channel, String rest)
 {
-  time_t current_time = time(NULL);
-
   from->sendNotice("\002DCClist:\002");
   from->sendNotice("\002Hostname                         Last used\002");
 
@@ -428,7 +430,7 @@ UserCommands::DCCList(ServerConnection *cnx, Person *from,
        it != cnx->bot->dccConnections.end();
        ++it) {
     from->sendNotice((*it)->nuh.pad(32) + " " +
-                     String((long)(current_time -
+                     String((long)(cnx->bot->currentTime.time -
                                    (*it)->lastSpoken)));
   }
 
@@ -644,58 +646,47 @@ void UserCommands::Help(ServerConnection *cnx, Person *from,
 /* Ident
  * Original 16/12/00, Pickle <pickle@alien.net.au>
  */
-void
-UserCommands::Ident(ServerConnection *cnx, Person *from,
-                    String channel, String rest)
+void UserCommands::Ident(ServerConnection *cnx, Person *from,
+			 String channel, String rest)
 {
-  Channel *c = cnx->bot->channelList->getChannel(channel);
-
-  if (rest.length() <= 2) {
-    from->sendNotice("\002No password specified or password "
-                     "too short.\002");
-    return;
-  }
-
-  User * u = c->getUser(from->getNick());
-  if (!u) {
-    from->sendNotice(String("\002You can identify yourself on"
-                     " channel\002 ") + channel +
-                     " \002only if you are on the channel.\002");
-    return;
-  }
-
-  if (u->userListItem && u->userListItem->identified) {
-    from->sendNotice(String("\002You are already identified on"
-                     " channel\002 ") + channel);
-    return;
-  }
-
-  if (!u->userListItem) {
-    from->sendNotice("\002You are not in my userlist.\002");
-    return;
-  }
-
-  if (u->userListItem->passwd ==
-      crypt((const char *)rest, (const char *)u->userListItem->passwd)) {
-    // For each channel, we increment identification counter
-    for (map<String, Channel *, less<String> >::iterator it =
+   Channel *c = cnx->bot->channelList->getChannel(channel);
+   
+   if (rest.length() <= 2) {
+      from->sendNotice("\002No password specified or password "
+		       "too short.\002");
+      return;
+   }
+   
+   User * u = c->getUser(from->getNick());
+   if (!u) {
+      from->sendNotice(String("\002You can identify yourself on"
+			      " channel\002 ") + channel +
+		       " \002only if you are on the channel.\002");
+      return;
+   }
+   
+   if (u->userListItem && u->userListItem->identified) {
+      from->sendNotice(String("\002You are already identified on"
+			      " channel\002 ") + channel);
+      return;
+   }
+   
+   if (!u->userListItem) {
+      from->sendNotice("\002You are not in my userlist.\002");
+      return;
+   }
+   
+   if (u->userListItem->passwd ==
+       crypt((const char *)rest, (const char *)u->userListItem->passwd)) {
+      // For each channel, we increment identification counter
+      for (map<String, Channel *, less<String> >::iterator it =
            cnx->bot->channelList->begin();
-         it != cnx->bot->channelList->end(); ++it)
-      u->userListItem->identified++;
-
-    from->sendNotice("\002You are now identified.\002");
-  } else
-    from->sendNotice("\002This is a wrong password.\002");
-}
-
-/* Info - General information on the bot
- * Original 22/12/00, Pickle <pickle@alien.net.au>
- * 28/12/00 Pickle - Added trigger to the start of hint commands
- */
-void UserCommands::Info(ServerConnection *cnx, Person *from,
-			String channel, String rest)
-{
-   Version::sendInformation(cnx, from);
+	   it != cnx->bot->channelList->end(); ++it)
+	u->userListItem->identified++;
+      
+      from->sendNotice("\002You are now identified.\002");
+   } else
+     from->sendNotice("\002This is a wrong password.\002");
 }
 
 /* Invite
@@ -881,13 +872,12 @@ void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
 	
 	if (uli) {
 	   if (uli->lastseen > 0) {
-	      time_t diff = time(NULL) - uli->lastseen;
-	      
 	      from->sendNotice(String("\002") + otherNick +
 			       String("\002 on \002") + 
 			       uli->channelMask.getMask() +
 			       String("\002 was last seen \002") +
-			       Utils::timelenToStr(diff) +
+			       Utils::timelenToStr(cnx->bot->currentTime.time -
+						   uli->lastseen) +
 			       String("\002 ago."));
 	   } else if (uli->lastseen == 0)
 		from->sendNotice(String("\002") + otherNick +
@@ -900,8 +890,6 @@ void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
 		it++) 
 	     if (((*it)->channelMask.getMask().toLower() == channel.toLower()) &&
 		 ((*it)->nicks.toLower() == otherNick.toLower())) {
-		time_t diff = time(NULL) - (*it)->lastseen;
-		
 		from->sendNotice(String("\002") + 
 				 Utils::getFirstNick((*it)->nicks) +
 				 String("\002 ") +
@@ -913,7 +901,8 @@ void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
 				 String("on \002") + 
 				 (*it)->channelMask.getMask() +
 				 String("\002 was last seen \002") +
-				 Utils::timelenToStr(diff) +
+				 Utils::timelenToStr(cnx->bot->currentTime.time -
+						     (*it)->lastseen) +
 				 String("\002 ago."));
 		
 		found = true;
@@ -944,8 +933,6 @@ void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
 	       ((rest == "-") ||
 		(rest.toLower() == (*it)->nicks.toLower()))) {
 	      num++;
-	      time_t diff = time(NULL) - (*it)->lastseen;
-	      
 	      from->sendNotice((((*it)->lastseen == 0) ?
 				(((*it)->flags & PERSONFLAG_IDENTIFIED) ?
 				 String("\002*\002") :
@@ -954,7 +941,8 @@ void UserCommands::LastSeen(ServerConnection *cnx, Person *from,
 			       Utils::getFirstNick((*it)->nicks).prepad(15) +
 			       (((*it)->lastseen > 0) ?
 				(String(" Seen ") +
-				 Utils::timelenToStr(diff) +
+				 Utils::timelenToStr(cnx->bot->currentTime.time -
+						     (*it)->lastseen) +
 				 String(" ago.") + 
 				 (((*it)->flags & USERFLAG_LASTSEEN_AUTH) ?
 				  String("") : String(" (Unconfirmed)"))) :
@@ -996,20 +984,6 @@ void
   }
                       
   cnx->queue->sendChannelMode(String("MODE ") + channel + " " + rest);
-}
-
-/* Merge with Say? */
-void
-UserCommands::Msg(ServerConnection *cnx, Person *from,
-                   String channel, String rest)
-{
-  StringTokenizer st(rest);
-  String who = st.nextToken();
-  String message = st.rest();
-
-  Message m = Commands::Msg(cnx->bot, who, message);
-  if (m.getCode() != 0)
-    from->sendNotice(m.getMessage());
 }
 
 /* Names - List names on a channel, or channels
@@ -1303,7 +1277,7 @@ UserCommands::Password(ServerConnection *cnx, Person *from,
   static char saltChars[] = "abcdefghijklmnopqrstuvwxyz"
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./";
   char salt[3];
-  srand(time(NULL));
+  srand(cnx->bot->currentTime.time);
   salt[0] = saltChars[rand() % 64];
   salt[1] = saltChars[rand() % 64];
   salt[2] = '\0';
@@ -1408,6 +1382,7 @@ UserCommands::ServerList(ServerConnection *cnx, Person *from,
 void UserCommands::Stats(ServerConnection *cnx, Person *from,
 			 String channel, String rest)
 {
+   Version::sendInformation(cnx, from);
 
    if (rest.length() != 0) {
       from->sendNotice(String("Statistics for \002") + rest +
@@ -1419,7 +1394,7 @@ void UserCommands::Stats(ServerConnection *cnx, Person *from,
       int num_lvluser, num_lvltrusted, num_lvlfriend, num_lvlmaster;
       int num_chanvoiced, num_nopass, peak_chanppl, peak_chanops;
       int peak_chanvoiced, num_dcc_con, num_chanbans, peak_chanbans;
-      time_t uptime = time(NULL) - cnx->bot->startTime;
+      time_t uptime = cnx->bot->currentTime.time - cnx->bot->startTime;
       
       // This is a scarey way of zeroing every variable!
       num_chans = num_users = num_bots = num_chanowns = num_suspend = 
@@ -1485,7 +1460,7 @@ void UserCommands::Stats(ServerConnection *cnx, Person *from,
 		       String(cnx->bot->nickName + " (" +
 			      cnx->bot->wantedNickName + ")").pad(23) +
 		       String("  Lag Check: ") +
-		       Utils::timelenToStr(cnx->lag));
+		       Utils::timeBigToStr(cnx->lag));
 #ifdef DEBUG
       from->sendNotice(String("Up time: ").prepad(10) +
 		       (!(cnx->bot->debug) ?
@@ -1582,101 +1557,64 @@ void UserCommands::Test(ServerConnection *cnx, Person *from,
   {
      from->sendNotice("\002Begin test dump.\002");
      from->sendNotice(String("channel = ") + String(channel));
-     from->sendNotice(String("rest = ") + String(rest));
+     from->sendNotice(String("rest = \002#\002") + String(rest) +
+		      String("\002#\002"));
+
+     for (map<String, gameQuizCategory *, less<String> >::iterator it =
+	  cnx->bot->games->quiz->gameQuizCategories.begin();
+	  it != cnx->bot->games->quiz->gameQuizCategories.end(); ++it) {
+	from->sendNotice(String("Quiz dump of \002") +
+			 (*it).first + String("\002 (\002") +
+			 String(((*it).second)->numQuestions) +
+			 String("\002 questions)"));
+	for (list<gameQuizQuestion *>::iterator it2 = 
+	     ((*it).second)->questions.begin();
+	     it2 != ((*it).second)->questions.end(); ++it2) {
+	   from->sendNotice(String("Q: ") + (*it2)->question);
+	   
+	   if ((*it2)->hint.length() > 0) {
+	      from->sendNotice(String("H: ") + (*it2)->hint);
+	   }
+	   
+	   for (list<String>::iterator it3 = (*it2)->answers.begin();
+		it3 != (*it2)->answers.end(); ++it3) {
+//	      from->sendNotice(String("A: ") + (const String &)it3);
+	      from->sendNotice(String("A: ") + (*it3));
+	   }
+	}
+     }
+       
      from->sendNotice("\002End of test dump.\002");
   }
 
-/* merge with ban */
-void
-UserCommands::TBan(ServerConnection *cnx, Person *from,
-                   String channel, String rest)
-{
-  Channel * c = cnx->bot->channelList->getChannel(channel);
-
-  StringTokenizer st(rest);
-  String who = st.nextToken();
-  String t = st.nextToken();
-  String dest;
-
-  if (who == "" || t == "") {
-    if (from)
-      from->sendNotice("\002Invalid syntax for this command.\002");
-    return;
-  }
-
-  if (Utils::isWildcard(who) && from) {
-    User * u = c->getUser(from->getNick());
-    if (u && u->getLevel() < User::TRUSTED_USER) {
-      if (from)
-        from->sendNotice("\002You need an higher level to use"
-                         " wildcards.\002");
-      return;
-    }
-  }
-
-  if (!cnx->bot->iAmOp(channel)) {
-    if (from)
-    from->sendNotice(String("\002I am not channel op on\002 ") +
-                     channel);
-    return;
-  }
-
-  if (!Utils::isWildcard(who))
-    dest = cnx->bot->getUserhost(channel, who);
-  else
-    dest = who;
-
-  if (dest == "") {
-    if (from)
-      from->sendNotice(String("\002I can not find\002 ") + who);
-    return;
-  }
-
-  time_t w;
-
-  if ((w = Utils::strToTime(t)) == 0) {
-    if (from)
-      from->sendNotice(t + " \002is an invalid time.\002");
-    return;
-  }
-
-  dest = Utils::makeWildcard(dest);
-  Mask m(dest);
-
-  for (list<UserListItem *>::iterator it = cnx->bot->userList->l.begin();
-       it != cnx->bot->userList->l.end();
-       it++)
-    if (m.matches((*it)->mask) &&
-        (*it)->channelMask.matches(channel) &&
-        (*it)->prot >= User::NO_BAN) {
-      if (from)
-        from->sendNotice(String("\002I can not ban\002 ") +
-                         who + " \002on channel\002 " +
-                         channel + " \002(protection).\002");
-      return;
-    }
-
-  for (vector<BanEntry *>::iterator it = c->channelBanlist.begin();
-       it != c->channelBanlist.end(); ++it)
-    if (m.matches((*it)->banMask))
-      cnx->queue->sendChannelMode(channel, "-b", (*it)->banMask.getMask());
-
-  cnx->bot->channelList->getChannel(channel)->addBan(dest, w);
-  cnx->queue->sendChannelMode(channel, "+b", dest);
-  cnx->bot->todoList->addDeban(channel, dest, (time_t)w);
-}
-
-/* merge with ban */
-void
-UserCommands::TKBan(ServerConnection *cnx, Person *from,
-                   String channel, String rest)
-{
-  StringTokenizer st(rest);
-  String who = st.nextToken();
-  String t = st.nextToken();
-
-  TBan(cnx, 0, channel, who + " " + t);
-  Kick(cnx, from, channel, who + " " + st.rest());
+/* Time - Tell someone the time (duh)
+ * Original 6/7/01, Simon Butcher <simonb@alien.net.au>
+ */
+void UserCommands::Time(ServerConnection *cnx, Person *from,
+			String channel, String rest)
+ {
+    String time = String(ctime(&cnx->bot->currentTime.time));
+    
+    from->sendNotice(String("The time is \002") +
+		     time.subString(0,time.length()-2) +
+		     String("\002."));
+    
+   
+   /*
+   struct tm *timeNow = localtime(&cnx->bot->currentTime.time);
+   
+   from->sendNotice(String("The time is \002") +
+		    String(timeNow->tm_hour) + String(":") +
+		    String(timeNow->tm_min) + String(":") +
+		    String(timeNow->tm_sec) + String(".") +
+		    String(cnx->bot->currentTime.millitm) + String(" ") +
+		    String(cnx->bot->currentTime.timezone) + String(", ") +
+		    String(timeNow->tm_wday) + String(" ") +
+		    String(timeNow->tm_mday) + String(" ") +
+		    String(timeNow->tm_mon) + String(" ") +
+		    String(timeNow->tm_year + 1900) +
+		    String("\002."));
+    */
 }
 
 /* Topic - Change the channel's topic

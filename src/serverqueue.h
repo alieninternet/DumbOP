@@ -8,6 +8,10 @@
 #include "queue.h"
 #include "serverqueueitem.h"
 
+//class ServerConnection;
+
+//#include "bot.h"
+
 enum {
   QUIT_PRIORITY, USERMODE_PRIORITY, CHANNELMODE_PRIORITY,
   KICK_PRIORITY, PONG_PRIORITY, TOPIC_PRIORITY, PART_PRIORITY,
@@ -36,14 +40,16 @@ static const int NOTICE_PENALTY = 1;
 
 class ServerQueue : public Queue {
 
+//  Bot *bot;   
+   
   list<ServerQueueItem *> serverQueue;
   int penalty;
 
 public:
 #ifdef DEBUG
-   ServerQueue(Socket *, bool);
+   ServerQueue(/*Bot *,*/ Socket *, bool);
 #else
-   ServerQueue(Socket *);
+   ServerQueue(/*Bot *,*/ Socket *);
 #endif
   ~ServerQueue();
   void addItem(ServerQueueItem *);

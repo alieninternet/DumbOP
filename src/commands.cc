@@ -55,7 +55,7 @@ Commands::AddUser(Bot *bot, String who, String maskChannel, int level,
   if (who.length() == 0 ||
       maskChannel.length() == 0 ||
       level < 0 ||
-      level > User::FRIEND ||
+      level > User::MANAGER ||
       prot < 0 ||
       prot > User::NO_DEOP)
     return InvalidParameters;

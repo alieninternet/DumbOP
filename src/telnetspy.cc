@@ -26,7 +26,7 @@ void TelnetSpy::spyLine(Bot *bot, String mask, String command, String rest)
      if (((*it)->flags & TELNETFLAG_CONNECTED) &&
 	 ((*it)->flags & TELNETFLAG_SPYING)) {
 	// THIS SHOULD CHANGE! :)
-	(*it)->write(IRCtoANSI(mask, command, to, line));
+	(*it)->write(IRCtoANSI(mask, command, to, ANSI::toANSI(line)));
      }
 
 }
@@ -74,15 +74,23 @@ String TelnetSpy::IRCtoANSI(String mask, String command, String to,
       return START_LINE + String(ANSI_HEAD_IRC) + nick +
 	String(" is now known as ") + to.subString(1) + END_LINE;
    } else if (command == "PRIVMSG") { // Messages
-      if (rest[0] == '\001') { // CTCP
+      if (rest[0] == '\001') { // CTCP request
 	 StringTokenizer c(rest);
 	 String cCommand = c.nextToken().subString(1);
 	 String cQuery = c.rest(); // Should trunc last chr (\001)
 	 
 	 if (cCommand == "ACTION") { // The /me command
-	    return START_LINE + String(ANSI_NGREEN) + String("* ") + 
-	      String(ANSI_HGREEN) + nick + String(ANSI_NGREEN) + String(" ") + 
-	      cQuery.subString(0, (cQuery.length() - 2)) + END_LINE;
+	    if (Utils::isChannel(to)) { // /me to channel
+	       return START_LINE + String(ANSI_NGREEN) + String("* ") + 
+		 String(ANSI_HGREEN) + nick + String(":") + to +
+		 String(ANSI_NGREEN) + String(" ") + 
+		 cQuery.subString(0, (cQuery.length() - 2)) + END_LINE;
+	    } else { // /me to bot
+	       return START_LINE + String(ANSI_NGREEN) + String("* ") + 
+		 String(ANSI_HGREEN) + nick + String(ANSI_NGREEN) + 
+		 String(" ") + cQuery.subString(0, (cQuery.length() - 2)) + 
+		 END_LINE;
+	    }
 	 }
       } else { // Normal
 	 if (Utils::isChannel(to)) { // Message to channel
@@ -97,16 +105,18 @@ String TelnetSpy::IRCtoANSI(String mask, String command, String to,
 	 }
       }
    } else if (command == "NOTICE") { // Notices and notifications
-	 if (Utils::isChannel(to)) {
+      if (rest[0] != '\001') { // CTCP reply
+	 if (Utils::isChannel(to)) { // To channel
 	    return START_LINE + String(ANSI_NGREEN) + String("-") + 
 	      String(ANSI_HWHITE) + nick + String(":") + to + 
 	      String(ANSI_NGREEN) + String("- ") + String(ANSI_NORMAL) + 
 	      rest + END_LINE;
-	 } else {
+	 } else { // To bot
 	    return START_LINE + String(ANSI_NGREEN) + String("-") + 
 	      String(ANSI_HWHITE) + nick + String(ANSI_NGREEN) + 
 	      String("- ") + String(ANSI_NORMAL) + rest + END_LINE;
 	 }
+      }
    } else if (command == "MODE") { // Mode changes
       return START_LINE + String(ANSI_HEAD_IRC) + nick + 
 	String(" sets mode: ") + to + String(" ") + rest + END_LINE;
@@ -126,11 +136,11 @@ String TelnetSpy::IRCtoANSI(String mask, String command, String to,
 	String(" was kicked by ") + nick + 
 	(((reason == "") || (reason == ":")) ? String("") :
 	 (String(" (") + reason + String(")"))) + END_LINE;
-//   } else if (command == "WALLOPS") { // Wallops broadcast
-//      return START_LINE + String(ANSI_NRED) + String("!") +
-//	String(ANSI_HWHITE) + nick + String(ANSI_NRED) +
-//	String("! ") + rest + String(ANSI_HRED) +
-//	String(ANSI_NORMAL) + END_LINE;
+   } else if (command == "WALLOPS") { // Wallops broadcast
+      return START_LINE + String(ANSI_NRED) + String("!") +
+	String(ANSI_HWHITE) + nick + String(ANSI_NRED) +
+	String("! ") + String(ANSI_NORMAL) + rest + String(ANSI_HRED) +
+	String(ANSI_NORMAL) + END_LINE;
    }
 
    return String(""); // The line wasn't anything worth displaying.

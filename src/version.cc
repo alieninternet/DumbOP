@@ -14,8 +14,4 @@ void Version::sendInformation(ServerConnection *cnx, Person *from)
    from->sendNotice(String("\002Compile Information:\002 ") + BUILD_STRING +
 		    String(" (") + COMPILE_STRING + String(")"));
    from->sendNotice("Suggestions, comments or questions? E-mail: dumbop@alien.net.au");
-   from->sendNotice(String("Type \002") + String(cnx->bot->commandChar) +
-		    "HELP\002 for more information, or \002" +
-		    String(cnx->bot->commandChar) +
-		    "STATS\002 for statistical junk.");
 }

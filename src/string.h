@@ -21,6 +21,7 @@ public:
   String(const String &);
    String(int);
    String(long);
+   String(unsigned long);
   String(char);
   
   String & operator=(const char *);

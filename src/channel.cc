@@ -116,7 +116,7 @@ void Channel::delNick(String n)
    if (u->userListItem) {
       if (u->userListItem->identified > 0)
 	u->userListItem->identified--;
-      u->userListItem->lastseen = time(NULL);
+      u->userListItem->lastseen = cnx->bot->currentTime.time;
    }
    delete u;  
 }

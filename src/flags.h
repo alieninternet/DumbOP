@@ -52,7 +52,8 @@
 // Game flags
 # define GAMEFLAG_EIGHT_BALL		0x00000001 // Allow 8ball game
 # define GAMEFLAG_FORTUNE		0x00000002 // Allow fortune game
-# define GAMEFLAG_MISFORTUNE		0x00000004 // ALlow mis-fortune game
+# define GAMEFLAG_MISFORTUNE		0x00000004 // Allow mis-fortune game
+# define GAMEFLAG_QUIZ			0x00000008 // Allow quiz game
 
 // Flag list structure
 struct flagLookupStruct {

@@ -231,19 +231,10 @@ void
 Parser::parse001(ServerConnection * cnx,
                  Person *from, String rest)
 {
-  String temp = "";
-  StringTokenizer st(rest);
-  String realNick = st.nextToken();
+   String temp = "";
+   StringTokenizer st(rest);
+   String realNick = st.nextToken();
 
-/*  if ((cnx->bot->nickName).toLower() != realNick) {
- *   // Yes, this can happen, and it was a very subtle bug :(
- *   cnx->bot->nickName = realNick;
- *   cnx->bot->userList->removeFirst();
- *   cnx->bot->userList->addUserFirst(realNick + "!" + cnx->bot->userHost, "*", 0, 3, realNick, -1, -1, "");
- *   cnx->bot->lastNickNameChange = time(NULL);
- *   cnx->bot->rehash();
- * } */
-   
    cnx->bot->connected = true;
 
    cnx->queue->sendUserMode(cnx->bot->nickName, "+iw");
@@ -588,14 +579,6 @@ Parser::parseNick(ServerConnection *cnx,
   String nn = rest.subString(1);
   String nn_lower = nn.toLower();
 
-/*  if ((cnx->bot->nickName).toLower() == on) {
- *   cnx->bot->userList->removeFirst();
- *   cnx->bot->userList->addUserFirst(nn + "!" + cnx->bot->userHost, "*", 0, 3, nn, -1, -1, "");
- *   cnx->bot->lastNickNameChange = time(NULL);
- *   cnx->bot->nickName = nn;
- *   cnx->bot->rehash();
- * } */
-
    for (map<String, Channel *, less<String> >::iterator it = 
 	cnx->bot->channelList->begin();
 	it != cnx->bot->channelList->end(); ++it)
@@ -648,7 +631,10 @@ Parser::parseNotice(ServerConnection *cnx,
 	((time_secs * 1000) + time_usecs);
       
       from->sendNotice(String("Ping shows a lag between us of \002") +
-		       Utils::timeBigToStr((long)pingpong));
+		       Utils::timeBigToStr((long)pingpong) +
+		       String("\002 (My connection is lagged by \002") +
+		       Utils::timeBigToStr(cnx->lag) +
+		       String("\002)"));
    }
 }
 
@@ -722,8 +708,10 @@ void
 Parser::parsePong(ServerConnection *cnx,
                   Person *from, String rest)
 {
-//  cnx->lag = (cnx->lag + 2 * (time(NULL) - cnx->pingTime)) / 3;
-   cnx->lag = time(NULL) - cnx->pingTime;
+   cnx->lag = (((cnx->bot->currentTime.time * 1000) + 
+		cnx->bot->currentTime.millitm) -
+	       ((cnx->pingTime.time * 1000) +
+		cnx->pingTime.millitm));
    cnx->bot->sentPing = false;
 }
 
@@ -896,22 +884,19 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	  User::MASTER,       	false 
      },
      { "DO",		UserCommands::Do,	   
-	  User::FRIEND,	       	true  
+	  User::MANAGER,	       	true  
      },
      { "HELP",        	UserCommands::Help,        
 	  User::NONE,         	false 
      },
 //     { "IDENT",       	UserCommands::Ident,       User::NONE,         true, false  },
-     { "INFO",		UserCommands::Info,	   
-	  User::USER,	       	false 
-     },
      { "INVITE",      	UserCommands::Invite,      
 	  User::TRUSTED_USER, 	true  
      },
      { "JOIN",        	UserCommands::Join,        
 	  User::MASTER,       	false 
      },
-//     { "KEEP",        	UserCommands::Keep,        User::FRIEND,       true, false  },
+//     { "KEEP",        	UserCommands::Keep,        User::MANAGER,       true, false  },
      { "KICK",        	UserCommands::Kick,        
 	  User::TRUSTED_USER, 	true  
      },
@@ -922,16 +907,13 @@ struct userFunctionsStruct userFunctionsInit[] = {
      { "MODE",        	UserCommands::Mode,        
 	  User::TRUSTED_USER, 	true  
      },
-     { "MSG",         	UserCommands::Msg,         
-	  User::MASTER,       	false 
-     },
      { "NAMES",       	UserCommands::Names,       
 	  User::MASTER,        	true
      },
      { "NEXTSERVER",  	UserCommands::NextServer,  
-	  User::FRIEND,       	false 
+	  User::MANAGER,       	false 
      },
-//     { "NICK",        	UserCommands::Nick,        User::FRIEND,       false, false },
+//     { "NICK",        	UserCommands::Nick,        User::MANAGER,       false, false },
      { "NOTE",		UserCommands::Note,	   
 	  User::MASTER,		false
      },
@@ -952,36 +934,37 @@ struct userFunctionsStruct userFunctionsInit[] = {
 	  User::MASTER,       	false 
      },
      { "RECONNECT",   	UserCommands::Reconnect,   
-	  User::FRIEND,       	false 
+	  User::MANAGER,       	false 
      },
      { "SAVE",        	UserCommands::Save,        
-	  User::FRIEND,       	false 
+	  User::MANAGER,       	false 
      },
      { "SAY",         	UserCommands::Say,         
-	  User::FRIEND,        	true 
+	  User::MANAGER,        	true 
      },
      { "SERVER",      	UserCommands::Server,      
-	  User::FRIEND,       	false 
+	  User::MANAGER,       	false 
      },
      { "SERVERLIST",  	UserCommands::ServerList,  
-	  User::FRIEND,       	false 
+	  User::MANAGER,       	false 
      },
      { "STATS",		UserCommands::Stats,	   
 	  User::MASTER,	       	false 
      },
-//     { "TBAN",        	UserCommands::TBan,        User::TRUSTED_USER, true, false  },
-//     { "TKBAN",       	UserCommands::TKBan,       User::USER,         true, false  },
      { "TEST",		UserCommands::Test,	   
 	  User::MASTER,       	true  
+     },
+     { "TIME",       	UserCommands::Time,       
+	  User::USER, 		false
      },
      { "TOPIC",       	UserCommands::Topic,       
 	  User::TRUSTED_USER, 	true 
      },
      { "USERLIST",	UserCommands::UserList,	   
-	  User::FRIEND,       	false 
+	  User::MANAGER,       	false 
      },
      { "VOICE",		UserCommands::Voice,
-	  User::TRUSTED_USER,  	false 
+	  User::MASTER,  	false 
      },
      { "",	0,	0,	false }
 };

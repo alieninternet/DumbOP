@@ -3,6 +3,7 @@
 #define __SERVERCONNECTION_H_
 
 #include <time.h>
+#include <sys/timeb.h>
 
 #include "server.h"
 #include "serverqueue.h"
@@ -18,8 +19,8 @@ class ServerConnection : public Connection {
   Server * server;
   Bot * bot; // Recursive
   ServerQueue * queue;
-  time_t pingTime;
-  int lag;
+  struct timeb pingTime;
+  long long lag;
 #ifdef DEBUG
    bool debug;
 #endif

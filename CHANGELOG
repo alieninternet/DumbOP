@@ -1,3 +1,30 @@
+Version 0.34
+------------
+Pickle: ctcp.cc - Fixed bug that was causing IRC servers to get cranky with
+	CTCP TIME reply, and clients to get confused between it and a NOTICE.
+Pickle: ansi.cc - Fixed top bar code time display; Now uses ctime().
+Pickle: Converted numerous time(NULL)'s to use the Bot::currentTime structure
+	set in the main loop to reduce number of system calls.
+Pickle: utils.cc - Added replaceVowels function
+Pickle: utils.cc - Added reverseStr function
+Pickle: ansi.cc - Added toANSI function, now using it with TelnetSpy::
+	routines.
+Pickle: signal.cc - Rough signal code added. Bot will shut down properly upon
+	death signals. No support for rehashing via SIGHUP as yet. All other
+	superfluous signals ignored. Did I mention 'rough'? hehe :)
+Pickle: bot.cc - Changed PING/PONG to only send the nick name rather than
+	waste time referencing memory to get the time. We no longer depend on
+	the server reply. AustNET returns a traditional PING (everything sent),
+	traditional IRCd returns just the PINGer's nick name. Many networks
+	send out either their network name, the options previously mentioned
+	or other strings. The RFC's from 2000 tell us the PING data should
+	contain the origin. We are going to be technically correct now, but
+	in the real world we just cannot rely on it, obviously! :)
+Pickle: gamequiz.cc and gamequiz.h created
+Pickle: INFO merged into STATS command (dodgey!)
+Pickle: MSG command removed
+
+
 Version 0.33
 ------------
 Pickle: parser.cc - Fixed retarded bug that shouldn't have happened in the

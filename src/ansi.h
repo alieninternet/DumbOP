@@ -135,6 +135,8 @@ class ANSI {
    
    static String telnetHeaderInit();
    static String telnetHeaderUpdate();
+
+   static String ANSI::toANSI(String);
 };
 
 #endif

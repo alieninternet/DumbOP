@@ -11,6 +11,64 @@
 #include "socket.h"
 #include "ansi.h"
 
+/* Telnet - Initialise and startup the telnet daemon stuff
+ * Original 2/1/01, Pickle <pickle@alien.net.au>
+ */
+Telnet::Telnet(Bot *b, int portNum)
+ : port(portNum), 
+ sock(0), 
+ bot(b),
+ lastBarUpdate(b->currentTime.time)
+{
+   if (makeSocket()) {
+      // umm..
+   } 
+}
+
+/* ~Telnet - Shutdown the telnet daemon stuff
+ * Original 2/1/01, Pickle <pickle@alien.net.au>
+ */
+Telnet::~Telnet()
+{
+#ifdef DEBUG
+   if (bot->debug)
+     cout << "Closing down open telnet connections" << endl;
+#endif
+   
+   // Close down all active sockets
+   telnetDescriptor *d;
+   while (descList.size() != 0) {
+      d = *descList.begin();
+
+      if (d->sock->isConnected()) {
+	 if (d->flags & TELNETFLAG_CONNECTED) {
+	    d->goodbyeSocket();
+	 } else
+	   d->sock->close();
+      }
+      
+      descList.erase(descList.begin());
+      delete d->sock;
+      delete d;
+   }
+   
+   for (list<telnetDescriptor *>::iterator it = descList.begin();
+	it != descList.end(); it++)
+     if ((*it)->sock->isConnected()) {
+	//	if ((*it)->flags & TELNETFLAG_CONNECTED)
+	// Say goodbye?
+	(*it)->sock->close();
+     }
+   
+#ifdef DEBUG
+   if (bot->debug)
+     cout << "Closing down main telnet socket" << endl;
+#endif
+   
+   sock->close();
+   delete sock;
+}
+
 /* handleInput - Handle telnet server input
  * Original 2/1/01, Pickle <pickle@alien.net.au>
  */
@@ -127,58 +185,28 @@ void Telnet::cleanDescs()
 //	it != descList.end(); it++)
 }
 
-/* Telnet - Initialise and startup the telnet daemon stuff
- * Original 2/1/01, Pickle <pickle@alien.net.au>
+/* attend - Called from main loop to update telnet consoles
+ * Original 8/7/01, Simon Butcher <simonb@alien.net.au>
  */
-Telnet::Telnet(Bot *b, int portNum)
-  : port(portNum), sock(0), bot(b)
+void Telnet::attend(void)
 {
-   if (makeSocket()) {
-      // umm..
-   } 
-}
-
-/* ~Telnet - Shutdown the telnet daemon stuff
- * Original 2/1/01, Pickle <pickle@alien.net.au>
- */
-Telnet::~Telnet()
-{
-#ifdef DEBUG
-   if (bot->debug)
-     cout << "Closing down open telnet connections" << endl;
-#endif
+   bool updateBars = false;
    
-   // Close down all active sockets
-   telnetDescriptor *d;
-   while (descList.size() != 0) {
-      d = *descList.begin();
-
-      if (d->sock->isConnected()) {
-	 if (d->flags & TELNETFLAG_CONNECTED) {
-	    d->goodbyeSocket();
-	 } else
-	   d->sock->close();
-      }
-      
-      descList.erase(descList.begin());
-      delete d->sock;
-      delete d;
+   // Time to update the status bar? We do this once a minute
+   if (bot->currentTime.time >= (lastBarUpdate + 60)) {
+      lastBarUpdate = bot->currentTime.time;
+      updateBars = true;
    }
    
+   // Run through the descriptor list to see what needs doing
    for (list<telnetDescriptor *>::iterator it = descList.begin();
-	it != descList.end(); it++)
-     if ((*it)->sock->isConnected()) {
-	//	if ((*it)->flags & TELNETFLAG_CONNECTED)
-	// Say goodbye?
-	(*it)->sock->close();
-     }
-   
-#ifdef DEBUG
-   if (bot->debug)
-     cout << "Closing down main telnet socket" << endl;
-#endif
-   
-   sock->close();
-   delete sock;
+	it != descList.end(); it++) {
+      // Is this descriptor connected?
+      if ((*it)->flags & TELNETFLAG_CONNECTED) {
+	 // Are we set to update the bars this time around?
+	 if (updateBars) {
+	    (*it)->write(ANSI::telnetHeaderUpdate());
+	 }
+      }
+   }
 }
-

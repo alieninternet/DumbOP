@@ -3,11 +3,11 @@
 #include "serverqueue.h"
 
 #ifdef DEBUG
-ServerQueue::ServerQueue(Socket *s, bool d)
-  : Queue(s,d), penalty(0)
+ServerQueue::ServerQueue(/*Bot *b,*/ Socket *s, bool d)
+  :/* Bot(b),*/ Queue(s,d), penalty(0)
 #else
-ServerQueue::ServerQueue(Socket *s)
-  : Queue(s), penalty(0)
+ServerQueue::ServerQueue(/*Bot *b,*/ Socket *s)
+  :/* Bot(b),*/ Queue(s), penalty(0)
 #endif
 {
   serverQueue.clear();
@@ -30,7 +30,7 @@ ServerQueue::addItem(ServerQueueItem *sqi)
   }
   it2 = it; --it2;
   if (it2 != serverQueue.end() && *it2) {
-    // All right, we try to merge this item to the previous
+    // try to merge this item to the previous
     if ((*it2)->merge(sqi)) {
       delete sqi;
       return;
@@ -42,9 +42,12 @@ ServerQueue::addItem(ServerQueueItem *sqi)
 void
 ServerQueue::addLine(String l, int pr, int pen, int t)
 {
-  ServerQueueOtherItem * sqoi =
-    new ServerQueueOtherItem(l, pr, pen, t);
-  addItem(sqoi);
+   // We want to keep track of how much we are sending out
+//   bot->sentLen += l.length();
+   
+   ServerQueueOtherItem * sqoi =
+     new ServerQueueOtherItem(l, pr, pen, t);
+   addItem(sqoi);
 }
 
 bool

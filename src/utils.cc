@@ -174,7 +174,7 @@ String Utils::levelToStr(int l)
    switch (l) {
     case User::USER: return "User";
     case User::TRUSTED_USER: return "Trusted User";
-    case User::FRIEND: return "Friend";
+    case User::MANAGER: return "Manager";
     case User::MASTER: return "Master";
    }
    return "None";
@@ -232,74 +232,121 @@ String Utils::timelenToStr(time_t len)
 String Utils::timeBigToStr(long long usecs)
 {
    return 
-     (timelenToStr(usecs / 1000) +
-      ((usecs % 1000 == 0) ? String("") :
-       (String(", ") + String((long)usecs % 1000) + String(" millisec") +
-	((usecs % 1000 >= 2) ? String("s") : String("")))));
+     ((((usecs / 1000) == 0) ? String("") :
+       (timelenToStr(usecs / 1000) +
+	(((usecs % 1000) == 0) ? String("") :
+	 (String(", "))))) +
+      ((((usecs % 1000) > 0) || ((usecs / 1000) == 0)) ?
+       (String((long)usecs % 1000) + String(" millisec") +
+	((usecs % 1000 >= 2) ? String("s") : String(""))) :
+       String("")));
 }
 
 
 time_t Utils::strToTime(String str)
 {
-  char num[512];
-  int len = 0;
-  time_t ans = 0;
-
-  num[0]='\0';
-
-  if (str.toLower() == "Inf")
-    return -1;
-
-  if (!isdigit(str[0]))
-    return 0;
-
-  for (int i = 0; i < str.length(); i++) {
-    switch (str[i]) {
-    case 'y':
-    case 'Y':
-      num[len] = '\0';
-      len = 0;
-      ans += (atoi(num) * 31557600);
-      break;
-    case 'M':
-      num[len] = '\0';
-      len = 0;
-      ans += (atoi(num) * 2629800);
-      break;
-    case 'd':
-    case 'D':
-      num[len] = '\0';
-      len = 0;
-      ans += (atoi(num) * 86400);
-      break;
-    case 'h':
-    case 'H':
-      num[len] = '\0';
-      len = 0;
-      ans += (atoi(num) * 3600);
-      break;
-    case 'm':
-      num[len] = '\0';
-      len = 0;
-      ans += (atoi(num) * 60);
-      break;
-    case 's':
-    case 'S':
-      num[len] = '\0';
-      len = 0;
-      ans += atoi(num);
-    default:
-      if (isdigit(str[i])) {
-        num[len++] = str[i];
-        num[len] = '\0';
-      } else
-        return 0;
-    }
-  }
-
-  if (len)
-    ans += atoi(num);
-
-  return time(NULL) + ans;
+   char num[512];
+   int len = 0;
+   time_t ans = 0;
+   
+   num[0]='\0';
+   
+   if (str.toLower() == "Inf")
+     return -1;
+   
+   if (!isdigit(str[0]))
+     return 0;
+   
+   for (int i = 0; i < str.length(); i++) {
+      switch (str[i]) {
+       case 'y':
+       case 'Y':
+	 num[len] = '\0';
+	 len = 0;
+	 ans += (atoi(num) * 31557600);
+	 break;
+       case 'M':
+	 num[len] = '\0';
+	 len = 0;
+	 ans += (atoi(num) * 2629800);
+	 break;
+       case 'd':
+       case 'D':
+	 num[len] = '\0';
+	 len = 0;
+	 ans += (atoi(num) * 86400);
+	 break;
+       case 'h':
+       case 'H':
+	 num[len] = '\0';
+	 len = 0;
+	 ans += (atoi(num) * 3600);
+	 break;
+       case 'm':
+	 num[len] = '\0';
+	 len = 0;
+	 ans += (atoi(num) * 60);
+	 break;
+       case 's':
+       case 'S':
+	 num[len] = '\0';
+	 len = 0;
+	 ans += atoi(num);
+       default:
+	 if (isdigit(str[i])) {
+	    num[len++] = str[i];
+	    num[len] = '\0';
+	 } else
+	   return 0;
+      }
+   }
+   
+   if (len)
+     ans += atoi(num);
+   
+   return time(NULL) + ans;
 }
 
+/* replaceVowels - Replace all vowels with given character
+ * Original 29/06/01, Pickle <pickle@alien.net.au>
+ */
+String Utils::replaceVowels(String line, char ch)
+{
+   String temp = "";
+   
+   for (int i = 0; i < line.length(); i++) {
+      switch (line[i]) {
+       case 'A':
+       case 'a':
+       case 'E':
+       case 'e':
+       case 'I':
+       case 'i':
+       case 'O':
+       case 'o':
+       case 'U':
+       case 'u': /* A vowel? I'm a lazy bastard programmer hey :) */
+	 temp = temp + String(ch);
+	 break;
+       default:
+	 temp = temp + String(line[i]);
+	 break;
+      }
+   }
+   
+   return temp;
+}
+
+/* reverseStr - Reverse a string
+ * Original 29/06/01, Pickle <pickle@alien.net.au>
+ */
+String Utils::reverseStr(String line)
+{
+   String temp = "";
+
+   for (int i = (line.length() - 1); i >= 0; i--) {
+      temp = temp + String(line[i]);
+   }
+   
+   return temp;
+}

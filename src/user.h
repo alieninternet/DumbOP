@@ -33,7 +33,7 @@ public:
     NONE = 0,
     USER = 1,
     TRUSTED_USER = 2,
-    FRIEND = 3,
+    MANAGER = 3,
     MASTER = 4
   };
 

@@ -1,0 +1,8654 @@
+# Reading from questions.trivia2.en
+#??#
+#??# $Id: questions.trivia2.en,v 1.5 2001/06/15 15:22:35 chat Exp $
+#??#
+#??# ------------------------------------------------------------------------------
+#??#
+#??#  Author:  	 I really forgot, please tell me!  No mails match this file.
+#??#  Editor:  	 Moxon, |casiotone|
+#??#  Last edited:  2001-04-23
+#??#  Last checkin: $Date: 2001/06/15 15:22:35 $
+#??#
+#??#  Comment:     
+#??#
+#??# ------------------------------------------------------------------------------
+
+#??## Demo-Entry:
+#??#  ----------
+#??#  Category: History
+#??#  Question: Chinese philosopher (um 500 v. Chr.) ?
+#??#  Answer: Konfuzius
+#??#  Regexp: [ck]onfu(ts|z)ius
+#??#  Author: anonymous
+#??#  Level: hard
+#??#  Comment: demo-entry, AEOEUEaeoeuess ^ Grad !"§$%&/()=? `´
+#??#  Score: 5
+#??#  Tip: Kon......
+#??#  Tip: ...fuz...
+#??#  Tip: ......ius
+
+#??## valid keys:
+#??#  ----------
+#??#  Category?                              (should always be on top!)
+#??#  Question                               (should always stand after Category)
+#??#  Answer                                 (will be matched if no regexp is provided)
+#??#  Regexp?                                (use UNIX-style expressions)
+#??#  Author?                                (the brain behind this question)
+#??#  Level? [baby|easy|normal|hard|extreme] (difficulty)
+#??#  Comment?                               (comment line)
+#??#  Score? [#]                             (credits for answering this question)
+#??#  Tip*                                   (provide one or more hints)
+#??#  TipCycle? [#]                          (Specify number of generated tips)
+
+#??## WARNING:
+#??#  -------
+#??#  DO NOT ADD COMMENTS BEYOND THIS LINE, since they might get lost.
+#??#  you may add as much comments as you want into the part above
+#??#  <!========================================================!>
+
+#??Category:  Geography
+# Question 1
+:What is the world's largest sea?
+Mediterranean
+
+#??Category:  History
+# Question 2
+:Who led the children of Israel out of Egypt?
+Moses
+
+#??Category: Abbreviations
+# Question 3
+:What do the initials 'VCP' stand for?
+Video Cassette Player
+
+#??Category: Abbreviations
+# Question 4
+:What do the initials 'VCR' stand for?
+Video Cassette Recorder
+
+#??Category: Abbreviations
+# Question 5
+:What does 'A&W' (of root beer fame) stand for ?
+Allen & Wright
+#??Regexp: Allen ?(and|&) ?Wright
+
+#??Category: Abbreviations
+# Question 6
+:What does 'AOL' stand for?
+America Online
+
+#??Category: Abbreviations
+# Question 7
+:What does S.O.S. stand for?
+Save Our Souls
+
+#??Category: Acronyms
+# Question 8
+:What does N.A.S.A stand for?
+National Aeronautics and Space Administration
+
+#??Category: Acronyms
+# Question 9
+:What does the acronym 'scuba' mean?
+Self Contained Underwater Breathing Apparatus
+#??Regexp: Self[- ]Contained Underwater Breathing Apparatus
+
+#??Category: Advertising
+# Question 10
+:Who is the dog on the crackerjack box?
+Bingo
+
+#??Category: Agriculture
+# Question 11
+:What is ground being 'rested' for a season called?
+fallow
+
+#??Category: Aircraft
+# Question 12
+:After what were the B52 bombers named?
+a fifties #hairdo#
+#??Regexp: (hair ?style|hair ?do)
+
+#??Category: Aircraft
+# Question 13
+:How many engines are on a B52 bomber?
+eight
+#??Regexp: (eight|8)
+
+#??Category: Aircraft
+# Question 14
+:How many gallons of fuel does a jumbo jet use during take off?
+four thousand
+#??Regexp: (Four thousand|4[, ]?000)
+
+#??Category: Aircraft
+# Question 15
+:What does a pilot drop to slow an airplane?
+flaps
+
+#??Category: Aircraft
+# Question 16
+:What is the world's fastest passenger aircraft?
+Concorde
+
+#??Category: Aircraft
+# Question 17
+:What type of craft is the US's Airforce One?
+Boeing #747#
+
+#??Category: Aircraft
+# Question 18
+:Whic country developed the first jet fighter?
+Germany
+
+#??Category: Aircraft
+# Question 19
+:Which two nations built the concorde?
+Britain and France
+#??Regexp: (Britain|France) (and|&) (Britain|France)
+
+#??Category: Aircraft
+# Question 20
+:Who built the 'Cherokee' and 'Commanche' aircraft?
+Piper
+
+#??Category: Aircraft
+# Question 21
+:Who built the hurricane aircraft?
+Hawker
+
+#??Category: Alcohol
+# Question 22
+:From what is the liqueur kirsch made?
+cherries
+#??Regexp: cherr(y|ies)
+
+#??Category: Alcohol
+# Question 23
+:From which plant is tequila derived?
+cactus
+
+#??Category: America
+# Question 24
+:As what is California also known?
+Golden State
+
+#??Category: America
+# Question 25
+:As what is Minnesota also known?
+Gopher State
+
+#??Category: America
+# Question 26
+:What city is also known as Beantown?
+Boston
+
+#??Category: America
+# Question 27
+:What state is 'The Golden State'?
+California
+
+#??Category: America
+# Question 28
+:What state is also called the 'Garden State'?
+New Jersey
+
+#??Category: America
+# Question 29
+:What state is the 'Hoosier State'?
+Indiana
+
+#??Category: America
+# Question 30
+:Where are the headquarters of the CIA?
+#Langley#, Virginia
+
+#??Category: America
+# Question 31
+:Which date is inscribed on the book held by the Statue Of Liberty?
+July 4 1776
+
+#??Category: American Cities
+# Question 32
+:What is the most air polluted city in the United States?
+Los Angeles
+#??Regexp: (Los Angeles|LA)
+
+#??Category: American General Knowledge
+# Question 33
+:Where is the Kitty Hawk?
+The #Smithsonian# Institute
+
+#??Category: American History
+# Question 34
+:What mountain has the figures of three mounted confederate heroes of the Civil War?
+#Stone# Mountain
+
+#??Category: American History
+# Question 35
+:What state is only part of the United States by treaty?
+Texas
+
+#??Category: Anagrams
+# Question 36
+:Which two fruits are an anagram of each other?
+lemon and melon
+#??Regexp: [ml]e[ml]on (and |& )?[ml]e[ml]on
+
+#??Category: Anatomy
+# Question 37
+:How many litres of air is in an adult lung?
+five
+#??Regexp: (five|5)
+
+#??Category: Anatomy
+# Question 38
+:How many times do your ribs move every year during breathing?
+five million
+#??Regexp: ((Five|5) million|5[ ,]?000[ ,]?000)
+
+#??Category: Anatomy
+# Question 39
+:Like fingerprints, what other print is individual?
+#tongue#prints
+
+#??Category: Anatomy
+# Question 40
+:Of what does the typical man have 13,000?
+whiskers
+
+#??Category: Anatomy
+# Question 41
+:What do the auricularis muscles move?
+#ear#s
+
+#??Category: Anatomy
+# Question 42
+:What is the Scientific name for the eardrum?
+tympanic membrane
+
+#??Category: Anatomy
+# Question 43
+:What is the common name for the scapula?
+breastbone
+
+#??Category: Anatomy
+# Question 44
+:What is the common name for the tympanic membrane?
+eardrum
+#??Regexp: ear ?drum
+
+#??Category: Anatomy
+# Question 45
+:What is the second largest bone in the foot?
+talus
+
+#??Category: Anatomy
+# Question 46
+:What is the smallest bone in the human body?
+#stirrup# bone
+
+#??Category: Anatomy
+# Question 47
+:Where are one quarter of the bones in the human body?
+feet
+
+#??Category: Anatomy
+# Question 48
+:Which is the most sensitive finger?
+forefinger
+#??Regexp: (fore|index)
+
+#??Category: Animal Kingdom
+# Question 49
+:As what is a camelopard also known?
+giraffe
+
+#??Category: Animal Kingdom
+# Question 50
+:As what is a giraffe also known?
+camelopard
+
+#??Category: Animal Kingdom
+# Question 51
+:As what is a moose also known?
+algonquin
+
+#??Category: Animal Kingdom
+# Question 52
+:As what is an algonquin more commonaly known?
+moose
+
+#??Category: Animal Kingdom
+# Question 53
+:At what age does a filly become a mare?
+five
+#??Regexp: (five|5)
+
+#??Category: Animal Kingdom
+# Question 54
+:Does a wild rabbit live 10, 15 or 20 years?
+10
+#??Regexp: (ten|10)
+
+#??Category: Animal Kingdom
+# Question 55
+:How fast (mph) can a kangaroo hop? 
+forty 
+#??Regexp: (forty|40)
+
+#??Category: Animal Kingdom
+# Question 56
+:How many hours a day does a ferret sleep?
+twenty
+#??Regexp: (twenty|20)
+
+#??Category: Animal Kingdom
+# Question 57
+:How many hours does an antelope sleep at night?
+one
+#??Regexp: (one|1)
+
+#??Category: Animal Kingdom
+# Question 58
+:How many teeth does a walrus have?
+eighteen
+#??Regexp: (eighteen|18)
+
+#??Category: Animal Kingdom
+# Question 59
+:If a robin's egg is put in vinegar for thirty days, what colour does it become?
+yellow
+
+#??Category: Animal Kingdom
+# Question 60
+:Name one male fish that gives birth?
+sea horse or pipe fish
+#??Regexp: (sea ?horse|pipe ?fish)
+#??Tip: s.. h.... or p... f...
+#??Tip: .e. .o... or .i.. .i..
+#??Tip: ..a ..r.. or ..p. ..s.
+#??Tip: ... ...s. or ...e ...h
+#??Tip: ... ....e or .... ....
+
+#??Category: Animal Kingdom
+# Question 61
+:Of what are walrus tusks made?
+ivory
+
+#??Category: Animal Kingdom
+# Question 62
+:On what do honeybees have a type of hair?
+eyes
+
+#??Category: Animal Kingdom
+# Question 63
+:What animal can get the disease 'heaves'?
+horse
+
+#??Category: Animal Kingdom
+# Question 64
+:What animal can hop as fast as 40 mph?
+kangaroo
+
+#??Category: Animal Kingdom
+# Question 65
+:What animal has red patches on its rear?
+mandrill
+
+#??Category: Animal Kingdom
+# Question 66
+:What animal lives in a form?
+hare
+
+#??Category: Animal Kingdom
+# Question 67
+:What animal lives in a warren?
+rabbit
+
+#??Category: Animal Kingdom
+# Question 68
+:What animal's milk is more than 54% fat?
+humpback #whale#
+
+#??Category: Animal Kingdom
+# Question 69
+:What are the only other animals on which the pill works?
+#gorilla#s
+
+#??Category: Animal Kingdom
+# Question 70
+:What bird is associated with Lundy Island?
+puffin
+
+#??Category: Animal Kingdom
+# Question 71
+:What colour is a robin's egg?
+blue
+
+#??Category: Animal Kingdom
+# Question 72
+:What comprises than 54% of humpback whale's milk?
+fat
+
+#??Category: Animal Kingdom
+# Question 73
+:What dog is named after a Mexican state?
+chihuahua
+
+#??Category: Animal Kingdom
+# Question 74
+:What herbivore sleeps one hour a night?
+antelope
+
+#??Category: Animal Kingdom
+# Question 75
+:What insect has a type of hair on it's eyes?
+honey#bees#
+
+#??Category: Animal Kingdom
+# Question 76
+:What is a female deer called?
+doe
+
+#??Category: Animal Kingdom
+# Question 77
+:What is a male deer called?
+buck
+
+#??Category: Animal Kingdom
+# Question 78
+:What is a marsupium?
+pouch
+
+#??Category: Animal Kingdom
+# Question 79
+:What is a word for a castrated ram?
+wether
+
+#??Category: Animal Kingdom
+# Question 80
+:What is a young whale called?
+calf
+
+#??Category: Animal Kingdom
+# Question 81
+:What is another name for the coyote?
+prairie wolf
+
+#??Category: Animal Kingdom
+# Question 82
+:What is another name for the prairie wolf?
+coyote
+
+#??Category: Animal Kingdom
+# Question 83
+:What is the chihuahua named after?
+A #Mexican state#
+#??Regexp: (Mexican state|state in Mexico)
+
+#??Category: Animal Kingdom
+# Question 84
+:What is the heaviest snake?
+anaconda
+
+#??Category: Animal Kingdom
+# Question 85
+:What is the largest lizard?
+Komodo Dragon
+
+#??Category: Animal Kingdom
+# Question 86
+:What is the longest venomous snake?
+king cobra
+
+#??Category: Animal Kingdom
+# Question 87
+:What is the scientific name for a turkey's wishbone?
+furcula
+
+#??Category: Animal Kingdom
+# Question 88
+:What is the technical name for an animal's pouch?
+marsupium
+
+#??Category: Animal Kingdom
+# Question 89
+:What lives in a formicary?
+#ant#s
+
+#??Category: Animal Kingdom
+# Question 90
+:What type of frog is the smallest frog?
+gold frog
+
+#??Category: Animal Kingdom
+# Question 91
+:What was the first animal on the endangered species list?
+peregrine falcon
+
+#??Category: Animal Kingdom
+# Question 92
+:What well known marsupial is the wallaby related to?
+kangaroo
+
+#??Category: Animal Kingdom
+# Question 93
+:Where do ants live?
+formicary
+#??Regexp: for[mn]icary
+
+#??Category: Animal Kingdom
+# Question 94
+:Which animal always grows new teeth to replace the old?
+crocodile
+
+#??Category: Animal Kingdom
+# Question 95
+:Which is the largest African bird of prey?
+lammergeyer
+
+#??Category: Animal Kingdom
+# Question 96
+:Which is the largest aquatic bird?
+albatross
+
+#??Category: Animal Kingdom
+# Question 97
+:Which is the largest known butterfly?
+Queen Alexandra's Birdwing
+#??Regexp: Queen Alexandra('s)? Bird ?wing
+
+#??Category: Animal Kingdom
+# Question 98
+:Which is the only animal other than humans that can get leprosy?
+armadillos
+
+#??Category: Animal Kingdom
+# Question 99
+:Which mammals fly?
+bats
+
+#??Category: Animal Kingdom
+# Question 100
+:Which snake kills the most humans?
+king cobra
+
+#??Category: Animal Kingdom
+# Question 101
+:With which island is the puffin associated?
+#Lundy# Island
+
+#??Category: Animal kingdom
+# Question 102
+:Where are there over 58 million dogs?
+USA
+#??Regexp: (U.?S.?A?.?|(United )?States?( of )?America)
+
+#??Category: Animals
+# Question 103
+:What is the most venomous snake?
+king cobra
+
+#??Category: Archaeology
+# Question 104
+:Approximately how many years old is the first known written advertisement?
+three thousand
+#??Regexp: (three thousand|3[, ]?000)
+
+#??Category: Archaeology
+# Question 105
+:In which ruins was the first known written advertisement found?
+Thebes
+
+#??Category: Archaic Terms
+# Question 106
+:What date is the 'Ides' of March?
+Fifteenth
+#??Regexp: (Fifteen|15)
+
+#??Category: Architecture
+# Question 107
+:Which famous million dollar building cost more than a million dollars?
+Sydney #Opera House#
+
+#??Category: Art
+# Question 108
+:Who painted 'Irises'?
+Vincent #Van Gogh#
+
+#??Category: Arts
+# Question 109
+:What is the art of tracing designs and making impressions of them called?
+lithography
+
+#??Category: Arts
+# Question 110
+:Which is the largest museum in the world?
+Louvre
+
+#??Category: Arts
+# Question 111
+:Who is a successful recording artist, talented landscape artist, and author of children's books?
+Ricky Van Shelton
+
+#??Category: Astology
+# Question 112
+:Who was born when Pluto, the astrological sign for death, was directly above Dallas, Texas?
+John F. #Kennedy#
+
+#??Category: Astrology
+# Question 113
+:What is the astrological sign for death?
+Pluto
+
+#??Category: Astrology
+# Question 114
+:What is the zodiacal symbol for Capricorn?
+goat
+
+#??Category: Astrology
+# Question 115
+:Which constellation is represented by a goat?
+Capricorn
+
+#??Category: Astronomy
+# Question 116
+:As what is Polaris also known?
+North Star
+
+#??Category: Astronomy
+# Question 117
+:As what is the North Star also known?
+Polaris
+
+#??Category: Astronomy
+# Question 118
+:Saturday is named after which planet?
+Saturn
+
+#??Category: Astronomy
+# Question 119
+:What constellation is represented by scales?
+Libra
+
+#??Category: Astronomy
+# Question 120
+:What is the most essential tool in astronomy?
+telescope
+
+#??Category: Astronomy
+# Question 121
+:What is the name given to a group of stars?
+constellation
+
+#??Category: Astronomy
+# Question 122
+:What is the name of brightest asteroid visible from earth?
+Vesta
+
+#??Category: Astronomy
+# Question 123
+:What is the only day named after a planet?
+Saturday
+
+#??Category: Astronomy
+# Question 124
+:What is the small irregular white cloud that zips around Neptune approximately every 16 hours called?
+Scooter
+
+#??Category: Astronomy
+# Question 125
+:What is the technical name for 'falling stars'?
+meteors
+
+#??Category: Astronomy
+# Question 126
+:What planet is nearest the sun?
+Mercury
+
+#??Category: Astronomy
+# Question 127
+:When does a full moon rise?
+sunset
+
+#??Category: Astronomy
+# Question 128
+:Which is the only planet that rotates clockwise?
+Venus
+
+#??Category: Astronomy
+# Question 129
+:Who coined the theory that the earth revolves around the sun?
+Nicolaus #Copernicus#
+
+#??Category: Astronomy
+# Question 130
+:Who discovered the four largest moons of Jupiter?
+Galileo
+
+#??Category: Astronomy
+# Question 131
+:Who invented the telescope?
+#Galileo# Galilei
+
+#??Category: Atmosphere
+# Question 132
+:What is the stratosphere immediately above?
+troposphere
+
+#??Category: Atmosphere
+# Question 133
+:What is the troposphere immediately lower than?
+stratosphere
+
+#??Category: Aviation
+# Question 134
+:How many 'Air Force One'(s) are there?
+two
+#??Regexp: (two|2)
+
+#??Category: Baseball
+# Question 135
+:Who wore a cabbage leaf under his cap?
+Babe Ruth
+
+#??Category: Beverages
+# Question 136
+:What drink is named after the queen of England who was famous for her 'sanguinary' persecution of the protestants?
+Bloody Mary
+
+#??Category: Beverages
+# Question 137
+:What is made of fermented grape juice?
+wine
+
+#??Category: Big Peepers
+# Question 138
+:Which animal has the largest eyes?
+giant squid
+
+#??Category: Biology
+# Question 139
+:Approximately how many times a day does the human heart beat?
+one million
+#??Regexp: ((one|1) ?million|1[, ]?000[, ]?000)
+
+#??Category: Biology
+# Question 140
+:As what is haemophilia also known?
+royal disease
+
+#??Category: Biology
+# Question 141
+:Of what is keratitis an inflammation?
+cornea
+
+#??Category: Biology
+# Question 142
+:On what side should you sleep to improve digestion?
+right
+
+#??Category: Biology
+# Question 143
+:To what disability can keratitis lead?
+blindness
+
+#??Category: Biology
+# Question 144
+:What appears when the sun activates melanocytes?
+freckles
+
+#??Category: Biology
+# Question 145
+:What body function is improved if you sleep on your right side?
+digestion
+
+#??Category: Biology
+# Question 146
+:What carries sensations from the tongue to the brain?
+lingual nerve
+
+#??Category: Biology
+# Question 147
+:What does the body release that dilates small blood vessels and so causes a person to blush?
+peptides
+
+#??Category: Biology
+# Question 148
+:What does the lack of iodine in the diet cause?
+goitre
+
+#??Category: Biology
+# Question 149
+:What does the pancreas produce?
+insulin
+
+#??Category: Biology
+# Question 150
+:What element is lacking in a diet when goitre occurs?
+iodine
+
+#??Category: Biology
+# Question 151
+:What falls out with phalacrosis?
+hair
+
+#??Category: Biology
+# Question 152
+:What falls out with phalacrosis?
+hair
+
+#??Category: Biology
+# Question 153
+:What fleshy muscular organ is joined to the hyoid bone?
+tongue
+
+#??Category: Biology
+# Question 154
+:What gland secretes fluid that washes the eyes?
+#tear# gland
+
+#??Category: Biology
+# Question 155
+:What is activated for freckles to appear?
+melanocytes
+
+#??Category: Biology
+# Question 156
+:What is the biological name for the shin bone?
+tibia
+
+#??Category: Biology
+# Question 157
+:What is the biological term for the voice box?
+larynx
+
+#??Category: Biology
+# Question 158
+:What is the common name for the larynx?
+voice box
+
+#??Category: Biology
+# Question 159
+:What is the hardest bone in the human body?
+jawbone
+
+#??Category: Biology
+# Question 160
+:What is the latin name for the top set of vertebrae?
+cervical
+
+#??Category: Biology
+# Question 161
+:What is the royal disease?
+haemophilia
+#??Regexp: ha?emophilia
+
+#??Category: Biology
+# Question 162
+:What is the tibia more commonly known as?
+shin bone
+
+#??Category: Biology
+# Question 163
+:What muscle is joined by the lingual nerve to the brain?
+tongue
+
+#??Category: Biology
+# Question 164
+:What muscles move the ears?
+auricularis
+
+#??Category: Biology
+# Question 165
+:What protein makes blood red?
+Haemoglobin
+#??Regexp: Ha?emolglobin
+
+#??Category: Biology
+# Question 166
+:What small region at end of medulla oblongata serves as 'bridge' to brain?
+pons
+
+#??Category: Biology
+# Question 167
+:When a tumour is cancerous, what is it said to be?
+malignant
+
+#??Category: Biology
+# Question 168
+:With age, what organ shrinks faster in males than in females?
+brain
+
+#??Category: Birthstones
+# Question 169
+:What is the birthstone for May?
+emerald
+
+#??Category: Birthstones
+# Question 170
+:What is the birthstone for September?
+sapphire
+
+#??Category: Botany
+# Question 171
+:Approximately how many years old are oak trees before they produce acorns?
+fifty
+#??Regexp: (fifty|50)
+
+#??Category: Botany
+# Question 172
+:One ragweed plant can release approximately how many grains of pollen?
+one billion
+#??Regexp: (one|1) billion
+
+#??Category: Botany
+# Question 173
+:To which family does the coffee plant belong?
+madder
+
+#??Category: Botany 
+# Question 174
+:Which tree only produces acorns after it is fifty years old?
+oak
+
+#??Category: Britain
+# Question 175
+:How many inches tall are the bearskins worn by the guards at Buckingham Palace?
+twenty
+#??Regexp: (twenty|20)
+
+#??Category: Britain
+# Question 176
+:In the House of Lords, where does the Lord Chancellor sit?
+wool#sack#
+
+#??Category: Britain
+# Question 177
+:In which park are Queen Mary's gardens?
+#Regents# Park
+
+#??Category: Britain
+# Question 178
+:What are the only two london boroughs that start with the letter 'e'?
+Ealing and Enfield
+#??Regexp: (Ealing (and |& )?Enfield|Enfield (and |& )?Ealing)
+
+#??Category: Britain
+# Question 179
+:What does 'The Monument' in London commemorate?
+#Great Fire# of London
+
+#??Category: Britain
+# Question 180
+:What was the second bridge built across the Thames?
+#Westminster# Bridge
+
+#??Category: Britain
+# Question 181
+:Where is Selfridges?
+Oxford Street, London
+#??Regexp: Oxford St(reet|.)?
+
+#??Category: Britain
+# Question 182
+:Who at Buckingham Palace wears bearskins?
+guards
+
+#??Category: Britain 
+# Question 183
+:Which building commemorates the Great Fire of London?
+Monument
+
+#??Category: British History
+# Question 184
+:What was Margaret Thatcher's nickname?
+Iron Lady
+
+#??Category: Buildings
+# Question 185
+:What is the largest inhabited castle in the world?
+Windsor Castle
+
+#??Category: Buildings
+# Question 186
+:Where is the 'whispering gallery'?
+St. Paul's Cathedral
+#??Regexp: St.? Paul'?s
+
+#??Category: Buildings
+# Question 187
+:Where would you find a nave, apse, atrium and narthex?
+Basilica
+
+#??Category: Cars
+# Question 188
+:How is 75% of petrol in an engine wasted?
+combustion
+
+#??Category: Cars
+# Question 189
+:What make of car is a 'Thunderbird'?
+Ford
+
+#??Category: Cars
+# Question 190
+:What make of car is an 'Espace'?
+Renault
+
+#??Category: Cars
+# Question 191
+:Which country has the most cars per mile of road?
+England
+
+#??Category: Cartoon Decorum
+# Question 192
+:Donald Duck comics were banned in Finland because he didn't wear ......?
+pants
+
+#??Category: Cartoon Trivia
+# Question 193
+:For which cartoon character was Beethoven a favourite composer?
+Shroeder
+#??Regexp: Sc?hroeder
+
+#??Category: Cartoon Trivia
+# Question 194
+:How many freckles did Howdy Doody have?
+forty eight
+#??Regexp: (forty eight|48)
+
+#??Category: Cartoon Trivia
+# Question 195
+:The maiden names of which two cartoon characters are Slaghoople and Mcbricker?
+Wilma Flintstone and Betty Rubble
+
+#??Category: Cartoon Trivia
+# Question 196
+:What are the names of Donald Duck's nephews?
+Huey Dewey and Louey
+#??Regexp: Huey,? (Duey|Dewey),?( and)? (Louey|Louie|Lewey)
+
+#??Category: Cartoon Trivia
+# Question 197
+:What city do Batman and Robin patrol?
+Gotham City
+
+#??Category: Cartoon Trivia
+# Question 198
+:What expression did Clark Kent's newspaper boss like to use?
+#Great Caesar's ghost#!
+#??Regexp: Great Caesar'?s ghost
+
+#??Category: Cartoon Trivia
+# Question 199
+:What is Dennis the Menace's surname?
+Mitchell
+
+#??Category: Cartoon Trivia
+# Question 200
+:What was the first cartoon character called?
+Oswald the Rabbit
+
+#??Category: Cartoon Trivia
+# Question 201
+:What were Wilma Flintstone and Betty Rubble's maiden names?
+Slaghoople and Mcbricker
+
+#??Category: Cartoon Trivia
+# Question 202
+:Which comic is drawn by Sam Keith?
+The Maxx
+
+#??Category: Cartoon Trivia
+# Question 203
+:Which magician did Lothar assist?
+Mandrake
+
+#??Category: Cartoon Trivia
+# Question 204
+:Who did the voices of Bugs Bunny, Sylvester and Tweety Pie?
+Mel Blanc
+
+#??Category: Cartoon Trivia
+# Question 205
+:Who drew the comic 'The Maxx'?
+Sam Keith
+
+#??Category: Cartoon Trivia
+# Question 206
+:Who patrols Gotham City?
+Batman and Robin
+
+#??Category: Cartoon Trivia
+# Question 207
+:Who took dictation from Perry Mason?
+Della Street
+
+#??Category: Cartoon Trivia
+# Question 208
+:Who was Barney Rubble's best friend?
+Fred Flintstone
+
+#??Category: Cartoon Trivia
+# Question 209
+:Who was Fred Flinstone's best friend?
+Barney Rubble
+
+#??Category: Cartoon Trivia
+# Question 210
+:Who was born on Krypton?
+Superman
+
+#??Category: Cartoon Trivia
+# Question 211
+:Who was the black assistant of Mandrake the Magician?
+Lothar
+
+#??Category: Cartoon Trivia
+# Question 212
+:Who was the first voice of Mickey Mouse?
+Walt Disney
+
+#??Category: Cartoon trivia
+# Question 213
+:What film was the last featuring Mel Blanc's voice?
+Jetsons
+
+#??Category: Chemistry
+# Question 214
+:20% of what is in the metal part at the end of a pencil?
+sulphur
+
+#??Category: Chemistry
+# Question 215
+:As what is sulphur also known?
+brimstone
+
+#??Category: Chemistry
+# Question 216
+:For what is the chemical formula H2O2?
+hydrogen peroxide
+
+#??Category: Chemistry
+# Question 217
+:For what metal is 'Au' the chemical symbol?
+gold
+
+#??Category: Chemistry
+# Question 218
+:Of what is 98% of the weight of water made?
+oxygen
+
+#??Category: Chemistry
+# Question 219
+:To what group of elements do cerium, praesiodymium and promethium belong?
+#rare earth# metals
+
+#??Category: Chemistry
+# Question 220
+:What does the symbol 'Am' represent?
+americium
+
+#??Category: Chemistry
+# Question 221
+:What is a corrosive substance with a pH value less than 7 called?
+acid
+
+#??Category: Chemistry
+# Question 222
+:What is calcium oxide commonly called?
+lime
+
+#??Category: Chemistry
+# Question 223
+:What is the atomic number for thalium?
+eighty one
+#??Regexp: (eighty one|81)
+
+#??Category: Chemistry
+# Question 224
+:What is the atomic number of Bromine?
+thirty five
+#??Regexp: (thirty five|35)
+
+#??Category: Chemistry
+# Question 225
+:What is the atomic number of Molybdenum?
+forty two
+#??Regexp: (forty[- ]two|42)
+
+#??Category: Chemistry
+# Question 226
+:What is the atomic number of sulphur?
+16
+
+#??Category: Chemistry
+# Question 227
+:What is the atomic number of uranium?
+ninety two
+#??Regexp: (ninety two|92)
+
+#??Category: Chemistry
+# Question 228
+:What is the chemical name for quicksilver?
+mercury
+
+#??Category: Chemistry
+# Question 229
+:What is the chemical symbol for gold?
+Au
+
+#??Category: Chemistry
+# Question 230
+:What is the chemical symbol for iron?
+Fe
+
+#??Category: Chemistry
+# Question 231
+:What is the heaviest naturally occuring element?
+uranium
+
+#??Category: Chemistry
+# Question 232
+:What is the symbol for copper?
+Cu
+
+#??Category: Chemistry
+# Question 233
+:What is the symbol for tin?
+Sn
+
+#??Category: Chemistry
+# Question 234
+:What term is applied to ethyl alcohol that has been treated with poison to make it unfit for human consumption?
+denatured
+
+#??Category: Chemistry
+# Question 235
+:What type of paper is used to test for acidity and alkalinity?
+litmus
+
+#??Category: Choking
+# Question 236
+:On what do approximately 100 people choke to death every year?
+ballpoint pens
+
+#??Category: Christianity
+# Question 237
+:How long did it take God to create the Universe?
+seven days
+#??Regexp: (seven|7) days
+
+#??Category: Christianity
+# Question 238
+:How many children did Noah have?
+three
+#??Regexp: (three|3)
+
+#??Category: Christianity
+# Question 239
+:How many sayings did Jesus say from the cross?
+seven
+#??Regexp: (seven|7)
+
+#??Category: Christianity
+# Question 240
+:How many times did Peter deny Jesus?
+three
+#??Regexp: (three|3)
+
+#??Category: Christianity
+# Question 241
+:How old was Sarah when she had a child?
+ninety
+#??Regexp: (ninety|90)
+
+#??Category: Christianity
+# Question 242
+:On which day was the resurrection of Christ?
+Easter Sunday
+
+#??Category: Christianity
+# Question 243
+:What are the first three words of The Bible?
+In the beginning
+
+#??Category: Christianity
+# Question 244
+:What two biblical cities did God destroy with fire and brimstone?
+Sodom and Gomorrah
+#??Regexp: Sodom (&|and) G[eoa]mm?orr?ah
+
+#??Category: Christianity
+# Question 245
+:Which two books in the Old Testament list the ten commandments? (in order of appearance)
+Exodus and Deuteronomy
+#??Regexp: Exodus (and |& )?Deuteronomy
+
+#??Category: Christianity
+# Question 246
+:Who killed Goliath?
+David
+
+#??Category: Christianity
+# Question 247
+:Who replaced Moses as the prophet of the Israelites?
+Joshua
+
+#??Category: Christianity
+# Question 248
+:Whose name did God change to Israel?
+Jacob
+
+#??Category: Christmas Trivia
+# Question 249
+:In the 'Twelve days of christmas', how many items in total are sent by 'my true love'?
+seventy eight
+#??Regexp: (seventy eight|78)
+
+#??Category: Cities
+# Question 250
+:As what is Constantinople now known?
+Istanbul
+
+#??Category: Cities
+# Question 251
+:Who has the world's largest double-decker tram fleet?
+Hong Kong
+
+#??Category: Cliches
+# Question 252
+:A bird in the hand is worth ......?
+two in the bush
+#??Regexp: (two|2) in the bush
+
+#??Category: Cliches
+# Question 253
+:A stitch in time saves ....?
+nine
+#??Regexp: (nine|9)
+
+#??Category: Cliches
+# Question 254
+:As clear as a .......?
+bell
+
+#??Category: Cliches
+# Question 255
+:As close as two ...... in a pod?
+peas
+
+#??Category: Cliches
+# Question 256
+:As easy as ......?
+pie
+
+#??Category: Cliches
+# Question 257
+:As mad as a .......?
+wet hen or hatter
+#??Regexp: (wet hen|hatter)
+
+#??Category: Cliches
+# Question 258
+:As nervous as a long-tailed cat in a room full of ......?
+rocking chairs
+
+#??Category: Cliches
+# Question 259
+:As pretty as a ......?
+picture
+
+#??Category: Cliches
+# Question 260
+:As sick as a ......?
+dog
+
+#??Category: Cliches
+# Question 261
+:As sly as a ......?
+fox
+
+#??Category: Cliches
+# Question 262
+:As tough as .......?
+nails
+
+#??Category: Cliches
+# Question 263
+:Hell hath no fury like a ......?
+woman scorned
+
+#??Category: Cliches
+# Question 264
+:Time .... when you're having fun?
+flies
+
+#??Category: Clothing
+# Question 265
+:On what is an espadrille worn?
+foot
+#??Regexp: (foot|feet)
+
+#??Category: Cocktails
+# Question 266
+:What are the essential ingredients of a daiquiri?
+rum and lemon
+#??Regexp: (rum (and |& )?lemon|lemon (and |& )?rum)
+
+#??Category: Cocktails
+# Question 267
+:What cocktail is based on rum and lemon?
+daiquiri
+
+#??Category: Codes
+# Question 268
+:In alphabet radio code, what word is used for 'c'?
+charlie
+
+#??Category: Codes
+# Question 269
+:In alphabet radio code, what word is used for 'f'?
+foxtrot
+
+#??Category: Codes
+# Question 270
+:In alphabet radio code, what word is used for 'h'?
+hotel
+
+#??Category: Codes
+# Question 271
+:In alphabet radio code, what word is used for 't'?
+tango
+
+#??Category: Codes
+# Question 272
+:In alphabet radio code, what word is used for 'x'?
+X-ray
+#??Regexp: X[- ]?ray
+
+#??Category: Codes
+# Question 273
+:Using morse code, what does trasmitting using 3 dots, 3 dashes and 3 dots?
+SOS
+
+#??Category: Coins
+# Question 274
+:What is a south african coin containing 1 troy ounce of gold called?
+Krugerrand
+
+#??Category: Collective Names
+# Question 275
+:What is a group of donkeys called?
+herd
+
+#??Category: Collective Names
+# Question 276
+:What is a group of geese called?
+gaggle
+
+#??Category: Companies
+# Question 277
+:The De Beers group of companies controls more than 80% of the world's supply of ......?
+rough #diamonds#
+
+#??Category: Companies
+# Question 278
+:What product built Hershey, Pennsylvania?
+chocolate
+
+#??Category: Companies
+# Question 279
+:Which company controls more than 80% of the world's rough diamond supply?
+De Beers
+
+#??Category: Computers
+# Question 280
+:In what year was the Intel Pentium processor introduced?
+1993
+
+#??Category: Computers
+# Question 281
+:What country did the operating system 'Linux' come from?
+Finland
+
+#??Category: Computers
+# Question 282
+:What does 'IBM' stand for?
+International Business Machines
+
+#??Category: Computers
+# Question 283
+:What does the 'x' mean when referring to the speed of a CD-rom (eg. 32x)?
+#times# (faster than standard speed)
+
+#??Category: Computers
+# Question 284
+:What type of printer did Seiko develop for the 1964 Tokyo Olympics?
+dot matrix
+
+#??Category: Computers
+# Question 285
+:What was invented over 3000 years ago that is now considered the first 'computer'?
+abacus
+
+#??Category: Computers
+# Question 286
+:What was the first version of Microsoft Windows to have networking capabilities?
+Windows for #Workgroups#
+
+#??Category: Computers
+# Question 287
+:What was the first version of Microsoft Windows?
+Windows #286#
+
+#??Category: Computers
+# Question 288
+:Who is the CEO of Apple computers?
+Steve Jobs
+
+#??Category: Contraception 
+# Question 289
+:After who is the 'Ramses' brand condom named?
+Pharaoh #Ramses II#
+
+#??Category: Corporations
+# Question 290
+:As what is America Online better known?
+AOL
+
+#??Category: Cosmology
+# Question 291
+:What is the most widely accepted theory for the creation of the universe?
+Big Bang
+
+#??Category: Cosmology
+# Question 292
+:What was created with the big bang?
+Universe
+
+#??Category: Crafts
+# Question 293
+:What is kaolin?
+pure china #clay#
+
+#??Category: Crafts
+# Question 294
+:What is liquid clay used in pottery called?
+slip
+
+#??Category: Crafts
+# Question 295
+:What is pure china clay called?
+kaolin
+
+#??Category: Culture
+# Question 296
+:Because the emu and the kangaroo cannot walk backwards, they are on the Australian ......?
+coat of arms
+
+#??Category: Culture
+# Question 297
+:For which country is the lotus flower the national symbol?
+India
+
+#??Category: Culture
+# Question 298
+:In which country is it polite to stick your tongue out at your guests?
+Tibet
+
+#??Category: Culture
+# Question 299
+:In which country is milk the most popular beverage?
+USA
+#??Regexp: (U.?S.?A?.?|(United )?(States)? ?(of )?America)
+
+#??Category: Culture
+# Question 300
+:In which town does the famous 'running of the bulls' take place?
+Pamplona
+
+#??Category: Culture
+# Question 301
+:Israel has the highest per capital consumption of ......?
+turkey
+
+#??Category: Culture
+# Question 302
+:What London landmark has an 11 foot long hand?
+Big Ben
+
+#??Category: Culture
+# Question 303
+:What animals are on the Australian coat of arms?
+emu and kangaroo
+#??Regexp: (kangaroo (and|&) emu|emu (and|&) kangaroo)
+
+#??Category: Culture
+# Question 304
+:What are the roads of Guam paved with?
+coral
+
+#??Category: Culture
+# Question 305
+:What are the sandals called that are worn in ceremonial japanese tradition?
+tabi
+
+#??Category: Culture
+# Question 306
+:What city do the Italians call the Monaco of bavaria?
+Munich
+
+#??Category: Culture
+# Question 307
+:What do the Italians call Munich?
+Monaco of Bavaria
+
+#??Category: Culture
+# Question 308
+:What famous building is located on the banks of the river Jumna?
+Taj Mahal
+
+#??Category: Culture
+# Question 309
+:What happened on screen for the first time in India in 1977?
+Screen #kiss#
+
+#??Category: Culture
+# Question 310
+:What is a water taxi known as in Venice?
+gondola
+
+#??Category: Culture
+# Question 311
+:What is the most common name in italy?
+Mario Rossi
+
+#??Category: Culture
+# Question 312
+:What is the name of a quarter of Jerusalem that can be translated as 'hundred gates'?
+Mea Shearim
+
+#??Category: Culture
+# Question 313
+:What is the name of the wrought iron tower in Paris?
+#Eiffel# Tower
+
+#??Category: Culture
+# Question 314
+:What is the national symbol for India?
+lotus flower
+
+#??Category: Culture
+# Question 315
+:What is the sacred river of Hinduism?
+Ganges
+#??Regexp: Gang(a|es)
+
+#??Category: Culture
+# Question 316
+:What is the tribal african word for dowry?
+lobola
+
+#??Category: Culture
+# Question 317
+:When is turkey traditionally eaten in America?
+thanksgiving
+
+#??Category: Culture
+# Question 318
+:Where are the Hausa and Ibo tribes?
+Nigeria
+
+#??Category: Culture
+# Question 319
+:Where do the English monarchs live?
+Buckingham Palace
+
+#??Category: Culture
+# Question 320
+:Where is the Blarney Stone?
+Blarney Castle, Ireland
+#??Regexp: (Blarney|Ireland)
+
+#??Category: Culture
+# Question 321
+:Where was it once against the law to have a pet dog?
+Iceland
+
+#??Category: Culture
+# Question 322
+:Where would one eat a taco?
+Mexico
+
+#??Category: Culture
+# Question 323
+:Which country eats the most turkey per capita?
+Israel
+
+#??Category: Culture
+# Question 324
+:Which famous museum is in Paris, France?
+Louvre
+
+#??Category: Culture
+# Question 325
+:Which nationality calls Munich the 'Monaco of Bavaria'?
+Italians
+
+#??Category: Currencies
+# Question 326
+:Germany's equivalent to the dollar is the ......?
+deutsche mark
+#??Regexp: deutsch(e )?mark
+
+#??Category: Currencies
+# Question 327
+:Israel's equivalent to the dollar is the ......?
+shekel
+
+#??Category: Currencies
+# Question 328
+:Italy's equivalant to the dollar is the ......?
+lira
+
+#??Category: Currencies
+# Question 329
+:Japan's equivalent to the dollar is the ......?
+yen
+
+#??Category: Currencies
+# Question 330
+:Mexico's equivalent to the dollar is the ......?
+peso
+
+#??Category: Currencies
+# Question 331
+:Spain's equivalent to the dollar is the ......?
+peseta
+
+#??Category: Currencies
+# Question 332
+:The quetzal is the currency of ......?
+Guatemala
+
+#??Category: Currencies
+# Question 333
+:What is the Japanese currency?
+yen
+
+#??Category: Currencies
+# Question 334
+:What is the currency of Guatemala?
+quetzal
+
+#??Category: Currencies
+# Question 335
+:What is the monetary unit of India?
+rupee
+
+#??Category: Currencies
+# Question 336
+:Which country has the currency 'yen'?
+Japan
+
+#??Category: Currency
+# Question 337
+:What country's currency is the Bolivar?
+Venezuela
+
+#??Category: Currency
+# Question 338
+:What is the currency of Venezuela?
+Bolivar
+
+#??Category: Definition
+# Question 339
+:What is armagnac?
+brandy
+
+#??Category: Definitions
+# Question 340
+:What does a chronometer measure?
+Time
+
+#??Category: Definitions
+# Question 341
+:What is a catalogue of languages called?
+ethnologue
+
+#??Category: Definitions
+# Question 342
+:What is a gondola?
+water taxi
+
+#??Category: Definitions
+# Question 343
+:What is a one-party system of government in which control is maintained by force and regimentation?
+fascism
+
+#??Category: Definitions
+# Question 344
+:What is a word for a sorcerer who deals in black magic?
+necromancer
+
+#??Category: Definitions
+# Question 345
+:What is another name for a sleepwalker?
+somnambulist
+
+#??Category: Definitions
+# Question 346
+:What is ornamental work in silver or gold thread called?
+filigree
+
+#??Category: Definitions
+# Question 347
+:What is the name given to a pregnant goldfish?
+twit
+
+#??Category: Definitions
+# Question 348
+:What word means 'to chew the cud'?
+ruminate
+#??Regexp: ruminan?t
+
+#??Category: Dimples
+# Question 349
+:What has 336 dimples?
+a #golf ball#
+#??Regexp: Golf ?ball
+
+#??Category: Disease
+# Question 350
+:Sleeping sickness is carried by which insect?
+tsetse fly
+
+#??Category: Disease
+# Question 351
+:What disease is carried by the tsetse fly?
+sleeping sickness
+
+#??Category: Distress Signals
+# Question 352
+:What is the international cry for help?
+mayday
+
+#??Category: Education
+# Question 353
+:What degree do the intials 'DDS' stand for?
+Doctor of Dental Surgery
+
+#??Category: Egypt
+# Question 354
+:What egyptian object is also known as 'the key to the Nile'?
+Ankh
+
+#??Category: Electronics
+# Question 355
+:As what was Sony's video recorder known?
+betamax
+
+#??Category: Electronics
+# Question 356
+:Circuits can be wired in parallel or ......?
+series
+
+#??Category: Entomology
+# Question 357
+:What is the only insect that can turn its head?
+praying mantis
+
+#??Category: Environmentalism
+# Question 358
+:Recycling one glass jar saves enough energy to watch TV for how many hours?
+three 
+#??Regexp: (three|3)
+
+#??Category: Famous Dead Bodies
+# Question 359
+:Where is Sir Herbert Baker buried?
+Westminster Abbey
+
+#??Category: Famous Genitals
+# Question 360
+:For how much did an American urologist buy Napoleon's penis? (US Dollars)
+$#3800#
+
+#??Category: Famous Initials
+# Question 361
+:For what are Allen and Wright most famous?
+root beer
+
+#??Category: Famous Places
+# Question 362
+:What Surrey town is famed for its salts?
+Epsom
+
+#??Category: Farming
+# Question 363
+:What is the most rural state in the USA?
+North Dakota
+
+#??Category: Fear
+# Question 364
+:If hell is a lake of fire, what would the temperature be? (in degrees Fahrenheit)
+833
+
+#??Category: Film and Television
+# Question 365
+:Who is the main character in 'Touched By An Angel'?
+Monica
+
+#??Category: Flags
+# Question 366
+:How many stars are there on the New Zealand flag?
+four
+#??Regexp: (four|4)
+
+#??Category: Flags
+# Question 367
+:What colours are on the Belgian flag?
+yellow, black and red
+#??Regexp: (yellow|black|red),? ?(yellow|black|red),? ?(and )?(yellow|black|red)
+
+#??Category: Flags
+# Question 368
+:Which country has a plain green flag?
+Libya
+
+#??Category: Flags
+# Question 369
+:Whose flag has the national arms on one side and the treasury seal on the other?
+Paraguay
+
+#??Category: Flea Abilities
+# Question 370
+:How many times its own length can the average flea jump?
+150
+#??Regexp: (One hundred (and |& )?fifty|150)
+
+#??Category: Folklore
+# Question 371
+:Who was the tallest of Robin Hood's men?
+Little John
+
+#??Category: Food
+# Question 372
+:Cornflakes were invented in 1863, 1890 or 1915?
+1890
+
+#??Category: Food
+# Question 373
+:How many herbs and spices are used in Kentucky Fried Chicken?
+eleven
+#??Regexp: (eleven|11)
+
+#??Category: Food
+# Question 374
+:How many pieces of bun are in a Mcdonald's Big Mac?
+three
+#??Regexp: (three|3)
+
+#??Category: Food
+# Question 375
+:In which country did edam cheese originate?
+Holland
+
+#??Category: Food
+# Question 376
+:In which country did the word 'biscuit' originate?
+France
+
+#??Category: Food
+# Question 377
+:What breakfast cereal was invented at Battle Creek Sanitarium?
+Cornflakes
+
+#??Category: Food
+# Question 378
+:What did Charles Jung invent?
+fortune cookies
+
+#??Category: Food
+# Question 379
+:What is another name for the carambula?
+star fruit
+#??Regexp: star ?fruit
+
+#??Category: Food
+# Question 380
+:What is the most widely used seasoning?
+salt
+
+#??Category: Food
+# Question 381
+:What is the oldest known vegetable?
+pea
+
+#??Category: Food
+# Question 382
+:Where were Cornflakes invented?
+Battle Creek Sanitarium
+
+#??Category: Food
+# Question 383
+:Where were fortune cookies invented?
+United States
+
+#??Category: Food
+# Question 384
+:Who invented fortune cookies?
+Charles Jung
+
+#??Category: Food
+# Question 385
+:Who invented the Egg Mcmuffin?
+Ed Peterson
+
+#??Category: Food and Drink
+# Question 386
+:What berries give gin its flavour?
+#juniper# berries
+
+#??Category: Fruit
+# Question 387
+:A tayberry is a cross between which two fruits?
+blackberry and raspberry
+#??Regexp: (rasp|black)berry (and|&) (rasp|black)berry
+
+#??Category: Fruit
+# Question 388
+:Unlike other oranges, what does a navel orange not have?
+seeds
+
+#??Category: Fruit
+# Question 389
+:What fruits are usually served 'belle helene'?
+pears
+
+#??Category: Fruit
+# Question 390
+:What is a cross between a blackberry and a raspberry?
+tayberry
+
+#??Category: Fruit
+# Question 391
+:What is another name for the star fruit?
+carambula
+
+#??Category: Fruit
+# Question 392
+:Where is most of the vitamin C in fruits?
+skin
+
+#??Category: Fun Runs
+# Question 393
+:What is San Francisco's equivalent to Sydney's 'City To Surf' race?
+#Bay to Breakers# footrace
+
+#??Category: Furniture
+# Question 394
+:What is the metal part of a lamp surrounding the bulb and supporting the shade called?
+harp
+
+#??Category: Furniture
+# Question 395
+:Where did venetian blinds originate?
+Japan
+
+#??Category: Games
+# Question 396
+:How many dots are on a twister mat?
+thirty
+#??Regexp: (thirty|30)
+
+#??Category: Games
+# Question 397
+:How many folds does a Monopoly board have?
+one
+#??Regexp: (one|1)
+
+#??Category: Games
+# Question 398
+:How many numbers are on the spinner in the game of 'Life'?
+ten
+#??Regexp: (ten|10)
+
+#??Category: Games
+# Question 399
+:How much does Park Place cost in Monopoly (in US Dollars)?
+450
+
+#??Category: Games
+# Question 400
+:In a game of horseshoes, how many feet apart must the stakes be?
+forty
+#??Regexp: (forty|40)
+
+#??Category: Games
+# Question 401
+:In roulette, what number is green?
+zero
+#??Regexp: (zero|0)
+
+#??Category: Games
+# Question 402
+:Moving anti-clockwise on a dartboard, what is the number next to '4'?
+eighteen
+#??Regexp: (eighteen|18)
+
+#??Category: Games
+# Question 403
+:To what do opposite faces of a dice always add up?
+seven
+#??Regexp: (seven|7)
+
+#??Category: Games
+# Question 404
+:What is another name for the card game 'Blackjack'?
+Twenty-one
+#??Regexp: (twenty[- ]one|21)
+
+#??Category: Games
+# Question 405
+:What is another name for the card game 'Twenty-one'?
+Blackjack
+
+#??Category: Games
+# Question 406
+:What is the best possible score in blackjack?
+twenty one
+#??Regexp: (twenty one|21)
+
+#??Category: Games
+# Question 407
+:What is the most popular sport in england?
+darts
+
+#??Category: Games
+# Question 408
+:What is the tallest piece on a chessboard?
+king
+
+#??Category: Games
+# Question 409
+:What number is at 12 o'clock on a dartboard?
+20
+#??Regexp: (twenty|20)
+
+#??Category: Games
+# Question 410
+:What sport/game is Bobby Fischer associated with?
+chess
+
+#??Category: Games
+# Question 411
+:Where did the card game 'bridge' originate?
+Turkey
+
+#??Category: Games
+# Question 412
+:Where does the annual Poker World Series take place?
+Las Vegas
+
+#??Category: Gastronomy
+# Question 413
+:Approximately how many pounds of cereal will the average american/canadian eat every year?
+twelve
+#??Regexp: (twelve|12)
+
+#??Category: Gems
+# Question 414
+:Peridot is the birthstone for ......?
+August
+
+#??Category: Gems
+# Question 415
+:What is the birthstone for August?
+peridot
+
+#??Category: General Knowledge
+# Question 416
+:During which month is the longest day in the Northern hemisphere?
+June
+
+#??Category: General Knowledge
+# Question 417
+:During which month is the longest day in the Southern hemisphere?
+December
+
+#??Category: General Knowledge
+# Question 418
+:During which month is the shortest day in the Northern hemisphere?
+December
+
+#??Category: General Knowledge
+# Question 419
+:During which month is the shortest day in the Southern hemisphere?
+June
+
+#??Category: General Knowledge
+# Question 420
+:What does a month beginning with a Sunday always have?
+Friday the 13th
+#??Regexp: Friday (the )?(13th|thirteenth)
+
+#??Category: General Knowledge
+# Question 421
+:What game usually starts with 'is it animal, vegetable or mineral'?
+twenty questions
+#??Regexp: (twenty|20) questions
+
+#??Category: General Knowledge
+# Question 422
+:What is the name of the office used by the president in the Whitehouse?
+Oval office
+
+#??Category: General Knowledge
+# Question 423
+:What is viewed during a a pyrotechnic display?
+fireworks
+
+#??Category: General Knowledge
+# Question 424
+:What system do the blind use for reading?
+braille
+
+#??Category: General Knowledge
+# Question 425
+:Where will children as young as 15 be jailed for cheating on their finals?
+Bangladesh
+
+#??Category: General Knowledge
+# Question 426
+:With what day does a month start if it has a Friday the 13th?
+Sunday
+
+#??Category: Genetics
+# Question 427
+:How many chromosomes do each body cell contain?
+forty six
+#??Regexp: (forty[- ]six|46)
+
+#??Category: Geograhy
+# Question 428
+:What is the capital of Zaire?
+Kinshasa
+
+#??Category: Geography
+# Question 429
+:Accra is the capital of ......?
+Ghana
+
+#??Category: Geography
+# Question 430
+:Albany is the capital of .....?
+New York
+
+#??Category: Geography
+# Question 431
+:Ankara is the capital of ......?
+Turkey
+
+#??Category: Geography
+# Question 432
+:As what is Formosa now known?
+Taiwan
+
+#??Category: Geography
+# Question 433
+:As what is Krung Thep is more commonly known?
+Bangkok
+
+#??Category: Geography
+# Question 434
+:As what is the South Pole also known?
+Amundsen Scott Station
+
+#??Category: Geography
+# Question 435
+:As what was the Taj Mahal originally built?
+tomb
+
+#??Category: Geography
+# Question 436
+:Austin is the capital of ......?
+Texas
+
+#??Category: Geography
+# Question 437
+:Bamako is the capital of ......?
+Mali
+
+#??Category: Geography
+# Question 438
+:Bangkok is the capital of ......?
+Thailand
+
+#??Category: Geography
+# Question 439
+:Banjul is the capital of ......?
+Gambia
+
+#??Category: Geography
+# Question 440
+:Bismarck is the capital of ......?
+North Dakota
+
+#??Category: Geography
+# Question 441
+:Bissau is the capital of ......?
+Guinea-Bissau
+#??Regexp: Guinea[- ]Bissau
+
+#??Category: Geography
+# Question 442
+:Bogota is the capital of ......?
+Colombia
+
+#??Category: Geography
+# Question 443
+:Boise is the capital of ......?
+Idaho
+
+#??Category: Geography
+# Question 444
+:Bridgetown is the capital of ......?
+Barbados
+
+#??Category: Geography
+# Question 445
+:Budapest is the capital of ......?
+Hungary
+
+#??Category: Geography
+# Question 446
+:Cheyenne is the capital of ......?
+Wyoming
+
+#??Category: Geography
+# Question 447
+:Columbus is the capital of ......?
+Ohio
+
+#??Category: Geography
+# Question 448
+:Dakar is the capital of ......?
+Senegal
+
+#??Category: Geography
+# Question 449
+:Des Moines is the capital of ......?
+Iowa
+
+#??Category: Geography
+# Question 450
+:Dhaka is the capital of ......?
+Bangladesh
+
+#??Category: Geography
+# Question 451
+:Djibouti is the capital of ......?
+Djibouti
+
+#??Category: Geography
+# Question 452
+:Five US states border which ocean?
+#Pacific# Ocean
+
+#??Category: Geography
+# Question 453
+:Guatemala is the capital of ......?
+Guatemala
+
+#??Category: Geography
+# Question 454
+:Helena is the capital of ......?
+Montana
+
+#??Category: Geography
+# Question 455
+:How many Great Lakes are there?
+five
+#??Regexp: (five|5)
+
+#??Category: Geography
+# Question 456
+:How many countries border the black sea?
+four
+#??Regexp: (four|4)
+
+#??Category: Geography
+# Question 457
+:If you flew due West from Portugal, what is the first continent you would reach?
+North America
+
+#??Category: Geography
+# Question 458
+:In what state is Silicon Valley?
+California
+
+#??Category: Geography
+# Question 459
+:In which city is Westminster Abbey?
+London
+
+#??Category: Geography
+# Question 460
+:In which city is Westminster Abbey?
+London
+
+#??Category: Geography
+# Question 461
+:In which city is the Arch of Hadrian?
+Athens
+
+#??Category: Geography
+# Question 462
+:In which city is the famous Bond Street?
+London
+
+#??Category: Geography
+# Question 463
+:In which country is Tobruk?
+Libya
+
+#??Category: Geography
+# Question 464
+:In which country is the largest volcano in the world?
+Ecuador
+
+#??Category: Geography
+# Question 465
+:In which county are all ten of England's highest peaks?
+Cumbria
+
+#??Category: Geography
+# Question 466
+:In which modern day country is ancient Troy?
+Turkey
+
+#??Category: Geography
+# Question 467
+:In which state is Tupelo?
+Mississippi
+
+#??Category: Geography
+# Question 468
+:In which state is the Natchez Trail?
+Mississippi
+
+#??Category: Geography
+# Question 469
+:In which year did Macau revert to China?
+1999
+
+#??Category: Geography
+# Question 470
+:Into what ocean does the Zambezi River empty?
+#Indian# Ocean
+
+#??Category: Geography
+# Question 471
+:Into which bay does the Golden Gate Strait lead?
+#San Francisco# Bay
+
+#??Category: Geography
+# Question 472
+:Into which estuary do the Trent and Ouse flow?
+Humber
+
+#??Category: Geography
+# Question 473
+:Is Belfast in Northern or Southern Ireland?
+Northern
+
+#??Category: Geography
+# Question 474
+:Is Dublin in Northern or Southern ireland?
+Southern
+
+#??Category: Geography
+# Question 475
+:Jefferson City is the capital of ......?
+Missouri
+
+#??Category: Geography
+# Question 476
+:Kathmandu is the capital of ......?
+Nepal
+
+#??Category: Geography
+# Question 477
+:Kigali is the capital of ......?
+Rwanda
+
+#??Category: Geography
+# Question 478
+:Kingston is the capital of ......?
+Jamaica
+
+#??Category: Geography
+# Question 479
+:Kinshasa is the capital of ......?
+Zaire
+
+#??Category: Geography
+# Question 480
+:Kuwait is the capital of ......?
+Kuwait
+
+#??Category: Geography
+# Question 481
+:Lagos is the capital of ......?
+Nigeria
+
+#??Category: Geography
+# Question 482
+:Lansing is the capital of ......?
+Michigan
+
+#??Category: Geography
+# Question 483
+:Libreville is the capital of ......?
+Gabon
+
+#??Category: Geography
+# Question 484
+:Lilongwe is the capital of ......?
+Malawi
+
+#??Category: Geography
+# Question 485
+:Lome is the capital of ......?
+Togo
+
+#??Category: Geography
+# Question 486
+:Luxembourg is the capital of ......?
+Luxembourg
+
+#??Category: Geography
+# Question 487
+:Malabo is the capital of ......?
+Equatorial Guinea
+
+#??Category: Geography
+# Question 488
+:Mayfair, London is a district of little streets near ......?
+Hyde Park
+
+#??Category: Geography
+# Question 489
+:Mexico City is the capital of ......?
+Mexico
+
+#??Category: Geography
+# Question 490
+:Montevideo is the capital of ......?
+Uruguay
+
+#??Category: Geography
+# Question 491
+:Nashville is the capital of ......?
+Tennessee
+
+#??Category: Geography
+# Question 492
+:Near what river is the Temple of Karnak?
+Nile
+
+#??Category: Geography
+# Question 493
+:New Delhi is the capital of ......?
+India
+
+#??Category: Geography
+# Question 494
+:Nicosia is the capital of ......?
+Cyprus
+
+#??Category: Geography
+# Question 495
+:Of what are Quemoy and Matsu part?
+Taiwan
+
+#??Category: Geography
+# Question 496
+:Of which country does the Kalahari Desert cover 84%?
+Botswana
+
+#??Category: Geography
+# Question 497
+:On the London Underground, which station has a different name on two of its platforms?
+Bank and Monument
+#??Regexp: (Bank (and|&) Monument|Monument (and|&) Bank)
+
+#??Category: Geography
+# Question 498
+:On the banks of which river is the Taj Mahal?
+River #Jumna#
+
+#??Category: Geography
+# Question 499
+:On what island is Pearl Harbor?
+Oahu
+
+#??Category: Geography
+# Question 500
+:On what river is Blackpool?
+River #Fylde#
+
+#??Category: Geography
+# Question 501
+:On what river is Liverpool?
+Mersey
+
+#??Category: Geography
+# Question 502
+:On what sea is the Crimea?
+#Black# Sea
+
+#??Category: Geography
+# Question 503
+:On which coast of Australia is Sydney?
+East
+
+#??Category: Geography
+# Question 504
+:Ouagadougou is the capital of ......?
+Burkino Faso
+#??Regexp: Burkin[oa] Faso
+
+#??Category: Geography
+# Question 505
+:Port Louis is the capital of ......?
+Mauritius
+
+#??Category: Geography
+# Question 506
+:Port Moresby is the capital of ......?
+Papua New Guinea
+
+#??Category: Geography
+# Question 507
+:Raleigh is the capital of ......?
+North Carolina
+
+#??Category: Geography
+# Question 508
+:Richmond is the capital of ......?
+Virginia
+
+#??Category: Geography
+# Question 509
+:Riyadh is the capital of ......?
+Saudi Arabia
+
+#??Category: Geography
+# Question 510
+:Rome is the capital of ......?
+Italy
+
+#??Category: Geography
+# Question 511
+:Santiago is the capital of ......?
+Chile
+
+#??Category: Geography
+# Question 512
+:Santo Domingo is the capital of ......?
+Dominican Republic
+
+#??Category: Geography
+# Question 513
+:Singapore is the capital of ......?
+Singapore
+
+#??Category: Geography
+# Question 514
+:Springfield is the capital of ......?
+Illinois
+
+#??Category: Geography
+# Question 515
+:Sydney is on the east coast of ......?
+Australia
+
+#??Category: Geography
+# Question 516
+:Tegucigalpa is the capital of ......?
+Honduras
+
+#??Category: Geography
+# Question 517
+:Through which ocean does the International Date Line approximately follow the 180 degree meridian?
+#Pacific# Ocean
+
+#??Category: Geography
+# Question 518
+:Tirana is the capital of ......?
+Albania
+
+#??Category: Geography
+# Question 519
+:Ulan Bator is the capital of ......?
+Mongolia
+
+#??Category: Geography
+# Question 520
+:Vaduz is the capital of ......?
+Liechtenstein
+
+#??Category: Geography
+# Question 521
+:What Central American country extends furthest north?
+Belize
+
+#??Category: Geography
+# Question 522
+:What Scandinavian capital begins and ends with the same letter?
+Oslo
+
+#??Category: Geography
+# Question 523
+:What city has the world's largest black population?
+#New York# City
+
+#??Category: Geography
+# Question 524
+:What continent is part of both the East and Aest hemispheres?
+Antarctica
+
+#??Category: Geography
+# Question 525
+:What country borders Egypt on the West?
+Libya
+
+#??Category: Geography
+# Question 526
+:What country borders Egypt to the South?
+Sudan
+
+#??Category: Geography
+# Question 527
+:What country borders Libya on the East?
+Egypt
+
+#??Category: Geography
+# Question 528
+:What country borders Sudan to the North?
+Egypt
+
+#??Category: Geography
+# Question 529
+:What country has the biggest population?
+China
+
+#??Category: Geography
+# Question 530
+:What country is situated between Panama and Nicaragua?
+Costa Rica
+
+#??Category: Geography
+# Question 531
+:What country is surrounded by Brazil, Argentina and Bolivia?
+Paraguay
+
+#??Category: Geography
+# Question 532
+:What country was once known as 'The Breadbasket of Russia'?
+Ukraine
+
+#??Category: Geography
+# Question 533
+:What country's capital is Caracas?
+Venezuela
+
+#??Category: Geography
+# Question 534
+:What divides the American North from the South?
+The Mason-Dixon Line
+#??Regexp: Mason[- ]Dixon Line
+
+#??Category: Geography
+# Question 535
+:What do Americans traditionally eat on thanksgiving day?
+turkey
+
+#??Category: Geography
+# Question 536
+:What does the George Washington Bridge span?
+#Hudson# River
+
+#??Category: Geography
+# Question 537
+:What is a peanut if it is not a pea or a nut?
+legume
+
+#??Category: Geography
+# Question 538
+:What is also known as Amundsen Scott Station?
+South Pole
+
+#??Category: Geography
+# Question 539
+:What is the Southernmost country in continental Europe?
+Spain
+
+#??Category: Geography
+# Question 540
+:What is the capital of Albania?
+Tirana
+
+#??Category: Geography
+# Question 541
+:What is the capital of Australia?
+Canberra
+
+#??Category: Geography
+# Question 542
+:What is the capital of Bangladesh?
+Dhaka
+
+#??Category: Geography
+# Question 543
+:What is the capital of Barbados?
+Bridgetown
+
+#??Category: Geography
+# Question 544
+:What is the capital of Brazil?
+Brasilia
+#??Regexp: Bra[zs]ilia
+
+#??Category: Geography
+# Question 545
+:What is the capital of Burkino Faso?
+Ouagadougou
+
+#??Category: Geography
+# Question 546
+:What is the capital of California?
+Sacramento
+
+#??Category: Geography
+# Question 547
+:What is the capital of Chile?
+Santiago
+
+#??Category: Geography
+# Question 548
+:What is the capital of Colombia?
+Bogota
+
+#??Category: Geography
+# Question 549
+:What is the capital of Cyprus?
+Nicosia
+
+#??Category: Geography
+# Question 550
+:What is the capital of Djibouti?
+Djibouti
+
+#??Category: Geography
+# Question 551
+:What is the capital of Equatorial Guinea?
+Malabo
+
+#??Category: Geography
+# Question 552
+:What is the capital of Gabon?
+Libreville
+
+#??Category: Geography
+# Question 553
+:What is the capital of Gambia?
+Banjul
+
+#??Category: Geography
+# Question 554
+:What is the capital of Ghana?
+Accra
+
+#??Category: Geography
+# Question 555
+:What is the capital of Guatemala?
+Guatemala
+
+#??Category: Geography
+# Question 556
+:What is the capital of Guinea-Bissau?
+Bissau
+
+#??Category: Geography
+# Question 557
+:What is the capital of Honduras?
+Tegucigalpa
+
+#??Category: Geography
+# Question 558
+:What is the capital of Hungary?
+Budapest
+
+#??Category: Geography
+# Question 559
+:What is the capital of Idaho?
+Boise
+
+#??Category: Geography
+# Question 560
+:What is the capital of Illinois?
+Springfield
+
+#??Category: Geography
+# Question 561
+:What is the capital of India?
+New Delhi
+
+#??Category: Geography
+# Question 562
+:What is the capital of Iowa?
+Des Moines
+
+#??Category: Geography
+# Question 563
+:What is the capital of Italy?
+Rome
+
+#??Category: Geography
+# Question 564
+:What is the capital of Jamaica?
+Kingston
+
+#??Category: Geography
+# Question 565
+:What is the capital of Kuwait?
+Kuwait
+
+#??Category: Geography
+# Question 566
+:What is the capital of Liechtenstein?
+Vaduz
+
+#??Category: Geography
+# Question 567
+:What is the capital of Luxembourg?
+Luxembourg
+
+#??Category: Geography
+# Question 568
+:What is the capital of Luxembourg?
+Luxembourg
+
+#??Category: Geography
+# Question 569
+:What is the capital of Malawi?
+Lilongwe
+
+#??Category: Geography
+# Question 570
+:What is the capital of Mali?
+Bamako
+
+#??Category: Geography
+# Question 571
+:What is the capital of Mauritius?
+Port Louis
+
+#??Category: Geography
+# Question 572
+:What is the capital of Mexico?
+Mexico City
+
+#??Category: Geography
+# Question 573
+:What is the capital of Michigan?
+Lansing
+
+#??Category: Geography
+# Question 574
+:What is the capital of Missouri?
+#Jefferson# City
+
+#??Category: Geography
+# Question 575
+:What is the capital of Mongolia?
+Ulan Bator
+#??Regexp: (Ulan Bator|Ulaanbaatar)
+
+#??Category: Geography
+# Question 576
+:What is the capital of Montana?
+Helena
+
+#??Category: Geography
+# Question 577
+:What is the capital of Nepal?
+Kathmandu
+
+#??Category: Geography
+# Question 578
+:What is the capital of New York state?
+Albany
+
+#??Category: Geography
+# Question 579
+:What is the capital of Nigeria?
+Lagos
+
+#??Category: Geography
+# Question 580
+:What is the capital of North Carolina?
+Raleigh
+
+#??Category: Geography
+# Question 581
+:What is the capital of North Dakota?
+Bismarck
+
+#??Category: Geography
+# Question 582
+:What is the capital of Ohio?
+Columbus
+
+#??Category: Geography
+# Question 583
+:What is the capital of Papua New Guinea?
+Port Moresby
+
+#??Category: Geography
+# Question 584
+:What is the capital of Pennsylvania?
+Harrisberg
+
+#??Category: Geography
+# Question 585
+:What is the capital of Rwanda?
+Kigali
+
+#??Category: Geography
+# Question 586
+:What is the capital of Saudi Arabia?
+Riyadh
+
+#??Category: Geography
+# Question 587
+:What is the capital of Singapore?
+Singapore
+
+#??Category: Geography
+# Question 588
+:What is the capital of Tennessee?
+Nashville
+
+#??Category: Geography
+# Question 589
+:What is the capital of Texas?
+Austin
+
+#??Category: Geography
+# Question 590
+:What is the capital of Thailand?
+Bangkok
+
+#??Category: Geography
+# Question 591
+:What is the capital of Togo?
+Lome
+
+#??Category: Geography
+# Question 592
+:What is the capital of Turkey?
+Ankara
+
+#??Category: Geography
+# Question 593
+:What is the capital of Uruguay?
+Montevideo
+
+#??Category: Geography
+# Question 594
+:What is the capital of Virginia?
+Richmond
+
+#??Category: Geography
+# Question 595
+:What is the capital of Wyoming?
+Cheyenne
+
+#??Category: Geography
+# Question 596
+:What is the capital of the Dominican Republic?
+Santo Domingo
+
+#??Category: Geography
+# Question 597
+:What is the circle of the earth at 0 degrees latitude called?
+equator
+
+#??Category: Geography
+# Question 598
+:What is the correct name of Bangkok?
+Krung Thep
+
+#??Category: Geography
+# Question 599
+:What is the deepest land gorge in the world?
+Grand Canyon
+
+#??Category: Geography
+# Question 600
+:What is the fifth largest country in the world?
+Brazil
+
+#??Category: Geography
+# Question 601
+:What is the highest peak in Fiji?
+Mount Victoria
+#??Regexp: M(oun)?t.? ?Victoria
+
+#??Category: Geography
+# Question 602
+:What is the largest city in China?
+Shanghai
+
+#??Category: Geography
+# Question 603
+:What is the largest city in Ecuador?
+Guayaquil
+
+#??Category: Geography
+# Question 604
+:What is the largest city in Switzerland?
+Zurich
+
+#??Category: Geography
+# Question 605
+:What is the largest country in Central America?
+Nicaragua
+
+#??Category: Geography
+# Question 606
+:What is the largest exclusively Indonesian island?
+Sumatra
+
+#??Category: Geography
+# Question 607
+:What is the largest ocean?
+#Pacific# Ocean
+
+#??Category: Geography
+# Question 608
+:What is the most mountainous country in Europe?
+Switzerland
+
+#??Category: Geography
+# Question 609
+:What is the oldest town in Belgium?
+Tongeren
+
+#??Category: Geography
+# Question 610
+:What is the only borough of New York City that is not on an island?
+Bronx
+
+#??Category: Geography
+# Question 611
+:What is the river capital of the world?
+Akron
+
+#??Category: Geography
+# Question 612
+:What is the saltiest sea in the world?
+The #Dead Sea#
+
+#??Category: Geography
+# Question 613
+:What is the second largest continent in the world?
+Africa
+
+#??Category: Geography
+# Question 614
+:What is the second largest ocean?
+#Atlantic# Ocean
+
+#??Category: Geography
+# Question 615
+:What is the second largest state in the USA?
+Texas
+
+#??Category: Geography
+# Question 616
+:What is the smallest Canadian province?
+Prince Edward Island
+
+#??Category: Geography
+# Question 617
+:What is the smallest state in the USA?
+Rhode Island
+
+#??Category: Geography
+# Question 618
+:What is the windiest place on earth?
+#Mount Washington#, New Hampshire
+#??Regexp: (Mount|Mt.?) ?Washington
+
+#??Category: Geography
+# Question 619
+:What is the world's highest waterfall?
+Angel Falls
+
+#??Category: Geography
+# Question 620
+:What is the world's largest desert?
+#Sahara# Desert
+
+#??Category: Geography
+# Question 621
+:What is the world's largest lake?
+Caspian Sea
+
+#??Category: Geography
+# Question 622
+:What is the world's widest river?
+Amazon
+
+#??Category: Geography
+# Question 623
+:What lake is approximately 394,000 sq. km in area?
+Caspian Sea
+
+#??Category: Geography
+# Question 624
+:What ocean is found along the East border of Asia?
+#Pacific# Ocean
+
+#??Category: Geography
+# Question 625
+:What place is known as 'the land nowhere near'?
+Cape Three Points
+#??Regexp: Cape (Three|3) Points
+
+#??Category: Geography
+# Question 626
+:What seaport's name is spanish for 'white house'?
+Casablanca
+
+#??Category: Geography
+# Question 627
+:What small island is in the bay of Naples?
+Isle of #Capri#
+
+#??Category: Geography
+# Question 628
+:Where are the 'wallops'?
+Hampshire
+
+#??Category: Geography
+# Question 629
+:Where are the Nazca lines?
+Peru
+
+#??Category: Geography
+# Question 630
+:Where are the two steepest streets in the USA?
+San Francisco
+
+#??Category: Geography
+# Question 631
+:Where is Angel Falls?
+Venezuela
+
+#??Category: Geography
+# Question 632
+:Where is Calcutta?
+India
+
+#??Category: Geography
+# Question 633
+:Where is Cape Hatteras?
+North Carolina
+
+#??Category: Geography
+# Question 634
+:Where is Eurodisney?
+#Paris#, France
+
+#??Category: Geography
+# Question 635
+:Where is Gorky Park?
+Moscow
+
+#??Category: Geography
+# Question 636
+:Where is Lake Maracaibo?
+Venezuela
+
+#??Category: Geography
+# Question 637
+:Where is Mount Washington?
+New Hampshire
+
+#??Category: Geography
+# Question 638
+:Where is Tabasco?
+Mexico
+
+#??Category: Geography
+# Question 639
+:Where is Tongeren?
+Belgium
+
+#??Category: Geography
+# Question 640
+:Where is area 51 generally said to be?
+Groom Lake
+
+#??Category: Geography
+# Question 641
+:Where is the Blue Grotto?
+Capri, Italy
+#??Regexp: Capri
+
+#??Category: Geography
+# Question 642
+:Where is the Machu Picchu?
+Peru
+
+#??Category: Geography
+# Question 643
+:Where is the Taj Mahal?
+India
+
+#??Category: Geography
+# Question 644
+:Where is the bridge of San Luis Rey?
+Peru
+
+#??Category: Geography
+# Question 645
+:Where is the land of 10,000 lakes?
+Minnesota
+
+#??Category: Geography
+# Question 646
+:Where is the statue 'Le Petit Pissoir'?
+Brussels
+
+#??Category: Geography
+# Question 647
+:Where is the wailing wall?
+Jerusalem
+
+#??Category: Geography
+# Question 648
+:Where is the world's biggest prison camp?
+Siberia
+
+#??Category: Geography
+# Question 649
+:Where is the world's largest desert?
+North Africa
+
+#??Category: Geography
+# Question 650
+:Which Californian desert drops below sea level?
+Death Valley
+
+#??Category: Geography
+# Question 651
+:Which English county has the smallest perimeter?
+Isle of Wight
+
+#??Category: Geography
+# Question 652
+:Which Portuguese colony reverted to China in December 1999?
+Macau
+
+#??Category: Geography
+# Question 653
+:Which South American country has both a Pacific and Atlantic coastline?
+Colombia
+
+#??Category: Geography
+# Question 654
+:Which US state gets the most rainfall?
+Hawaii
+
+#??Category: Geography
+# Question 655
+:Which bridge spans the Hudson River?
+#George Washington# Bridge
+
+#??Category: Geography
+# Question 656
+:Which country administers Martinique?
+France
+
+#??Category: Geography
+# Question 657
+:Which country has the most emigrants?
+Mexico
+
+#??Category: Geography
+# Question 658
+:Which country is known as the roof of the world?
+Tibet
+
+#??Category: Geography
+# Question 659
+:Which country occupies the 'horn' of Africa?
+Somalia
+
+#??Category: Geography
+# Question 660
+:Which country owns Corfu?
+Greece
+
+#??Category: Geography
+# Question 661
+:Which imaginery line approximately follows the 180 degree meridian through the Pacific Ocean?
+International Date Line
+
+#??Category: Geography
+# Question 662
+:Which is the largest lake in South America?
+Lake #Maracaibo#
+
+#??Category: Geography
+# Question 663
+:Which is the most populated state/territory in Australia?
+New South Wales
+
+#??Category: Geography
+# Question 664
+:Which is the most remote island in the southern atlantic ocean?
+#Bouvet# Island
+
+#??Category: Geography
+# Question 665
+:Which is the only musical bird that can fly backwards?
+hummingbird
+
+#??Category: Geography
+# Question 666
+:Which is the only sea below sea level?
+Dead Sea
+
+#??Category: Geography
+# Question 667
+:Which is the smallest independent country?
+Vatican City
+
+#??Category: Geography
+# Question 668
+:Which island country lies immediately to the East of Mauritius?
+Australia
+
+#??Category: Geography
+# Question 669
+:Which island country lies immediately to the West of Australia?
+Mauritius
+
+#??Category: Geography
+# Question 670
+:Which large city is on the Southeastern coast of Australia?
+Sydney
+
+#??Category: Geography
+# Question 671
+:Which ocean has an area of approximately 166 sq. km?
+#Pacific# Ocean
+
+#??Category: Geography
+# Question 672
+:Which river passes through Germany, Austria, Slovakia, Hungary, Croatia, Yugoslavia, Romania, Bulgaria and Ukraine before arriving at the Black Sea?
+Danube
+
+#??Category: Geography
+# Question 673
+:Which tropic passes through Australia?
+Tropic of #Capricorn#
+
+#??Category: Geography
+# Question 674
+:Who owns the island of Bermuda?
+Britain
+
+#??Category: Geography
+# Question 675
+:Yaounde is the capital of ......?
+Cameroon
+
+#??Category: Geography 
+# Question 676
+:What is the capital of Senegal?
+Dakar
+
+#??Category: Geogrophy
+# Question 677
+:Approximately what percentage of the earth do the oceans cover?
+seventy one
+#??Regexp: (seventy one|71)
+
+#??Category: Geology
+# Question 678
+:What is the largest volcano in the world?
+Cotopaxi
+
+#??Category: Geology
+# Question 679
+:What is the most reliable geyser in the world?
+Old Faithful
+
+#??Category: Geology
+# Question 680
+:What type of rock is marble?
+metamorphic
+
+#??Category: Geometry
+# Question 681
+:What is the sum of all the angles in a square? (in degrees)
+three hundred and sixty
+#??Regexp: (three hundred (and )?sixty|360)
+
+#??Category: Glass Making
+# Question 682
+:What is the glass capital of the world?
+Toledo
+
+#??Category: Handy Hints
+# Question 683
+:By raising your legs slowly and laying on your back, in what can you not sink?
+quicksand
+
+#??Category: Hisory
+# Question 684
+:Who invented the predecessor to today's computers?
+Charles Babbage
+
+#??Category: History
+# Question 685
+:'Operation Desert Storm' took place in 1989, 1991 or 1995?
+1991
+
+#??Category: History
+# Question 686
+:After who was America named?
+Amerigo Vespucci
+
+#??Category: History
+# Question 687
+:After who was Mickey Mouse named?
+Mickey Rooney
+
+#??Category: History
+# Question 688
+:Approximately how many children did pharaoh Ramses II father?
+one hundred and sixty
+#??Regexp: (One hundred (and )?sixty|160)
+
+#??Category: History
+# Question 689
+:As what was Istanbul previously known?
+Constantinople
+
+#??Category: History
+# Question 690
+:As what was Taiwan formerly known?
+Formosa
+
+#??Category: History
+# Question 691
+:As what was winchester known by the Romans?
+Venta Bulgarum
+
+#??Category: History
+# Question 692
+:Between which countries was the shortest war in history?
+Zanzibar and England
+#??Regexp: (Zanzibar[-/ ](and |& )?England|England[-/ ](and |& )?Zanzibar)
+
+#??Category: History
+# Question 693
+:Bill and Hilary Clinton switched on the Christmas tree lights in Belfast in 1990, 1995 or 1996?
+1995
+
+#??Category: History
+# Question 694
+:By who was Gerald Ford almost assassinated?
+Squeaky Fromme
+#??Regexp: (Lynette|Squeaky) Fromme
+
+#??Category: History
+# Question 695
+:Did Rotheim invent the aerosol in 1919, 1926 or 1931?
+1926
+
+#??Category: History
+# Question 696
+:East Berlin was the capital of ......?
+East Germany
+
+#??Category: History
+# Question 697
+:From what did Alexander the Great suffer?
+epilepsy
+
+#??Category: History
+# Question 698
+:George Washington Carver advocated planting peanuts and sweet potatoes to replace what?
+cotton and tobacco
+#??Regexp: (cotton (and |& )tobacco|tobacco (and |& )cotton)
+
+#??Category: History
+# Question 699
+:George Washington Carver advocated planting what to replace cotton and tobacco?
+peanuts and sweet potatoes
+#??Regexp: (Pea ?nuts (and |& )(sweet )?potatoe?s|(Sweet )?potatoe?s (and |& ) pea ?nuts)
+
+#??Category: History
+# Question 700
+:Germany was split into two zones by which agreement?
+#Yalta# agreement
+
+#??Category: History
+# Question 701
+:His wife was Roxana, his horse was Bacephalus, he was?
+Alexander the Great
+
+#??Category: History
+# Question 702
+:How many British officers were forced by Indian troops into the Black Hole of Calcutta?
+146
+#??Regexp: (One hundred (and |& )?forty[- ]six|146)
+
+#??Category: History
+# Question 703
+:How many people were killed in the battle of Lexington?
+eight
+#??Regexp: (eight|8)
+
+#??Category: History
+# Question 704
+:How many years was Nelson Mandela in prison?
+twenty seven
+#??Regexp: (twenty seven|27)
+
+#??Category: History
+# Question 705
+:In 1962, for what did Britain and France sign an agreement to build together?
+Concorde
+
+#??Category: History
+# Question 706
+:In 1975, what re-opened after an 8 year closure?
+Suez Canal
+
+#??Category: History
+# Question 707
+:In the 15th century, what was the war between the houses of Lancaster and York?
+War of the #Roses#
+
+#??Category: History
+# Question 708
+:In what year did the Berlin Wall come down?
+1989
+
+#??Category: History
+# Question 709
+:In which battle was George A. Custer defeated?
+Battle of #Little Bighorn#
+
+#??Category: History
+# Question 710
+:In which country was paper money first used?
+China
+
+#??Category: History
+# Question 711
+:In which year did Disneyland open?
+1955
+
+#??Category: History
+# Question 712
+:In which year did Richard Burton die?
+1984
+
+#??Category: History
+# Question 713
+:In which year did Skylab crashland in Western Australia?
+1979
+
+#??Category: History
+# Question 714
+:In which year did the first man walk on the moon?
+1969
+
+#??Category: History
+# Question 715
+:In which year was Nelson Mandela released from Robben Island?
+1990
+
+#??Category: History
+# Question 716
+:In which year was Nelson Mandela released from prison?
+1990
+
+#??Category: History
+# Question 717
+:In which year was the shortest war in history?
+1896
+
+#??Category: History
+# Question 718
+:In which year was the smoke detector invented?
+1969
+
+#??Category: History
+# Question 719
+:Kate Barton became the first bus conductress in 1909, 1920 or 1933?
+1909
+
+#??Category: History
+# Question 720
+:King Richard the ........?
+Lionhearted
+#??Regexp: Lionheart
+
+#??Category: History
+# Question 721
+:Louis XVI was guillotined in 1732, 1793 or 1842?
+1793
+
+#??Category: History
+# Question 722
+:Marconi transmitted radio signals across the atlantic in 1901, 1902 or 1903?
+1901
+
+#??Category: History
+# Question 723
+:Near what falls did Jimmy Angel crash his plane in 1937?
+Angel Falls
+
+#??Category: History
+# Question 724
+:Of which Cambodian party was Pol Pot the leader?
+Khmer Rouge
+
+#??Category: History
+# Question 725
+:Of which ship was Miles Standish captain?
+The #Mayflower#
+
+#??Category: History
+# Question 726
+:On what date did America become an independant nation?
+July 4th, 1776
+#??Regexp: (July 4(th)?,? 1776|4(th)?( of)? July,? 1776)
+
+#??Category: History
+# Question 727
+:On what day of the week did Solomon Grundy die?
+Saturday
+
+#??Category: History
+# Question 728
+:On what was Pennsylvania incorrectly spelled?
+Liberty Bell
+
+#??Category: History
+# Question 729
+:The Empire State Building was completed in 1930, 1931 or 1932?
+1931
+
+#??Category: History
+# Question 730
+:The date of which Christian festival was fixed in 325AD by the Council of Nicaea?
+Easter
+
+#??Category: History
+# Question 731
+:The first charity flag day was held in 1914, 1917 or 1919?
+1914
+
+#??Category: History
+# Question 732
+:The first metered taxi become operational in 1899, 1903 or 1907?
+1907
+
+#??Category: History
+# Question 733
+:The wristwatch invented in 1896, 1898 or 1904?
+1904
+
+#??Category: History
+# Question 734
+:The ...... Tea Party?
+Boston
+
+#??Category: History
+# Question 735
+:Through the streets of what town did Lady Godiva ride naked?
+Coventry
+
+#??Category: History
+# Question 736
+:What 19th century war between Russia and England, Turkey, Britain and France, was named after a peninsula in the Black Sea?
+#Crimean# War
+
+#??Category: History
+# Question 737
+:What English city was known to the Romans as Venta Bulgarum?
+Winchester
+
+#??Category: History
+# Question 738
+:What Shakespearean king was actually king of Scotland for 17 years?
+Macbeth
+
+#??Category: History
+# Question 739
+:What United States president was in office during the civil war?
+Abraham #Lincoln#
+
+#??Category: History
+# Question 740
+:What colour was Diana Spencer's engagement photograph suit?
+blue
+
+#??Category: History
+# Question 741
+:What country was formerly known as Siam?
+Thailand
+
+#??Category: History
+# Question 742
+:What country was ruled by Pol Pot, leader of the Khmer Rouge party?
+Cambodia (Kampuchea)
+#??Regexp: (Kampuchea|Cambodia)
+
+#??Category: History
+# Question 743
+:What did 'DMZ' stand for in the vietnam war?
+Demilitarized Zone
+#??Regexp: Demilitari[sz]ed Zone
+
+#??Category: History
+# Question 744
+:What did David Stirling found?
+SAS
+#??Regexp: S.?A.?S.?
+
+#??Category: History
+# Question 745
+:What did Ed Peterson invent?
+Egg Mcmuffin
+
+#??Category: History
+# Question 746
+:What did Eli Whitney invent?
+cotton gin
+
+#??Category: History
+# Question 747
+:What did Erik Rotheim invent in 1926?
+aerosol
+
+#??Category: History
+# Question 748
+:What did Henry Shrapnel invent?
+The #exploding shell#
+
+#??Category: History
+# Question 749
+:What did Louis Cartier invent?
+wristwatch
+
+#??Category: History
+# Question 750
+:What did Marie Curie die of on 4th July, 1934?
+#radiation# poisoning
+
+#??Category: History
+# Question 751
+:What did Pennsylvania legalise before any other colony?
+witchcraft
+
+#??Category: History
+# Question 752
+:What did Victorian women bathe in to try to enlarge their breasts?
+strawberries
+
+#??Category: History
+# Question 753
+:What famous artist could write with both his left and right hand at the same time?
+Leonardo #da Vinci#
+
+#??Category: History
+# Question 754
+:What food was almost non-existent in Ireland in the 1840's?
+potatoes
+
+#??Category: History
+# Question 755
+:What is the 15' by 18' cell that 146 captured british officers were forced into by indian troops in the 19th century called?
+Black Hole of Calcutta
+
+#??Category: History
+# Question 756
+:What kind of teeth did George Washington have?
+#wood#en
+
+#??Category: History
+# Question 757
+:What missionary station was built by Albert Schweitzer?
+Lambarene
+
+#??Category: History
+# Question 758
+:What period is also known as the age of fish?
+#Devonian# period
+
+#??Category: History
+# Question 759
+:What pre-tv radio show turned film caused people to commit suicide when it was first aired?
+War Of The Worlds
+
+#??Category: History
+# Question 760
+:What war lasted from June 5 to June 11, 1967?
+Six day war
+#??Regexp: (Six|6) days? war
+
+#??Category: History
+# Question 761
+:What was Alaska called before 1867?
+Russian America
+
+#??Category: History
+# Question 762
+:What was Alexander The Great's wife's name?
+Roxana
+
+#??Category: History
+# Question 763
+:What was George A Custer's horses' name?
+Commanche
+
+#??Category: History
+# Question 764
+:What was King Arthur's mother's name?
+Igraine
+
+#??Category: History
+# Question 765
+:What was Russian America called after 1867?
+Alaska
+
+#??Category: History
+# Question 766
+:What was Thailand formerly known as?
+Siam
+
+#??Category: History
+# Question 767
+:What was named after Amerigo Vespucci?
+America
+
+#??Category: History
+# Question 768
+:What was the D-Day invasion password?
+Mickey Mouse
+
+#??Category: History
+# Question 769
+:What was the capital of East Germany?
+East Berlin
+
+#??Category: History
+# Question 770
+:What was the first American colony to legalise witchcraft?
+Pennsylvania
+
+#??Category: History
+# Question 771
+:What was the first fighting vehicle?
+war #chariot#
+
+#??Category: History
+# Question 772
+:What was the first product to have a barcode?
+Wrigley's gum
+#??Regexp: Wrigley'?s
+
+#??Category: History
+# Question 773
+:What was the first ship to reach the Titanic after it sank?
+Carpathia
+
+#??Category: History
+# Question 774
+:What was the last chinese dynasty?
+Manchu
+
+#??Category: History
+# Question 775
+:What was the leading cause of death in the late 19th century?
+tuberculosis
+
+#??Category: History
+# Question 776
+:What was the name of the first ironclad warship ever launched?
+HMS #Warrior#
+
+#??Category: History
+# Question 777
+:What was the name of the scandal that resulted in the resignation of president Nixon?
+Watergate
+
+#??Category: History
+# Question 778
+:What wonder stood 32m high in rhodes harbour?
+Colossus of Rhodes
+
+#??Category: History
+# Question 779
+:When was D-day?
+June 6th, 1944
+#??Regexp: (6(th)? (of )?June,? 1944|June 6(th)?,? 1944)
+
+#??Category: History
+# Question 780
+:When was Julius Caesar murdered?
+Ides of March
+
+#??Category: History
+# Question 781
+:When was the Greek alphabet first used?
+800 BC
+#??Regexp: 800 ?BC
+
+#??Category: History
+# Question 782
+:Where did 'The Mayflower' take the pilgrims?
+New World
+
+#??Category: History
+# Question 783
+:Where did Bill and Hilary Clinton switch on Christmas lights in 1995?
+Belfast, Ireland
+#??Regexp: (Belfast|Ireland)
+
+#??Category: History
+# Question 784
+:Where did Churchill, Roosevelt and Stalin meet in 1945?
+Yalta
+
+#??Category: History
+# Question 785
+:Where did Guinevere retire to die?
+Amesbury
+
+#??Category: History
+# Question 786
+:Where did the Bay Of Pigs take place?
+Cuba
+
+#??Category: History
+# Question 787
+:Where did the Birkenhead sink?
+Danger Point
+
+#??Category: History
+# Question 788
+:Where did the bayonet originate?
+Bayonne, France
+#??Regexp: (Bayonne|France)
+
+#??Category: History
+# Question 789
+:Where was Napoleon defeated?
+Waterloo
+
+#??Category: History
+# Question 790
+:Where was Nelson mandela in prison?
+Robben Island
+
+#??Category: History
+# Question 791
+:Where were numerous French nuclear tests conducted?
+Muraroa Atoll
+
+#??Category: History
+# Question 792
+:Where were the Hanging Gardens?
+Babylon
+
+#??Category: History
+# Question 793
+:Where were the first books printed?
+China
+
+#??Category: History
+# Question 794
+:Which Apollo space mission put the first men on the moon ?
+Apollo 11
+#??Regexp: Apollo (eleven|11)
+
+#??Category: History
+# Question 795
+:Which Baltic seaport was the German rocket centre during WWII?
+Peenemunde
+
+#??Category: History
+# Question 796
+:Which Spanish explorer first travelled to Jamaica?
+Christopher #Columbus#
+
+#??Category: History
+# Question 797
+:Which US president said 'the buck stops here'?
+Harry #Truman#
+
+#??Category: History
+# Question 798
+:Which british comedian was the first man to appear on the cover of 'playboy'?
+Peter Sellers
+
+#??Category: History
+# Question 799
+:Which country blew up a Greenpeace ship in New Zealand?
+France
+
+#??Category: History
+# Question 800
+:Which country was split into two zones by the Yalta agreement?
+Germany
+
+#??Category: History
+# Question 801
+:Which emperor made his horse a senator?
+Caligula
+
+#??Category: History
+# Question 802
+:Which famous actor is honored in a statue in Leicester Square?
+Charlie Chaplin
+
+#??Category: History
+# Question 803
+:Which famous explorer visited Australia and New Zealand, then surveyed the Pacific coast of North America?
+Captain George #Vancouver#
+
+#??Category: History
+# Question 804
+:Which frontiersman died at the Alamo?
+Davy Crockett
+#??Regexp: Dave?y Crockett
+
+#??Category: History
+# Question 805
+:Which houses fought the War of the Roses?
+Lancaster and York
+#??Regexp: (York (and |& )?Lancaster|Lancaster (and |& )?York)
+
+#??Category: History
+# Question 806
+:Which is the most ancient walled city?
+Jericho
+
+#??Category: History
+# Question 807
+:Which nation did Moshoeshoe found?
+Basotho
+
+#??Category: History
+# Question 808
+:Which nation was led by Genghis Khan?
+#Mongol#ia
+
+#??Category: History
+# Question 809
+:Which nursery rhyme was the first gramophone recording?
+Mary Had A Little Lamb
+
+#??Category: History
+# Question 810
+:Which period was first, jurassic or carboniferous?
+carboniferous
+
+#??Category: History
+# Question 811
+:Which president was responsible for the 'Louisiana Purchase'?
+Thomas #Jefferson#
+
+#??Category: History
+# Question 812
+:Which racist organisation was formed in Tennessee in 1865?
+Klu Klux Klan
+
+#??Category: History
+# Question 813
+:Which ship did Charles Darwin captain?
+HMS Beagle
+
+#??Category: History
+# Question 814
+:Which was the first Chinese dynasty?
+Shang
+
+#??Category: History
+# Question 815
+:Which was the first magazine to publish a hologram on its cover?
+National Geographic
+
+#??Category: History
+# Question 816
+:Who advocated planting peanuts and sweet potatoes to replace cotton and tobacco?
+George Washington #Carver#
+
+#??Category: History
+# Question 817
+:Who appeared on the back of a US banknote in 1875?
+Pocahontas
+
+#??Category: History
+# Question 818
+:Who assassinated John Lennon?
+Mark David Chapman
+#??Regexp: Mark (David )?Chapman
+
+#??Category: History
+# Question 819
+:Who assassinated president Kennedy?
+Lee Harvey Oswald
+#??Regexp: Lee (Harvey )?Oswald
+
+#??Category: History
+# Question 820
+:Who became president of South Africa in 1989?
+F.W. #de Klerk#
+
+#??Category: History
+# Question 821
+:Who built Camelot?
+King #Arthur#
+
+#??Category: History
+# Question 822
+:Who built the Lambarene missionary station?
+Albert #Schweitzer#
+
+#??Category: History
+# Question 823
+:Who built the Taj Mahal?
+Shah Jahan
+
+#??Category: History
+# Question 824
+:Who burned Atlanta in 1864?
+General #Sherman#
+
+#??Category: History
+# Question 825
+:Who captained the HMS Beagle?
+Charles #Darwin#
+
+#??Category: History
+# Question 826
+:Who committed the first daytime robbery?
+Frank and Jesse James
+#??Regexp: (Jesse (and|&) Frank|Frank (and|&) Jesse) James
+
+#??Category: History
+# Question 827
+:Who developed the first nuclear submarine?
+Soviet Union
+#??Regexp: (Russia|U.?S.?S.?R.?|Soviet Union)
+
+#??Category: History
+# Question 828
+:Who did Squeaky Fromme try to assassinate?
+Gerald Ford
+
+#??Category: History
+# Question 829
+:Who died three days after Elvis Presley?
+Groucho Marx
+
+#??Category: History
+# Question 830
+:Who died three days before Groucho Marx?
+Elvis Presley
+
+#??Category: History
+# Question 831
+:Who discovered the Grand Canyon?
+Francisco #Coronado#
+
+#??Category: History
+# Question 832
+:Who drafted most of the American Declaration of Independence?
+Thomas #Jefferson#
+
+#??Category: History
+# Question 833
+:Who fiddled while Rome burned?
+Nero
+
+#??Category: History
+# Question 834
+:Who fixed the date of the Christian festival 'Easter'?
+Council of Nicaea
+
+#??Category: History
+# Question 835
+:Who forced 146 captured British officers into the Black Hole of Calcutta?
+#Indian# troops
+
+#??Category: History
+# Question 836
+:Who introduced bagpipes to the British Isles?
+Romans
+
+#??Category: History
+# Question 837
+:Who invented crop insurance?
+Benjamin Franklin
+
+#??Category: History
+# Question 838
+:Who invented the aerosol?
+Erik Rotheim
+
+#??Category: History
+# Question 839
+:Who invented the ballpoint pen?
+Georgo and Laszlo #Biro#
+
+#??Category: History
+# Question 840
+:Who invented the cotton gin?
+Eli #Whitney#
+
+#??Category: History
+# Question 841
+:Who invented the exploding shell?
+Henry Shrapnel
+
+#??Category: History
+# Question 842
+:Who invented the gatling gun?
+Richard Gatling
+
+#??Category: History
+# Question 843
+:Who invented the wristwatch?
+Louis #Cartier#
+
+#??Category: History
+# Question 844
+:Who is considered the father of medicine?
+Hippocrates
+
+#??Category: History
+# Question 845
+:Who is identified with the word 'eureka'?
+Archimedes
+
+#??Category: History
+# Question 846
+:Who is known as the high priest of revenge?
+Philip Seldon
+
+#??Category: History
+# Question 847
+:Who is known for his 'theory of evolution'?
+Charles #Darwin#
+
+#??Category: History
+# Question 848
+:Who is recognised as the father of geometry?
+Euclid
+
+#??Category: History
+# Question 849
+:Who killed Jesse James?
+Robert #Ford#
+
+#??Category: History
+# Question 850
+:Who led 900 followers in a mass suicide in 1979?
+Jim Jones
+
+#??Category: History
+# Question 851
+:Who led the mongols?
+Genghis Khan
+
+#??Category: History
+# Question 852
+:Who married actress Nancy Davis?
+Ronald Reagan
+
+#??Category: History
+# Question 853
+:Who met in Yalta in 1945 (in alphabetical order)?
+Churchill Roosevelt Stalin
+#??Regexp: Churchill,? Roosevelt,? (and )?Stalin
+
+#??Category: History
+# Question 854
+:Who ordered the persecution of the Christians in which Peter and Paul died?
+Nero
+
+#??Category: History
+# Question 855
+:Who presided over the trial of Jesus?
+Pontius #Pilate#
+
+#??Category: History
+# Question 856
+:Who received the nobel peace prize in 1964 for civil rights leadership?
+#Martin Luther King# Jr
+
+#??Category: History
+# Question 857
+:Who ruled rome when Christ was born?
+Augustus Caesar
+#??Regexp: (Caesar Augustus|Augustus Caesar)
+
+#??Category: History
+# Question 858
+:Who said 'eureka'?
+Archimedes
+
+#??Category: History
+# Question 859
+:Who said 'public service is my motto'?
+Al Capone
+
+#??Category: History
+# Question 860
+:Who sailed to the new world in 'The mayflower'?
+pilgrims
+
+#??Category: History
+# Question 861
+:Who shot Abraham Lincoln?
+John Wilkes Booth
+
+#??Category: History
+# Question 862
+:Who signed the 'thanksgiving proclamation'?
+Abraham #Lincoln#
+
+#??Category: History
+# Question 863
+:Who started the second Punic war?
+Carthage
+
+#??Category: History
+# Question 864
+:Who succeeded Winston Churchill as Prime Minister of England?
+Anthony Eden
+
+#??Category: History
+# Question 865
+:Who tried to create the 'Great Society'?
+Lyndon B #Johnson#
+
+#??Category: History
+# Question 866
+:Who was 'The Elephant Man'?
+John Merrick
+
+#??Category: History
+# Question 867
+:Who was George Washington's vice-president?
+John #Adams#
+
+#??Category: History
+# Question 868
+:Who was John Merrick?
+The #Elephant Man#
+
+#??Category: History
+# Question 869
+:Who was King Arthur's foster-father?
+Ector
+
+#??Category: History
+# Question 870
+:Who was Ulysses' son, who grew to manhood in his absence?
+Telemachus
+
+#??Category: History
+# Question 871
+:Who was assassinated on December 8, 1980 in New York City?
+John Lennon
+
+#??Category: History
+# Question 872
+:Who was assassinated on November 22, 1963 in Dallas, Texas?
+President John F. #Kennedy#
+
+#??Category: History
+# Question 873
+:Who was captain of 'The Mayflower'?
+Miles #Standish#
+
+#??Category: History
+# Question 874
+:Who was defeated at the Battle of Little Bighorn?
+George A. #Custer#
+
+#??Category: History
+# Question 875
+:Who was forced by Indian troops into the Black Hole of Calcutta?
+#British# officers
+
+#??Category: History
+# Question 876
+:Who was given the only Nobel Peace Prize award during WWI?
+International #Red Cross#
+
+#??Category: History
+# Question 877
+:Who was kidnapped on the night of March 1, 1932?
+Charles Lindbergh Jr
+
+#??Category: History
+# Question 878
+:Who was known as 'the peanut president'?
+Jimmy Carter
+
+#??Category: History
+# Question 879
+:Who was the first (and last) catholic president?
+John Fitzerald #Kennedy#
+
+#??Category: History
+# Question 880
+:Who was the first person to break the sound barrier?
+Chuck Yager
+
+#??Category: History
+# Question 881
+:Who was the first person to swim the English Channel?
+Captain #Matthew Webb#
+
+#??Category: History
+# Question 882
+:Who was the first woman in space?
+Valentina Tereshkova
+
+#??Category: History
+# Question 883
+:Who was the lead singer for Creedence Clearwater Revival, and recently released 'Blue Moon Swamp'?
+John Fogerty
+
+#??Category: History
+# Question 884
+:Who was the leader of the Khmer Rouge?
+Pol Pot
+
+#??Category: History
+# Question 885
+:Who was the only survivor of Custer's last stand?
+his #horse#
+
+#??Category: History
+# Question 886
+:Who were the first people to be elected into the Aviation Hall Of Fame?
+The #Wright Brothers#
+
+#??Category: History
+# Question 887
+:Who wrote 'The Starry Messenger'?
+Galileo
+
+#??Category: History
+# Question 888
+:Winston Churchill resigned from office in 1954, 1955 or 1956?
+1955
+
+#??Category: Hobbies
+# Question 889
+:What hobby was developed by the Palmer Paint Company?
+Painting by #number#s
+
+#??Category: Hobbies
+# Question 890
+:Who invented painting by numbers?
+palmer paint company
+
+#??Category: How many?
+# Question 891
+:How many years in a vicennial?
+twenty
+#??Regexp: (twenty|20)
+
+#??Category: Human Achievment
+# Question 892
+:Who hit the first golf shot on the moon?
+Alan Sheppard
+
+#??Category: Humanitarianism
+# Question 893
+:What does the abbreviation 'UNICEF' stand for?
+United Nations Childrens' Emergency Fund
+#??Regexp: United Nations Childrens'? Emergency Fund
+
+#??Category: IRC
+# Question 894
+:In mIRC, what colour does control-4 give?
+red
+
+#??Category: IRC
+# Question 895
+:On IRC, how do you ask age, sex, location?
+asl
+#??regexp: a[/,] ?s[/,] ?l
+
+#??Category: IRC
+# Question 896
+:On irc, what does a/s/l mean?
+age/sex/location
+#??Regexp: Age[/,] ?Sex[/,] ?Location
+
+#??Category: Impressive Fauna
+# Question 897
+:What animal can live several weeks without its head?
+cockroach
+
+#??Category: Industry
+# Question 898
+:South africa is the biggest producer and exporter of ......?
+mohair
+
+#??Category: Industry
+# Question 899
+:Which country is the biggest producer and exporter of mohair?
+South Africa
+
+#??Category: Intelligence
+# Question 900
+:Who founded the SAS?
+David Stirling
+
+#??Category: Interesting Fact
+# Question 901
+:More people are killed by donkeys every year than are killed in ......?
+plane crashes
+
+#??Category: Inventors
+# Question 902
+:Who invented 'bifocal' lenses for eyeglasses?
+Benjamin Franklin
+
+#??Category: Inventors
+# Question 903
+:Who invented the most common projection for world maps?
+Gerardus #Mercator#
+
+#??Category: Jokes
+# Question 904
+:In the old gag, where is Prince Albert?
+In a #can#
+
+#??Category: Language
+# Question 905
+:From what Irish words is 'Dublin' derived?
+dubh linn
+
+#??Category: Language
+# Question 906
+:From what language is the term 'finito'?
+Italian
+
+#??Category: Language
+# Question 907
+:Merging the words 'melt' and 'weld' created which word?
+meld
+
+#??Category: Language
+# Question 908
+:Other than Germany, whose official language is German?
+Austria
+
+#??Category: Language
+# Question 909
+:The word rodent comes from the italian 'rodere', which means?
+gnaw
+
+#??Category: Language
+# Question 910
+:What city's name is derived from the words 'dubh linn'?
+Dublin
+
+#??Category: Language
+# Question 911
+:What does 'alma mater' mean in English?
+bountiful mother
+
+#??Category: Language
+# Question 912
+:What does 'majuba' mean?
+place of rock pigeons
+
+#??Category: Language
+# Question 913
+:What does 'shogun' mean in English?
+military governer
+
+#??Category: Language
+# Question 914
+:What does the Irish 'dubh linn' mean?
+black pool
+#??Regexp: black ?pool
+
+#??Category: Language
+# Question 915
+:What does the word 'karate' translate to in English?
+open hand
+
+#??Category: Language
+# Question 916
+:What is 'blackpool' in Irish?
+dubh linn
+
+#??Category: Language
+# Question 917
+:What is 'bountiful mother' in Latin?
+alma mater
+
+#??Category: Language
+# Question 918
+:What is 'military governer' in Japanese?
+shogun
+
+#??Category: Language
+# Question 919
+:What is the English word for 'fiesta'?
+festival
+
+#??Category: Language
+# Question 920
+:What is the Israeli 'knesset'?
+parliament
+
+#??Category: Language
+# Question 921
+:What is the Old English word for 'sneeze'?
+fneasan
+
+#??Category: Language
+# Question 922
+:What is the Spanish word for 'festival'?
+fiesta
+
+#??Category: Language
+# Question 923
+:What is the language of Hungary?
+Magyar
+
+#??Category: Language
+# Question 924
+:What is the literal meaning of 'pince-nez'?
+pinch nose
+#??Regexp: pinch[- ]?nose
+
+#??Category: Language
+# Question 925
+:What is the meaning of the Mercedes Benz motto 'Das beste oder nichts'?
+The best or nothing
+
+#??Category: Language
+# Question 926
+:What is the official language of Austria?
+german
+
+#??Category: Language
+# Question 927
+:What two words make the word 'meld'?
+melt and weld
+#??Regexp: (weld (and |& )?melt|melt (and |& )?weld)
+
+#??Category: Language
+# Question 928
+:What was the language of ancient India?
+Sanskrit
+
+#??Category: Law
+# Question 929
+:In which country was it once against the law to slam your car door?
+Switzerland
+
+#??Category: Lawn Mowers
+# Question 930
+:How fast does the tip of a standard rotary mower travel? (in km/h)
+two hundred
+#??Regexp: (two hundred|200)
+
+#??Category: Legends
+# Question 931
+:What was the Lone Ranger's real name?
+John Reid
+
+#??Category: Legends
+# Question 932
+:Where does Nessie live?
+Loch Ness
+
+#??Category: Legends
+# Question 933
+:Who are santa's reindeer, in alphabetical order?
+blitzen, comet, dancer, dasher, prancer and vixen
+#??Regexp: blitzen(,| and)? comet(,| and)? dancer(,| and)? dasher(,| and)? prancer(,| and)? vixen
+
+#??Category: Legends
+# Question 934
+:Who created the round table?
+Merlin
+
+#??Category: Legends
+# Question 935
+:Who was Bonnie Parker's partner?
+Clyde Barrow
+
+#??Category: Legends
+# Question 936
+:Who was Clyde Barrow's partner?
+Bonnie Parker
+
+#??Category: Legends
+# Question 937
+:Who was John Reid?
+Lone Ranger
+
+#??Category: Legends
+# Question 938
+:Who was the Lone Ranger's Indian companion?
+Tonto
+
+#??Category: Literature
+# Question 939
+:As what did H.G. Wells refer to Adolf Hitler?
+A #certifiable lunatic#
+
+#??Category: Literature
+# Question 940
+:How many books are there in Anne Rice's vampire series?
+five
+#??Regexp: (five|5)
+
+#??Category: Literature
+# Question 941
+:How many stories did enid blyton publish in 1959?
+fifty nine
+#??Regexp: (fifty[- ]nine|59)
+
+#??Category: Literature
+# Question 942
+:In 'A Christmas Carol', how many ghosts visited Scrooge?
+four
+
+#??Category: Literature
+# Question 943
+:In 'A Christmas Carol', what was the name of the miser?
+Ebenezer #Scrooge#
+
+#??Category: Literature
+# Question 944
+:In 'Alice In Wonderland', who never stopped sobbing?
+Mock Turtle
+
+#??Category: Literature
+# Question 945
+:In 'Romeo and Juliet', about what was Mercutio's long monologue?
+Queen Mab
+
+#??Category: Literature
+# Question 946
+:In 'Romeo and Juliet', who gave a long monologue about Queen Mab?
+Mercutio
+
+#??Category: Literature
+# Question 947
+:In 'Romeo and Juliet', who said 'I have a faint cold, fear thrills through my veins'?
+Juliet
+
+#??Category: Literature
+# Question 948
+:In 'Romeo and Juliet', who says 'make the bridal bed in that dim monument where Tybalt lies?
+Juliet
+
+#??Category: Literature
+# Question 949
+:In 'Romeo and Juliet', who says 'what must be must be'?
+Juliet
+
+#??Category: Literature
+# Question 950
+:In one of Donald Horne's novels, as what was Australia dubbed?
+The #lucky country#
+
+#??Category: Literature
+# Question 951
+:In one of Donald Horne's novels, which was 'the lucky country'?
+Australia
+
+#??Category: Literature
+# Question 952
+:In the Dr Seuss books, which elephant hatched an egg?
+Horton
+
+#??Category: Literature
+# Question 953
+:In which book did four ghosts visit Scrooge?
+A Christmas Carol
+
+#??Category: Literature
+# Question 954
+:On what book was 'Three Days Of The Condor' based?
+Six Days Of The Condor
+#??Regexp: (Six|6) Days Of The condor
+
+#??Category: Literature
+# Question 955
+:The Hardy Boys and ......?
+Nancy Drew
+
+#??Category: Literature
+# Question 956
+:What Dr Seuss character steals Christmas?
+Grinch
+
+#??Category: Literature
+# Question 957
+:What controversial book did Germaine Greer write?
+The #Female Eunuch#
+
+#??Category: Literature
+# Question 958
+:What shakespearean play refers to the date of epiphany?
+Twelfth Night
+
+#??Category: Literature
+# Question 959
+:What story features flopsy, mopsy and cottontail?
+Peter Rabbit
+
+#??Category: Literature
+# Question 960
+:What subject did 'Mr. Chips' teach?
+Latin
+
+#??Category: Literature
+# Question 961
+:What was H.G Wells' first novel?
+The #Time Machine#
+
+#??Category: Literature
+# Question 962
+:What was Lestat's last name?
+de Lioncourt
+
+#??Category: Literature
+# Question 963
+:What were the dolls in the novel 'Valley Of The Dolls'?
+pills
+
+#??Category: Literature
+# Question 964
+:What were the two cities in 'A Tale Of Two Cities'?
+London and Paris
+#??Regexp: (Paris,? (and |& )?London|London,? (and |& )?Paris)
+
+#??Category: Literature
+# Question 965
+:Which Tennesee Williams play is about a Sicilian-American woman?
+The #Rose Tattoo#
+
+#??Category: Literature
+# Question 966
+:Which book featured the miser Scrooge?
+A Christmas Carol
+
+#??Category: Literature
+# Question 967
+:Which is the only book written by Margaret Mitchell?
+Gone With The Wind
+
+#??Category: Literature
+# Question 968
+:Who created 'Horton' the elephant?
+Dr. Seuss
+#??Regexp: Dr.? Seuss
+
+#??Category: Literature
+# Question 969
+:Who created 'Maudie Frickett'?
+Jonathan Winters
+
+#??Category: Literature
+# Question 970
+:Who created 'The Saint'?
+Leslie Charteris
+
+#??Category: Literature
+# Question 971
+:Who did Macduff kill?
+Macbeth
+
+#??Category: Literature
+# Question 972
+:Who did author Leslie Charteris create?
+The #Saint#
+
+#??Category: Literature
+# Question 973
+:Who dubbed Australia 'the lucky country'?
+Donald Horne
+
+#??Category: Literature
+# Question 974
+:Who killed Macbeth?
+Macduff
+#??Regexp: Ma?cduff
+
+#??Category: Literature
+# Question 975
+:Who said 'But, soft! what light through yonder window breaks'?
+Romeo
+
+#??Category: Literature
+# Question 976
+:Who was Winnie the Pooh's neighbour?
+Piglet
+
+#??Category: Literature
+# Question 977
+:Who was the author of 'Dracula'?
+Bram Stoker
+
+#??Category: Literature
+# Question 978
+:Who was the human companion of Willow?
+Mad Mardigan
+
+#??Category: Literature
+# Question 979
+:Who wrote '1984'?
+George Orwell
+
+#??Category: Literature
+# Question 980
+:Who wrote 'A Christmas Carol'?
+Charles #Dickens#
+
+#??Category: Literature
+# Question 981
+:Who wrote 'A Tale Of Two Cities'?
+Charles #Dickens#
+
+#??Category: Literature
+# Question 982
+:Who wrote 'A Tale Of Two Cities'?
+Charles #Dickens#
+
+#??Category: Literature
+# Question 983
+:Who wrote 'Alice In Wonderland'?
+Lewis Carroll
+
+#??Category: Literature
+# Question 984
+:Who wrote 'Gone With The Wind'?
+Margaret Mitchell
+
+#??Category: Literature
+# Question 985
+:Who wrote 'The Female Eunuch'?
+Germaine Greer
+
+#??Category: Literature
+# Question 986
+:Who wrote 'The Hobbit'?
+J.R.R. #Tolkien#
+
+#??Category: Literature
+# Question 987
+:Who wrote 'The Rose Tattoo'?
+Tennessee Williams
+
+#??Category: Literature
+# Question 988
+:Who wrote 'The Time Machine'?
+H.G. Wells
+#??Regexp: H.?G.? Wells
+
+#??Category: Literature
+# Question 989
+:Who wrote 'Valley Of The Dolls'?
+Jacqueline Susann
+
+#??Category: Literature
+# Question 990
+:Who wrote 'Weird Harold and Fat Albert'?
+Bill Cosby
+
+#??Category: Literature
+# Question 991
+:Who wrote 'little lamb, who made thee'?
+William Blake
+
+#??Category: Literature
+# Question 992
+:Who wrote the 'Dragonriders Of Pern' series?
+Anne Mcaffrey
+#??Regexp: Anne Ma?caffrey
+
+#??Category: Literature
+# Question 993
+:Who wrote the 'Father Brown' crime stories?
+G.K. #Chesterton#
+
+#??Category: Literature
+# Question 994
+:Who wrote the 'Myth' series?
+Robert Asprin
+
+#??Category: Literature
+# Question 995
+:Who wrote the 'Noddy' books?
+Enid Blyton
+
+#??Category: Literature
+# Question 996
+:Who wrote the vampire series that featured Lestat as the main character?
+Anne Rice
+
+#??Category: Literature
+# Question 997
+:Who's last words were 'Thus with a kiss I die'?
+Romeo
+
+#??Category: Longevity
+# Question 998
+:How old was the world's oldest man?
+one hundred and forty one
+#??Regexp: (One hundred (and )?forty[- ]one|141)
+
+#??Category: Longevity
+# Question 999
+:Who was the world's oldest man?
+Bir Narayan Chaudhari
+
+#??Category: Maritime Trivia
+# Question 1000
+:On a ship, what is the line that indicates the maximum load that may be transported?
+#Plimsoll# Line
+
+#??Category: Mathematics
+# Question 1001
+:How many different letters are used in the roman numeral system?
+seven
+#??Regexp: (seven|7)
+
+#??Category: Mathematics
+# Question 1002
+:What is 65% of 60?
+39
+#??Regexp: (Thirty[- ]nine|39)
+
+#??Category: Mathematics
+# Question 1003
+:What is the maximum number of integer degrees in a reflex angle?
+three hundred and fifty nine
+#??Regexp: (three hundred (and |& )?fifty[- ]nine|359)
+
+#??Category: Mathematics
+# Question 1004
+:What is the maximum number of integer degrees in an acute angle?
+eighty nine
+#??Regexp: (eighty[- ]nine|89)
+
+#??Category: Mathematics
+# Question 1005
+:What is the maximum number of integer degrees in an obtuse angle?
+one hundred and seventy nine
+#??Regexp: (One hundred (and |& )?seventy[- ]nine|179)
+
+#??Category: Mathematics
+# Question 1006
+:What is the minimum number of integer degrees in a reflex angle?
+one hundred and eighty one
+#??Regexp: (One hundred (and |& )?eighty[- ]one|181)
+
+#??Category: Mathematics
+# Question 1007
+:What is the minimum number of integer degrees in an acute angle?
+one 
+#??Regexp: (one|1)
+
+#??Category: Mathematics
+# Question 1008
+:What is the minimum number of integer degrees in an obtuse angle?
+ninety one
+#??Regexp: (ninety[- ]one|91)
+
+#??Category: Mathematics
+# Question 1009
+:What is the only digit that has the same number of letters as its value?
+four
+#??Regexp: (four|4)
+
+#??Category: Mathematics
+# Question 1010
+:What is the square root of one quarter?
+one half
+#??Regexp: ((One |A |1 )?half|1/2)
+
+#??Category: Measurement
+# Question 1011
+:What instrument measures walking distance?
+pedometer
+
+#??Category: Medicien
+# Question 1012
+:In what body part does an osteopath specialise?
+#bone#s
+
+#??Category: Medicine
+# Question 1013
+:A salt enema was given to children to rid them of ......?
+Threadworm
+
+#??Category: Medicine
+# Question 1014
+:Heroin is the brand name of morphine once marketed by which pharmaceutical company?
+Bayer
+
+#??Category: Medicine
+# Question 1015
+:In the early 20th century, rattlesnake venom was used to treat which illness?
+epilepsy
+
+#??Category: Medicine
+# Question 1016
+:North American Indians ate watercress to dissolve gravel and stones in the ......?
+bladder
+
+#??Category: Medicine
+# Question 1017
+:North American Indians ate watercress to dissolve what in the bladder?
+gravel and stones
+#??Regexp: (gravel|stones)
+
+#??Category: Medicine
+# Question 1018
+:On what part of the body is an 'LTK procedure' performed?
+eyes
+
+#??Category: Medicine
+# Question 1019
+:The first rubber gloves were used during surgery in 1890, 1910 or 1920?
+1890
+
+#??Category: Medicine
+# Question 1020
+:The smallpox vaccine was invented in 1763, 1784 or 1798?
+1798
+
+#??Category: Medicine
+# Question 1021
+:What did North American Indians eat to dissolve gravel and stones in the bladder?
+watercress
+
+#??Category: Medicine
+# Question 1022
+:What does a sphygmomanometer measure?
+blood pressure
+
+#??Category: Medicine
+# Question 1023
+:What does hepatitis affect?
+liver
+
+#??Category: Medicine
+# Question 1024
+:What instrument measures blood pressure?
+sphygmomanometer
+
+#??Category: Medicine
+# Question 1025
+:What is a the technical name for a heart attack?
+myocardial infarct
+
+#??Category: Medicine
+# Question 1026
+:What is acute nasopharyngitis?
+A #cold#
+
+#??Category: Medicine
+# Question 1027
+:What is another name for consumption?
+tuberculosis
+
+#??Category: Medicine
+# Question 1028
+:What is another name for tuberculosis?
+consumption
+
+#??Category: Medicine
+# Question 1029
+:What was given to children to rid them of threadworm?
+salt enema
+
+#??Category: Medicine
+# Question 1030
+:Who ate watercress to dissolve gravel and stones in the bladder?
+North American #Indians#
+
+#??Category: Medicine
+# Question 1031
+:Who invented the smallpox vaccine?
+Edward Jenner
+
+#??Category: Medicine
+# Question 1032
+:Who was the first to use rubber gloves during surgery?
+Dr. W.S. #Halstead#
+
+#??Category: Military
+# Question 1033
+:As a result of their wearing high leather collars to protect their necks from sabres, as what were the first US marines known?
+leathernecks
+
+#??Category: Military
+# Question 1034
+:What do the letters 'SAM' mean in SAM missiles?
+Surface To Air
+#??Regexp: Surface[- ]To[- ]Air
+
+#??Category: Military
+# Question 1035
+:What is the mascot of the US naval academy?
+goat
+
+#??Category: Military
+# Question 1036
+:What is the naval equivalent of an army Major?
+Lieutenant Commander
+
+#??Category: Military
+# Question 1037
+:With which hand do soldiers salute?
+right
+
+#??Category: Minerals
+# Question 1038
+:What forms when a diamond is cut with a laser?
+#graphite# dust
+
+#??Category: Minerals
+# Question 1039
+:What is also known as the 'bishop's stone'?
+amethyst
+
+#??Category: Minerals
+# Question 1040
+:What is the violet variety of quartz otherwise known as?
+amethyst
+
+#??Category: Mining
+# Question 1041
+:Approximately how deep are the deepest mines? (in km)
+four
+#??Regexp: (4|four)
+
+#??Category: Mining
+# Question 1042
+:In which country is the largest gold refinery?
+South Africa
+
+#??Category: Mining
+# Question 1043
+:What is the deepest mine in the world?
+Western Deep Levels Mine
+
+#??Category: Mining
+# Question 1044
+:What is the name of the largest gold refinery?
+Rand Refinery
+
+#??Category: Mining
+# Question 1045
+:Where are the deepest mines?
+South Africa
+
+#??Category: Minreals
+# Question 1046
+:Graphite dust is formed when what is cut with a laser?
+diamond
+
+#??Category: Misnomers
+# Question 1047
+:What are Swedish buns called?
+Danishes
+#??Regexp: Danish(es)?
+
+#??Category: Modern Myths
+# Question 1048
+:What has no reflection, no shadow, and can't stand the smell of garlic?
+vampire
+
+#??Category: Monuments
+# Question 1049
+:Which man has the most monuments erected in his honour?
+Buddha
+
+#??Category: Monuments
+# Question 1050
+:Which woman has the most monuments erected in her honour?
+Virgin Mary
+
+#??Category: Motor Racing
+# Question 1051
+:From which team did Marlboro switch its backing to Mclaren in the 1974 season?
+BRM
+
+#??Category: Motor Racing
+# Question 1052
+:How many pole positions did Ayrton Senna score?
+sixty five
+#??Regexp: (sixty[- ]five|65)
+
+#??Category: Motor Racing
+# Question 1053
+:In 1976, James Hunt was disqualified after winning which Grand Prix?
+British 
+
+#??Category: Motor Racing
+# Question 1054
+:Name the first automobile racetrack in America.
+Indianapolis Motor Speedway
+
+#??Category: Motor Racing
+# Question 1055
+:Over what time period is the Le Mans endurance motor race?
+Twenty four hours
+#??Regexp: (Twenty[- ]four|24) ?(h(ou)?rs?|(One |1 ?)day)
+
+#??Category: Motor Racing
+# Question 1056
+:To which team did Marlboro switch its backing from BRM in the 1974 season?
+Mclaren
+#??Regexp: Ma?claren
+
+#??Category: Motor Racing
+# Question 1057
+:What colours was the Ferrari Formula 1 car in the 1964 US Grand prix?
+blue and white
+#??Regexp: (blue (and |& )white|white (and |& )blue)
+
+#??Category: Motor Racing
+# Question 1058
+:What event marked the 1954 french grand prix?
+The return of #Mercedes#
+
+#??Category: Motor Racing
+# Question 1059
+:Where do the Italians host the Grand Prix?
+Monza
+
+#??Category: Motor Racing
+# Question 1060
+:Which car won the 1953 Italian Grand Prix?
+Maserati
+
+#??Category: Motor Racing
+# Question 1061
+:Which new engine regulation replaced the 2.5 litre rule at the start of the 1961 season?
+#1.5 litre# rule
+#??Regexp: 1.5
+
+#??Category: Motor Racing
+# Question 1062
+:Who hosts the Monza Grand Prix?
+Italy
+
+#??Category: Motor Racing
+# Question 1063
+:Who qualified for pole position in the 1984 Brazilian Grand Prix?
+Elio #de Angelis#
+
+#??Category: Motor Racing
+# Question 1064
+:Who was disqualified after winning the 1976 British Grand Prix?
+James Hunt
+
+#??Category: Motor Racing
+# Question 1065
+:Who was the driver for the Jordan team in the 1998 Grand Prix?
+Damon Hill
+
+#??Category: Motor Racing
+# Question 1066
+:Who won the 1966 F1 championship?
+Jack Brabham
+
+#??Category: Mottos
+# Question 1067
+:Whose motto is 'Be prepared'?
+Boy Scouts
+
+#??Category: Mountain Climbing
+# Question 1068
+:Who conquered the Matterhorn in 1865?
+Edward Whymper
+
+#??Category: Movie Stars
+# Question 1069
+:Who was Lauren Bacall's first husband?
+Humphrey Bogart
+
+#??Category: Movie Trivia
+# Question 1070
+:About which family are the Godfather films?
+Corleone
+
+#??Category: Movie Trivia
+# Question 1071
+:For which film did Art Carney win best actor Oscar in 1974?
+Harry and Tonto
+
+#??Category: Movie Trivia
+# Question 1072
+:In 'Star Wars', who was C3P0's sidekick?
+R2D2
+
+#??Category: Movie Trivia
+# Question 1073
+:In 'The Shining' what was the child's imaginary friend's name (the one who told him things that were going to happen)?
+Tony
+
+#??Category: Movie Trivia
+# Question 1074
+:In the 'Nightmare On Elm Street' films, who played Freddy Frueger?
+Robert Englund
+#??Regexp: Robert Engl[au]nd
+
+#??Category: Movie Trivia
+# Question 1075
+:In the film 'American Hot Wax', who did Jay Leno play?
+Mookie
+
+#??Category: Movie Trivia
+# Question 1076
+:In the film 'American Hot Wax', who played the 'Mookie'?
+Jay Leno
+
+#??Category: Movie Trivia
+# Question 1077
+:In the film 'Hackers', how old was 'zero_kool' when he was first arrested?
+eleven
+#??Regexp: (eleven|11)
+
+#??Category: Movie Trivia
+# Question 1078
+:In the film 'Home Alone', who played the baddies?
+Joe Pesci and Daniel Stern
+#??Regexp: (Joe Pesci (and |& )Daniel Stern|Daniel Stern (and |& )Joe Pesci)
+
+#??Category: Movie Trivia
+# Question 1079
+:In the film 'Pretty Woman', for who was Goldie Hawn the body double?
+Julia Roberts
+
+#??Category: Movie Trivia
+# Question 1080
+:In the film 'The Day Of The Jackal', who played the Jackal?
+Edward Fox
+
+#??Category: Movie Trivia
+# Question 1081
+:In what did someone squish her hands to make the sound of e.t walking?
+jelly
+
+#??Category: Movie Trivia
+# Question 1082
+:In what film did Whoopi Goldberg make her screen debut?
+The #Color Purple#
+
+#??Category: Movie Trivia
+# Question 1083
+:In which James Bond film does the villain cheat at golf?
+Goldfinger
+
+#??Category: Movie Trivia
+# Question 1084
+:In which film did Henry Fonda play a fallen priest?
+The Fugitive
+
+#??Category: Movie Trivia
+# Question 1085
+:In which film did Paul Newman and Robert Redford hold hands and jump into a river?
+Butch Cassidy and the Sundance Kid
+
+#??Category: Movie Trivia
+# Question 1086
+:In which film was Goldie Hawn the body double for Julia Roberts?
+Pretty Woman
+
+#??Category: Movie Trivia
+# Question 1087
+:Juliette Binoch won an academy award for best supporting role in which film?
+English Patient
+
+#??Category: Movie Trivia
+# Question 1088
+:Pancho was whose faithful sidekick?
+#Cisco Kid#'s
+
+#??Category: Movie Trivia
+# Question 1089
+:The film 'The Wizard Of ......'?
+Oz
+
+#??Category: Movie Trivia
+# Question 1090
+:Tippi Hedren is best known for her lead role in which film?
+The #Birds#
+
+#??Category: Movie Trivia
+# Question 1091
+:Was Shirley Temple 21, 25 or 29 when she made her last film?
+21
+
+#??Category: Movie Trivia
+# Question 1092
+:What Marlon Brando film was widely banned?
+Last Tango In Paris
+
+#??Category: Movie Trivia
+# Question 1093
+:What did Dorothy's house land on in 'The Wizard Of Oz'?
+The #Wicked Witch of the West#
+
+#??Category: Movie Trivia
+# Question 1094
+:What film featured a cat named Mr. Bigglesworth?
+Austin Powers
+
+#??Category: Movie Trivia
+# Question 1095
+:What film is generally considered the worst film ever made?
+Attack of the Killer Tomatoes
+
+#??Category: Movie Trivia
+# Question 1096
+:What film marked James Cagney's return to the screen after 20 years?
+Ragtime
+
+#??Category: Movie Trivia
+# Question 1097
+:What film starred Helen Hunt, Gary Elwes and Bill Paxton?
+Twister
+
+#??Category: Movie Trivia
+# Question 1098
+:What film starred Rosie O'Donnell, Rita Wilson and Meg Ryan?
+Sleepless in Seattle
+
+#??Category: Movie Trivia
+# Question 1099
+:What is the name of the film in which Steven Segal's character dies?
+Executive Decision
+
+#??Category: Movie Trivia
+# Question 1100
+:What is the sequel to the film 'Every Which Way But Loose'?
+Every Which Way You Can
+
+#??Category: Movie Trivia
+# Question 1101
+:What was Ben Stiller's character called in 'Mystery Men'?
+Mr. Furious
+#??Regexp: (Mr.?|Mister) Furious
+
+#??Category: Movie Trivia
+# Question 1102
+:What was Eddie Murphy's character name in 'Beverley Hills Cop'?
+Axel Foley
+
+#??Category: Movie Trivia
+# Question 1103
+:What was Garth's last name in 'Wayne's World'?
+Algar
+
+#??Category: Movie Trivia
+# Question 1104
+:What was John Wayne's real name?
+Marion Morrison
+
+#??Category: Movie Trivia
+# Question 1105
+:What was Keanu Reeves' computer world alias in 'The Matrix'?
+Neo
+
+#??Category: Movie Trivia
+# Question 1106
+:What was Keanu Reeves' first big film?
+Point Break
+
+#??Category: Movie Trivia
+# Question 1107
+:What was Kevin Bacon's first big hit?
+Footloose
+
+#??Category: Movie Trivia
+# Question 1108
+:What was painted on Peter Fonda's helmet motorcycle helmet in 'Easy Rider'?
+stars and stripes
+
+#??Category: Movie Trivia
+# Question 1109
+:What was the first film directed by Robert Redford?
+Ordinary People
+
+#??Category: Movie Trivia
+# Question 1110
+:What was the name of the pinball machine in the film 'Tommy'?
+Wizard
+
+#??Category: Movie Trivia
+# Question 1111
+:What was the name of the two space shuttles in 'Armegeddon'?
+Freedom and Independence
+#??Regexp: (Freedom (& |and )?Independence|Independence (& |and )?Freedom)
+
+#??Category: Movie Trivia
+# Question 1112
+:What was used for blood in the film 'psycho'?
+#chocolate# syrup
+
+#??Category: Movie Trivia
+# Question 1113
+:Which basketball star played a genie in 'Kazaam'?
+Shaquille O'Neal
+#??Regexp: Shaquille O'?Ne[ai]l
+
+#??Category: Movie Trivia
+# Question 1114
+:Which film preceded 'Magnum Force' and 'The Enforcer'?
+Dirty Harry
+
+#??Category: Movie Trivia
+# Question 1115
+:Which films are about the Corleone family?
+The #Godfather# films
+
+#??Category: Movie Trivia
+# Question 1116
+:Which was the first 'Indiana Jones' film?
+Raiders Of The Lost Ark
+
+#??Category: Movie Trivia
+# Question 1117
+:Who appeared in 'St. Elmo's Fire', 'The Scarlett Letter' and 'Striptease'?
+Demi Moore
+
+#??Category: Movie Trivia
+# Question 1118
+:Who did Charlie Becker play in 'The Wizard of Oz'?
+The #mayor of the munchkins#
+
+#??Category: Movie Trivia
+# Question 1119
+:Who directed 'The Shining'?
+Stanley #Kubrick#
+
+#??Category: Movie Trivia
+# Question 1120
+:Who directed the film 'Ordinary People'?
+Robert Redford
+
+#??Category: Movie Trivia
+# Question 1121
+:Who does the voice for Yoda in the Star Wars films?
+Frank Oz
+
+#??Category: Movie Trivia
+# Question 1122
+:Who played 'Johnny Mnemonic'?
+Keanu Reeves
+
+#??Category: Movie Trivia
+# Question 1123
+:Who played Clyde to Faye Dunaway's Bonnie?
+Warren Beatty
+
+#??Category: Movie Trivia
+# Question 1124
+:Who played Dr. Frankenfurter in the pop-culture film 'The Rocky Horror Picture Show?
+Tim Curry
+
+#??Category: Movie Trivia
+# Question 1125
+:Who played Dr. Kildare?
+Richard Chamberlain
+
+#??Category: Movie Trivia
+# Question 1126
+:Who played Eddie in the pop-culture film 'The Rocky Horror Picture Show?
+Meatloaf
+
+#??Category: Movie Trivia
+# Question 1127
+:Who played Hopalong Cassidy?
+William Boyd
+
+#??Category: Movie Trivia
+# Question 1128
+:Who played Louis in 'Interview With The Vampire'?
+Brad Pitt
+
+#??Category: Movie Trivia
+# Question 1129
+:Who played Queen Amidala in the latest 'Star Wars' film?
+Natalie Portman
+
+#??Category: Movie Trivia
+# Question 1130
+:Who played in the film 'Ragtime' after 20 years offscreen?
+James Cagney
+
+#??Category: Movie Trivia
+# Question 1131
+:Who played the 'Universal Soldier'?
+Jean-Claude Van Damme
+#??Regexp: Van[- ]Damme
+
+#??Category: Movie Trivia
+# Question 1132
+:Who played the mayor of the munchkins in 'The Wizard of Oz'?
+Charlie Becker
+
+#??Category: Movie Trivia
+# Question 1133
+:Who played the murder victim in the original version of 'Psycho'?
+Janet Leigh
+
+#??Category: Movie Trivia
+# Question 1134
+:Who played the president of the U.S in 'Air Force One'?
+Harrison Ford
+
+#??Category: Movie Trivia
+# Question 1135
+:Who played the title role in the 'Mad Max' series of films?
+Mel Gibson
+
+#??Category: Movie Trivia
+# Question 1136
+:Who played the title role in the 1978 version of 'Superman'?
+Christopher Reeve
+
+#??Category: Movie Trivia
+# Question 1137
+:Who starred in 'Conan The Barbarian'?
+Arnold Schwarzenegger
+
+#??Category: Movie Trivia
+# Question 1138
+:Who starred in the 1952 film 'Niagara'?
+Marilyn Monroe
+
+#??Category: Movie Trivia
+# Question 1139
+:Who starred in the film 'The Man With Two Brains'?
+Steve Martin
+
+#??Category: Movie Trivia
+# Question 1140
+:Who starred in the film version of 'To Kill A Mockingbird'?
+Gregory Peck
+
+#??Category: Movie Trivia
+# Question 1141
+:Who was Dr. Zhivago's great love?
+Lara
+
+#??Category: Movie Trivia
+# Question 1142
+:Who was John Wayne's musical co-star in true grit?
+Glen Campbell
+
+#??Category: Movie Trivia
+# Question 1143
+:Who was Miss Hungary in 1936?
+Zsa Zsa Gabor
+
+#??Category: Movie Trivia
+# Question 1144
+:Who was the Cisco Kid's faithful sidekick?
+Pancho
+
+#??Category: Movie Trivia
+# Question 1145
+:Who was the director of 'Terminator' and 'Titanic'?
+James Cameron
+
+#??Category: Movie Trivia
+# Question 1146
+:Who was the villain in 'Star Wars'?
+Darth Vader
+
+#??Category: Movie Trivia
+# Question 1147
+:Who wrote 'Psycho'?
+Alfred Hitchcock
+
+#??Category: Movie Trivia
+# Question 1148
+:Who wrote 'The Birds'?
+Alfred Hitchcock
+
+#??Category: Movie Trivia
+# Question 1149
+:Who wrote the classic thriller 'The Birds'?
+Alfred Hitchcock
+
+#??Category: Movie Trivia
+# Question 1150
+:Whose films include 'Giant', 'Written On The Wind' and 'A Farewell To Arms'?
+Rock Hudson
+
+#??Category: Movie trivia
+# Question 1151
+:In which film did Jay Leno play 'Mookie'?
+American Hot Wax
+
+#??Category: Multiple Meanings
+# Question 1152
+:What animal has the same name as a high church official?
+cardinal
+
+#??Category: Music
+# Question 1153
+:'Hang On Sloopy' was the official rock song of which band?
+Ohio
+
+#??Category: Music
+# Question 1154
+:'White Room' was a hit off which Eric Clapton album?
+Cream
+
+#??Category: Music
+# Question 1155
+:As what is Merle Haggard also known as?
+Okie from Muskogee
+
+#??Category: Music
+# Question 1156
+:Besides the Stones, which group had the longest touring career until the founder's death in 1995?
+The #Grateful Dead#
+
+#??Category: Music
+# Question 1157
+:Bill Justis was a studio musician when he recorded this 'sloppy' instrumental in october 1957?
+Raunchy
+
+#??Category: Music
+# Question 1158
+:Country singer Vince ....?
+Gill
+
+#??Category: Music
+# Question 1159
+:Crosby, Stills and Nash's debut album included a song about a girl and the colour of her eyes. Name that song.
+Sweet Judy Blue Eyes
+
+#??Category: Music
+# Question 1160
+:For whom did Colonel Tom Parker act as manager?
+#Elvis# Presley
+
+#??Category: Music
+# Question 1161
+:Formerly with Spencer Davis, he went on to form Traffic with Dave Mason. He is?
+Steve Winwood
+
+#??Category: Music
+# Question 1162
+:From what platform does the 'Chattanooga Choo Choo' leave Pennsylvania station?
+twenty nine
+#??Regexp: (twenty nine|29)
+
+#??Category: Music
+# Question 1163
+:From which station does the 'Chattanooga Choo Choo' leave?
+#Pennsylvania# station
+
+#??Category: Music
+# Question 1164
+:Hey! What was the name of the hit song released by 'The Romantics' in February 1980?
+That's #What I Like About You#
+
+#??Category: Music
+# Question 1165
+:How many members are in the 'fairfield four'?
+five
+#??Regexp: (five|5)
+
+#??Category: Music
+# Question 1166
+:How old was Leann Rhimes when she became a country music star?
+fourteen
+#??Regexp: (fourteen|14)
+
+#??Category: Music
+# Question 1167
+:How old was Leann Rhimes when she recorded her first album?
+eleven
+#??Regexp: (eleven|11)
+
+#??Category: Music
+# Question 1168
+:In 'La Traviata', what does Violetta sing?
+Sempre Libera
+
+#??Category: Music
+# Question 1169
+:In 'La Traviata', who sings 'Sempre Libera'?
+Violetta
+
+#??Category: Music
+# Question 1170
+:In 1958, who had a pop music hit with 'Willie and the Hand Jive'?
+Johnny Otis
+
+#??Category: Music
+# Question 1171
+:In 1968, who released 'Carnival of life' and 'Recital'?
+Lee Michaels
+
+#??Category: Music
+# Question 1172
+:In 1981, who won song of the year with 'Sailing'?
+Christopher Cross
+
+#??Category: Music
+# Question 1173
+:In 1987, who released her second album 'Solitude Standing'?
+Suzanne Vega
+
+#??Category: Music
+# Question 1174
+:In a 1976 release, who wanted to 'fly like an eagle'?
+#Steve Miller# Band
+
+#??Category: Music
+# Question 1175
+:In late 1957, Buddy Holly's solo release 'Peggy Sue' challenged which song recorded with The Crickets?
+Oh Boy
+
+#??Category: Music
+# Question 1176
+:In the opera 'Don Giovanni', what was Leporello?
+servant
+
+#??Category: Music
+# Question 1177
+:In which Verdi opera does Violetta sing 'Sempre Libera'?
+La Traviata
+
+#??Category: Music
+# Question 1178
+:In which opera does Leporello entertain a vengeful jilted lover?
+Don Giovanni
+
+#??Category: Music
+# Question 1179
+:In which year was George Jones inducted into the Country Music Hall of Fame?
+1992
+
+#??Category: Music
+# Question 1180
+:Michael di Lorenzo was one of the lead dancers on which Michael Jackson video?
+Beat It
+
+#??Category: Music
+# Question 1181
+:R. Kelly sings: 'If I can see it then I can do it, if I just believe it, there's nothing to it'. What's the song title?
+I Believe I Can Fly
+
+#??Category: Music
+# Question 1182
+:Randy Travis said his love was 'deeper than the ......'?
+holler
+
+#??Category: Music
+# Question 1183
+:Savage Garden took 13 nominations and 10 wins at which awards?
+#ARIA# awards
+
+#??Category: Music
+# Question 1184
+:Singer Paula ......?
+Abdul
+
+#??Category: Music
+# Question 1185
+:Sung by Robert Palmer, '...... to love'?
+Addicted
+
+#??Category: Music
+# Question 1186
+:The first Eurovision Song Contest was in 1951, 1956 or 1958?
+1956
+
+#??Category: Music
+# Question 1187
+:What Don Mclean song laments the day Buddy Holly died?
+American Pie
+
+#??Category: Music
+# Question 1188
+:What album holds the world record for copies sold?
+Thriller
+
+#??Category: Music
+# Question 1189
+:What are the separators on a guitar neck called?
+frets
+
+#??Category: Music
+# Question 1190
+:What classic rock band sang the song 'Paint It, Black'?
+Rolling #Stones#
+
+#??Category: Music
+# Question 1191
+:What did George Harrison discover on the Witwatersrand?
+gold
+
+#??Category: Music
+# Question 1192
+:What did Sheryl Crow do before she became a singer?
+teach
+
+#??Category: Music
+# Question 1193
+:What does the term 'DJ' mean?
+Disc Jockey
+
+#??Category: Music
+# Question 1194
+:What hardcore rock group sings, 'Blind' and 'Clown'?
+Korn
+
+#??Category: Music
+# Question 1195
+:What instrument are you playing when you perform a rim shot?
+#drum#s
+
+#??Category: Music
+# Question 1196
+:What instrument does an organ grinder play?
+hurdy gurdy
+
+#??Category: Music
+# Question 1197
+:What is Cape Town's major choir called?
+#Philharmonic# choir
+
+#??Category: Music
+# Question 1198
+:What is Elton John's real name?
+Reginald Dwight
+
+#??Category: Music
+# Question 1199
+:What is Vanilla Ice's real name?
+Robert van Winkle
+
+#??Category: Music
+# Question 1200
+:What is a cello's full name?
+violoncello
+#??Regexp: viol[io]ncello
+
+#??Category: Music
+# Question 1201
+:What is a violoncello usually called?
+cello
+
+#??Category: Music
+# Question 1202
+:What is the name given to the type of West Indian music made famous by artists such as Bob Marley and Peter Tosh?
+reggae
+
+#??Category: Music
+# Question 1203
+:What is the official birthplace of country music?
+Bristol
+
+#??Category: Music
+# Question 1204
+:What song did Elton John and George Michael sing as a duet?
+Don't Let The Sun Go Down On Me
+#??Regexp: Don'?t Let The Sun Go Down On Me
+
+#??Category: Music
+# Question 1205
+:What song was originally 'Good Morning To You' before the words were changed and it was published in 1935?
+#Happy Birthday# To You
+
+#??Category: Music
+# Question 1206
+:What song's words were changed and then published in 1935 as 'Happy Birthday To You'?
+Good Morning To You
+
+#??Category: Music
+# Question 1207
+:What was Elvis Presley's twin brother's name?
+Garon
+
+#??Category: Music
+# Question 1208
+:What was Jethro Tull before donating his name to a British epic rock group?
+agriculturist
+
+#??Category: Music
+# Question 1209
+:What was the average age of United States soldiers in the Vietnam war?
+nineteen
+#??Regexp: (19|nineteen)
+
+#??Category: Music
+# Question 1210
+:What was the first CD pressed in the USA?
+Born In The USA
+#??Regexp: Born in the U.?S.?A
+
+#??Category: Music
+# Question 1211
+:What was the original name of Paul McCartney's fictional church cleaner 'Eleanor Rigby'?
+Miss Daisy Hawkins
+
+#??Category: Music
+# Question 1212
+:Where did George Harrison discover gold?
+Witwatersrand
+
+#??Category: Music
+# Question 1213
+:Where is the Rock and Roll Hall Of Fame?
+Cleveland, Ohio
+#??regexp: (cleveland|ohio)
+
+#??Category: Music
+# Question 1214
+:Which 1960's group sang a song inspired by 'Alice In Wonderland'?
+The #Jefferson Airplane#
+
+#??Category: Music
+# Question 1215
+:Which 1980's Pink Floyd album was made into a film that starred Bob Geldof, and featured the artwork of cartoonist Gerald Scarfe?
+The Wall
+
+#??Category: Music
+# Question 1216
+:Which Australian duo took 13 nominations and 10 wins at the ARIA awards?
+Savage Garden
+
+#??Category: Music
+# Question 1217
+:Which Elton John song was re-recorded as a requiem for Lady Diana Spencer?
+Candle In The Wind
+
+#??Category: Music
+# Question 1218
+:Which country and western singer is known as the 'okie from muskogee'?
+Merle Haggard
+
+#??Category: Music
+# Question 1219
+:Which singer is a former school teacher?
+Sheryl Crow
+
+#??Category: Music
+# Question 1220
+:Which singer/songwriter worked in a factory making toilets for airplanes before he recorded 'Aint No Sunshine'?
+Bill Withers
+
+#??Category: Music
+# Question 1221
+:Who 'imagined' a better world?
+John Lennon
+
+#??Category: Music
+# Question 1222
+:Who advised us to 'break on through to the other side'?
+#Jim Morrison# (of The Doors)
+#??Regexp: (Jim Morrison|Doors)
+
+#??Category: Music
+# Question 1223
+:Who appeared solo at the Woodstock festival after leaving 'The Lovin' Spoonful'?
+John Sebastian
+
+#??Category: Music
+# Question 1224
+:Who began his career with 'The Yardbirds' and established himself as one of the best rock guitarists of his generation?
+Eric Clapton
+
+#??Category: Music
+# Question 1225
+:Who began his professional career with Black Sabbath?
+Ozzy Osbourne
+
+#??Category: Music
+# Question 1226
+:Who collaborated with John Lennon on 'Whatever Gets You Through The Night'?
+Elton John
+
+#??Category: Music
+# Question 1227
+:Who did a version of 'One Bourbon, One Scotch, One Beer' on his 1977 debut album?
+George Thorogood
+#??Regexp: George Thou?rou?gh?ood
+
+#??Category: Music
+# Question 1228
+:Who did the music for the 1970's film 'Saturday Night Fever'?
+Bee Gees
+
+#??Category: Music
+# Question 1229
+:Who discovered gold on the Witwatersrand?
+George Harrison
+
+#??Category: Music
+# Question 1230
+:Who founded 'Live Aid' and 'Band Aid'?
+Bob Geldof
+
+#??Category: Music
+# Question 1231
+:Who is Reginald Dwight known as?
+Elton John
+
+#??Category: Music
+# Question 1232
+:Who is Robert van Winkle?
+Vanilla Ice
+
+#??Category: Music
+# Question 1233
+:Who is the elder statesman of 'british blues', and fronted 'The Bluesbreakers'?
+John Mayall
+
+#??Category: Music
+# Question 1234
+:Who is the lead singer of 'The Doors'?
+Jim Morrison
+
+#??Category: Music
+# Question 1235
+:Who is the only singer to have no.1 hits in the 50's, 60's, 70's, 80's and 90's?
+Cliff Richard
+
+#??Category: Music
+# Question 1236
+:Who produced 'Sgt Pepper's Lonely Hearts Club Band'?
+George Martin
+
+#??Category: Music
+# Question 1237
+:Who recorded 'A Boy Named Sue'?
+Johnny Cash
+
+#??Category: Music
+# Question 1238
+:Who released 'Time, Love and Tenderness' in 1981?
+Michael Bolton
+
+#??Category: Music
+# Question 1239
+:Who released 'Tuesday Night Music Club' in 1993?
+Sheryl Crow
+
+#??Category: Music
+# Question 1240
+:Who released a chart-busting album in 1976 which featured 'The Lido Shuffle'?
+Boz Scaggs
+
+#??Category: Music
+# Question 1241
+:Who released the double album 'Goodbye Yellow Brick Road' in 1973?
+Elton John
+
+#??Category: Music
+# Question 1242
+:Who sang 'All Right Now'?
+Free
+
+#??Category: Music
+# Question 1243
+:Who sang 'Any Way You Want Me'?
+Elvis Presley
+
+#??Category: Music
+# Question 1244
+:Who sang 'Bad Case Of Loving You'?
+Robert Palmer
+
+#??Category: Music
+# Question 1245
+:Who sang 'Beat It'?
+Michael Jackson
+
+#??Category: Music
+# Question 1246
+:Who sang 'Beauty and the Beast'?
+Celine Dion
+
+#??Category: Music
+# Question 1247
+:Who sang 'Born In The USA'?
+Bruce Springsteen
+
+#??Category: Music
+# Question 1248
+:Who sang 'Forever and Ever, Amen'?
+Randy Travis
+
+#??Category: Music
+# Question 1249
+:Who sang 'Good Morning To You?
+Mildred and Patty Hill
+
+#??Category: Music
+# Question 1250
+:Who sang 'I'm A Believer'?
+Monkees
+
+#??Category: Music
+# Question 1251
+:Who sang 'In The Air Tonight'?
+Phil Collins
+
+#??Category: Music
+# Question 1252
+:Who sang 'Islands In The Stream' with Dolly Parton?
+Kenny Rogers
+#??Regexp: Kenny Rod?gers
+
+#??Category: Music
+# Question 1253
+:Who sang 'Islands In The Stream' with Kenny Rogers?
+Dolly Parton
+
+#??Category: Music
+# Question 1254
+:Who sang 'Jet Airliner'?
+#Steve Miller# Band
+
+#??Category: Music
+# Question 1255
+:Who sang 'Rescue Me'?
+Fontella Bass
+
+#??Category: Music
+# Question 1256
+:Who sang 'That's Alright Mama'?
+#Elvis# Presley
+
+#??Category: Music
+# Question 1257
+:Who sang 'We've only just begun'?
+Carpenters
+
+#??Category: Music
+# Question 1258
+:Who sang 'You Can Call Me Al'?
+Paul Simon
+
+#??Category: Music
+# Question 1259
+:Who sang about 'Commitment'?
+Leann Rhimes
+#??Regexp: Leanne? Rhimes
+
+#??Category: Music
+# Question 1260
+:Who sang about 'The Boogie Woogie Bugle Boy Of Company B'?
+The #Andrews Sisters#
+
+#??Category: Music
+# Question 1261
+:Who sang about Desmond and Molly Jones?
+The #Beatles#
+
+#??Category: Music
+# Question 1262
+:Who sang for 'Bad company' and 'Free', then went out on his own?
+Paul Rodgers
+#??Regexp: Paul Rod?gers
+
+#??Category: Music
+# Question 1263
+:Who sang with 'The Dakotas'?
+Billy J. Kramer
+#??Regexp: Billy J.? Kramer
+
+#??Category: Music
+# Question 1264
+:Who sings 'Sweet Home Alabama'?
+Lynyrd Skynyrd
+
+#??Category: Music
+# Question 1265
+:Who wanted 'a lover with a slow hand'?
+The #Pointer Sisters#
+
+#??Category: Music
+# Question 1266
+:Who wanted 'a new drug'?
+#Huey Lewis# and The News
+
+#??Category: Music
+# Question 1267
+:Who was 'hooked on a feeling'?
+Blue Suede
+
+#??Category: Music
+# Question 1268
+:Who was a member of 'Crosby, Stills and Nash' and 'The Hollies'?
+Graham Nash
+
+#??Category: Music
+# Question 1269
+:Who was the Indian maiden in Johnny Preston's 'Running Bear'?
+Little White Dove
+
+#??Category: Music
+# Question 1270
+:Who was the first female to enter the Billboard charts in 1985?
+Whitney Houston
+
+#??Category: Music
+# Question 1271
+:Who was the oldest member of The Beatles?
+Ringo Starr
+
+#??Category: Music
+# Question 1272
+:Who was the only songwriter to win the Eurovision Song Contest twice?
+Johnny Logan
+
+#??Category: Music
+# Question 1273
+:Who wrote 'Roll Over Beethoven'?
+Chuck Berry
+
+#??Category: Music
+# Question 1274
+:Who wrote the opera 'The Giant'?
+Sergei #Prokofiev#
+
+#??Category: Music
+# Question 1275
+:Who wrote the opera 'The Masked Ball'?
+Guiseppe #Verdi#
+
+#??Category: Music
+# Question 1276
+:Who wrote the opera 'Tosca'?
+Giacomo #Puccini#
+
+#??Category: Music
+# Question 1277
+:Who wrote the opera 'norma'?
+Vincenzo #Bellini#
+
+#??Category: Music
+# Question 1278
+:Who wrote the oprea 'La Traviata'?
+Guiseppe #Verdi#
+
+#??Category: Music
+# Question 1279
+:Who wrote the song 'Do They Know It's Christmas' with Bob Geldof?
+Midge Ure
+
+#??Category: Music
+# Question 1280
+:Who wrote the song 'Do They Know It's Christmas' with Midge Ure?
+Bob Geldof
+
+#??Category: Music
+# Question 1281
+:Who's first release was 'Talking Heads 77'?
+Psycho Killer
+
+#??Category: Music
+# Question 1282
+:..... in the name of love?
+Stop
+
+#??Category: Music 
+# Question 1283
+:What license plate number is on the Volkswagon on the cover of The Beatles' 'Abbey Road' Album?
+281F
+
+#??Category: Muthology
+# Question 1284
+:In Greek mythology, the riddle of what did Oedipus solve?
+sphinx
+
+#??Category: Mytholgy
+# Question 1285
+:Apollo was the Greek god of ......?
+prophecy and archery
+#??Regexp: (prophecy (and|&) archery|archery (and|&) prophecy)
+
+#??Category: Mythology
+# Question 1286
+:Dionysus was the greek god of ......?
+Wine
+
+#??Category: Mythology
+# Question 1287
+:In Egyptian mythology, what is the life force called?
+Ka
+
+#??Category: Mythology
+# Question 1288
+:In Egyptian mythology, who is known as the god of the desert?
+Ash
+
+#??Category: Mythology
+# Question 1289
+:In Egyptian mythology, who is the god of the underworld?
+Cherti
+
+#??Category: Mythology
+# Question 1290
+:In Egyptian mythology, who was Horus' mother?
+Isis
+
+#??Category: Mythology
+# Question 1291
+:In Egyptian mythology, who was Isis the wife of?
+Osiris
+
+#??Category: Mythology
+# Question 1292
+:In English mythology, who caused the death of the Lady of Shallot?
+Sir Lancelot
+
+#??Category: Mythology
+# Question 1293
+:In Greek mythology who did Athena turn into a spider?
+Arachne
+
+#??Category: Mythology
+# Question 1294
+:In Greek mythology, how many heads did Hydra have?
+nine
+
+#??Category: Mythology
+# Question 1295
+:In Greek mythology, into what did Athena turn Arachne?
+spider
+
+#??Category: Mythology
+# Question 1296
+:In Greek mythology, what animal is associated with Athena?
+owl
+
+#??Category: Mythology
+# Question 1297
+:In Greek mythology, what did Daedalus construct for Minos?
+labyrinth
+
+#??Category: Mythology
+# Question 1298
+:In Greek mythology, what was Minos the king of?
+Crete
+
+#??Category: Mythology
+# Question 1299
+:In Greek mythology, where did Perseus kill his grandfather?
+#Larrisan# games
+
+#??Category: Mythology
+# Question 1300
+:In Greek mythology, who did Jocasta marry?
+Oedipus
+
+#??Category: Mythology
+# Question 1301
+:In Greek mythology, who did Minos hire to construct the labyrinth?
+Daedalus
+
+#??Category: Mythology
+# Question 1302
+:In Greek mythology, who had nine heads?
+Hydra
+
+#??Category: Mythology
+# Question 1303
+:In Greek mythology, who hired Daedalus to construct the labyrinth?
+Minos
+
+#??Category: Mythology
+# Question 1304
+:In Greek mythology, who ruled over the island of Samos?
+Polycrates
+
+#??Category: Mythology
+# Question 1305
+:In Greek mythology, who solved the riddle of the Sphinx?
+Oedipus
+
+#??Category: Mythology
+# Question 1306
+:In Greek mythology, who turned Arachne into a spider?
+Athena
+
+#??Category: Mythology
+# Question 1307
+:In Greek mythology, who was Jason's wife?
+Medea
+
+#??Category: Mythology
+# Question 1308
+:In Greek mythology, who was Medea's husband?
+Jason
+
+#??Category: Mythology
+# Question 1309
+:In Greek mythology, who was the only mortal gorgon?
+Medusa
+
+#??Category: Mythology
+# Question 1310
+:In Greek mythology, who was the son of Peleus and Thetis?
+Achilles
+
+#??Category: Mythology
+# Question 1311
+:In Greek mythology, who were Achilles' parents?
+Peleus and Thetis
+#??Regexp: (Peleus (and |& )Thetis|Thetis (and |& )Peleus)
+
+#??Category: Mythology
+# Question 1312
+:Neptune was the Roman god of the ......?
+sea
+
+#??Category: Mythology
+# Question 1313
+:Persephone was the Greek goddess of ......?
+spring
+
+#??Category: Mythology
+# Question 1314
+:Poseidon was the Greek god of the ......?
+sea
+
+#??Category: Mythology
+# Question 1315
+:What mythical Scottish town appears for one day every 100 years?
+Brigadoon
+
+#??Category: Mythology
+# Question 1316
+:Which Norse god had the Valkyries as handmaidens?
+Odin
+
+#??Category: Mythology
+# Question 1317
+:Which Titan had snakes for hair?
+Medusa
+
+#??Category: Mythology
+# Question 1318
+:Who did the Norse god Odin have as handmaidens?
+Valkyries
+
+#??Category: Mythology
+# Question 1319
+:Who is the Greek messenger god?
+Hermes
+
+#??Category: Mythology
+# Question 1320
+:Who is the Norse god of lightning?
+Odin
+
+#??Category: Mythology
+# Question 1321
+:Who is the Norse god of mischief?
+Loki
+
+#??Category: Mythology
+# Question 1322
+:Who is the Norse god of thunder and war?
+Thor
+
+#??Category: Mythology
+# Question 1323
+:Who is the mother of Apollo and Artemis?
+Leto
+
+#??Category: Mythology
+# Question 1324
+:Who was Hercules' father?
+Zeus
+
+#??Category: Mythology
+# Question 1325
+:Who was Hercules' stepmother?
+Hera
+
+#??Category: Mythology
+# Question 1326
+:Who was the Greek god of fire?
+Hephaestus
+
+#??Category: Mythology
+# Question 1327
+:Who was the Greek god of prophecy and archery?
+Apollo
+
+#??Category: Mythology
+# Question 1328
+:Who was the Greek god of wine?
+Dionysus
+
+#??Category: Mythology
+# Question 1329
+:Who was the Greek goddess of spring?
+Persephone
+
+#??Category: Mythology
+# Question 1330
+:Who, in Egyptian mythology, is the god of the dead?
+Aker
+
+#??Category: Nationalities
+# Question 1331
+:Which people invented the compass?
+Chinese
+
+#??Category: Nature
+# Question 1332
+:Approximately how many pounds of salt is in every gallon of seawater?
+one quarter
+#??Regexp: ((One|1) quarter|1/4)
+
+#??Category: Nature
+# Question 1333
+:At which time of year do children grow fastest?
+#spring#time
+
+#??Category: Nature
+# Question 1334
+:By what process is rock worn down by the weather?
+erosion
+
+#??Category: Nature
+# Question 1335
+:During pregnancy, how many times its normal size does the human uterus expand?
+five hundred
+#??Regexp: (five hundred|500)
+
+#??Category: Nature
+# Question 1336
+:How many hearts do earthworms have?
+five
+#??Regexp: (five|5)
+
+#??Category: Nature
+# Question 1337
+:Of what do earthworms have five?
+#heart#s
+
+#??Category: Nature
+# Question 1338
+:What animal has bony plates and rolls up into a ball if it is frightened?
+armadillo
+
+#??Category: Nature
+# Question 1339
+:What has approximately 1/4 pound of salt in every gallon?
+seawater
+
+#??Category: Nature
+# Question 1340
+:What is the heart rate of the blue whale? (in beats per minute)
+nine
+#??Regexp: (nine|9)
+
+#??Category: Nature
+# Question 1341
+:When does the human uterus expand 500 times its normal size?
+during #pregnancy#
+
+#??Category: Nomenclature
+# Question 1342
+:Eras are divided into units called ........?
+periods
+
+#??Category: Not Telling!
+# Question 1343
+:What can be either new, last or gibbous?
+The #moon#
+
+#??Category: Nuresry rhymes
+# Question 1344
+:Who sat on her tuffet?
+Little Miss Muffet
+
+#??Category: Nursery Rhymes
+# Question 1345
+:In the song 'Skip To My Lou', in what beverage are the flies?
+Buttermilk
+
+#??Category: Nursery Rhymes
+# Question 1346
+:Where did Little Miss Muffet sit?
+On her #tuffet#
+
+#??Category: Nursery Rhymes
+# Question 1347
+:Who is Mother Goose's son?
+Jack
+
+#??Category: Nutrition
+# Question 1348
+:Is wholemeal bread brown or white?
+brown
+
+#??Category: Nutrition
+# Question 1349
+:Lack of Vitamin D causes which disease?
+rickets
+
+#??Category: Nutrition
+# Question 1350
+:Rickets is caused by a lack of which vitamin?
+vitamin #D#
+
+#??Category: Nutrition
+# Question 1351
+:Six ounces of orange juice contains the minimum daily requirement for which vitamin?
+vitamin #C#
+
+#??Category: Nutrition
+# Question 1352
+:What does iron deficiency cause?
+anaemia
+#??Regexp: Ana?emia
+
+#??Category: Nutrition
+# Question 1353
+:What makes brown bread healthier than white bread?
+wholemeal
+
+#??Category: Odd Words
+# Question 1354
+:Basmati is a type of what?
+Rice
+
+#??Category: Odd Words
+# Question 1355
+:What does a notaphile collect?
+Banknotes
+
+#??Category: Odd Words
+# Question 1356
+:What does a philluminist collect?
+Match box labels
+#??Regexp: Match[- ]?box labels
+
+#??Category: Odd Words
+# Question 1357
+:What does an ombrometer measure?
+rainfall
+
+#??Category: Odd Words
+# Question 1358
+:What is a 'funambulist'?
+A #tightrope walker#
+#??Regexp: tightrope
+
+#??Category: Odd Words
+# Question 1359
+:What is a pugilist?
+boxer
+
+#??Category: Odd Words
+# Question 1360
+:What is another name for a  tightrope walker?
+funambulist
+
+#??Category: Odd Words
+# Question 1361
+:What is someone who collects banknotes called?
+Notaphile
+
+#??Category: Odd Words
+# Question 1362
+:With what is rainfall measured?
+ombrometer
+
+#??Category: Odd words
+# Question 1363
+:What is a 'somnambulist'?
+sleepwalker
+
+#??Category: Oil Production 
+# Question 1364
+:Which south african oil company has estblished the only commercially proven 'oil from coal' operations in the world?
+Sasol
+
+#??Category: Olympics
+# Question 1365
+:In ancient Greece, where were the original Olympics held?
+Olympia
+
+#??Category: Olympics
+# Question 1366
+:The Olympic motto 'citius, altius, fortius' means what?
+Faster, higher, stronger
+#??Regexp: Faster,? higher,? stronger
+
+#??Category: Olympics
+# Question 1367
+:What is the Olympic motto in the original Latin?
+Citius, altius, fortius
+
+#??Category: Olympics
+# Question 1368
+:Where were the 1956 Summer Olympics held?
+Melbourne, Australia
+
+#??Category: Olympics
+# Question 1369
+:Where were the 1960 summer Olympics held?
+Rome, Italy
+
+#??Category: Olympics
+# Question 1370
+:Who did Zola Budd trip in the 1984 Los Angeles Olympics?
+Mary Decker
+
+#??Category: Olympics
+# Question 1371
+:Who tripped Mary Decker in the 1984 Los Angeles Olympics?
+Zola Budd
+
+#??Category: One For The Spoon Buffs
+# Question 1372
+:Approximately how many spoons are there in the New Jersey Spoon Museum?
+5400
+
+#??Category: One For The Trekkies
+# Question 1373
+:How many episodes were there in the original Star Trek series?
+seventy five
+#??Regexp: (seventy five|75)
+
+#??Category: One For The Trekkies
+# Question 1374
+:In 'Star Trek' Jean ...... Picard?
+Luc
+
+#??Category: One For The Trekkies
+# Question 1375
+:In 'Star Trek', what is Data's rank?
+Lieutenant Commander
+
+#??Category: One For The Trekkies
+# Question 1376
+:In 'Star Trek', who was the captain of the 'Enterprise C'?
+Rachel Garret
+
+#??Category: One For The Trekkies
+# Question 1377
+:What is the registry number of the enterprise in the original Star Trek?
+NCC 1701
+#??Regexp: NCC ?1701
+
+#??Category: One For The Trekkies
+# Question 1378
+:Who played Deanna Troi in 'Star Trek The Next Generation'?
+Marina Sirtis
+
+#??Category: Optics
+# Question 1379
+:What colour on black produces the most visible combination?
+yellow
+
+#??Category: Orienteering
+# Question 1380
+:On maps, what is the technical name for the 'you are here' arrow?
+ideo locator
+
+#??Category: Philosophy
+# Question 1381
+:The last line of which document is 'working men of all countries, unite!'?
+Communist Manifesto
+
+#??Category: Physics
+# Question 1382
+:At what angle above the horizon must the sun be to create a rainbow? (in degrees)
+forty 
+#??Regexp: (forty|40)
+
+#??Category: Physics
+# Question 1383
+:Waves 'break' when their height is how much more than the depth of the water?
+seven tenths
+#??Regexp: (seven tenths|7/10|(seventy|70) (percent|%))
+
+#??Category: Physics
+# Question 1384
+:What is the name given to elementary particles originating in the sun and other stars, that continuously rain down on the earth?
+cosmic rays
+
+#??Category: Politics
+# Question 1385
+:In England, what is the Speaker of the House not allowed to do?
+speak
+
+#??Category: Politics
+# Question 1386
+:Of which island do Ireland, Britain, Iceland and Norway dispute ownership?
+Rockall
+
+#??Category: Politics
+# Question 1387
+:What does Israel call its parliament?
+Knesset
+
+#??Category: Politics
+# Question 1388
+:Which island do the nationalist Chinese occupy?
+Taiwan
+
+#??Category: Politics
+# Question 1389
+:Which nation calls its parliament 'The Knesset'?
+Israel
+
+#??Category: Politics
+# Question 1390
+:Who succeeded Charles de Gaulle as president of France?
+Georges #Pompidour#
+
+#??Category: Pop Optics
+# Question 1391
+:What colour lenses are required to view a 3-D film?
+red and green
+#??Regexp: (red|green) (and|&) (red|green)
+
+#??Category: Popsicle Inventors
+# Question 1392
+:Who invented popsicles?
+Frank Epperson
+
+#??Category: Pseudonyms
+# Question 1393
+:As who is Vincent Furnier known?
+Alice Cooper
+
+#??Category: Pseudonyms
+# Question 1394
+:What is Alice Cooper's real name?
+Vincent Furnier
+
+#??Category: Pseudonyms
+# Question 1395
+:What is Conway Twitty's real name?
+Harold Lloyd Jenkins
+
+#??Category: Pseudonyms
+# Question 1396
+:What is Harold Lloyd Jenkins' stage name?
+Conway Twitty
+
+#??Category: Pseudonyms
+# Question 1397
+:What is Wynonna Judd's real name?
+Christina Clair Ciminella
+
+#??Category: Pseudonyms
+# Question 1398
+:Who is Anne Mae Bullock better known as?
+Tina Turner
+
+#??Category: Pseudonyms
+# Question 1399
+:Who is Christina Claire Ciminella otherwise known as?
+Wynonna Judd
+
+#??Category: Psychology
+# Question 1400
+:Approximately how many dreams does a person have every year?
+1460
+
+#??Category: Psychology
+# Question 1401
+:Of what did Sigmund Freud have a morbid fear?
+ferns
+
+#??Category: Psychology
+# Question 1402
+:Who wrote 'Sexual Behavior In The Human Male' in 1948?
+Alfred #Kinsey#
+
+#??Category: Psychology
+# Question 1403
+:With what branch of medicine is Franz Mesmer associated?
+hypnotism
+
+#??Category: Railways
+# Question 1404
+:New York has the longest subway system in ......?
+North #America#
+
+#??Category: Railways
+# Question 1405
+:What city has the most underground stations in the world?
+New York
+
+#??Category: Recorded Media
+# Question 1406
+:Who is the spokesperson for the exercise tapes 'Tae Bo'?
+Billy Blanks
+
+#??Category: Recreational Chemistry
+# Question 1407
+:What is the common name for lysergic acid diethylamide?
+LSD
+#??Regexp: L.?S.?D.?
+
+#??Category: Relativity
+# Question 1408
+:What does the 'c' in the equation e=mc^2 stand for?
+speed of light
+
+#??Category: Religion
+# Question 1409
+:A catholic minister is known as a?
+Priest
+
+#??Category: Religion
+# Question 1410
+:In what city does a certain church forbid burping or sneezing?
+#Omaha#, Nebraska
+
+#??Category: Religion
+# Question 1411
+:Of the 266 popes, how many died violently?
+thirty three
+#??Regexp: (thirty three|33)
+
+#??Category: Religion
+# Question 1412
+:To where do Muslims make pilgrimage?
+Mecca
+
+#??Category: Religion
+# Question 1413
+:What is God called in the Muslim faith?
+Allah
+
+#??Category: Religion
+# Question 1414
+:What is a person who has made a pilgimage to Mecca?
+Hajji
+
+#??Category: Religion
+# Question 1415
+:What religious movement was founded by William Booth?
+Salvation Army
+
+#??Category: Religion
+# Question 1416
+:Who founded the Salvation Army?
+William Booth
+
+#??Category: Sad, But True
+# Question 1417
+:What are 35% of people using personal ads for dating?
+married
+
+#??Category: Saints
+# Question 1418
+:St Frideswide the patron saint ......?
+Oxford
+
+#??Category: Saints
+# Question 1419
+:St Patrick the patron saint of ......?
+Ireland
+
+#??Category: Saints
+# Question 1420
+:St. Bernard the patron saint of .....?
+skiers
+
+#??Category: Saints
+# Question 1421
+:St. Christopher the patron saint of ......?
+travellers
+
+#??Category: Saints
+# Question 1422
+:Who is the patron saint of skiers?
+St. Bernard
+#??Regexp: (Saint |St.? ?)Bernard
+
+#??Category: Satellites
+# Question 1423
+:What country has the third most satellites in orbit?
+France
+
+#??Category: Science
+# Question 1424
+:As what is minus forty celcius the same?
+minus forty fahrenheit
+#??Regexp: (minus forty fahrenheit|-40 ?f)
+
+#??Category: Science
+# Question 1425
+:As what is minus forty fahrenheit the same?
+minus forty celcius
+#??Regexp: (minus forty celcius|-40 ?c)
+
+#??Category: Science
+# Question 1426
+:How many beams of light are used to record a holograph?
+two
+#??Regexp: (two|2)
+
+#??Category: Science
+# Question 1427
+:In what does a rhinologist specialise?
+human #nose#
+
+#??Category: Science
+# Question 1428
+:In what was the strength of early lasers measured?
+gillettes
+
+#??Category: Science
+# Question 1429
+:In which branch of science are monocotyledon and dicotyledon terms?
+Botany
+
+#??Category: Science
+# Question 1430
+:Meteorology is the study of ......?
+weather
+
+#??Category: Science
+# Question 1431
+:Of what did Aristotle say all things were made up?
+air, earth, fire, and water
+#??Regexp: (air|earth|fire|water),? ?(air|earth|fire|water),? ?(air|earth|fire|water),? ?(and )?(air|earth|fire|water)
+
+#??Category: Science
+# Question 1432
+:Of what is genetics the study?
+heredity
+
+#??Category: Science
+# Question 1433
+:Paedology is the study of ...... ?
+soil
+
+#??Category: Science
+# Question 1434
+:What did Wilhelm Roentgen discover in 1895?
+X-rays
+#??Regexp: X[- ]?rays
+
+#??Category: Science
+# Question 1435
+:What does breaking the sound barrier cause?
+A #sonic boom#
+
+#??Category: Science
+# Question 1436
+:What does the Rankine scale measure?
+temperature
+
+#??Category: Science
+# Question 1437
+:What is name applied to the study of soil?
+paedology
+
+#??Category: Science
+# Question 1438
+:What is the number of blue razor blades a given beam can puncture?
+gillette
+
+#??Category: Science
+# Question 1439
+:What is the scientific name for brimstone?
+sulphur
+
+#??Category: Science
+# Question 1440
+:What is the scientific name for earth's outer layer of surface soil or crust?
+lithosphere
+
+#??Category: Science
+# Question 1441
+:What is the study of prehistoric plants and animals?
+paleontology
+
+#??Category: Science
+# Question 1442
+:What is the study of the composition of substances and the changes they undergo?
+chemistry
+
+#??Category: Science
+# Question 1443
+:What is the study of the earth's physical divisions termed?
+Geography
+
+#??Category: Science
+# Question 1444
+:What is the term that refers to the search for the existence of ghosts?
+eidology
+
+#??Category: Science
+# Question 1445
+:What was the first recorded message?
+Mary had a little lamb
+
+#??Category: Science
+# Question 1446
+:Which freezes faster - hot or cold water?
+hot
+
+#??Category: Science
+# Question 1447
+:Who developed the laws of electrolysis?
+Michael #Faraday#
+
+#??Category: Science
+# Question 1448
+:Who discovered X-rays?
+Wilhelm Roentgen
+
+#??Category: Science
+# Question 1449
+:Who first transmitted radio signals across the Atlantic?
+Enrico #Marconi#
+
+#??Category: Science
+# Question 1450
+:Who said all things were made up of air, earth, fire, and water?
+Aristotle
+
+#??Category: Science
+# Question 1451
+:Who spoke the first recorded message?
+Thomas #Edison#
+
+#??Category: Science
+# Question 1452
+:X-rays were discovered in 1850, 1895 or 1924?
+1895
+
+#??Category: Scouts
+# Question 1453
+:What is the boy scout motto?
+Be prepared
+
+#??Category: Scouts
+# Question 1454
+:Who founded the Boy Scouts?
+Lord #Baden Powell#
+
+#??Category: Sea Crawlies
+# Question 1455
+:How many legs does a crab have?
+ten
+#??Regexp: (ten|10)
+
+#??Category: Secretions
+# Question 1456
+:What is cerumen?
+earwax
+
+#??Category: Secretions
+# Question 1457
+:What is the scientific name for earwax?
+cerumen
+
+#??Category: Semantics
+# Question 1458
+:What is a female calf called?
+heifer
+
+#??Category: Semantics
+# Question 1459
+:What is a female cat called?
+queen
+
+#??Category: Semantics
+# Question 1460
+:What is a male cat called?
+tom
+
+#??Category: Semantics
+# Question 1461
+:What is a resident of Manchester called?
+Mancunian
+
+#??Category: Semantics
+# Question 1462
+:What is a resident of liverpool?
+Liverpudlian
+
+#??Category: Semantics
+# Question 1463
+:What is another word for a female sheep?
+ewe
+
+#??Category: Semantics
+# Question 1464
+:What is podobromhidrosis?
+Smelly feet
+#??Regexp: (Foot[- ]Odou?r|Smelly feet)
+
+#??Category: Semantics
+# Question 1465
+:What is the name given to male sheep?
+ram
+
+#??Category: Semantics
+# Question 1466
+:What is the name given to the switching of letters in an expression (e.g. saying Jag of Flapan instead of Flag of Japan)?
+spoonerism
+
+#??Category: Semantics
+# Question 1467
+:What is the study of weather technically called?
+meteorology
+
+#??Category: Semantics 
+# Question 1468
+:What is a person who makes barrels called?
+cooper
+
+#??Category: Shoe Trivia
+# Question 1469
+:What is the covering on the tip of a shoelace called?
+aglet
+
+#??Category: Show Biz
+# Question 1470
+:After who was Deana Carter named?
+Dean Martin
+
+#??Category: Show Biz
+# Question 1471
+:What instrument does Woody Allen play?
+clarinet
+
+#??Category: Show Biz
+# Question 1472
+:What is Cher's maiden name?
+Sarkassian
+
+#??Category: Show Biz
+# Question 1473
+:What is Tina Turner's real name?
+Anne Mae Bullock
+
+#??Category: Show Biz
+# Question 1474
+:What is tattooed on Glen Campbell's arm?
+dagger
+
+#??Category: Show Biz
+# Question 1475
+:What musical instrument did Jack Benny play?
+violin
+
+#??Category: Show Biz
+# Question 1476
+:What was Betty Grable's nickname?
+The #Legs#
+
+#??Category: Show Biz
+# Question 1477
+:What was Don Rickles' nickname?
+Mr. Warmth
+#??Regexp: Mr.? Warmth
+
+#??Category: Show Biz
+# Question 1478
+:Who is Melanie Griffith's mother?
+Tippi Hedren
+
+#??Category: Show Biz
+# Question 1479
+:Who is Tippi Hedren's daughter?
+Melanie Griffith
+
+#??Category: Show Biz
+# Question 1480
+:Who is married to Eddie Van Halen?
+Valerie Bertanelli
+
+#??Category: Show Biz
+# Question 1481
+:Who is married to Valerie Bertanelli?
+Eddie Van Halen
+
+#??Category: Show Biz
+# Question 1482
+:Who married Mutt Lange?
+Shania Twain
+
+#??Category: Show Biz
+# Question 1483
+:Who married Shania Twain?
+Robert "Mutt" Lange
+#??Regexp: (Robert|Mutt) Lange
+
+#??Category: Show Biz
+# Question 1484
+:Who said 'you'd be surprised how much it costs to look this cheap'?
+Dolly Parton
+
+#??Category: Similes
+# Question 1485
+:As neat as a ......?
+pin
+
+#??Category: Space
+# Question 1486
+:In which state is the Houston Space Centre?
+Texas
+
+#??Category: Space
+# Question 1487
+:What is the biggest criterion for prospective astronauts?
+eyesight
+
+#??Category: Sport
+# Question 1488
+:As who is Cassius Clay now known?
+Mohammed Ali
+
+#??Category: Sport
+# Question 1489
+:Baseball: The Atlanta ......?
+Braves
+
+#??Category: Sport
+# Question 1490
+:Baseball: The Boston ......?
+Red Sox
+
+#??Category: Sport
+# Question 1491
+:Baseball: The Chicago ......?
+Cubs
+
+#??Category: Sport
+# Question 1492
+:Baseball: The Cleveland ......?
+Indians
+
+#??Category: Sport
+# Question 1493
+:Baseball: The Florida ......?
+Marlins
+
+#??Category: Sport
+# Question 1494
+:Baseball: The Houston ......?
+Astros
+
+#??Category: Sport
+# Question 1495
+:Baseball: The Kansas City ......?
+Royals
+
+#??Category: Sport
+# Question 1496
+:Baseball: The Milwaukee ......?
+Brewers
+
+#??Category: Sport
+# Question 1497
+:Baseball: The New York ......?
+Mets
+
+#??Category: Sport
+# Question 1498
+:Baseball: The Philadelphia ......?
+Phillies
+
+#??Category: Sport
+# Question 1499
+:Baseball: The St. Louis ......?
+Cardinals
+
+#??Category: Sport
+# Question 1500
+:Baseball: The Texas ......?
+Rangers
+
+#??Category: Sport
+# Question 1501
+:Basketball: The Denver ......?
+Nuggets
+
+#??Category: Sport
+# Question 1502
+:Football: The Chicago ......?
+Bears
+
+#??Category: Sport
+# Question 1503
+:Football: The Dallas ......?
+Cowboys
+
+#??Category: Sport
+# Question 1504
+:Football: The Denver ....?
+Broncos
+
+#??Category: Sport
+# Question 1505
+:Football: The Pittsburgh ......?
+Steelers
+
+#??Category: Sport
+# Question 1506
+:Football: The San Diego ......?
+Chargers
+
+#??Category: Sport
+# Question 1507
+:Hockey: The Calgary .......?
+Flames
+
+#??Category: Sport
+# Question 1508
+:Hockey: The Toronto ......?
+Maple Leafs
+
+#??Category: Sport
+# Question 1509
+:How many dimples does a golf ball have?
+three hundred and thirty six
+#??Regexp: (three hundred (and |& )?thirty[- ]six|336)
+
+#??Category: Sport
+# Question 1510
+:How many sides does a baseball homeplate have?
+five
+#??Regexp: (five|5)
+
+#??Category: Sport
+# Question 1511
+:How many stitches are on a regulation baseball?
+108
+#??Regexp: (One hundred (and )?eight|108)
+
+#??Category: Sport
+# Question 1512
+:In baseball, who won their first world series in 1969?
+New York #Mets#
+
+#??Category: Sport
+# Question 1513
+:In hockey, what is the equivalent of a rugby scrum?
+face-off
+#??Regexp: face[- ]?off
+
+#??Category: Sport
+# Question 1514
+:In rugby, what is the equivalent of a hockey face-off?
+scrum
+
+#??Category: Sport
+# Question 1515
+:In showjumping, how many points are incurred for knocking down a fence?
+four
+#??Regexp: (four|4)
+
+#??Category: Sport
+# Question 1516
+:In what sport did the word 'crestfallen' originate?
+cockfighting
+
+#??Category: Sport
+# Question 1517
+:In what sport do you find 'coursing'?
+#greyhound# racing
+
+#??Category: Sport
+# Question 1518
+:In what sport is the term 'terminal speed' used?
+Drag Racing
+
+#??Category: Sport
+# Question 1519
+:Other than England, which european country took part in the 1996 cricket World Cup?
+Netherlands
+
+#??Category: Sport
+# Question 1520
+:Other than skiing, which sport takes place on a piste?
+fencing
+
+#??Category: Sport
+# Question 1521
+:The first cricket one-day international was held between england and ......?
+Australia
+
+#??Category: Sport
+# Question 1522
+:What are the two basic aids in orienteering?
+map and compass
+#??Regexp: (map|compass) (and|&) (map|compass)
+
+#??Category: Sport
+# Question 1523
+:What is soccer star Pele's real name?
+Edson Arantes do Nascimento
+
+#??Category: Sport
+# Question 1524
+:What is the maximum number of clubs a golfer may use in a round?
+fourteen
+#??Regexp: (fourteen|14)
+
+#??Category: Sport
+# Question 1525
+:What is the misshapen ear that boxers often have called?
+cauliflower ear
+
+#??Category: Sport
+# Question 1526
+:What is the name given to a rower who competes in an individual event?
+sculler
+
+#??Category: Sport
+# Question 1527
+:What is the regulation height for a pin in tenpin bowling? (in inches)
+fifteen
+#??Regexp: (fifteen|15) 
+
+#??Category: Sport
+# Question 1528
+:What is the score of a forfeited baseball game?
+9-0
+
+#??Category: Sport
+# Question 1529
+:What is the score of a forfeited softball game?
+7-0
+
+#??Category: Sport
+# Question 1530
+:What nationality is Gabriela Sabatini?
+Argentinian
+
+#??Category: Sport
+# Question 1531
+:What sport has sprint, tandem and team pursuit events?
+cycling
+
+#??Category: Sport
+# Question 1532
+:What sport is sometimes called 'rugger'?
+rugby union
+
+#??Category: Sport
+# Question 1533
+:What sport/game is Chris Evert associated with?
+tennis
+
+#??Category: Sport
+# Question 1534
+:What trophy is awarded to the winner of the NHL playoffs?
+Stanley Cup
+
+#??Category: Sport
+# Question 1535
+:What was Jack Nicklaus' nickname?
+Golden Bear
+
+#??Category: Sport
+# Question 1536
+:What was Mohammed Ali's original name?
+Cassius Clay
+
+#??Category: Sport
+# Question 1537
+:When did the New York Mets win their first World Series?
+1969
+
+#??Category: Sport
+# Question 1538
+:Where is Capitol Hill?
+#Washington# DC
+
+#??Category: Sport
+# Question 1539
+:Which country always leads the opening Olympic procession?
+Greece
+
+#??Category: Sport
+# Question 1540
+:Which cricket player holds the world record for the highest individual score in first-class cricket?
+Brian Lara
+
+#??Category: Sport
+# Question 1541
+:Which sport allows substitutions without stoppage in play?
+hockey
+
+#??Category: Sport
+# Question 1542
+:Which tennis star wore denim shorts during matches?
+Andre Agassi
+
+#??Category: Sport
+# Question 1543
+:Who did 'Tennis World' name rookie of the year in 1974?
+Martina Navratilova
+
+#??Category: Sport
+# Question 1544
+:Who had the nickname 'Golden Bear'?
+Jack Nicklaus
+
+#??Category: Sport
+# Question 1545
+:Who has played in the most consecutive baseball games?
+#Cal Ripken# Jr
+
+#??Category: Sport
+# Question 1546
+:Who holds the NHL record for the most goals scored during a regular season?
+Wayne #Gretzky#
+
+#??Category: Sport
+# Question 1547
+:Who hosted the 1999 cricket World Cup?
+England
+
+#??Category: Sport
+# Question 1548
+:Who is Edson Arantes do Nascimento better known as?
+Pele
+
+#??Category: Sport
+# Question 1549
+:Who was the 1990 Wimbledon women's singles runner-up?
+Zina #Garrison#
+
+#??Category: Sport
+# Question 1550
+:Who was the NBA MVP in 1976, 1977 and 1980?
+Kareem Abdul-Jabbar
+#??Regexp: Kareem Abdul[- ]Jabbar
+
+#??Category: Sport
+# Question 1551
+:Who was the NBA's most valuable player in 1976, 1977 and 1980?
+Kareem Abdul-Jabbar
+#??Regexp: Kareem Abdul[- ]Jabbar
+
+#??Category: Sport
+# Question 1552
+:Who was the last Briton to win the men's singles at Wimbledon?
+Fred Perry
+
+#??Category: Sport
+# Question 1553
+:Who was the only boxer to knock out Mohammed Ali?
+Larry Holmes
+
+#??Category: Sport
+# Question 1554
+:Who won the 1982 soccer world cup?
+Italy
+
+#??Category: Sport
+# Question 1555
+:With what sport is Chris Boardman associated?
+cycling
+
+#??Category: Sport
+# Question 1556
+:With what sport is Gabriela Sabatini associated?
+tennis
+
+#??Category: Sport
+# Question 1557
+:With what sport is Jack Nicklaus associated?
+golf
+
+#??Category: Sport 
+# Question 1558
+:With what did cricketer Mansoor Ali Khan Pataudi frequently play with in his hands?
+glass eye
+
+#??Category: Sport and Entomology
+# Question 1559
+:What swimming stroke is named after an insect?
+butterfly
+
+#??Category: Squid Trivia
+# Question 1560
+:How many tentacles does a squid have?
+ten
+#??Regexp: (ten|10)
+
+#??Category: Superstition
+# Question 1561
+:What were comfrey baths were believed to restore?
+virginity
+
+#??Category: Superstitions
+# Question 1562
+:According to superstition, what do you make when you stub the toes on your right foot?
+A #wish#
+
+#??Category: Swimming
+# Question 1563
+:What did Captain Matthew Webb swim first?
+English Channel
+
+#??Category: TV Trivia
+# Question 1564
+:As who is Terry Bollea known?
+Hulk Hogan
+
+#??Category: TV Trivia
+# Question 1565
+:For which ad campaign was the line 'I can't believe I ate the whole thing' used?
+Alka Seltzer
+
+#??Category: TV Trivia
+# Question 1566
+:From where was Ricky in 'I Love Lucy'?
+Cuba
+
+#??Category: TV Trivia
+# Question 1567
+:In 'Coronation Street', who is Ken and Denise's son?
+Daniel
+
+#??Category: TV Trivia
+# Question 1568
+:In the TV series 'Seinfeld', who does Michael Richards play?
+Kramer
+
+#??Category: TV Trivia
+# Question 1569
+:In the TV series 'Seinfeld', who plays Kramer?
+Michael Richards
+
+#??Category: TV Trivia
+# Question 1570
+:In the TV series 'The Brady Bunch', what was Cindy's toy doll's name?
+Kitty Carrie All
+#??Regexp: Kitt(ie|y) Carr(ie|y) All
+
+#??Category: TV Trivia
+# Question 1571
+:In the TV series 'The Fall Guy', who did Lee Majors play?
+Colt Seavers
+
+#??Category: TV Trivia
+# Question 1572
+:In the TV series 'The Fall Guy', who played Colt Seavers?
+Lee Majors
+
+#??Category: TV Trivia
+# Question 1573
+:In the TV sitcom 'Married With Children', what is the dog's name?
+Buck
+
+#??Category: TV Trivia
+# Question 1574
+:In the children's tv series 'Sesame Street', what two characters were roomates?
+Bert and Ernie
+#??Regexp: (Bert (and|&) Ernie|Ernie (and|&) Bert)
+
+#??Category: TV Trivia
+# Question 1575
+:Kelsey Grammar sings and plays the theme song for which TV show?
+Frasier
+
+#??Category: TV Trivia
+# Question 1576
+:On 'Dragnet', who played officer Bill Gannon?
+Harry Morgan
+
+#??Category: TV Trivia
+# Question 1577
+:On 'The Lucy Show', who played Vivian Bagley?
+Vivian Vance
+
+#??Category: TV Trivia
+# Question 1578
+:TV series: 'American ......'?
+Bandstand
+
+#??Category: TV Trivia
+# Question 1579
+:To which elemetary school did TV's 'Brady Bunch' go?
+#Dixie Canyon# Elementary
+
+#??Category: TV Trivia
+# Question 1580
+:What TV network features programming just for children?
+Nickelodeon
+
+#??Category: TV Trivia
+# Question 1581
+:What TV series from 1970-1974 starred Susan Dey?
+Partridge Family
+
+#??Category: TV Trivia
+# Question 1582
+:What did Dr. David Banner become when he got angry?
+The #Incredible Hulk#
+
+#??Category: TV Trivia
+# Question 1583
+:What is Hulk Hogan's real name?
+Terry Bollea
+
+#??Category: TV Trivia
+# Question 1584
+:What is Kermit D Frog's girlfriend's name?
+Miss Piggy
+
+#??Category: TV Trivia
+# Question 1585
+:What is the drummer's name in 'The Muppet Show'?
+Animal
+
+#??Category: TV Trivia
+# Question 1586
+:What is the frog's name in 'The Muppet Show'?
+#Kermit# D Frog
+
+#??Category: TV Trivia
+# Question 1587
+:What is the name of Jaleel White's character in the tv series 'Family ties'?
+Steve Erkel
+
+#??Category: TV Trivia
+# Question 1588
+:What night club did Ricky work at on 'I Love Lucy'?
+The #Tropicana#
+
+#??Category: TV Trivia
+# Question 1589
+:What show/game has characters such as Bulbasaur and Pikachu?
+Pokemon
+
+#??Category: TV Trivia
+# Question 1590
+:What was Lucy's maiden name on 'I Love Lucy'?
+McGillicuddy
+#??Regexp: Ma?cGillicuddy
+
+#??Category: TV Trivia
+# Question 1591
+:What was the name of Ross' pet monkey on 'Friends'?
+Marcel
+
+#??Category: TV Trivia
+# Question 1592
+:When did the series 'Lost In Space' premier on CBS?
+1965
+
+#??Category: TV Trivia
+# Question 1593
+:Which famous male actor made his name in 'I Dream Of Jeannie'?
+Larry Hagman
+
+#??Category: TV Trivia
+# Question 1594
+:Who did Larry Hagman portray in the TV series 'Dallas'?
+J.R. Ewing
+#??Regexp: (J.R.|JR)
+
+#??Category: TV Trivia
+# Question 1595
+:Who did Pat Sajak play on the soapie 'Days Of Our Lives'?
+Kevin Hathaway
+
+#??Category: TV Trivia
+# Question 1596
+:Who did Patrick Duffy portray in the TV series 'Dallas'?
+Bobby Ewing
+
+#??Category: TV Trivia
+# Question 1597
+:Who did Vivian Vance play on 'The Lucy Show'?
+Vivian Bagley
+
+#??Category: TV Trivia
+# Question 1598
+:Who killed Kenny?
+They
+
+#??Category: TV Trivia
+# Question 1599
+:Who played Bobby Ewing in the TV series 'Dallas'?
+Patrick Duffy
+
+#??Category: TV Trivia
+# Question 1600
+:Who played George Costanza on 'Seinfeld'?
+Jason Alexander
+
+#??Category: TV Trivia
+# Question 1601
+:Who played Kevin Hathaway on the soapie 'Days Of Our Lives'?
+Pat Sajak
+
+#??Category: TV Trivia
+# Question 1602
+:Who played Steve Erkel in 'Family Matters'?
+Jaleel White
+
+#??Category: TV Trivia
+# Question 1603
+:Who played commander Riker in 'Star Trek'?
+Jonathan Frakes
+
+#??Category: TV Trivia
+# Question 1604
+:Who plays many voices, such as Dr Nick, and Moe on 'The Simpsons'?
+Hank Azaria
+
+#??Category: TV Trivia
+# Question 1605
+:Who sings and plays the theme song for the TV show 'Frasier'?
+Kelsey Grammar
+
+#??Category: TV Trivia
+# Question 1606
+:Who starred as 'ouboet' in the first TV series of 'Orkney Snork Nie'?
+Frank Opperman
+
+#??Category: TV Trivia
+# Question 1607
+:Who was the alter ego of 'The Incredible Hulk'?
+Dr. #David Banner#
+
+#??Category: TV Trivia
+# Question 1608
+:Who were Lucy and Ricky's next door neighbours and best friends?
+Fred and Ethel
+#??Regexp: (Fred (&|and) Ethel|Ethel (&|and) Fred)
+
+#??Category: Taboos
+# Question 1609
+:Over what place in india is it forbidden to fly an airplane?
+Taj Mahal
+
+#??Category: Textiles
+# Question 1610
+:What colour thread is used for filigree?
+silver or gold
+#??Regexp: (silver|gold)
+
+#??Category: The Space Race
+# Question 1611
+:What was the name of the first space shuttle ever built?
+Enterprise
+
+#??Category: Theatre
+# Question 1612
+:In the opera 'La Traviata', what was Violetta's occupation?
+courtesan
+
+#??Category: Theme Parks
+# Question 1613
+:Which is the largest theme resort hotel?
+Lost City
+
+#??Category: Things
+# Question 1614
+:What can be tulip, balloon or flute?
+#wine glass#es
+
+#??Category: Toys
+# Question 1615
+:From what were balloons originally made?
+animal #bladders#
+
+#??Category: Toys
+# Question 1616
+:What toy was originally made from the bladder of an animal?
+balloon
+
+#??Category: Travel
+# Question 1617
+:What city does Orly airport serve?
+Paris
+
+#??Category: Travel
+# Question 1618
+:Which airline has the registration prefix 'VR'?
+Cathay Pacific
+
+#??Category: Travel
+# Question 1619
+:Which city is served by Ringway Airport?
+Manchester
+
+#??Category: Trivia
+# Question 1620
+:5% of Canadians don't know the first seven words of the Canadian anthem, but know the first nine words of which anthem?
+The #American# anthem
+
+#??Category: Trivia
+# Question 1621
+:7% of Americans don't know the first nine words of the American anthem, but know the first seven words of which anthem?
+#Canadian# anthem
+
+#??Category: Trivia
+# Question 1622
+:Betsy Ross is the only real person to ever have been the head of a ......?
+Pez dispenser
+
+#??Category: Trivia
+# Question 1623
+:How much do nine pennies weigh?
+one ounce
+#??Regexp: (one |1 ?)(ounce|oz)
+
+#??Category: Trivia
+# Question 1624
+:Like what can a fully ripened cranberry be dribbled?
+basketball
+
+#??Category: Trivia
+# Question 1625
+:Of what are throat, foxing and platform parts?
+shoe
+
+#??Category: Trivia
+# Question 1626
+:What have woodpecker scalps, porpoise teeth and giraffe tails all been used as?
+money
+
+#??Category: Trivia
+# Question 1627
+:What is 'mother's ruin'?
+gin
+
+#??Category: Trivia
+# Question 1628
+:What is the range, in miles, of an Aim-7 Sparrow?
+twenty eight 
+#??Regexp: (twenty[- ]eight|28)
+
+#??Category: Trivia
+# Question 1629
+:What keeps one from crying when peeling onions?
+chewing gum
+
+#??Category: Trivia
+# Question 1630
+:Who is the only real person to ever have been the head on a Pez dispenser?
+Betsy Ross
+
+#??Category: Tunnels
+# Question 1631
+:How long is the longest tunnel? (in kms)
+one hundred and sixty nine
+#??Regexp: (one hundred (and )?sixty[- ]nine|169)
+
+#??Category: Tunnels
+# Question 1632
+:The world's longest tunnel connects Delaware and ......?
+New York
+
+#??Category: Tunnels
+# Question 1633
+:The world's longest tunnel connects New York and ......?
+Delaware
+
+#??Category: Tunnels
+# Question 1634
+:What is the world's longest tunnel?
+The #Water Supply# Tunnel
+
+#??Category: US Aeronautics
+# Question 1635
+:Where is the Kennedy Space Centre?
+#Cape Canaveral#, Florida
+
+#??Category: United States
+# Question 1636
+:In the USA, for how many years is a patent good?
+seventeen 
+#??Regexp: (seventeen|17)
+
+#??Category: United States
+# Question 1637
+:In what year was the first black mayor of Chicago elected?
+1983
+
+#??Category: United States
+# Question 1638
+:What is on a 5000 acre landfill at the head of Jamaica Bay near New York City?
+John F. Kennedy #Airport#
+
+#??Category: United States
+# Question 1639
+:What is the most popular street name in the US?
+#Park# Street
+
+#??Category: United States
+# Question 1640
+:What was Nancy Davis Reagan's birth name?
+Anne Frances Robbins
+
+#??Category: United States
+# Question 1641
+:What was the Statue Of Liberty originally named?
+Liberty Enlightening The World
+
+#??Category: United States
+# Question 1642
+:Where is Stone Mountain?
+Atlanta
+
+#??Category: United States
+# Question 1643
+:Where were Tommy Lee Jones and Al Gore freshman roommates?
+#Harvard# University
+
+#??Category: United States
+# Question 1644
+:Which city is a 'player with railroads, and the nation's freight handler'?
+Chicago
+
+#??Category: United States
+# Question 1645
+:Which two cities are known as the twin cities?
+Minneapolis and Saint Paul
+#??Regexp: (Minneapolis (and |& ) S(ain)?t.? Paul|S(ain)?t.? Paul (and |& )Minneapolis)
+
+#??Category: United States
+# Question 1646
+:Who is the only man to have been both chief justice and president of the US?
+William #Taft#
+
+#??Category: United States
+# Question 1647
+:Who was Al Gore's freshman roommate at Harvard?
+Tommy Lee Jones
+
+#??Category: United States
+# Question 1648
+:Who was Tommy Lee Jones' freshman roommate at Harvard?
+Al Gore
+
+#??Category: United States
+# Question 1649
+:Who was born Anne Frances Robbins?
+Nancy Davis Reagan
+
+#??Category: United States
+# Question 1650
+:Who was born Sarah Jane Fulks?
+Jane Wyman Reagan
+
+#??Category: United States
+# Question 1651
+:Who was the first black mayor of Chicago?
+Harold Washington
+
+#??Category: United states
+# Question 1652
+:What was Jane Wyman Reagan's birth name?
+Sarah Jane Fulks
+
+#??Category: Ventilation
+# Question 1653
+:If locked in a completely sealed room, of what will you die before you suffocate?
+carbon monoxide poisoning
+
+#??Category: Very Big Guns
+# Question 1654
+:Where is the biggest calibre cannon?
+Kremlin
+
+#??Category: Weather
+# Question 1655
+:Approximately how many times a minute does lightning strike the earth?
+six thousand
+#??Regexp: (six thousand|6[, ]?000)
+
+#??Category: Weather
+# Question 1656
+:Which country holds the record for most snowfall in a day, recorded February 7, 1916?
+Alaska
+
+#??Category: What is it?
+# Question 1657
+:What is 9 metres high, 7 metres wide and 2,500 kilometres long?
+Great Wall of China
+
+#??Category: Wines
+# Question 1658
+:Good Rhine wines are bottled in what colour bottles?
+brown
+
+#??Category: Woodchucks
+# Question 1659
+:How much wood can a wood chuck chuck if a woodchuck could chuck wood?
+All the wood that a wood chuck could if a wood chuck could chuck wood
+
+#??Category: Word Association
+# Question 1660
+:Which word is related to these three: rat, blue, cottage?
+cheese
+
+#??Category: Word Pairs
+# Question 1661
+:Cattle are bovine, sheep are ...... ?
+ovine
+
+#??Category: Words containing 'for'
+# Question 1662
+:Pardon?
+FORgive
+
+#??Category: World Affairs
+# Question 1663
+:What arabian peninsula nations recently merged under communist leadership?
+Yemen
+
+#??Category: World Climate
+# Question 1664
+:What is a calm ocean region near the equator called?
+doldrums
+
+#??Category: Y/N?
+# Question 1665
+:Which british group recorded the 1983 hit 'Owner Of A Lonely Heart'?
+Yes
+#??Regexp: Y
+
+# Question 1666
+:Baseball: The San Diego .......?
+Padres
+
+# Question 1667
+:If Brazil had won the 1998 tournament, how many times would they have won the soccer World Cup?
+five
+#??Regexp: (five|5)
+
+# Question 1668
+:If body temperature was 86 degrees, how many years would a man man live?
+two hundred
+#??Regexp: (two hundred|200)
+
+# Question 1669
+:In 1986, what was the maximum fuel capacity (in litres) imposed in Formula 1 racing?
+195
+#??Regexp: (one hundred (and )?ninety five|195)
+
+# Question 1670
+:What was the name of Buffy's doll in the 1970's show 'Family Affair'?
+Mrs. #Beasley#
+
+# Question 1671
+:When was the date of the Christian festival Easter fixed by the Council of Nicaea?
+#325# AD
+
+# Question 1672
+:Which film starring Julie Andrews and Christopher Plummer won the Oscar for best picture in 1965?
+The #Sound Of Music#
+
+# Question 1673
+:Which two teams automatically qualified for the France '98 soccer world cup?
+France and Brazil
+#??Regexp: (France (and|&) Brazil|Brazil (and|&) France)
+
+

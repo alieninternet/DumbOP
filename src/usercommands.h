@@ -25,7 +25,6 @@ class UserCommands {
    static void Do(ServerConnection *, Person *, String, String);
    static void Help(ServerConnection *, Person *, String, String);
    static void Ident(ServerConnection *, Person *, String, String);
-   static void Info(ServerConnection *, Person *, String, String);
    static void Invite(ServerConnection *, Person *, String, String);
    static void Join(ServerConnection *, Person *, String, String);
    static void Keep(ServerConnection *, Person *, String, String);
@@ -33,7 +32,6 @@ class UserCommands {
    static void KickBan(ServerConnection *, Person *, String, String);
    static void LastSeen(ServerConnection *, Person *, String, String);
    static void Mode(ServerConnection *, Person *, String, String);
-   static void Msg(ServerConnection *, Person *, String, String);
    static void Names(ServerConnection *, Person *, String, String);
    static void NextServer(ServerConnection *, Person *, String, String);
    static void Nick(ServerConnection *, Person *, String, String);
@@ -51,8 +49,7 @@ class UserCommands {
    static void ServerList(ServerConnection *, Person *, String, String);
    static void Stats(ServerConnection *, Person *, String, String);
    static void Test(ServerConnection *, Person *, String, String);
-   static void TBan(ServerConnection *, Person *, String, String);
-   static void TKBan(ServerConnection *, Person *, String, String);
+   static void Time(ServerConnection *, Person *, String, String);
    static void Topic(ServerConnection *, Person *, String, String);
    static void UserList(ServerConnection *, Person *, String, String);
    static void Voice(ServerConnection *, Person *, String, String);

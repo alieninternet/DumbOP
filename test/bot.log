@@ -1,453 +1,318 @@
-[25/06/2001 - 19:59:08] Starting log.
-[25/06/2001 - 19:59:08] DumbOP version 0.33b
-[25/06/2001 - 19:59:10] Connected to server firstlink.nsw.au.austnet.org (6667).
-[25/06/2001 - 19:59:12] Joined channel #chaty.
-[25/06/2001 - 19:59:14] Joined channel #melbirc.
-[25/06/2001 - 19:59:16] Joined channel #o0.
-[25/06/2001 - 19:59:18] Joined channel #quiz.
-[25/06/2001 - 19:59:20] Joined channel #wetmusik.
-[25/06/2001 - 20:11:40] [Pickle]!nobody@vw-21223.optushome.com.au did PING 
-[25/06/2001 - 20:15:05] [pickel]!nobody@vw-21223.optushome.com.au did USERLIST 
-[25/06/2001 - 20:15:48] [Pickle]!nobody@vw-21223.optushome.com.au did USERLIST 
-[25/06/2001 - 20:19:11] [Pickle]!nobody@vw-21223.optushome.com.au did SAVE 
-[25/06/2001 - 20:19:22] [Pickle]!nobody@vw-21223.optushome.com.au did DIE Lag. Reconnecting
-[25/06/2001 - 20:19:22] Stopping log.
-[25/06/2001 - 20:19:49] Starting log.
-[25/06/2001 - 20:19:49] DumbOP version 0.33b
-[25/06/2001 - 20:19:59] Connected to server firstlink.nsw.au.austnet.org (6667).
-[25/06/2001 - 20:20:01] Joined channel #chaty.
-[25/06/2001 - 20:20:03] Joined channel #melbirc.
-[25/06/2001 - 20:20:05] Joined channel #o0.
-[25/06/2001 - 20:20:07] Joined channel #quiz.
-[25/06/2001 - 20:20:10] Joined channel #wetmusik.
-[25/06/2001 - 20:20:44] [Pickle]!nobody@vw-21223.optushome.com.au did USERLIST 
-[25/06/2001 - 20:21:03] Left channel #wetmusik.
-[25/06/2001 - 20:21:05] Joined channel #wetmusik.
-[25/06/2001 - 20:22:27] [Pickle]!nobody@vw-21223.optushome.com.au did HELP 
-[25/06/2001 - 21:02:01] [Pickle]!nobody@vw-21223.optushome.com.au did SAVE 
-[25/06/2001 - 21:02:06] [Pickle]!nobody@vw-21223.optushome.com.au did DIE bbk
-[25/06/2001 - 21:02:06] Stopping log.
-[25/06/2001 - 21:03:30] Starting log.
-[25/06/2001 - 21:03:30] DumbOP version 0.33b
-[25/06/2001 - 21:03:34] Connected to server firstlink.nsw.au.austnet.org (6667).
-[25/06/2001 - 21:03:37] Joined channel #chaty.
-[25/06/2001 - 21:03:39] Joined channel #melbirc.
-[25/06/2001 - 21:03:41] Joined channel #o0.
-[25/06/2001 - 21:03:43] Joined channel #quiz.
-[25/06/2001 - 21:03:45] Joined channel #wetmusik.
-[25/06/2001 - 21:04:25] [Pickle]!nobody@vw-21223.optushome.com.au did PING 
-[25/06/2001 - 21:12:44] Caught Signal SIGINT: Should be shutting down.
-[25/06/2001 - 21:12:44] Select broke on us :(
-[25/06/2001 - 21:12:44] Caught Signal SIGINT: Should be shutting down.
-[25/06/2001 - 21:12:44] Select broke on us :(
-[25/06/2001 - 21:12:44] Caught Signal SIGINT: Should be shutting down.
-[25/06/2001 - 21:12:44] Select broke on us :(
-[25/06/2001 - 21:16:58] Starting log.
-[25/06/2001 - 21:16:58] DumbOP version 0.33b
-[25/06/2001 - 21:16:59] Connected to server firstlink.nsw.au.austnet.org (6667).
-[25/06/2001 - 21:17:02] Joined channel #chaty.
-[25/06/2001 - 21:17:04] Joined channel #melbirc.
-[25/06/2001 - 21:17:06] Joined channel #o0.
-[25/06/2001 - 21:17:08] Joined channel #quiz.
-[25/06/2001 - 21:17:10] Joined channel #wetmusik.
-[25/06/2001 - 21:18:49] [Pickle]!nobody@vw-21223.optushome.com.au did PING 
-[25/06/2001 - 21:29:08] [Pickle]!nobody@vw-21223.optushome.com.au did PING 
-[25/06/2001 - 21:50:53] [Pickle]!nobody@vw-21223.optushome.com.au did SAVE 
-[25/06/2001 - 21:50:55] [Pickle]!nobody@vw-21223.optushome.com.au did DIE 
-[25/06/2001 - 21:50:55] Stopping log.
-[25/06/2001 - 21:55:16] Starting log.
-[25/06/2001 - 21:55:16] DumbOP version 0.33b
-[25/06/2001 - 21:55:17] Connected to server firstlink.nsw.au.austnet.org (6667).
-[25/06/2001 - 21:55:20] Joined channel #chaty.
-[25/06/2001 - 21:55:22] Joined channel #melbirc.
-[25/06/2001 - 21:55:24] Joined channel #o0.
-[25/06/2001 - 21:55:26] Joined channel #quiz.
-[25/06/2001 - 21:55:28] Joined channel #wetmusik.
-[25/06/2001 - 21:56:08] [Pickle]!nobody@vw-21223.optushome.com.au did PING 
-[25/06/2001 - 21:56:51] [Pickle]!nobody@vw-21223.optushome.com.au did PING 
-[25/06/2001 - 21:56:53] [Pickle]!nobody@vw-21223.optushome.com.au did PING 
-[26/06/2001 - 05:05:57] Connected to server ozemail.nsw.au.austnet.org (6667).
-[26/06/2001 - 05:06:00] Joined channel #chaty.
-[26/06/2001 - 05:06:02] Joined channel #melbirc.
-[26/06/2001 - 05:06:10] Joined channel #o0.
-[26/06/2001 - 05:06:12] Joined channel #quiz.
-[26/06/2001 - 05:06:14] Joined channel #wetmusik.
-[26/06/2001 - 11:22:23] [Pickle]!nobody@vw-21223.optushome.com.au did RECONNECT you idiot
-[26/06/2001 - 11:22:26] Connected to server ozemail.nsw.au.austnet.org (6667).
-[26/06/2001 - 11:22:28] Joined channel #chaty.
-[26/06/2001 - 11:22:30] Joined channel #melbirc.
-[26/06/2001 - 11:22:32] Joined channel #o0.
-[26/06/2001 - 11:22:34] Joined channel #quiz.
-[26/06/2001 - 11:22:36] Joined channel #wetmusik.
-[26/06/2001 - 11:29:35] [Pickle]!nobody@vw-21223.optushome.com.au did SAY :(
-[26/06/2001 - 11:48:20] [Pickle]!nobody@vw-21223.optushome.com.au did SAY Are you making fun of me again? :(
-[26/06/2001 - 11:48:40] [Pickle]!nobody@vw-21223.optushome.com.au did SAY You always make fun of me :(
-[26/06/2001 - 11:48:51] [Pickle]!nobody@vw-21223.optushome.com.au did SAY Like I'm worthless to you people or something :(
-[26/06/2001 - 11:49:11] [Pickle]!nobody@vw-21223.optushome.com.au did SAY What am I to you people? Dumb or something? :(
-[26/06/2001 - 11:49:29] [Pickle]!nobody@vw-21223.optushome.com.au did DO sulks :(
-[26/06/2001 - 11:50:11] [Pickle]!nobody@vw-21223.optushome.com.au did SAY No I'm not :(
-[26/06/2001 - 11:50:18] [Pickle]!nobody@vw-21223.optushome.com.au did SAY *pouts*
-[26/06/2001 - 11:50:49] [Pickle]!nobody@vw-21223.optushome.com.au did DO thinks you all laugh at it behind its back
-[26/06/2001 - 11:51:13] [Pickle]!nobody@vw-21223.optushome.com.au did SAY The joke's on you - I don't have a head!
-[26/06/2001 - 11:52:10] [Pickle]!nobody@vw-21223.optushome.com.au did SAY :)
-[26/06/2001 - 11:52:22] [Pickle]!nobody@vw-21223.optushome.com.au did STATS 
-[26/06/2001 - 13:11:35] [Pickle]!nobody@vw-21223.optushome.com.au did HELP 
-[26/06/2001 - 13:11:51] [Pickle]!nobody@vw-21223.optushome.com.au did NAMES 
-[26/06/2001 - 13:16:35] Phull!asf@vw-11098.iprimus.net.au is flooding me. We will ignore him/her/it.
-[26/06/2001 - 13:50:11] [Pickle]!nobody@vw-21223.optushome.com.au did SAVE 
-[26/06/2001 - 13:50:15] [Pickle]!nobody@vw-21223.optushome.com.au did DIE bye bye
-[26/06/2001 - 13:50:15] Stopping log.
-[26/06/2001 - 13:51:20] Starting log.
-[26/06/2001 - 13:51:20] DumbOP version 0.33b
-[26/06/2001 - 13:51:20] Syntax error in file bot.conf, line 14
-[26/06/2001 - 13:51:45] Starting log.
-[26/06/2001 - 13:51:45] DumbOP version 0.33b
-[26/06/2001 - 13:51:48] Connected to server firstlink.nsw.au.austnet.org (6667).
-[26/06/2001 - 13:51:50] Joined channel #chaty.
-[26/06/2001 - 13:51:52] Joined channel #melbirc.
-[26/06/2001 - 13:51:54] Joined channel #o0.
-[26/06/2001 - 13:51:56] Joined channel #quiz.
-[26/06/2001 - 13:51:58] Joined channel #wetmusik.
-[26/06/2001 - 14:09:02] Starting log.
-[26/06/2001 - 14:09:02] DumbOP version 0.33b
-[26/06/2001 - 14:09:02] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:10:42] Starting log.
-[26/06/2001 - 14:10:42] DumbOP version 0.33b
-[26/06/2001 - 14:10:42] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:22:30] Starting log.
-[26/06/2001 - 14:22:30] DumbOP version 0.33b
-[26/06/2001 - 14:22:30] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:23:59] Starting log.
-[26/06/2001 - 14:24:00] DumbOP version 0.33b
-[26/06/2001 - 14:24:00] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:25:49] Starting log.
-[26/06/2001 - 14:25:49] DumbOP version 0.33b
-[26/06/2001 - 14:25:49] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:28:17] Starting log.
-[26/06/2001 - 14:28:17] DumbOP version 0.33b
-[26/06/2001 - 14:28:17] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:29:44] Starting log.
-[26/06/2001 - 14:29:44] DumbOP version 0.33b
-[26/06/2001 - 14:29:44] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:29:51] Starting log.
-[26/06/2001 - 14:29:51] DumbOP version 0.33b
-[26/06/2001 - 14:29:51] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:29:51] Starting log.
-[26/06/2001 - 14:29:51] DumbOP version 0.33b
-[26/06/2001 - 14:29:51] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:29:52] Starting log.
-[26/06/2001 - 14:29:52] DumbOP version 0.33b
-[26/06/2001 - 14:29:52] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:29:53] Starting log.
-[26/06/2001 - 14:29:53] DumbOP version 0.33b
-[26/06/2001 - 14:29:53] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:29:53] Starting log.
-[26/06/2001 - 14:29:53] DumbOP version 0.33b
-[26/06/2001 - 14:29:53] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:29:54] Starting log.
-[26/06/2001 - 14:29:54] DumbOP version 0.33b
-[26/06/2001 - 14:29:54] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:33:15] Starting log.
-[26/06/2001 - 14:33:15] DumbOP version 0.33b
-[26/06/2001 - 14:33:15] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:34:57] Starting log.
-[26/06/2001 - 14:34:57] DumbOP version 0.33b
-[26/06/2001 - 14:34:57] Syntax error in file bot.conf, line 10
-[26/06/2001 - 14:35:52] Starting log.
-[26/06/2001 - 14:35:52] DumbOP version 0.33b
-[26/06/2001 - 14:35:52] Connected to server mothership.alien.intranet (6667).
-[26/06/2001 - 14:35:55] Joined channel #Chaty.
-[26/06/2001 - 14:36:35] [Pickle]!root@mothership.alien.intranet did HELP 
-[26/06/2001 - 14:39:19] [Pickle]!root@mothership.alien.intranet did JOIN #fuck
-[26/06/2001 - 14:39:19] Joined channel #fuck.
-[26/06/2001 - 14:39:25] [Pickle]!root@mothership.alien.intranet did JOIN #a
-[26/06/2001 - 14:39:25] Joined channel #a.
-[26/06/2001 - 14:39:31] [Pickle]!root@mothership.alien.intranet did JOIN #b
-[26/06/2001 - 14:39:31] Joined channel #b.
-[26/06/2001 - 14:39:34] [Pickle]!root@mothership.alien.intranet did JOIN #c
-[26/06/2001 - 14:39:36] [Pickle]!root@mothership.alien.intranet did JOIN #d
-[26/06/2001 - 14:39:38] Joined channel #c.
-[26/06/2001 - 14:39:41] Joined channel #d.
-[26/06/2001 - 20:23:40] Starting log.
-[26/06/2001 - 20:23:40] DumbOP version 0.33b
-[26/06/2001 - 20:42:44] Starting log.
-[26/06/2001 - 20:42:45] DumbOP version 0.33b
-[26/06/2001 - 20:42:46] Connected to server mothership.alien.intranet (6667).
-[26/06/2001 - 20:43:02] [Pickle]!~simonb@172.16.0.12 did HELP 
-[26/06/2001 - 20:43:05] [Pickle]!~simonb@172.16.0.12 did HELP 
-[26/06/2001 - 20:43:24] [Pickle]!~simonb@172.16.0.12 did RECONNECT 
-[26/06/2001 - 20:43:25] Connected to server mothership.alien.intranet (6667).
-[26/06/2001 - 20:57:05] [Pickle]!~simonb@172.16.0.12 did JOIN #chaty
-[26/06/2001 - 20:57:20] [Pickle]!~simonb@172.16.0.12 did NEXTSERVER 
-[26/06/2001 - 20:57:25] [Pickle]!~simonb@172.16.0.12 did RECONNECT 
-[26/06/2001 - 20:57:26] Connected to server mothership.alien.intranet (6667).
-[26/06/2001 - 21:20:35] [Pickle]!~simonb@172.16.0.12 did DIE 
-[26/06/2001 - 21:20:42] Stopping log.
-[26/06/2001 - 21:22:59] Starting log.
-[26/06/2001 - 21:23:00] DumbOP version 0.33b
-[26/06/2001 - 21:23:10] Connected to server mothership.alien.intranet (6667).
-[26/06/2001 - 21:23:11] Joined channel #Chaty.
-[26/06/2001 - 21:23:29] [Pickle]!simonb@alien-router.routers.intranet did CYCLE 
-[26/06/2001 - 21:30:09] Starting log.
-[26/06/2001 - 21:30:10] DumbOP version 0.33b
-[26/06/2001 - 21:30:13] Connected to server mothership.alien.intranet (6667).
-[26/06/2001 - 21:30:15] Joined channel #Chaty.
-[26/06/2001 - 21:31:00] [Pickle]!simonb@alien-router.routers.intranet did RECONNECT 
-[26/06/2001 - 21:36:31] Starting log.
-[26/06/2001 - 21:36:33] DumbOP version 0.33b
-[26/06/2001 - 21:36:40] Connected to server mothership.alien.intranet (6667).
-[26/06/2001 - 21:36:42] Joined channel #Chaty.
-[26/06/2001 - 21:36:55] [Pickle]!simonb@alien-router.routers.intranet is flooding me. We will ignore him/her/it.
-[26/06/2001 - 21:38:31] Starting log.
-[26/06/2001 - 21:38:32] DumbOP version 0.33b
-[26/06/2001 - 21:38:37] Connected to server mothership.alien.intranet (6667).
-[26/06/2001 - 21:38:38] Joined channel #Chaty.
-[26/06/2001 - 21:40:02] [Pickle]!simonb@alien-router.routers.intranet did HELP 
-[26/06/2001 - 21:40:10] [Pickle]!simonb@alien-router.routers.intranet did STATS 
-[26/06/2001 - 21:41:00] [Pickle]!simonb@alien-router.routers.intranet did PART 
-[26/06/2001 - 21:41:01] Left channel #chaty.
-[26/06/2001 - 21:41:07] [Pickle]!simonb@alien-router.routers.intranet did JOIN #chaty
-[26/06/2001 - 21:41:07] Joined channel #chaty.
-[26/06/2001 - 21:41:22] [Pickle]!simonb@alien-router.routers.intranet did CYCLE 
-[26/06/2001 - 21:41:22] Left channel #chaty.
-[26/06/2001 - 21:41:22] Joined channel #chaty.
-[26/06/2001 - 21:41:36] [Pickle]!simonb@alien-router.routers.intranet did RECONNECT 
-[26/06/2001 - 21:41:39] Connected to server mothership.alien.intranet (6667).
-[26/06/2001 - 21:41:42] Joined channel #Chaty.
-[26/06/2001 - 21:42:14] [Pickle]!simonb@alien-router.routers.intranet did CYCLE 
-[26/06/2001 - 21:42:14] Left channel #chaty.
-[26/06/2001 - 21:42:14] Joined channel #chaty.
-[26/06/2001 - 21:42:28] [Pickle]!simonb@alien-router.routers.intranet did DIE 
-[26/06/2001 - 21:42:28] Stopping log.
-[26/06/2001 - 21:44:32] Starting log.
-[26/06/2001 - 21:44:32] DumbOP version 0.33b
-[26/06/2001 - 21:44:36] Connected to server mothership.alien.intranet (6667).
-[26/06/2001 - 21:44:38] Joined channel #Chaty.
-[26/06/2001 - 21:44:48] [Pickle]!simonb@alien-router.routers.intranet did CYCLE 
-[26/06/2001 - 21:45:12] Starting log.
-[26/06/2001 - 21:45:13] DumbOP version 0.33b
-[26/06/2001 - 21:45:18] Connected to server mothership.alien.intranet (6667).
-[26/06/2001 - 21:45:21] Joined channel #Chaty.
-[26/06/2001 - 21:45:29] [Pickle]!simonb@alien-router.routers.intranet did PART 
-[26/06/2001 - 21:45:30] Left channel #chaty.
-[26/06/2001 - 21:45:33] [Pickle]!simonb@alien-router.routers.intranet did JOIN #chaty
-[26/06/2001 - 21:45:35] Joined channel #chaty.
-[26/06/2001 - 21:45:55] [Pickle]!simonb@alien-router.routers.intranet did CYCLE 
-[26/06/2001 - 21:45:55] Left channel #chaty.
-[26/06/2001 - 21:45:55] Joined channel #chaty.
-[26/06/2001 - 21:45:59] [Pickle]!simonb@alien-router.routers.intranet did USERLIST 
-[26/06/2001 - 21:46:48] [Pickle]!simonb@alien-router.routers.intranet did INFO 
-[26/06/2001 - 21:46:53] [Pickle]!simonb@alien-router.routers.intranet did STATS 
-[27/06/2001 - 13:41:56] Starting log.
-[27/06/2001 - 13:41:56] DumbOP version 0.33b
-[27/06/2001 - 13:41:59] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 13:42:00] Joined channel #Chaty.
-[27/06/2001 - 13:42:04] Joined channel #one.
-[27/06/2001 - 13:42:07] Joined channel #test.
-[27/06/2001 - 13:42:10] Joined channel #three.
-[27/06/2001 - 13:42:13] Joined channel #two.
-[27/06/2001 - 13:42:48] [Pickle]!simonb@alien-router.routers.intranet did NAMES 
-[27/06/2001 - 13:42:52] [Pickle]!simonb@alien-router.routers.intranet did NAMES -
-[27/06/2001 - 13:57:54] [Pickle]!simonb@alien-router.routers.intranet did DIE 
-[27/06/2001 - 13:57:58] Stopping log.
-[27/06/2001 - 14:00:13] Starting log.
-[27/06/2001 - 14:00:15] DumbOP version 0.33b
-[27/06/2001 - 14:00:22] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 14:00:23] Joined channel #chaty.
-[27/06/2001 - 14:00:27] Joined channel #one.
-[27/06/2001 - 14:00:30] Joined channel #test.
-[27/06/2001 - 14:00:33] Joined channel #three.
-[27/06/2001 - 14:00:36] Joined channel #two.
-[27/06/2001 - 14:00:41] [Pickle]!simonb@alien-router.routers.intranet did HELP 
-[27/06/2001 - 14:01:21] [Pickle]!simonb@alien-router.routers.intranet did CYCLE 
-[27/06/2001 - 14:01:21] Left channel #chaty.
-[27/06/2001 - 14:01:21] Joined channel #chaty.
-[27/06/2001 - 16:29:10] [Pickle]!simonb@alien-router.routers.intranet did DIE 
-[27/06/2001 - 16:29:10] Stopping log.
-[27/06/2001 - 16:47:22] Starting log.
-[27/06/2001 - 16:47:23] DumbOP version 0.33b
-[27/06/2001 - 16:47:28] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 16:54:04] Starting log.
-[27/06/2001 - 16:54:05] DumbOP version 0.33b
-[27/06/2001 - 16:54:09] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 16:58:58] Starting log.
-[27/06/2001 - 16:58:58] DumbOP version 0.33b
-[27/06/2001 - 16:59:08] Starting log.
-[27/06/2001 - 16:59:08] DumbOP version 0.33b
-[27/06/2001 - 17:12:35] Starting log.
-[27/06/2001 - 17:12:36] DumbOP version 0.33b
-[27/06/2001 - 17:12:45] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 17:12:46] Joined channel #chaty.
-[27/06/2001 - 17:12:50] Joined channel #one.
-[27/06/2001 - 17:12:53] Joined channel #test.
-[27/06/2001 - 17:12:56] Joined channel #three.
-[27/06/2001 - 17:12:59] Joined channel #two.
-[27/06/2001 - 17:13:35] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 17:13:38] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 17:13:40] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 17:13:40] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 17:13:42] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 17:13:44] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 17:15:02] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 17:20:53] [Pickle]!simonb@alien-router.routers.intranet did DIE 
-[27/06/2001 - 17:20:54] Stopping log.
-[27/06/2001 - 17:23:24] Starting log.
-[27/06/2001 - 17:23:25] DumbOP version 0.33b
-[27/06/2001 - 17:23:30] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 17:23:31] Joined channel #chaty.
-[27/06/2001 - 17:23:34] Joined channel #one.
-[27/06/2001 - 17:23:37] Joined channel #test.
-[27/06/2001 - 17:23:40] Joined channel #three.
-[27/06/2001 - 17:23:43] Joined channel #two.
-[27/06/2001 - 17:24:38] [Pickle]!simonb@alien-router.routers.intranet did USERLIST 
-[27/06/2001 - 17:24:47] [Pickle]!simonb@alien-router.routers.intranet did CYCLE 
-[27/06/2001 - 17:24:47] Left channel #chaty.
-[27/06/2001 - 17:24:47] Joined channel #chaty.
-[27/06/2001 - 17:26:16] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 17:35:00] [Pickle]!simonb@alien-router.routers.intranet did DIE 
-[27/06/2001 - 17:35:01] Stopping log.
-[27/06/2001 - 17:37:04] Starting log.
-[27/06/2001 - 17:37:05] DumbOP version 0.33b
-[27/06/2001 - 17:37:10] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 17:37:11] Joined channel #chaty.
-[27/06/2001 - 17:37:15] Joined channel #one.
-[27/06/2001 - 17:37:18] Joined channel #test.
-[27/06/2001 - 17:37:21] Joined channel #three.
-[27/06/2001 - 17:37:24] Joined channel #two.
-[27/06/2001 - 17:42:38] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 17:49:10] [Pickle]!simonb@alien-router.routers.intranet did STATS 
-[27/06/2001 - 17:50:57] [Pickle]!simonb@alien-router.routers.intranet did CYCLE 
-[27/06/2001 - 17:50:59] Left channel #chaty.
-[27/06/2001 - 17:50:59] Joined channel #chaty.
-[27/06/2001 - 17:51:23] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 17:51:25] [Pickle]!simonb@alien-router.routers.intranet did DIE bah bah
-[27/06/2001 - 17:51:25] Stopping log.
-[27/06/2001 - 17:56:50] Starting log.
-[27/06/2001 - 17:56:50] DumbOP version 0.33b
-[27/06/2001 - 17:56:54] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 17:56:55] Joined channel #chaty.
-[27/06/2001 - 17:56:58] Joined channel #one.
-[27/06/2001 - 17:57:02] Joined channel #test.
-[27/06/2001 - 17:57:05] Joined channel #three.
-[27/06/2001 - 17:57:08] Joined channel #two.
-[27/06/2001 - 17:58:05] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 17:58:16] [Pickle]!simonb@alien-router.routers.intranet did DIE 
-[27/06/2001 - 17:58:16] Stopping log.
-[27/06/2001 - 18:00:08] Starting log.
-[27/06/2001 - 18:00:09] DumbOP version 0.33b
-[27/06/2001 - 18:00:14] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 18:00:17] Joined channel #chaty.
-[27/06/2001 - 18:00:20] Joined channel #one.
-[27/06/2001 - 18:00:23] Joined channel #test.
-[27/06/2001 - 18:00:26] Joined channel #three.
-[27/06/2001 - 18:00:29] Joined channel #two.
-[27/06/2001 - 18:02:18] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:08:08] [Pickle]!simonb@alien-router.routers.intranet did DIE 
-[27/06/2001 - 18:08:09] Stopping log.
-[27/06/2001 - 18:17:24] Starting log.
-[27/06/2001 - 18:17:25] DumbOP version 0.33b
-[27/06/2001 - 18:17:29] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 18:17:30] Joined channel #chaty.
-[27/06/2001 - 18:17:33] Joined channel #one.
-[27/06/2001 - 18:17:37] Joined channel #test.
-[27/06/2001 - 18:17:40] Joined channel #three.
-[27/06/2001 - 18:17:43] Joined channel #two.
-[27/06/2001 - 18:18:42] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:18:45] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:19:16] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:19:19] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:19:21] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:19:22] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:19:24] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:19:35] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:19:41] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:19:43] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:19:45] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:19:46] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:19:47] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:19:51] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:20:13] [Pickle]!simonb@alien-router.routers.intranet did DIE 
-[27/06/2001 - 18:20:14] Stopping log.
-[27/06/2001 - 18:39:00] Starting log.
-[27/06/2001 - 18:39:01] DumbOP version 0.33b
-[27/06/2001 - 18:39:07] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 18:39:07] Joined channel #chaty.
-[27/06/2001 - 18:39:11] Joined channel #one.
-[27/06/2001 - 18:39:14] Joined channel #test.
-[27/06/2001 - 18:39:17] Joined channel #three.
-[27/06/2001 - 18:39:20] Joined channel #two.
-[27/06/2001 - 18:40:01] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:40:07] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:40:08] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:40:09] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:40:09] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:40:10] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:40:15] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 18:40:55] [Pickle]!simonb@alien-router.routers.intranet did DIE 
-[27/06/2001 - 18:40:56] Stopping log.
-[27/06/2001 - 19:23:35] Starting log.
-[27/06/2001 - 19:23:36] DumbOP version 0.33b
-[27/06/2001 - 19:23:40] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 19:23:43] Joined channel #chaty.
-[27/06/2001 - 19:23:44] Joined channel #one.
-[27/06/2001 - 19:23:48] Joined channel #test.
-[27/06/2001 - 19:23:51] Joined channel #three.
-[27/06/2001 - 19:23:54] Joined channel #two.
-[27/06/2001 - 19:24:32] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 19:24:36] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 19:24:37] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 19:24:39] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 19:24:40] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 19:24:42] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 19:24:43] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 19:24:57] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 19:26:02] [Pickle]!simonb@alien-router.routers.intranet did CYCLE 
-[27/06/2001 - 19:26:03] Left channel #chaty.
-[27/06/2001 - 19:26:03] Joined channel #chaty.
-[27/06/2001 - 19:26:12] [Pickle]!simonb@alien-router.routers.intranet did OP 
-[27/06/2001 - 19:26:15] [Pickle]!simonb@alien-router.routers.intranet did VOICE 
-[27/06/2001 - 19:26:19] [Pickle]!simonb@alien-router.routers.intranet did VOICE 
-[27/06/2001 - 19:26:22] [Pickle]!simonb@alien-router.routers.intranet did DEOP 
-[27/06/2001 - 19:26:24] [Pickle]!simonb@alien-router.routers.intranet did OP 
-[27/06/2001 - 19:26:27] [Pickle]!simonb@alien-router.routers.intranet did OP 
-[27/06/2001 - 19:26:31] [Pickle]!simonb@alien-router.routers.intranet did DEOP 
-[27/06/2001 - 19:26:32] [Pickle]!simonb@alien-router.routers.intranet did DEOP 
-[27/06/2001 - 19:26:34] [Pickle]!simonb@alien-router.routers.intranet did DEOP 
-[27/06/2001 - 19:26:36] [Pickle]!simonb@alien-router.routers.intranet did OP 
-[27/06/2001 - 19:26:47] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 19:26:50] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 19:26:51] [Pickle]!simonb@alien-router.routers.intranet did USERLIST 
-[27/06/2001 - 20:22:36] [Pickle]!simonb@alien-router.routers.intranet did DIE 
-[27/06/2001 - 20:22:42] Stopping log.
-[27/06/2001 - 20:25:42] Starting log.
-[27/06/2001 - 20:25:45] DumbOP version 0.33b
-[27/06/2001 - 20:25:53] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 20:25:56] Joined channel #chaty.
-[27/06/2001 - 20:25:58] Joined channel #one.
-[27/06/2001 - 20:26:01] Joined channel #test.
-[27/06/2001 - 20:26:04] Joined channel #three.
-[27/06/2001 - 20:26:07] Joined channel #two.
-[27/06/2001 - 20:28:14] [Pickle]!simonb@alien-router.routers.intranet did PING 
-[27/06/2001 - 22:00:43] [Pickle]!simonb@alien-router.routers.intranet did DIE 
-[27/06/2001 - 22:00:44] Stopping log.
-[27/06/2001 - 22:04:35] Starting log.
-[27/06/2001 - 22:04:36] DumbOP version 0.33b
-[27/06/2001 - 22:04:37] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 22:04:40] Joined channel #chaty.
-[27/06/2001 - 22:04:43] Joined channel #one.
-[27/06/2001 - 22:04:46] Joined channel #test.
-[27/06/2001 - 22:04:49] Joined channel #three.
-[27/06/2001 - 22:04:51] Joined channel #two.
-[27/06/2001 - 22:07:38] [Pickle]!simonb@alien-router.routers.intranet did STATS 
-[27/06/2001 - 22:08:22] [Pickle]!simonb@alien-router.routers.intranet did DIE 
-[27/06/2001 - 22:08:23] Stopping log.
-[27/06/2001 - 22:10:09] Starting log.
-[27/06/2001 - 22:10:09] DumbOP version 0.33b
-[27/06/2001 - 22:10:11] Connected to server mothership.alien.intranet (6667).
-[27/06/2001 - 22:10:13] Joined channel #chaty.
-[27/06/2001 - 22:10:15] Joined channel #one.
-[27/06/2001 - 22:10:19] Joined channel #test.
-[27/06/2001 - 22:10:22] Joined channel #three.
-[27/06/2001 - 22:10:25] Joined channel #two.
-[27/06/2001 - 22:11:10] [Pickle]!simonb@alien-router.routers.intranet did STATS 
-[27/06/2001 - 22:18:05] [Pickle]!simonb@alien-router.routers.intranet did USERLIST 
+[06/07/2001 - 15:06:24] Starting log.
+[06/07/2001 - 15:06:24] DumbOP v0.34b
+[06/07/2001 - 15:06:25] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[06/07/2001 - 15:06:25] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[06/07/2001 - 15:06:26] Connected to server mothership.alien.intranet (6667).
+[06/07/2001 - 15:06:29] Joined channel #chaty.
+[06/07/2001 - 15:06:32] Joined channel #quiz.
+[06/07/2001 - 15:07:49] [Pickle]!nobody@gateway.routers.intranet did PING 
+[06/07/2001 - 15:10:13] [Pickle]!nobody@gateway.routers.intranet did PING 
+[06/07/2001 - 15:10:18] [Pickle]!nobody@gateway.routers.intranet did TEST 
+[06/07/2001 - 15:29:58] Caught Signal SIGINT: Shutting down.
+[06/07/2001 - 15:29:58] Select prematurely returned!
+[06/07/2001 - 15:29:59] Stopping log.
+[06/07/2001 - 16:46:49] Starting log.
+[06/07/2001 - 16:46:49] DumbOP v0.34b
+[06/07/2001 - 16:46:49] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[06/07/2001 - 16:46:49] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[06/07/2001 - 16:46:50] Connected to server mothership.alien.intranet (6667).
+[06/07/2001 - 16:46:53] Joined channel #chaty.
+[06/07/2001 - 16:46:56] Joined channel #quiz.
+[06/07/2001 - 16:47:05] [Pickle]!nobody@gateway.routers.intranet did PING 
+[06/07/2001 - 16:47:16] [Pickle]!nobody@gateway.routers.intranet did TIME 
+[06/07/2001 - 16:54:23] [Pickle]!nobody@gateway.routers.intranet did TEST 
+[06/07/2001 - 17:01:56] [Pickle]!nobody@gateway.routers.intranet did TIME 
+[06/07/2001 - 17:19:22] [Pickle]!nobody@gateway.routers.intranet did TIME 
+[06/07/2001 - 17:48:32] Caught Signal SIGTSTP: Ignoring (Perplexed)
+[06/07/2001 - 17:48:32] Caught Signal SIGHUP: Should be reloading files.
+[06/07/2001 - 17:48:32] Select prematurely returned!
+[06/07/2001 - 18:13:25] Left channel #chaty.
+[06/07/2001 - 18:13:25] Joined channel #chaty.
+[06/07/2001 - 18:13:39] Left channel #quiz.
+[06/07/2001 - 18:13:39] Joined channel #quiz.
+[06/07/2001 - 18:15:53] Caught Signal SIGTERM: Shutting down.
+[06/07/2001 - 18:15:53] Select prematurely returned!
+[06/07/2001 - 18:15:53] Stopping log.
+[06/07/2001 - 18:15:59] Starting log.
+[06/07/2001 - 18:15:59] DumbOP v0.34b
+[06/07/2001 - 18:15:59] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[06/07/2001 - 18:15:59] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[06/07/2001 - 18:15:59] Connected to server mothership.alien.intranet (6667).
+[06/07/2001 - 18:16:02] Joined channel #chaty.
+[06/07/2001 - 18:16:03] Caught Signal SIGINT: Shutting down.
+[06/07/2001 - 18:16:03] Select prematurely returned!
+[06/07/2001 - 18:16:03] Stopping log.
+[06/07/2001 - 18:16:13] Starting log.
+[06/07/2001 - 18:16:13] DumbOP v0.34b
+[06/07/2001 - 18:16:13] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[06/07/2001 - 18:16:13] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[06/07/2001 - 18:16:13] Connected to server mothership.alien.intranet (6667).
+[06/07/2001 - 18:16:16] Joined channel #chaty.
+[06/07/2001 - 18:16:19] Joined channel #quiz.
+[06/07/2001 - 18:53:43] Caught Signal SIGTSTP: Ignoring (Perplexed)
+[06/07/2001 - 18:53:43] Caught Signal SIGHUP: Should be reloading files.
+[06/07/2001 - 18:53:43] Caught Signal SIGHUP: Should be reloading files.
+[06/07/2001 - 18:53:43] Select prematurely returned!
+[06/07/2001 - 19:31:22] [Pickle]!nobody@gateway.routers.intranet did DIE 
+[06/07/2001 - 19:31:22] Stopping log.
+[06/07/2001 - 20:48:00] Starting log.
+[06/07/2001 - 20:48:01] DumbOP v0.34b
+[06/07/2001 - 20:48:01] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[06/07/2001 - 20:48:01] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[06/07/2001 - 20:48:04] Connected to server mothership.alien.intranet (6667).
+[06/07/2001 - 20:48:07] Joined channel #chaty.
+[06/07/2001 - 20:48:11] Joined channel #quiz.
+[06/07/2001 - 20:50:25] [Pickle]!nobody@gateway.routers.intranet did STATS 
+[06/07/2001 - 20:53:06] [Pickle]!nobody@gateway.routers.intranet did TIME 
+[06/07/2001 - 20:58:21] Caught Signal SIGINT: Shutting down.
+[06/07/2001 - 20:58:23] Select prematurely returned!
+[06/07/2001 - 20:58:27] Stopping log.
+[06/07/2001 - 20:59:57] Starting log.
+[06/07/2001 - 20:59:58] DumbOP v0.34b
+[06/07/2001 - 20:59:58] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[06/07/2001 - 20:59:58] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[06/07/2001 - 20:59:58] Connected to server mothership.alien.intranet (6667).
+[06/07/2001 - 21:00:01] Joined channel #chaty.
+[06/07/2001 - 21:00:04] Joined channel #quiz.
+[06/07/2001 - 21:00:34] [Pickle]!nobody@gateway.routers.intranet did TIME 
+[06/07/2001 - 21:01:21] [Pickle]!nobody@gateway.routers.intranet did TIME 
+[06/07/2001 - 21:27:14] Caught Signal SIGINT: Shutting down.
+[06/07/2001 - 21:27:16] Select prematurely returned!
+[06/07/2001 - 21:27:21] Stopping log.
+[06/07/2001 - 21:56:05] Starting log.
+[06/07/2001 - 21:56:05] DumbOP v0.34b
+[06/07/2001 - 21:56:05] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[06/07/2001 - 21:56:05] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[06/07/2001 - 21:56:07] Connected to server mothership.alien.intranet (6667).
+[06/07/2001 - 21:56:09] Joined channel #chaty.
+[06/07/2001 - 21:56:12] Joined channel #quiz.
+[06/07/2001 - 22:14:54] Caught Signal SIGINT: Shutting down.
+[06/07/2001 - 22:14:54] Select prematurely returned!
+[06/07/2001 - 22:14:54] Stopping log.
+[06/07/2001 - 22:49:56] Starting log.
+[06/07/2001 - 22:49:56] DumbOP v0.34b
+[06/07/2001 - 22:49:56] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[06/07/2001 - 22:49:56] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[06/07/2001 - 22:49:57] Connected to server mothership.alien.intranet (6667).
+[06/07/2001 - 22:49:59] Joined channel #chaty.
+[06/07/2001 - 22:50:02] Joined channel #quiz.
+[06/07/2001 - 22:51:46] [Pickle]!nobody@gateway.routers.intranet did TIME 
+[06/07/2001 - 22:51:52] [Pickle]!nobody@gateway.routers.intranet did TIME 
+[06/07/2001 - 22:52:00] Caught Signal SIGINT: Shutting down.
+[06/07/2001 - 22:52:00] Select prematurely returned!
+[06/07/2001 - 22:52:00] Stopping log.
+[07/07/2001 - 11:23:28] Starting log.
+[07/07/2001 - 11:23:28] DumbOP v0.34b
+[07/07/2001 - 11:23:28] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[07/07/2001 - 11:23:28] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[07/07/2001 - 11:23:29] Connected to server mothership.alien.intranet (6667).
+[07/07/2001 - 11:23:31] Joined channel #chaty.
+[07/07/2001 - 11:23:34] Joined channel #quiz.
+[07/07/2001 - 11:24:21] [Pickle]!nobody@gateway.routers.intranet did USERLIST 
+[07/07/2001 - 11:24:34] [Pickle]!nobody@gateway.routers.intranet did VOICE #chaty [Pickle]
+[07/07/2001 - 11:25:06] Starting log.
+[07/07/2001 - 11:25:06] DumbOP v0.34b
+[07/07/2001 - 11:25:06] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[07/07/2001 - 11:25:06] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[07/07/2001 - 11:25:06] Connected to server mothership.alien.intranet (6667).
+[07/07/2001 - 11:25:09] Joined channel #chaty.
+[07/07/2001 - 11:25:12] Joined channel #quiz.
+[07/07/2001 - 11:25:19] [Pickle]!nobody@gateway.routers.intranet did VOICE 
+[07/07/2001 - 11:25:37] [Pickle]!nobody@gateway.routers.intranet did VOICE #chaty [Pickle]
+[07/07/2001 - 11:25:42] Starting log.
+[07/07/2001 - 11:25:42] DumbOP v0.34b
+[07/07/2001 - 11:25:42] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[07/07/2001 - 11:25:42] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[07/07/2001 - 11:25:42] Connected to server mothership.alien.intranet (6667).
+[07/07/2001 - 11:25:45] Joined channel #chaty.
+[07/07/2001 - 11:25:48] Joined channel #quiz.
+[07/07/2001 - 11:26:03] Left channel #quiz.
+[07/07/2001 - 11:26:08] Joined channel #quiz.
+[07/07/2001 - 11:27:08] [Pickle]!nobody@gateway.routers.intranet did STATS 
+[07/07/2001 - 11:27:47] Left channel #chaty.
+[07/07/2001 - 11:27:47] Joined channel #chaty.
+[07/07/2001 - 11:27:57] [Pickle]!nobody@gateway.routers.intranet did OP 
+[07/07/2001 - 11:28:07] [Pickle]!nobody@gateway.routers.intranet did OP [Pickle]
+[07/07/2001 - 11:28:14] [Pickle]!nobody@gateway.routers.intranet did VOICE 
+[07/07/2001 - 11:28:27] [Pickle]!nobody@gateway.routers.intranet did OP 
+[07/07/2001 - 11:39:38] [Pickle]!nobody@gateway.routers.intranet did KICK [pickle]
+[07/07/2001 - 11:39:44] [Pickle]!nobody@gateway.routers.intranet did KICK [pickle] hi
+[07/07/2001 - 11:42:45] [Pickle]!nobody@gateway.routers.intranet did MSG 
+[07/07/2001 - 11:42:53] [Pickle]!nobody@gateway.routers.intranet did MSG [pickle] Hello
+[07/07/2001 - 11:43:40] [Pickle]!nobody@gateway.routers.intranet did SAY [pickle] test
+[07/07/2001 - 12:04:39] Caught Signal SIGINT: Shutting down.
+[07/07/2001 - 12:04:39] Select prematurely returned!
+[07/07/2001 - 12:04:39] Stopping log.
+[07/07/2001 - 21:53:34] Starting log.
+[07/07/2001 - 21:53:35] DumbOP v0.34b
+[07/07/2001 - 21:53:38] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[07/07/2001 - 21:53:38] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[07/07/2001 - 21:53:40] Connected to server mothership.alien.intranet (6667).
+[07/07/2001 - 21:53:42] Joined channel #chaty.
+[07/07/2001 - 21:53:45] Joined channel #quiz.
+[07/07/2001 - 21:53:58] [Pickle]!~_Pickle_@172.16.0.1 did TEST 
+[07/07/2001 - 21:59:03] Caught Signal SIGINT: Shutting down.
+[07/07/2001 - 21:59:04] Select prematurely returned!
+[07/07/2001 - 21:59:04] Stopping log.
+[07/07/2001 - 22:00:25] Starting log.
+[07/07/2001 - 22:00:25] DumbOP v0.34b
+[07/07/2001 - 22:00:25] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[07/07/2001 - 22:00:25] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[07/07/2001 - 22:00:27] Connected to server mothership.alien.intranet (6667).
+[07/07/2001 - 22:00:29] Joined channel #chaty.
+[07/07/2001 - 22:00:32] Joined channel #quiz.
+[07/07/2001 - 22:00:39] [Pickle]!~_Pickle_@172.16.0.1 did TEST 
+[07/07/2001 - 22:13:05] Caught Signal SIGINT: Shutting down.
+[07/07/2001 - 22:13:05] Select prematurely returned!
+[07/07/2001 - 22:13:06] Stopping log.
+[07/07/2001 - 22:13:08] Starting log.
+[07/07/2001 - 22:13:08] DumbOP v0.34b
+[07/07/2001 - 22:13:09] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[07/07/2001 - 22:13:09] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[07/07/2001 - 22:13:09] Connected to server mothership.alien.intranet (6667).
+[07/07/2001 - 22:13:13] Joined channel #chaty.
+[07/07/2001 - 22:13:15] Joined channel #quiz.
+[07/07/2001 - 22:13:17] [Pickle]!~_Pickle_@172.16.0.1 did PING 
+[07/07/2001 - 22:13:44] [Pickle]!~_Pickle_@172.16.0.1 did PING 
+[07/07/2001 - 22:13:47] [Pickle]!~_Pickle_@172.16.0.1 did TEST 
+[07/07/2001 - 22:16:14] Caught Signal SIGINT: Shutting down.
+[07/07/2001 - 22:16:14] Select prematurely returned!
+[07/07/2001 - 22:16:14] Stopping log.
+[07/07/2001 - 22:18:46] Starting log.
+[07/07/2001 - 22:18:47] DumbOP v0.34b
+[07/07/2001 - 22:18:47] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[07/07/2001 - 22:18:47] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[07/07/2001 - 22:18:48] Connected to server mothership.alien.intranet (6667).
+[07/07/2001 - 22:18:51] Joined channel #chaty.
+[07/07/2001 - 22:18:54] Joined channel #quiz.
+[07/07/2001 - 22:19:21] [Pickle]!~_Pickle_@172.16.0.1 did PING 
+[07/07/2001 - 22:19:25] [Pickle]!~_Pickle_@172.16.0.1 did TIME 
+[07/07/2001 - 22:19:37] [Pickle]!~_Pickle_@172.16.0.1 did TEST 
+[07/07/2001 - 22:19:37] Caught Signal SIGABRT: Shutting down.
+[07/07/2001 - 22:22:55] Starting log.
+[07/07/2001 - 22:22:55] DumbOP v0.34b
+[07/07/2001 - 22:22:55] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[07/07/2001 - 22:22:55] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[07/07/2001 - 22:22:56] Connected to server mothership.alien.intranet (6667).
+[07/07/2001 - 22:22:59] Joined channel #chaty.
+[07/07/2001 - 22:23:02] Joined channel #quiz.
+[07/07/2001 - 22:23:09] [Pickle]!~_Pickle_@172.16.0.1 did TIME 
+[07/07/2001 - 22:23:38] [Pickle]!~_Pickle_@172.16.0.1 did TEST 
+[07/07/2001 - 23:12:22] Caught Signal SIGINT: Shutting down.
+[07/07/2001 - 23:12:28] Select prematurely returned!
+[07/07/2001 - 23:12:33] Stopping log.
+[07/07/2001 - 23:38:50] Starting log.
+[07/07/2001 - 23:38:50] DumbOP v0.34b
+[07/07/2001 - 23:38:50] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[07/07/2001 - 23:38:50] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[07/07/2001 - 23:38:50] Connected to server mothership.alien.intranet (6667).
+[07/07/2001 - 23:38:53] Joined channel #chaty.
+[07/07/2001 - 23:38:57] Joined channel #quiz.
+[07/07/2001 - 23:39:26] [Pickle]!~_Pickle_@172.16.0.1 did TOPIC 'Allo quiz champions, and welcome back #quiz regulars! The quiz is unfortunately still under construction!  Alpha testing of the quiz bot will start pretty soon, so be prepared ;)  Stay tuned for how YOU can help :) Until then, Cheers!
+[08/07/2001 - 01:53:22] [Pickle]!~_Pickle_@172.16.0.1 did TEST 
+[08/07/2001 - 01:59:49] Caught Signal SIGINT: Shutting down.
+[08/07/2001 - 01:59:49] Select prematurely returned!
+[08/07/2001 - 01:59:49] Stopping log.
+[08/07/2001 - 02:14:25] Starting log.
+[08/07/2001 - 02:14:25] DumbOP v0.34b
+[08/07/2001 - 02:14:25] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[08/07/2001 - 02:14:25] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[08/07/2001 - 02:14:26] Connected to server mothership.alien.intranet (6667).
+[08/07/2001 - 02:14:28] Joined channel #chaty.
+[08/07/2001 - 02:14:31] Joined channel #quiz.
+[08/07/2001 - 02:28:32] [Pickle]!~_Pickle_@172.16.0.1 did STATS 
+[08/07/2001 - 02:53:13] [Pickle]!~_Pickle_@172.16.0.1 did PING 
+[08/07/2001 - 12:46:52] Left channel #quiz.
+[08/07/2001 - 12:46:52] Joined channel #quiz.
+[08/07/2001 - 12:46:57] Left channel #chaty.
+[08/07/2001 - 12:47:02] Joined channel #chaty.
+[08/07/2001 - 14:01:40] Caught Signal SIGINT: Shutting down.
+[08/07/2001 - 14:01:40] Select prematurely returned!
+[08/07/2001 - 14:01:41] Stopping log.
+[08/07/2001 - 14:05:37] Starting log.
+[08/07/2001 - 14:05:37] DumbOP v0.34b
+[08/07/2001 - 14:05:37] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[08/07/2001 - 14:05:37] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[08/07/2001 - 14:05:38] Connected to server mothership.alien.intranet (6667).
+[08/07/2001 - 14:05:41] Joined channel #chaty.
+[08/07/2001 - 14:05:45] Joined channel #quiz.
+[08/07/2001 - 14:05:51] [Pickle]!nobody@gateway.routers.intranet did HELP time
+[08/07/2001 - 14:07:19] Caught Signal SIGINT: Shutting down.
+[08/07/2001 - 14:07:19] Select prematurely returned!
+[08/07/2001 - 14:07:19] Stopping log.
+[08/07/2001 - 14:08:41] Starting log.
+[08/07/2001 - 14:08:41] DumbOP v0.34b
+[08/07/2001 - 14:08:41] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[08/07/2001 - 14:08:41] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[08/07/2001 - 14:08:41] Connected to server mothership.alien.intranet (6667).
+[08/07/2001 - 14:08:44] Joined channel #chaty.
+[08/07/2001 - 14:08:47] Joined channel #quiz.
+[08/07/2001 - 14:09:40] [Pickle]!nobody@gateway.routers.intranet did HELP time
+[08/07/2001 - 14:41:17] Caught Signal SIGINT: Shutting down.
+[08/07/2001 - 14:41:17] Select prematurely returned!
+[08/07/2001 - 14:41:17] Stopping log.
+[08/07/2001 - 16:55:05] Starting log.
+[08/07/2001 - 16:55:05] DumbOP v0.34b
+[08/07/2001 - 16:55:05] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[08/07/2001 - 16:55:05] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[08/07/2001 - 16:55:06] Connected to server mothership.alien.intranet (6667).
+[08/07/2001 - 16:55:10] Joined channel #chaty.
+[08/07/2001 - 16:55:11] Joined channel #quiz.
+[08/07/2001 - 16:58:49] Left channel #quiz.
+[08/07/2001 - 16:58:49] Joined channel #quiz.
+[08/07/2001 - 17:47:30] Starting log.
+[08/07/2001 - 17:47:30] DumbOP v0.34b
+[08/07/2001 - 17:47:31] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[08/07/2001 - 17:47:31] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[08/07/2001 - 17:47:34] Connected to server mothership.alien.intranet (6667).
+[08/07/2001 - 17:47:37] Joined channel #chaty.
+[08/07/2001 - 17:47:40] Joined channel #quiz.
+[08/07/2001 - 17:47:57] [Pickle]!nobody@gateway.routers.intranet is flooding me. We will ignore him/her/it.
+[08/07/2001 - 18:31:04] Caught Signal SIGINT: Shutting down.
+[08/07/2001 - 18:31:04] Stopping log.
+[08/07/2001 - 18:33:07] Starting log.
+[08/07/2001 - 18:33:07] DumbOP v0.34b
+[08/07/2001 - 18:33:08] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[08/07/2001 - 18:33:08] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[08/07/2001 - 18:33:10] Connected to server mothership.alien.intranet (6667).
+[08/07/2001 - 18:33:12] Joined channel #chaty.
+[08/07/2001 - 18:33:15] Joined channel #quiz.
+[08/07/2001 - 18:34:34] [Pickle]!nobody@gateway.routers.intranet is flooding me. We will ignore him/her/it.
+[08/07/2001 - 18:44:28] Starting log.
+[08/07/2001 - 18:44:28] DumbOP v0.34b
+[08/07/2001 - 18:44:29] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[08/07/2001 - 18:44:29] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[08/07/2001 - 18:44:33] Connected to server mothership.alien.intranet (6667).
+[08/07/2001 - 18:44:35] Joined channel #chaty.
+[08/07/2001 - 18:44:38] Joined channel #quiz.
+[08/07/2001 - 18:44:41] [Pickle]!nobody@gateway.routers.intranet is flooding me. We will ignore him/her/it.
+[09/07/2001 - 02:02:15] Starting log.
+[09/07/2001 - 02:02:15] DumbOP v0.34b
+[09/07/2001 - 02:02:17] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[09/07/2001 - 02:02:17] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[09/07/2001 - 02:02:20] Connected to server mothership.alien.intranet (6667).
+[09/07/2001 - 02:02:23] Joined channel #chaty.
+[09/07/2001 - 02:02:26] Joined channel #quiz.
+[09/07/2001 - 02:02:31] [Pickle]!nobody@gateway.routers.intranet did PING 
+[09/07/2001 - 02:03:47] [Pickle]!nobody@gateway.routers.intranet did TIME 
+[09/07/2001 - 02:06:59] [Pickle]!nobody@gateway.routers.intranet did TIME 
+[09/07/2001 - 02:07:01] [Pickle]!nobody@gateway.routers.intranet did PING 
+[09/07/2001 - 02:10:25] [Pickle]!nobody@gateway.routers.intranet did PING 
+[09/07/2001 - 11:33:23] [Pickle]!nobody@gateway.routers.intranet did PING 
+[09/07/2001 - 12:01:34] Starting log.
+[09/07/2001 - 12:01:35] DumbOP v0.34b
+[09/07/2001 - 12:01:36] Loaded QUIZ category 'AUSTRALIANA' (19 lines, 5 questions)
+[09/07/2001 - 12:01:36] Loaded QUIZ category 'TEST' (38 lines, 4 questions)
+[09/07/2001 - 12:01:42] Connected to server mothership.alien.intranet (6667).
+[09/07/2001 - 12:01:44] Joined channel #chaty.
+[09/07/2001 - 12:01:47] Joined channel #quiz.
+[09/07/2001 - 12:02:12] [Pickle]!nobody@gateway.routers.intranet did TEST 
+[09/07/2001 - 12:03:39] [Pickle]!nobody@gateway.routers.intranet did TIME 
+[09/07/2001 - 12:03:44] [Pickle]!nobody@gateway.routers.intranet did PING 
+[09/07/2001 - 12:04:23] [Pickle]!nobody@gateway.routers.intranet did HELP ping
+[09/07/2001 - 12:04:30] [Pickle]!nobody@gateway.routers.intranet did HELP time
+[09/07/2001 - 12:07:48] [Pickle]!nobody@gateway.routers.intranet did PING 
+[09/07/2001 - 12:08:39] [Pickle]!nobody@gateway.routers.intranet did HELP time
+[09/07/2001 - 12:13:57] [Pickle]!nobody@gateway.routers.intranet did PING 
+[09/07/2001 - 12:21:17] [Pickle]!nobody@gateway.routers.intranet did PING 
+[09/07/2001 - 12:23:47] [Pickle]!nobody@gateway.routers.intranet did PING 

@@ -15,9 +15,8 @@
 
 # define TELNETFLAG_CONNECTED		0x0001	// Connected
 # define TELNETFLAG_AUTHENTICATED	0x0002	// Logged on
-# define TELNETFLAG_ANSI		0x0008	// Can support ANSI
-# define TELNETFLAG_SPYING		0x0010	// Not in menu, spying
-# define TELNETFLAG_CLI			0x0020	// Command-Line mode on
+# define TELNETFLAG_IN_MENU		0x0010	// Currently in a menu
+# define TELNETFLAG_SPYING		0x0020	// In ircII style 'spying' mode
 
 class telnetDescriptor {
  public:
@@ -42,6 +41,7 @@ class Socket;
 class Bot;
 
 class Telnet {
+ private:
    int port;
    Socket *sock;
    Bot *bot; // Recursive
@@ -53,11 +53,15 @@ class Telnet {
    
    void cleanDescs();
 
+   time_t lastBarUpdate;		// Last time the status bar was updated
+
    friend class TelnetSpy;
    
  public:
    Telnet(Bot *, int);
    ~Telnet();
+
+   void attend(void);			// Called by main loop
    
    friend class Socket;
    friend class Bot;

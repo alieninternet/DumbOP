@@ -1,0 +1,2 @@
+Small bug regarding the attribute setting code. Mass setting seems to
+confuse it a little - or is this just microsoft's ANSI that's confused?

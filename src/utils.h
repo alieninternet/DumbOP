@@ -36,6 +36,10 @@ class Utils {
    static String timeBigToStr(long long);
    
    static time_t strToTime(String);
+
+   static String replaceVowels(String, char);
+   static String reverseStr(String);
+
 };
 
 #endif

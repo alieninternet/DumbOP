@@ -5,6 +5,7 @@
 #include <signal.h>
 
 #include "signal.h"
+#include "commands.h"
 
 static const char *sigNames[] = {
    "SIGZERO",   //  0 - Apparently never used
@@ -70,20 +71,6 @@ void sigHandler(int sig)
       logSignal(sig, "Should be reloading files.");
       break;
       
-      // Normal shutdown
-    case SIGINT:
-    case SIGQUIT:
-    case SIGTERM:
-    case SIGABRT:
-#ifdef SIGXCPU
-    case SIGXCPU:
-#endif
-#ifdef SIGXFSZ
-    case SIGXFSZ:
-#endif
-      logSignal(sig, "Should be shutting down.");
-      break;
-      
       // Panic state - dump, restart
     case SIGILL:
     case SIGTRAP:
@@ -103,7 +90,27 @@ void sigHandler(int sig)
     case SIGURG:
 #endif
     case SIGFPE:
-//      break;
+      exit(250);
+      break;
+
+      // Normal shutdown
+    case SIGINT:
+    case SIGQUIT:
+    case SIGTERM:
+    case SIGABRT:
+#ifdef SIGXCPU
+    case SIGXCPU:
+#endif
+#ifdef SIGXFSZ
+    case SIGXFSZ:
+#endif
+      logSignal(sig, "Shutting down.");
+      Commands::Die(bot, String("Caught ") + String(sigNames[sig]) +
+		    String(": Shutting down. [") + 
+		    VERSION_STRING + String("]"));
+      break;
+      
+      // Everything else we ignore.
     default:
       logSignal(sig, "Ignoring (Perplexed)");
    }
@@ -122,8 +129,8 @@ Signal::Signal(Bot *b)
    bot = (Bot *)b;
    
    // We are very multi-talented, we handle it all!
-/*   for (unsigned char i = 0; i < NSIG; i++)
-     signal(i, sigHandler); */
+   for (unsigned char i = 0; i < NSIG; i++)
+     signal(i, sigHandler);
 }
    
 

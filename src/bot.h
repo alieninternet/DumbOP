@@ -17,6 +17,7 @@
 # include "telnet.h"
 # include "signal.h"
 # include "version.h"
+# include "games.h"
 
 /* THIS SHOULD BE TEMPORARY
  * shhh scott :)
@@ -84,19 +85,21 @@ class Bot {
    ServerConnection * serverConnection;
    list<DCCConnection *> dccConnections;
 
-   static const time_t TELNET_PORT = 4000; // Default port is 4000
+   static const long TELNET_PORT = 4000; // Default port is 4000
    Telnet * telnetDaemon;
+   
+   Games *games;
    
    map<unsigned long, String, less<unsigned long> > userhostMap;
    unsigned long sentUserhostID;
    unsigned long receivedUserhostID;
    
-   static const unsigned int MAX_MESSAGES = 2;
+   static const unsigned int MAX_MESSAGES = 20;
    static const time_t NICK_CHANGE  = 300; // 5 mins
    static const time_t CHANNEL_JOIN = 600; // 10 mins
-   static const time_t IGNORE_DELAY = 180; // 3 mins
+   static const time_t IGNORE_DELAY = 120; // 2 mins
    static const time_t DCC_DELAY = 300; // 5 mins
-   static const time_t PING_TIME = 240; // 4 mins *MUST BE SHORTED THAN TIMEOUT*
+   static const time_t PING_TIME = 180; // 3 mins *MUST BE SHORTED THAN TIMEOUT*
    static const time_t TIMEOUT = 300; // 5 mins
    
  public:

@@ -11,11 +11,11 @@ ServerConnection::ServerConnection(Bot *b, Server *s, String localIP)
     server(s),
     bot(b),
 #ifdef DEBUG
-    queue(new ServerQueue(&socket, b->debug)),
+    queue(new ServerQueue(/*bot,*/ &socket, b->debug)),
 #else
-    queue(new ServerQueue(&socket)),
+    queue(new ServerQueue(/*bot,*/ &socket)),
 #endif
-    pingTime(time(NULL)), lag(0), 
+    pingTime(bot->currentTime), lag(0), 
 #ifdef DEBUG
     debug(b->debug),
 #endif

@@ -141,8 +141,8 @@ void CTCP::Finger(ServerConnection *cnx, Person *from, String rest)
  */
 void CTCP::Lag(ServerConnection *cnx, Person *from, String rest)
 {
-   from->sendCTCPReply("LAG", String((long)cnx->lag) + String(":") +
-		       Utils::timelenToStr(cnx->lag));
+   from->sendCTCPReply("LAG", String((long)(cnx->lag / 1000)) + String(":") +
+		       Utils::timeBigToStr(cnx->lag));
 }
 
 
@@ -183,9 +183,10 @@ void CTCP::Source(ServerConnection *cnx, Person *from, String rest)
  */
 void CTCP::Time(ServerConnection *cnx, Person *from, String rest)
 {
-   time_t timenow = time(NULL);
+   String time = String(ctime(&cnx->bot->currentTime.time));
    
-   from->sendCTCPReply("TIME", String(ctime(&timenow)));
+   from->sendCTCPReply("TIME", 
+		       time.subString(0,time.length()-2));
 }
 
 
@@ -195,9 +196,9 @@ void CTCP::Time(ServerConnection *cnx, Person *from, String rest)
  */
 void CTCP::Uptime(ServerConnection *cnx, Person *from, String rest)
 {
-   time_t diff = (time(NULL) - cnx->bot->startTime);
-
-   from->sendCTCPReply("UPTIME", String((long)diff) + String(":") +
+   time_t diff = cnx->bot->currentTime.time - cnx->bot->startTime;
+   
+   from->sendCTCPReply("UPTIME", String((long)diff) + String(":") + 
 		       Utils::timelenToStr(diff));
 }
 
